@@ -1,0 +1,495 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>mine apps | Official Promotion Page</title>
+    <meta
+      name="description"
+      content="mine が提供するモバイルアプリの公式プロモーションページです。複数アプリの概要、サポート窓口、プライバシーポリシーをご案内します。"
+    />
+    <meta property="og:title" content="mine apps" />
+    <meta
+      property="og:description"
+      content="mine のモバイルアプリ公式ページ。最新アプリ情報、サポート、プライバシーポリシー。"
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://minetoshi.github.io/" />
+    <meta name="theme-color" content="#0e3b44" />
+    <style>
+      :root {
+        --bg: #f7f4ed;
+        --bg-soft: #efe7da;
+        --ink: #1e2528;
+        --muted: #4d5b60;
+        --brand: #0e3b44;
+        --brand-2: #c9703e;
+        --card: rgba(255, 255, 255, 0.88);
+        --line: rgba(30, 37, 40, 0.12);
+        --shadow: 0 14px 40px rgba(17, 30, 35, 0.12);
+        --max: 1120px;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        font-family: "Avenir Next", "Hiragino Sans", "Yu Gothic", "Segoe UI", sans-serif;
+        color: var(--ink);
+        background:
+          radial-gradient(circle at 10% 10%, rgba(201, 112, 62, 0.24), transparent 44%),
+          radial-gradient(circle at 90% 15%, rgba(14, 59, 68, 0.2), transparent 42%),
+          linear-gradient(165deg, var(--bg) 0%, var(--bg-soft) 90%);
+        line-height: 1.62;
+      }
+
+      .ambient-shape {
+        position: fixed;
+        inset: auto -10vw -18vh auto;
+        width: 56vw;
+        height: 56vw;
+        max-width: 620px;
+        max-height: 620px;
+        border-radius: 38% 62% 66% 34% / 41% 34% 66% 59%;
+        background: linear-gradient(130deg, rgba(14, 59, 68, 0.18), rgba(201, 112, 62, 0.14));
+        filter: blur(12px);
+        pointer-events: none;
+        z-index: -1;
+        animation: drift 11s ease-in-out infinite alternate;
+      }
+
+      @keyframes drift {
+        from {
+          transform: translate3d(0, 0, 0) rotate(0deg);
+        }
+        to {
+          transform: translate3d(-3vw, -2vh, 0) rotate(10deg);
+        }
+      }
+
+      .shell {
+        width: min(94vw, var(--max));
+        margin: 0 auto;
+      }
+
+      header {
+        padding: 18px 0 0;
+      }
+
+      .nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 16px;
+        background: rgba(255, 255, 255, 0.6);
+        border: 1px solid rgba(255, 255, 255, 0.78);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+        border-radius: 999px;
+        padding: 10px 18px;
+        backdrop-filter: blur(6px);
+      }
+
+      .brand {
+        font-size: 0.96rem;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .nav-links {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .nav a {
+        color: var(--ink);
+        text-decoration: none;
+        font-size: 0.9rem;
+      }
+
+      .hero {
+        padding: 72px 0 48px;
+        display: grid;
+        grid-template-columns: 1.2fr 0.8fr;
+        gap: 32px;
+        align-items: start;
+      }
+
+      .hero h1 {
+        margin: 0;
+        font-family: "Avenir Next Condensed", "Avenir Next", "Hiragino Sans", sans-serif;
+        font-size: clamp(2.1rem, 5vw, 4rem);
+        line-height: 1.08;
+        letter-spacing: -0.02em;
+      }
+
+      .hero p {
+        margin: 20px 0 0;
+        color: var(--muted);
+        max-width: 60ch;
+      }
+
+      .chips {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 24px;
+      }
+
+      .chip {
+        display: inline-flex;
+        align-items: center;
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        padding: 6px 14px;
+        background: rgba(255, 255, 255, 0.7);
+        font-size: 0.84rem;
+      }
+
+      .hero-card {
+        background: var(--card);
+        border: 1px solid rgba(255, 255, 255, 0.8);
+        border-radius: 20px;
+        box-shadow: var(--shadow);
+        padding: 26px;
+        animation: rise 520ms ease-out both;
+      }
+
+      @keyframes rise {
+        from {
+          opacity: 0;
+          transform: translate3d(0, 18px, 0);
+        }
+        to {
+          opacity: 1;
+          transform: none;
+        }
+      }
+
+      .hero-card dl {
+        margin: 0;
+        display: grid;
+        gap: 14px;
+      }
+
+      .hero-card dt {
+        color: var(--muted);
+        font-size: 0.82rem;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+      }
+
+      .hero-card dd {
+        margin: 4px 0 0;
+        font-size: 1rem;
+      }
+
+      section {
+        padding: 28px 0;
+      }
+
+      h2 {
+        margin: 0 0 14px;
+        font-size: clamp(1.4rem, 2.4vw, 2rem);
+      }
+
+      .lead {
+        margin: 0;
+        color: var(--muted);
+      }
+
+      .grid {
+        margin-top: 20px;
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 16px;
+      }
+
+      .card {
+        background: var(--card);
+        border: 1px solid rgba(255, 255, 255, 0.8);
+        border-radius: 16px;
+        padding: 18px;
+        box-shadow: 0 8px 28px rgba(30, 37, 40, 0.08);
+      }
+
+      .card h3 {
+        margin: 0;
+        font-size: 1.04rem;
+      }
+
+      .card p {
+        margin: 8px 0 0;
+        color: var(--muted);
+        font-size: 0.94rem;
+      }
+
+      .badge {
+        display: inline-flex;
+        margin-top: 14px;
+        padding: 4px 10px;
+        border-radius: 999px;
+        font-size: 0.75rem;
+        letter-spacing: 0.04em;
+        color: var(--brand);
+        border: 1px solid rgba(14, 59, 68, 0.24);
+        background: rgba(14, 59, 68, 0.08);
+      }
+
+      .promise {
+        margin-top: 16px;
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 16px;
+      }
+
+      .promise-item {
+        border-top: 2px solid var(--brand-2);
+        background: rgba(255, 255, 255, 0.76);
+        border-radius: 10px;
+        padding: 14px 14px 16px;
+      }
+
+      .promise-item strong {
+        display: block;
+        font-size: 0.95rem;
+      }
+
+      .promise-item span {
+        display: block;
+        margin-top: 6px;
+        color: var(--muted);
+        font-size: 0.9rem;
+      }
+
+      .support {
+        margin-top: 14px;
+        padding: 20px;
+        border-radius: 16px;
+        background: linear-gradient(145deg, rgba(14, 59, 68, 0.1), rgba(255, 255, 255, 0.78));
+        border: 1px solid rgba(14, 59, 68, 0.15);
+      }
+
+      .actions {
+        margin-top: 16px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+      }
+
+      .btn {
+        display: inline-block;
+        text-decoration: none;
+        border-radius: 999px;
+        padding: 10px 16px;
+        font-weight: 600;
+        font-size: 0.9rem;
+      }
+
+      .btn-solid {
+        background: var(--brand);
+        color: #fff;
+      }
+
+      .btn-outline {
+        color: var(--brand);
+        border: 1px solid rgba(14, 59, 68, 0.4);
+        background: rgba(255, 255, 255, 0.72);
+      }
+
+      footer {
+        padding: 38px 0 48px;
+        color: var(--muted);
+        font-size: 0.86rem;
+      }
+
+      @media (max-width: 960px) {
+        .hero {
+          grid-template-columns: 1fr;
+          gap: 20px;
+          padding-top: 52px;
+        }
+
+        .grid,
+        .promise {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+      }
+
+      @media (max-width: 640px) {
+        .nav {
+          border-radius: 16px;
+          align-items: flex-start;
+          flex-direction: column;
+        }
+
+        .nav-links {
+          width: 100%;
+          justify-content: space-between;
+        }
+
+        .grid,
+        .promise {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "mine",
+        "url": "https://minetoshi.github.io/",
+        "email": "fitmo.app@gmail.com"
+      }
+    </script>
+  </head>
+  <body>
+    <div class="ambient-shape" aria-hidden="true"></div>
+
+    <header class="shell">
+      <nav class="nav" aria-label="Primary">
+        <div class="brand">mine apps</div>
+        <ul class="nav-links">
+          <li><a href="#apps">Apps</a></li>
+          <li><a href="#support">Support</a></li>
+          <li><a href="/privacy/">Privacy</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main class="shell">
+      <section class="hero" id="top">
+        <div>
+          <h1>毎日の小さな課題を、<br />シンプルなアプリで解決する。</h1>
+          <p>
+            このページは、mine が提供する複数のモバイルアプリをまとめた公式プロモーションページです。
+            アプリの情報、共通サポート窓口、プライバシーポリシーへの導線を一元化しています。
+          </p>
+          <div class="chips" aria-label="Key Information">
+            <span class="chip">iOS App Portfolio</span>
+            <span class="chip">Official Promotion URL</span>
+            <span class="chip">Multi-App Support</span>
+          </div>
+        </div>
+
+        <aside class="hero-card" aria-label="Publisher Details">
+          <dl>
+            <div>
+              <dt>Publisher</dt>
+              <dd>mine</dd>
+            </div>
+            <div>
+              <dt>Primary Region</dt>
+              <dd>Japan</dd>
+            </div>
+            <div>
+              <dt>Support</dt>
+              <dd><a href="mailto:fitmo.app@gmail.com">fitmo.app@gmail.com</a></dd>
+            </div>
+            <div>
+              <dt>Policy</dt>
+              <dd><a href="/privacy/">Privacy Policy</a></dd>
+            </div>
+          </dl>
+        </aside>
+      </section>
+
+      <section id="apps" aria-labelledby="apps-title">
+        <h2 id="apps-title">App Categories</h2>
+        <p class="lead">
+          さまざまな用途のアプリを展開しています。各アプリの詳細ページやストア情報は順次追加・更新されます。
+        </p>
+        <div class="grid">
+          <article class="card">
+            <h3>Productivity</h3>
+            <p>タスク管理、習慣化、学習記録など、継続を支えるアプリ。</p>
+            <span class="badge">Focus on Daily Use</span>
+          </article>
+          <article class="card">
+            <h3>Finance</h3>
+            <p>家計・支出の可視化と管理をシンプルにするアプリ。</p>
+            <span class="badge">Clarity First</span>
+          </article>
+          <article class="card">
+            <h3>Utilities</h3>
+            <p>日常の細かい不便を減らす軽量なツール系アプリ。</p>
+            <span class="badge">Fast and Lightweight</span>
+          </article>
+          <article class="card">
+            <h3>Learning</h3>
+            <p>理解・反復・定着を支援する、学習向けアプリ体験。</p>
+            <span class="badge">Keep Improving</span>
+          </article>
+          <article class="card">
+            <h3>Health &amp; Lifestyle</h3>
+            <p>生活リズムや自己管理を補助するライフログ系アプリ。</p>
+            <span class="badge">Simple Habit Design</span>
+          </article>
+          <article class="card">
+            <h3>New Releases</h3>
+            <p>公開準備中の新作アプリ情報をこのページで更新します。</p>
+            <span class="badge">Rolling Updates</span>
+          </article>
+        </div>
+      </section>
+
+      <section aria-labelledby="policy-title">
+        <h2 id="policy-title">Common Policy for All Apps</h2>
+        <p class="lead">
+          個別アプリで差分がある場合を除き、情報の取り扱い方針は共通です。
+          収集情報・利用目的・問い合わせ方法はプライバシーポリシーに明記しています。
+        </p>
+        <div class="promise" aria-label="Policy Promise">
+          <div class="promise-item">
+            <strong>必要最小限のデータ取扱い</strong>
+            <span>アプリ提供と品質改善に必要な範囲で情報を扱います。</span>
+          </div>
+          <div class="promise-item">
+            <strong>透明性のある説明</strong>
+            <span>取得項目と利用目的は、公開ページでいつでも確認できます。</span>
+          </div>
+          <div class="promise-item">
+            <strong>継続的な改善</strong>
+            <span>運用や法令変更に応じて、方針と案内を随時更新します。</span>
+          </div>
+        </div>
+      </section>
+
+      <section id="support" aria-labelledby="support-title">
+        <h2 id="support-title">Support</h2>
+        <div class="support">
+          <p class="lead">
+            アプリの不具合報告、機能要望、その他のお問い合わせはメールで受け付けています。
+            プロモーションページとして、各アプリ共通の窓口をここに集約しています。
+          </p>
+          <div class="actions">
+            <a class="btn btn-solid" href="mailto:fitmo.app@gmail.com">Contact by Email</a>
+            <a class="btn btn-outline" href="/privacy/">View Privacy Policy</a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="shell">
+      <small>
+        &copy; <span id="year"></span> mine. This website is the official promotion page for multiple mobile apps.
+      </small>
+    </footer>
+
+    <script>
+      document.getElementById("year").textContent = new Date().getFullYear();
+    </script>
+  </body>
+</html>
