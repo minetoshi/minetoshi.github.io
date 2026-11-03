@@ -101,12 +101,15 @@ function start(mode, domain){
 function renderQuestion(){
   const q=session.questions[session.index];
   session.selected=null; session.answered=false;
+  session.choiceOrders=session.choiceOrders||{};
+  if(!session.choiceOrders[q.id]) session.choiceOrders[q.id]=shuffle(q.choices.map((_,i)=>i));
+  const order=session.choiceOrders[q.id];
   els.quizMode.textContent=modeLabel(session.mode);
   els.quizCounter.textContent=`${session.index+1} / ${session.questions.length}`;
   els.progress.style.width=`${Math.round(session.index/session.questions.length*100)}%`;
   els.qDomain.textContent=q.domain; els.qSkill.textContent=q.skill; els.qDiff.textContent=q.difficulty;
   els.qText.textContent=q.question;
-  els.choices.innerHTML=q.choices.map((c,i)=>`<button class="choice" data-i="${i}"><b>${String.fromCharCode(65+i)}.</b> ${escapeHtml(c)}</button>`).join("");
+  els.choices.innerHTML=order.map((originalIndex,displayIndex)=>`<button class="choice" data-i="${originalIndex}"><b>${String.fromCharCode(65+displayIndex)}.</b> ${escapeHtml(q.choices[originalIndex])}</button>`).join("");
   [...els.choices.querySelectorAll(".choice")].forEach(b=>b.addEventListener("click",()=>{
     if(session.answered) return;
     session.selected=Number(b.dataset.i);
@@ -139,10 +142,11 @@ function answer(){
     next();
     return;
   }
-  [...els.choices.children].forEach((b,i)=>{
+  [...els.choices.children].forEach((b)=>{
     b.disabled=true;
-    if(i===q.answer)b.classList.add("correct");
-    if(i===session.selected && i!==q.answer)b.classList.add("wrong");
+    const originalIndex=Number(b.dataset.i);
+    if(originalIndex===q.answer)b.classList.add("correct");
+    if(originalIndex===session.selected && originalIndex!==q.answer)b.classList.add("wrong");
   });
   els.feedback.className="feedback "+(correct?"ok":"bad");
   els.feedback.innerHTML=`<h3>${correct?"正解":"不正解"}</h3><div><b>正解：${String.fromCharCode(65+q.answer)}. ${escapeHtml(q.choices[q.answer])}</b></div><p>${escapeHtml(q.explanation)}</p><a href="${q.source}" target="_blank" rel="noopener">Microsoft公式資料を確認 →</a>`;
