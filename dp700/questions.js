@@ -306,13 +306,63 @@ for(const item of q){
   }
 }
 
+const CURRENT_SKILL_NAMES={
+  "O01": "Configure Spark workspace settings",
+  "O02": "Configure domain workspace settings",
+  "O03": "Configure OneLake workspace settings",
+  "O04": "Configure data workflow workspace settings",
+  "O05": "Configure version control",
+  "O06": "Implement database projects",
+  "O07": "Create and configure deployment pipelines",
+  "O08": "Implement workspace-level access controls",
+  "O09": "Implement item-level access controls",
+  "O10": "Implement row-level, column-level, object-level, and file-level access controls",
+  "O11": "Implement dynamic data masking",
+  "O12": "Apply sensitivity labels to items",
+  "O13": "Endorse items",
+  "O16": "Choose between a pipeline and a notebook",
+  "O17": "Design and implement schedules and event-based triggers",
+  "O18": "Implement orchestration patterns with notebooks and pipelines, including parameters and dynamic expressions",
+  "O19": "Design and implement full and incremental data loads",
+  "O20": "Prepare data for loading into a dimensional model",
+  "O21": "Design and implement a loading pattern for streaming data",
+  "O22": "Choose an appropriate data store",
+  "O23": "Choose between dataflows, notebooks, and T-SQL for data transformation",
+  "O24": "Create and manage shortcuts to data",
+  "O25": "Implement mirroring",
+  "O26": "Ingest data by using pipelines",
+  "O27": "Transform data by using PySpark, SQL, and KQL",
+  "O28": "Denormalize data",
+  "O29": "Group and aggregate data",
+  "O30": "Handle duplicate, missing, and late-arriving data",
+  "O31": "Choose an appropriate streaming engine",
+  "O34": "Process data by using eventstreams",
+  "O35": "Process data by using Spark structured streaming",
+  "O36": "Process data by using KQL",
+  "O37": "Create windowing functions",
+  "O38": "Monitor data ingestion",
+  "O39": "Monitor data transformation",
+  "O40": "Monitor semantic model refresh",
+  "O41": "Configure alerts",
+  "O42": "Identify and resolve pipeline errors",
+  "O43": "Identify and resolve dataflow errors",
+  "O44": "Identify and resolve notebook errors",
+  "O45": "Identify and resolve eventhouse errors",
+  "O46": "Identify and resolve eventstream errors",
+  "O47": "Identify and resolve T-SQL errors",
+  "O49": "Optimize a lakehouse table",
+  "O50": "Optimize a pipeline",
+  "O51": "Optimize a data warehouse",
+  "O52": "Optimize eventstreams and eventhouses",
+  "O53": "Optimize Spark performance",
+  "O54": "Optimize query performance"
+};
+for(const item of q){ if(CURRENT_SKILL_NAMES[item.objectiveId]) item.skill=CURRENT_SKILL_NAMES[item.objectiveId]; }
+
 const CURRENT_OBJECTIVES=O
   .filter(x=>!CURRENT_EXCLUDED_OBJECTIVES.has(x[0]))
   .map(x=>{
-    const obj={id:x[0],domain:x[1],group:x[2],skill:x[3],source:CURRENT_SOURCE_OVERRIDES[x[0]]||x[8]};
-    if(obj.id==="O04") obj.skill="Data workflow workspace settings";
-    if(obj.id==="O16") obj.skill="Choose between a pipeline and a notebook";
-    if(obj.id==="O23") obj.skill="Choose between dataflows, notebooks, and T-SQL for data transformation";
+    const obj={id:x[0],domain:x[1],group:x[2],skill:CURRENT_SKILL_NAMES[x[0]]||x[3],source:CURRENT_SOURCE_OVERRIDES[x[0]]||x[8]};
     return obj;
   });
 
