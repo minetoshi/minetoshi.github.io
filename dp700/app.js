@@ -61,9 +61,10 @@ function choose(mode,domain){
  if(mode==="wrong")return sample(Q.filter(q=>itemStat(q.id).lastWrong),25);
  if(mode==="due"){const now=Date.now();return sample(Q.filter(q=>{const s=itemStat(q.id);return s.nextReview&&s.nextReview<=now;}),25);}
  if(mode==="domain")return sample(Q.filter(q=>q.domain===domain),20);
+ if(mode==="domainAll")return shuffle(Q.filter(q=>q.domain===domain));
  return sample(Q,10);
 }
-function modeLabel(m){return ({quick10:"10問クイック",train20:"20問演習",mock45:"本番模試45問",pa25:"Practice Assessment予行25問",code:"コード20問",wrong:"間違い復習",due:"期限復習",domain:"分野別20問"})[m]||"演習";}
+function modeLabel(m){return ({quick10:"10問クイック",train20:"20問演習",mock45:"本番模試45問",pa25:"Practice Assessment予行25問",code:"コード20問",wrong:"間違い復習",due:"期限復習",domain:"分野別20問",domainAll:"このジャンルを全問"})[m]||"演習";}
 function start(mode,domain){
  const questions=choose(mode,domain);if(!questions.length){alert(mode==="wrong"?"間違い復習の対象はありません。":"復習対象がありません。");return;}
  session={mode,domain,questions,index:0,selected:new Set(),results:[],answered:false,mock:mode==="mock45",choiceOrders:{},orderState:{},startedAt:Date.now(),deadline:mode==="mock45"?Date.now()+100*60*1000:null};
@@ -164,6 +165,7 @@ function finish(timeout){
 }
 document.querySelectorAll("[data-mode]").forEach(b=>b.addEventListener("click",()=>start(b.dataset.mode)));
 $("domainStart").addEventListener("click",()=>start("domain",els.domainSelect.value));
+$("domainAllStart").addEventListener("click",()=>start("domainAll",els.domainSelect.value));
 els.answerBtn.addEventListener("click",answer);els.nextBtn.addEventListener("click",next);
 $("quitBtn").addEventListener("click",()=>{if(confirm("この演習を終了しますか？"))renderHome();});
 $("homeBtn").addEventListener("click",renderHome);
