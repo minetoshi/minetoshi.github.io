@@ -366,14 +366,46 @@ const CURRENT_OBJECTIVES=O
     return obj;
   });
 
+
+const FINAL_SOURCE_MAP={
+  O27:"https://learn.microsoft.com/en-us/fabric/fundamentals/prepare-transform-data",
+  O28:"https://learn.microsoft.com/en-us/fabric/data-warehouse/dimensional-modeling-dimension-tables",
+  O31:"https://learn.microsoft.com/en-us/azure/architecture/data-guide/technology-choices/fabric-analytical-data-stores",
+  O37:"https://learn.microsoft.com/en-us/fabric/real-time-intelligence/event-streams/overview"
+};
+const FINAL_CODE_SOURCE_BY_PREFIX={
+  "C-SQL":"https://learn.microsoft.com/en-us/training/modules/fabric-transform-data-tsql/",
+  "C-PY":"https://learn.microsoft.com/en-us/training/modules/fabric-transform-data-notebooks/",
+  "C-KQL":"https://learn.microsoft.com/en-us/training/modules/query-data-kql-database-microsoft-fabric/"
+};
+const FINAL_ORDER_SOURCE_BY_ID={
+  "ORD-07":"https://learn.microsoft.com/en-us/fabric/data-factory/tutorial-incremental-copy-data-warehouse-lakehouse",
+  "ORD-08":"https://learn.microsoft.com/en-us/fabric/onelake/onelake-medallion-lakehouse-architecture",
+  "ORD-11":"https://learn.microsoft.com/en-us/fabric/real-time-hub/process-data-streams-using-transformations",
+  "ORD-12":"https://learn.microsoft.com/en-us/training/modules/fabric-transform-data-notebooks/"
+};
+for(const item of q){
+  if(FINAL_SOURCE_MAP[item.objectiveId]) item.source=FINAL_SOURCE_MAP[item.objectiveId];
+  for(const prefix of Object.keys(FINAL_CODE_SOURCE_BY_PREFIX)){
+    if(item.id.startsWith(prefix)) item.source=FINAL_CODE_SOURCE_BY_PREFIX[prefix];
+  }
+  if(FINAL_ORDER_SOURCE_BY_ID[item.id]) item.source=FINAL_ORDER_SOURCE_BY_ID[item.id];
+
+  if(item.id==="C-SQL-04") item.source="https://learn.microsoft.com/en-us/fabric/data-warehouse/dimensional-modeling-dimension-tables";
+  if(item.id==="C-PY-09" || item.id==="C-PY-10") item.source="https://learn.microsoft.com/en-us/fabric/data-engineering/structured-streaming-overview";
+  if(item.id==="C-KQL-05") item.source="https://learn.microsoft.com/en-us/fabric/real-time-intelligence/event-streams/query-fabric-workspace-monitoring-data";
+}
+
 window.DP700_META={
  title:"DP-700 過去問道場",
- version:"2026.11.03-v3",
+ version:"2026.11.03-v4",
  officialGuide:S.GUIDE,
  objectiveCount:49,
  questionCount:q.length,
  skillsMeasuredAsOf:"2026-10-19",
  guideLastChecked:"2026-11-03",
+ practiceAssessmentUrl:"https://learn.microsoft.com/en-us/credentials/certifications/fabric-data-engineer-associate/?practice-assessment-type=certification",
+ practiceAssessmentNote:"新版Practice AssessmentはAI Skills Navigator上で提供され、本試験体験により近い。実問題は転載せず、道場では形式・難易度・弱点診断を近づける。",
  disclaimer:"Microsoft公式Study Guide（2026-10-30更新、skills measured as of 2026-10-19）に基づく独自問題です。実試験の流出問題・再現問題ではありません。"
 };
 window.DP700_OBJECTIVES=CURRENT_OBJECTIVES;
