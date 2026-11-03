@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0f172a">
+<title>DP-700 過去問道場</title>
+<meta name="description" content="Microsoft DP-700対策。90問のオリジナル問題、分野別演習、模試、誤答復習、弱点分析。">
+<style>
+:root{--bg:#f8fafc;--card:#fff;--ink:#0f172a;--muted:#64748b;--line:#e2e8f0;--accent:#2563eb;--accent2:#1d4ed8;--ok:#15803d;--bad:#b91c1c;--warn:#b45309;--soft:#eff6ff}
+*{box-sizing:border-box}body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans JP",sans-serif;background:var(--bg);color:var(--ink);line-height:1.55}
+button,select{font:inherit}.shell{max-width:940px;margin:0 auto;padding:16px 16px 56px}.hero{background:linear-gradient(135deg,#0f172a,#1e3a8a);color:#fff;padding:22px;border-radius:20px;box-shadow:0 12px 30px #0f172a22;margin:8px 0 16px}
+.hero h1{font-size:clamp(25px,6vw,38px);margin:0 0 6px}.hero p{margin:0;color:#dbeafe}.badge{display:inline-block;background:#ffffff22;border:1px solid #ffffff44;padding:4px 9px;border-radius:999px;font-size:12px;margin-top:10px}
+.grid{display:grid;grid-template-columns:repeat(12,1fr);gap:12px}.card{grid-column:span 12;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px;box-shadow:0 3px 12px #0f172a08}
+@media(min-width:760px){.half{grid-column:span 6}.third{grid-column:span 4}}
+.kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.kpi{background:#f8fafc;border:1px solid var(--line);padding:10px;border-radius:12px;text-align:center}.kpi strong{display:block;font-size:22px}.kpi span{font-size:12px;color:var(--muted)}
+h2{font-size:18px;margin:0 0 12px}.modes{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}.btn{border:0;border-radius:12px;padding:13px 14px;font-weight:700;cursor:pointer}.btn.primary{background:var(--accent);color:#fff}.btn.primary:hover{background:var(--accent2)}.btn.secondary{background:#eef2ff;color:#1e3a8a}.btn.ghost{background:#fff;border:1px solid var(--line);color:var(--ink)}.btn.danger{background:#fee2e2;color:#991b1b}.btn:disabled{opacity:.5;cursor:not-allowed}
+.domain{padding:10px 0;border-top:1px solid var(--line)}.domain:first-of-type{border-top:0}.row{display:flex;gap:8px;align-items:center;justify-content:space-between}.bar{height:8px;background:#e2e8f0;border-radius:99px;overflow:hidden;margin-top:6px}.bar i{display:block;height:100%;background:var(--accent);width:0}
+.small{font-size:12px;color:var(--muted)}.note{background:#fffbeb;border:1px solid #fde68a;color:#92400e;border-radius:12px;padding:11px;font-size:13px}
+.hidden{display:none!important}
+#quiz .top{display:flex;gap:8px;justify-content:space-between;align-items:center;margin:4px 0 12px}.progress{height:8px;background:#e2e8f0;border-radius:99px;overflow:hidden}.progress i{display:block;height:100%;background:var(--accent)}
+.qmeta{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px}.tag{font-size:12px;background:#f1f5f9;border:1px solid var(--line);padding:3px 8px;border-radius:999px}
+.question{font-size:20px;font-weight:750;margin:8px 0 16px}.choices{display:grid;gap:10px}.choice{width:100%;text-align:left;background:#fff;border:2px solid var(--line);border-radius:14px;padding:14px;cursor:pointer}.choice:hover{border-color:#93c5fd}.choice.selected{border-color:#2563eb;background:#eff6ff}.choice.correct{border-color:#16a34a;background:#f0fdf4}.choice.wrong{border-color:#dc2626;background:#fef2f2}
+.feedback{margin-top:14px;padding:14px;border-radius:14px;border:1px solid var(--line);background:#f8fafc}.feedback.ok{border-color:#86efac;background:#f0fdf4}.feedback.bad{border-color:#fecaca;background:#fef2f2}.feedback h3{margin:0 0 6px}.feedback a{color:var(--accent)}
+.actions{display:flex;gap:8px;margin-top:14px}.actions .btn{flex:1}
+.resultScore{text-align:center;padding:12px}.resultScore strong{font-size:48px;display:block}.good{color:var(--ok)}.mid{color:var(--warn)}.low{color:var(--bad)}
+.list{margin:0;padding-left:20px}.footer{font-size:12px;color:var(--muted);text-align:center;margin-top:22px}.footer a{color:var(--accent)}
+select{width:100%;padding:12px;border-radius:12px;border:1px solid var(--line);background:#fff}
+</style>
+</head>
+<body>
+<main class="shell">
+<section id="home">
+  <header class="hero">
+    <h1>DP-700 過去問道場</h1>
+    <p>問題を解く → 弱点を特定 → 間違いだけ反復。Fabric初心者から合格圏へ。</p>
+    <span class="badge">90問 / 2026-11版公式スキル準拠</span>
+  </header>
+
+  <div class="grid">
+    <section class="card half">
+      <h2>学習状況</h2>
+      <div class="kpis">
+        <div class="kpi"><strong id="statAttempts">0</strong><span>回答数</span></div>
+        <div class="kpi"><strong id="statRate">--</strong><span>総合正答率</span></div>
+        <div class="kpi"><strong id="statWrong">0</strong><span>要復習</span></div>
+      </div>
+      <div id="readiness" class="note" style="margin-top:12px">まず10問解いて現在地を確認してください。</div>
+    </section>
+
+    <section class="card half">
+      <h2>すぐ始める</h2>
+      <div class="modes">
+        <button class="btn primary" data-mode="quick10">10問</button>
+        <button class="btn secondary" data-mode="train20">20問</button>
+        <button class="btn secondary" data-mode="mock50">50問模試</button>
+        <button class="btn ghost" data-mode="wrong">間違い復習</button>
+        <button class="btn ghost" data-mode="due">期限復習</button>
+        <button class="btn ghost" id="resetBtn">履歴リセット</button>
+      </div>
+    </section>
+
+    <section class="card half">
+      <h2>分野別に鍛える</h2>
+      <select id="domainSelect"></select>
+      <button class="btn primary" id="domainStart" style="width:100%;margin-top:10px">この分野を20問</button>
+    </section>
+
+    <section class="card half">
+      <h2>合格目安</h2>
+      <ul class="list small">
+        <li>各分野 80%以上</li>
+        <li>20問演習 85%以上を3回</li>
+        <li>50問模試 85%以上を2回</li>
+        <li>最後にMicrosoft公式Practice Assessmentで85%以上</li>
+      </ul>
+      <p class="small" style="margin-bottom:0">700点＝70%とは限りません。この道場では安全側に85%を目標にします。</p>
+    </section>
+
+    <section class="card">
+      <h2>分野別の現在地</h2>
+      <div id="domainStats"></div>
+    </section>
+
+    <section class="card">
+      <div class="note"><b>重要：</b>このサイトの問題はMicrosoft公式試験範囲に基づく独自問題です。実試験の流出問題・再現問題ではありません。製品仕様は更新されるため、解説の公式リンクも併せて確認してください。</div>
+    </section>
+  </div>
+</section>
+
+<section id="quiz" class="hidden">
+  <div class="top">
+    <button class="btn ghost" id="quitBtn">← 終了</button>
+    <div class="small"><span id="quizMode"></span>　<span id="quizCounter"></span></div>
+  </div>
+  <div class="progress"><i id="progressBar"></i></div>
+  <section class="card" style="margin-top:12px">
+    <div class="qmeta"><span class="tag" id="qDomain"></span><span class="tag" id="qSkill"></span><span class="tag" id="qDiff"></span></div>
+    <div class="question" id="qText"></div>
+    <div class="choices" id="choices"></div>
+    <div id="feedback" class="feedback hidden"></div>
+    <div class="actions">
+      <button class="btn primary" id="answerBtn" disabled>回答する</button>
+      <button class="btn primary hidden" id="nextBtn">次へ</button>
+    </div>
+  </section>
+</section>
+
+<section id="result" class="hidden">
+  <section class="card">
+    <div class="resultScore"><span class="small">今回の結果</span><strong id="resultPct">0%</strong><div id="resultMsg"></div></div>
+    <div id="resultBreakdown"></div>
+    <div class="actions"><button class="btn primary" id="retryWrongBtn">今回の誤答を復習</button><button class="btn ghost" id="homeBtn">ホームへ</button></div>
+  </section>
+</section>
+
+<div class="footer">
+  DP-700 Dojo v2026.11 • <a href="https://learn.microsoft.com/ja-jp/credentials/certifications/resources/study-guides/dp-700" target="_blank" rel="noopener">Microsoft公式 Study Guide</a>
+</div>
+</main>
+<script src="./questions.js"></script>
+<script src="./app.js"></script>
+</body>
+</html>
