@@ -32,7 +32,7 @@ function renderHome(){
  els.domainStats.innerHTML=ds.map(d=>{const s=domainAgg(d);return '<div class="domain"><div class="row"><b>'+escapeHtml(d)+'</b><span class="small">'+(s.attempts?s.rate+"%":"--")+' ・ '+s.attempted+'/'+s.total+'問経験</span></div><div class="bar"><i style="width:'+(s.attempts?s.rate:0)+'%"></i></div></div>';}).join("");
  const uniqueObj=new Set(Q.map(q=>q.objectiveId).filter(x=>/^O\d+/.test(x))).size;
  const codeCount=Q.filter(q=>q.type==="code").length, multiCount=Q.filter(q=>q.type==="multi").length, caseCount=Q.filter(q=>q.type==="case").length, orderCount=Q.filter(q=>q.type==="order").length;
- if(els.bankInfo) els.bankInfo.textContent=Q.length+"問 / 公式54項目 "+uniqueObj+"/54 / コード"+codeCount+" / 複数選択"+multiCount+" / ケース"+caseCount+" / 並べ替え"+orderCount;
+ if(els.bankInfo){const target=META.objectiveCount||49;els.bankInfo.textContent=Q.length+"問 / 公式"+target+"項目 "+uniqueObj+"/"+target+" / コード"+codeCount+" / 複数選択"+multiCount+" / ケース"+caseCount+" / 並べ替え"+orderCount;}
  const overall=store.totalAttempts?pct(store.totalCorrect,store.totalAttempts):0;
  const minDomain=Math.min(...ds.map(d=>domainAgg(d).attempts?domainAgg(d).rate:0));
  const distinct=Object.values(store.items).filter(x=>x.attempts>0).length;
