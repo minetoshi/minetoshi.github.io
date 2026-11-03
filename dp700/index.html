@@ -54,6 +54,7 @@ h2{font-size:18px;margin:0 0 12px}h3{font-size:15px}.modes{display:grid;grid-tem
     <button class="btn primary" data-mode="quick10">10問</button>
     <button class="btn secondary" data-mode="train20">20問</button>
     <button class="btn secondary" data-mode="mock45">45問 / 100分模試</button>
+    <button class="btn secondary" data-mode="pa25">公式PA予行25問</button>
     <button class="btn secondary" data-mode="code">コード20問</button>
     <button class="btn ghost" data-mode="wrong">間違い復習</button>
     <button class="btn ghost" data-mode="due">期限復習</button>
@@ -73,6 +74,7 @@ h2{font-size:18px;margin:0 0 12px}h3{font-size:15px}.modes{display:grid;grid-tem
     <li>各3分野 80%以上</li>
     <li>20問演習 85%以上を3回</li>
     <li>45問/100分模試 85%以上を2回</li>
+    <li>公式PA予行25問で85%以上</li>
     <li>最後にMicrosoft公式Practice Assessmentで85%以上</li>
   </ul>
   <p class="small" style="margin-bottom:0">Microsoft本試験の700点は単純な正答率70%ではありません。道場では安全側に85%を目標にします。</p>
@@ -89,12 +91,17 @@ h2{font-size:18px;margin:0 0 12px}h3{font-size:15px}.modes{display:grid;grid-tem
     <div class="auditItem"><b>公式範囲</b>2026-10-30更新Study Guideの49項目を全件マッピング</div>
     <div class="auditItem"><b>問題形式</b>単一 / 複数 / ケース / コード / 並べ替え</div>
     <div class="auditItem"><b>模試</b>3分野均等の45問・100分</div>
-    <div class="auditItem"><b>根拠</b>各問から関連するMicrosoft Learnへ参照</div>
+    <div class="auditItem"><b>根拠</b>各問から個別のMicrosoft Learnへ直接参照</div>
   </div>
 </section>
 
 <section class="card">
-  <div class="note"><b>重要：</b>このサイトの問題はMicrosoft公式試験範囲に基づく独自問題です。実試験の流出問題・再現問題ではありません。製品仕様は更新されるため、解説の公式リンクも併せて確認してください。</div>
+  <h2>Microsoft公式Practice Assessment</h2>
+  <p class="small">新版Practice AssessmentはAI Skills Navigator上で提供され、Microsoftは本試験体験により近いと案内しています。この道場は実際のPractice Assessment問題を転載せず、公式範囲・問題形式・難易度に寄せた予行モードを用意しています。</p>
+  <a class="btn primary" style="display:block;text-align:center;text-decoration:none" href="https://learn.microsoft.com/en-us/credentials/certifications/fabric-data-engineer-associate/?practice-assessment-type=certification" target="_blank" rel="noopener">公式Practice Assessmentを開く</a>
+</section>
+<section class="card">
+  <div class="note"><b>重要：</b>このサイトの問題はMicrosoft公式試験範囲に基づく独自問題です。実試験やPractice Assessmentの流出問題・再現問題ではありません。製品仕様は更新されるため、解説の公式リンクも併せて確認してください。</div>
 </section>
 </div>
 </section>
@@ -131,7 +138,7 @@ h2{font-size:18px;margin:0 0 12px}h3{font-size:15px}.modes{display:grid;grid-tem
 </section>
 
 <div class="footer">
-DP-700 Dojo v2 • <a href="https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/dp-700" target="_blank" rel="noopener">Microsoft公式 Study Guide</a>
+DP-700 Dojo v4 • <a href="https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/dp-700" target="_blank" rel="noopener">Microsoft公式 Study Guide</a>
 </div>
 </main>
 <script src="./questions.js"></script>
