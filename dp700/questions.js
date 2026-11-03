@@ -159,6 +159,65 @@ orderQ("ORD-16",D3,"Eventhouse tuning",["System overviewで取り込み/容量/�
 orderQ("ORD-17",D3,"Spark skew",["Spark UI/ログで遅いTaskとデータ分布を確認","キー偏りによるskewか確認","repartition/broadcast等の対策を適用","再実行してshuffle/時間を比較"],"推測でリソース増強する前にskewを観測する。",S.SPARK);
 orderQ("ORD-18",D3,"Alerts",["監視対象と失敗/遅延条件を決める","Monitoring/Alert機能で条件を設定","通知先を構成","テストRunで通知を検証"],"アラートは条件と通知先を定義して実際にテストする。","https://learn.microsoft.com/en-us/fabric/data-factory/create-alerts-for-pipeline-runs");
 
+
+const extraTargets=[
+  ...O.filter(x=>x[1]===D1).slice(0,14),
+  ...O.filter(x=>x[1]===D3).slice(0,14)
+];
+for(const o of extraTargets){
+  const [oid,domain,group,skill,scenario,correct,related,wrongs,source]=o;
+  push({
+    id:oid+"-D",objectiveId:oid,domain,group,skill,difficulty:"Hard",type:"case",
+    caseText:"本番運用中のFabric環境で、変更統制・再現性・最小権限・運用効率を重視する。",
+    question:scenario+" 制約を踏まえ、最も妥当な設計・対応はどれか。",
+    choices:[correct,...wrongs],answers:[0],
+    explanation:correct+"。加えて「"+related+"」も実装時の重要な確認点となる。",
+    source
+  });
+}
+
+const weak=/壁紙|画面テーマ|セル色|Notebookテーマ|Workspaceを削除|全員Admin|Git履歴を消|Gitを削除|ログを削除|Sensitivity labelでSUM|HTMLで|Gitをメッセージブローカー|Gitでイベント|Power BIテーマ|Deployment pipelineの色|ブラウザ履歴/;
+const plausiblePools={
+  [D1]:[
+    "Workspaceロールだけでデータ行・列レベルの制御まで完結させる",
+    "Deployment pipelineだけでデータ変換ロジックそのものを実行する",
+    "Sensitivity labelだけで実際のアクセス権限を制御する",
+    "Git integrationだけで実行時資格情報も自動同期されると考える",
+    "監査ログをアクセス制御そのものの代わりに使う",
+    "本番Workspaceで直接変更し、後から開発環境へ合わせる"
+  ],
+  [D2]:[
+    "Deployment pipelineをデータ取り込みエンジンとして使用する",
+    "Sensitivity labelをデータ変換ロジックとして使用する",
+    "Workspace roleで集計・変換処理を実行する",
+    "Git integrationをストリーミング処理エンジンとして使用する",
+    "OneLake shortcutを常に物理コピーとして扱う",
+    "Mirroringを単発の手動ファイルコピーとして運用する"
+  ],
+  [D3]:[
+    "計測せずに最初からcapacityだけ増強する",
+    "実行ログを確認せず再実行だけを繰り返す",
+    "RLS/CLS解除を性能改善の第一手にする",
+    "Git履歴だけで実行時エラー原因を判定する",
+    "Workspace role変更だけで処理性能を改善する",
+    "Sensitivity label変更を障害解析の第一手にする"
+  ]
+};
+for(const item of q){
+  if(!Array.isArray(item.choices)) continue;
+  const pool=plausiblePools[item.domain]||plausiblePools[D1];
+  item.choices=item.choices.map((choice,idx)=>{
+    if(item.answers&&item.answers.includes(idx)) return choice;
+    if(!weak.test(choice)) return choice;
+    let repl=pool[(idx+item.id.length)%pool.length],tries=0;
+    while(item.choices.includes(repl)&&tries<pool.length){
+      tries++;
+      repl=pool[(idx+item.id.length+tries)%pool.length];
+    }
+    return repl;
+  });
+}
+
 window.DP700_META={
  title:"DP-700 過去問道場",
  version:"2026.11.03-v2",
