@@ -51,13 +51,19 @@ function choose(mode,domain){
  if(mode==="quick10")return sample(Q,10);
  if(mode==="train20")return sample(Q,20);
  if(mode==="mock45")return stratified(45);
+ if(mode==="pa25"){
+   const preferred=Q.filter(q=>q.difficulty==="Hard" || ["case","multi","code","order"].includes(q.type));
+   const ds=domains(), base=Math.floor(25/ds.length), rem=25%ds.length; let out=[];
+   ds.forEach((d,i)=>out=out.concat(sample(preferred.filter(q=>q.domain===d),base+(i<rem?1:0))));
+   return shuffle(out);
+ }
  if(mode==="code")return sample(Q.filter(q=>q.type==="code"),20);
  if(mode==="wrong")return sample(Q.filter(q=>itemStat(q.id).lastWrong),25);
  if(mode==="due"){const now=Date.now();return sample(Q.filter(q=>{const s=itemStat(q.id);return s.nextReview&&s.nextReview<=now;}),25);}
  if(mode==="domain")return sample(Q.filter(q=>q.domain===domain),20);
  return sample(Q,10);
 }
-function modeLabel(m){return ({quick10:"10問クイック",train20:"20問演習",mock45:"本番模試45問",code:"コード20問",wrong:"間違い復習",due:"期限復習",domain:"分野別20問"})[m]||"演習";}
+function modeLabel(m){return ({quick10:"10問クイック",train20:"20問演習",mock45:"本番模試45問",pa25:"Practice Assessment予行25問",code:"コード20問",wrong:"間違い復習",due:"期限復習",domain:"分野別20問"})[m]||"演習";}
 function start(mode,domain){
  const questions=choose(mode,domain);if(!questions.length){alert(mode==="wrong"?"間違い復習の対象はありません。":"復習対象がありません。");return;}
  session={mode,domain,questions,index:0,selected:new Set(),results:[],answered:false,mock:mode==="mock45",choiceOrders:{},orderState:{},startedAt:Date.now(),deadline:mode==="mock45"?Date.now()+100*60*1000:null};
