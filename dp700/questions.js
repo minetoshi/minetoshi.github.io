@@ -357,6 +357,1147 @@ const CURRENT_SKILL_NAMES={
   "O53": "Optimize Spark performance",
   "O54": "Optimize query performance"
 };
+
+// 50 Japanese original questions re-authored from user-provided Practice Assessment screenshots.
+// They preserve the tested concepts but do not reproduce the original assessment wording.
+const PA50_REAUTHORED=[
+  {
+    "id": "PA50-01",
+    "objectiveId": "O17",
+    "domain": "分析ソリューションの実装と管理",
+    "group": "Practice Assessment論点再構成",
+    "skill": "",
+    "difficulty": "Hard",
+    "type": "multi",
+    "question": "Blob Storage の /retail 配下に CSV が到着したときだけ Pipeline1 を開始し、Pipeline1 が成功した後に Dataflow1 を実行したい。適切な設定を2つ選べ。",
+    "choices": [
+      "Pipeline1 に Blob created イベントを設定し、フォルダー /retail と拡張子 .csv の両方で絞り込む",
+      "Dataflow1 を Pipeline1 の成功後に実行されるよう依存関係を設定する",
+      "Pipeline1 は /retail だけで絞り込み、拡張子は指定しない",
+      "Dataflow1 自身の成功イベントをトリガーにする"
+    ],
+    "answers": [
+      0,
+      1
+    ],
+    "explanation": "イベント条件は対象ファイルを十分に絞り込み、後続処理は前段成功への依存関係で接続する。",
+    "source": "https://learn.microsoft.com/en-us/fabric/data-factory/pipeline-runs",
+    "origin": "pa50-ja",
+    "selectCount": 2
+  },
+  {
+    "id": "PA50-02",
+    "objectiveId": "O01",
+    "domain": "分析ソリューションの実装と管理",
+    "group": "Practice Assessment論点再構成",
+    "skill": "",
+    "difficulty": "Hard",
+    "type": "multi",
+    "question": "Starter pool では計算資源が不足する大規模 Spark ジョブがある。一方でセッション開始時間は極端に長くしたくない。適切な対策を2つ選べ。",
+    "choices": [
+      "Autoscale を有効にしたカスタム Spark pool を作成する",
+      "Dynamic Allocation を有効にして executor 数を負荷に応じて調整する",
+      "Starter pool を無効化するだけで解決する",
+      "ジョブの partition 数だけを増やせば計算資源不足は必ず解消する"
+    ],
+    "answers": [
+      0,
+      1
+    ],
+    "explanation": "大きなジョブではカスタム pool の autoscale と Dynamic Allocation を組み合わせ、必要時だけリソースを拡張できる。",
+    "source": "https://learn.microsoft.com/en-us/fabric/data-engineering/configure-starter-pools",
+    "origin": "pa50-ja",
+    "selectCount": 2
+  },
+  {
+    "id": "PA50-03",
+    "objectiveId": "O16",
+    "domain": "分析ソリューションの実装と管理",
+    "group": "Practice Assessment論点再構成",
+    "skill": "",
+    "difficulty": "Hard",
+    "type": "single",
+    "question": "ADLS Gen2 上の CSV を Lakehouse に取り込みながら、開発者同士で対話的にコードを検証・共有したい。最も適切な Fabric アイテムはどれか。",
+    "choices": [
+      "Data Factory pipeline",
+      "Dataflow Gen2",
+      "Notebook",
+      "Deployment pipeline"
+    ],
+    "answers": [
+      2
+    ],
+    "explanation": "対話的なコード実行、共同開発、Spark を使った取り込み・変換には Notebook が適する。",
+    "source": "https://learn.microsoft.com/en-us/fabric/data-engineering/author-execute-notebook",
+    "origin": "pa50-ja"
+  },
+  {
+    "id": "PA50-04",
+    "objectiveId": "O01",
+    "domain": "分析ソリューションの実装と管理",
+    "group": "Practice Assessment論点再構成",
+    "skill": "",
+    "difficulty": "Hard",
+    "type": "single",
+    "question": "Spark ジョブごとに必要な executor 数が大きく変動し、固定 executor 数がボトルネックになっている。最も直接的な改善策はどれか。",
+    "choices": [
+      "Dynamic Allocation を有効化する",
+      "Workspace Viewer を増やす",
+      "Notebook の AutoSave を無効化する",
+      "OneLake shortcut を追加する"
+    ],
+    "answers": [
+      0
+    ],
+    "explanation": "Dynamic Allocation は負荷に応じて executor 数を動的に調整する。",
+    "source": "https://learn.microsoft.com/en-us/fabric/data-engineering/configure-starter-pools",
+    "origin": "pa50-ja"
+  },
+  {
+    "id": "PA50-05",
+    "objectiveId": "O18",
+    "domain": "分析ソリューションの実装と管理",
+    "group": "Practice Assessment論点再構成",
+    "skill": "",
+    "difficulty": "Hard",
+    "type": "multi",
+    "question": "Pipeline の文字列パラメーター RunDate を Notebook の process_date に毎回渡し、Notebook の既定値を上書きしたい。必要な設定を2つ選べ。",
+    "choices": [
+      "Notebook で process_date を parameter cell の変数として定義する",
+      "Notebook activity の Base parameters で process_date に @pipeline().parameters.RunDate を渡す",
+      "process_date を Markdown セルに記載する",
+      "前の Activity の出力を必ず process_date として使用する"
+    ],
+    "answers": [
+      0,
+      1
+    ],
+    "explanation": "Notebook 側でパラメーター化し、Pipeline の Notebook activity から Base parameters で実行時値を渡す。",
+    "source": "https://learn.microsoft.com/en-us/fabric/data-engineering/author-execute-notebook",
+    "origin": "pa50-ja",
+    "selectCount": 2
+  },
+  {
+    "id": "PA50-06",
+    "objectiveId": "O06",
+    "domain": "分析ソリューションの実装と管理",
+    "group": "Practice Assessment論点再構成",
+    "skill": "",
+    "difficulty": "Hard",
+    "type": "single",
+    "question": "既存の Fabric Warehouse のスキーマをコードとして管理し、Git で変更レビューしたい。最も適切な開始方法はどれか。",
+    "choices": [
+      "既存 Warehouse から Database Project を作成・抽出する",
+      "Warehouse を CSV に書き出して管理する",
+      "Semantic model を Database Project に変換する",
+      "OneLake shortcut を作る"
+    ],
+    "answers": [
+      0
+    ],
+    "explanation": "Database Project は Warehouse のスキーマをソース管理可能な形で扱うために使用できる。",
+    "source": "https://learn.microsoft.com/en-us/fabric/data-warehouse/develop-warehouse-project",
+    "origin": "pa50-ja"
+  },
+  {
+    "id": "PA50-07",
+    "objectiveId": "O10",
+    "domain": "分析ソリューションの実装と管理",
+    "group": "Practice Assessment論点再構成",
+    "skill": "",
+    "difficulty": "Hard",
+    "type": "multi",
+    "question": "Warehouse の Sales テーブルを、ログインユーザーの部門に対応する行だけ参照できるようにしたい。RLS 実装に必要なものを2つ選べ。",
+    "choices": [
+      "ユーザーと行を判定する predicate function",
+      "FILTER PREDICATE を含む SECURITY POLICY",
+      "Dynamic Data Masking",
+      "全ユーザーへの Workspace Admin 付与"
+    ],
+    "answers": [
+      0,
+      1
+    ],
+    "explanation": "RLS は predicate function と security policy を用いて、行単位の参照範囲を制御する。",
+    "source": "https://learn.microsoft.com/en-us/fabric/data-warehouse/security",
+    "origin": "pa50-ja",
+    "selectCount": 2
+  },
+  {
+    "id": "PA50-08",
+    "objectiveId": "O06",
+    "domain": "分析ソリューションの実装と管理",
+    "group": "Practice Assessment論点再構成",
+    "skill": "",
+    "difficulty": "Hard",
+    "type": "single",
+    "question": "VS Code で既存 Warehouse の現在のスキーマを取り込み、既存データベースを変更せずに Database Project を開始したい。適切な操作はどれか。",
+    "choices": [
+      "Create Project From Database",
+      "Publish Project",
+      "Drop and Recreate Database",
+      "Create OneLake Shortcut"
+    ],
+    "answers": [
+      0
+    ],
+    "explanation": "既存データベースからプロジェクトを生成すれば、現在のスキーマをプロジェクトへ取り込める。",
+    "source": "https://learn.microsoft.com/en-us/fabric/data-warehouse/develop-warehouse-project",
+    "origin": "pa50-ja"
+  },
+  {
+    "id": "PA50-09",
+    "objectiveId": "O10",
+    "domain": "分析ソリューションの実装と管理",
+    "group": "Practice Assessment論点再構成",
+    "skill": "",
+    "difficulty": "Hard",
+    "type": "single",
+    "question": "Employees テーブルの MedicalHistory 列だけを、許可されたユーザーに限定して参照させたい。最も適切な制御はどれか。",
+    "choices": [
+      "Row-Level Security",
+      "Column-Level Security",
+      "Sensitivity label だけを設定",
+      "Workspace Viewer"
+    ],
+    "answers": [
+      1
+    ],
+    "explanation": "特定列そのものへのアクセスを制御する要件には Column-Level Security が適する。",
+    "source": "https://learn.microsoft.com/en-us/fabric/data-warehouse/security",
+    "origin": "pa50-ja"
+  },
+  {
+    "id": "PA50-10",
+    "objectiveId": "O11",
+    "domain": "分析ソリューションの実装と管理",
+    "group": "Practice Assessment論点再構成",
+    "skill": "",
+    "difficulty": "Hard",
+    "type": "single",
+    "question": "Dynamic Data Masking を設定した列について、承認済みユーザーだけ元の値を参照させたい。付与すべき権限はどれか。",
+    "choices": [
+      "SELECT ALL USER SECURABLES",
+      "CONTROL SERVER",
+      "UNMASK",
+      "ALTER ANY MASK"
+    ],
+    "answers": [
+      2
+    ],
+    "explanation": "DDM のマスク前の値を参照させるには、必要な範囲で UNMASK 権限を付与する。",
+    "source": "https://learn.microsoft.com/en-us/fabric/data-warehouse/dynamic-data-masking",
+    "origin": "pa50-ja"
+  },
+  {
+    "id": "PA50-11",
+    "objectiveId": "O07",
+    "domain": "分析ソリューションの実装と管理",
+    "group": "Practice Assessment論点再構成",
+    "skill": "",
+    "difficulty": "Hard",
+    "type": "single",
+    "question": "Deployment pipeline の Test から Production へ、変更された一部の Fabric アイテムだけを昇格したい。最も適切な方法はどれか。",
+    "choices": [
+      "Workspace 全体を毎回再作成する",
+      "Git 接続を切断する",
+      "Selective deployment を使用する",
+      "全アイテムを手動コピーする"
+    ],
+    "answers": [
+      2
+    ],
+    "explanation": "Selective deployment を使うと、対象アイテムを選んでステージ間へデプロイできる。",
+    "source": "https://learn.microsoft.com/en-us/fabric/cicd/deployment-pipelines/deploy-content",
+    "origin": "pa50-ja"
+  },
+  {
+    "id": "PA50-12",
+    "objectiveId": "O10",
+    "domain": "分析ソリューションの実装と管理",
+    "group": "Practice Assessment論点再構成",
+    "skill": "",
+    "difficulty": "Hard",
+    "type": "multi",
+    "question": "従業員テーブルで Salary と SocialSecurityNumber は HR のみ参照可能にしたい。既存の一般ロールにはテーブル参照権限がある。適切な対策を3つ選べ。",
+    "choices": [
+      "HR 用のデータベースロールを作成して HR ユーザーを所属させる",
+      "HR ロールに機密列の SELECT を許可する",
+      "一般ロールには機密列の SELECT を許可しない、または必要に応じて明示的に拒否する",
+      "全ユーザーに UNMASK を付与する",
+      "全員を Workspace Admin にする"
+    ],
+    "answers": [
+      0,
+      1,
+      2
+    ],
+    "explanation": "列レベルの権限と専用ロールを使い、HR だけに機密列の参照権限を与える。",
+    "source": "https://learn.microsoft.com/en-us/fabric/data-warehouse/security",
+    "origin": "pa50-ja",
+    "selectCount": 3
+  },
+  {
+    "id": "PA50-13",
+    "objectiveId": "O11",
+    "domain": "分析ソリューションの実装と管理",
+    "group": "Practice Assessment論点再構成",
+    "skill": "",
+    "difficulty": "Hard",
+    "type": "single",
+    "question": "クレジットカード番号の末尾4桁だけを表示し、それ以外を固定文字で隠したい。DDM のマスクとして最も適切なのはどれか。",
+    "choices": [
+      "partial(0,\"XXXX-XXXX-XXXX-\",4)",
+      "default()",
+      "email()",
+      "random(1,4)"
+    ],
+    "answers": [
+      0
+    ],
+    "explanation": "partial は先頭・置換文字列・末尾表示文字数を指定できる。末尾4桁だけ残す要件に合う。",
+    "source": "https://learn.microsoft.com/en-us/fabric/data-warehouse/dynamic-data-masking",
+    "origin": "pa50-ja"
+  },
+  {
+    "id": "PA50-14",
+    "objectiveId": "O13",
+    "domain": "分析ソリューションの実装と管理",
+    "group": "Practice Assessment論点再構成",
+    "skill": "",
+    "difficulty": "Hard",
+    "type": "multi",
+    "question": "品質検証済みの Lakehouse を組織の信頼できるデータ資産として示し、認定管理をドメイン単位で委任したい。適切な設定を2つ選べ。",
+    "choices": [
+      "Lakehouse を Certified にする",
+      "Domain administrator に certification の管理を委任する",
+      "Promoted だけを設定し、認定プロセスは不要とする",
+      "Workspace Viewer に tenant 全体の認定権限を与える"
+    ],
+    "answers": [
+      0,
+      1
+    ],
+    "explanation": "検証済み資産には Certified を使い、認定可否の管理は適切な管理者へ委任できる。",
+    "source": "https://learn.microsoft.com/en-us/fabric/admin/endorsement-certification-enable",
+    "origin": "pa50-ja",
+    "selectCount": 2
+  },
+  {
+    "id": "PA50-15",
+    "objectiveId": "O01",
+    "domain": "分析ソリューションの実装と管理",
+    "group": "Practice Assessment論点再構成",
+    "skill": "",
+    "difficulty": "Hard",
+    "type": "single",
+    "question": "複数 Notebook で同じ Spark セッションを効率的に共有し、高コンカレンシーを利用したい。設定場所として最も適切なのはどれか。",
+    "choices": [
+      "Workspace settings の Data Engineering/Science > Spark settings > High concurrency",
+      "Power BI tenant settings",
+      "Deployment pipeline のルール",
+      "OneLake catalog の endorsement"
+    ],
+    "answers": [
+      0
+    ],
+    "explanation": "High concurrency の既定動作は Workspace の Spark settings で管理する。",
+    "source": "https://learn.microsoft.com/en-us/fabric/data-engineering/configure-high-concurrency-session-notebooks",
+    "origin": "pa50-ja"
+  },
+  {
+    "id": "PA50-16",
+    "objectiveId": "O10",
+    "domain": "分析ソリューションの実装と管理",
+    "group": "Practice Assessment論点再構成",
+    "skill": "",
+    "difficulty": "Hard",
+    "type": "single",
+    "question": "あるグループには Warehouse の Read 権限があるが、dbo.FactSales だけをクエリできるよう SQL 権限を絞りたい。最も適切な方法はどれか。",
+    "choices": [
+      "Workspace Member を付与する",
+      "UNMASK を付与する",
+      "dbo.FactSales に必要な SELECT 権限だけを付与する",
+      "Fabric administrator にする"
+    ],
+    "answers": [
+      2
+    ],
+    "explanation": "SQL のオブジェクト/列レベル権限で、必要なテーブルだけに SELECT を限定する。",
+    "source": "https://learn.microsoft.com/en-us/fabric/data-warehouse/security",
+    "origin": "pa50-ja"
+  },
+  {
+    "id": "PA50-17",
+    "objectiveId": "O11",
+    "domain": "分析ソリューションの実装と管理",
+    "group": "Practice Assessment論点再構成",
+    "skill": "",
+    "difficulty": "Hard",
+    "type": "code",
+    "question": "カード番号列の末尾4桁だけを表示する DDM を設定したい。正しい T-SQL はどれか。",
+    "choices": [
+      "ALTER TABLE dbo.Payments ALTER COLUMN CardNo ADD MASKED WITH (FUNCTION = 'partial(0,\"XXXX-XXXX-XXXX-\",4)');",
+      "ALTER TABLE dbo.Payments ALTER COLUMN CardNo ADD MASKED WITH (FUNCTION = 'email()');",
+      "GRANT UNMASK TO public;",
+      "ALTER TABLE dbo.Payments DROP COLUMN CardNo;"
+    ],
+    "answers": [
+      0
+    ],
+    "explanation": "末尾4桁を残すには partial マスクを指定する。",
+    "source": "https://learn.microsoft.com/en-us/fabric/data-warehouse/dynamic-data-masking",
+    "origin": "pa50-ja",
+    "code": "-- CardNo: 1234-5678-9012-3456\n-- 期待表示: XXXX-XXXX-XXXX-3456"
+  },
+  {
+    "id": "PA50-18",
+    "objectiveId": "O08",
+    "domain": "分析ソリューションの実装と管理",
+    "group": "Practice Assessment論点再構成",
+    "skill": "",
+    "difficulty": "Hard",
+    "type": "single",
+    "question": "本番ステージに割り当てた Workspace で、一般利用者が Fabric アイテムを編集できないようにしたい。最も直接的に見直すべきものはどれか。",
+    "choices": [
+      "Workspace ロールとアクセス権",
+      "Sensitivity label の色",
+      "Pipeline の Retry 回数",
+      "Spark executor 数"
+    ],
+    "answers": [
+      0
+    ],
+    "explanation": "Workspace 全体の編集可否は Workspace ロールとアクセス権で制御する。",
+    "source": "https://learn.microsoft.com/en-us/fabric/data-warehouse/security",
+    "origin": "pa50-ja"
+  },
+  {
+    "id": "PA50-19",
+    "objectiveId": "O11",
+    "domain": "分析ソリューションの実装と管理",
+    "group": "Practice Assessment論点再構成",
+    "skill": "",
+    "difficulty": "Hard",
+    "type": "multi",
+    "question": "Dynamic Data Masking の運用として適切なものを3つ選べ。",
+    "choices": [
+      "機密列へ要件に合うマスク関数を定義する",
+      "元値が必要な承認済みユーザーだけに UNMASK を付与する",
+      "非特権ユーザーで実際の表示結果をテストする",
+      "DDM を設定すれば他のアクセス制御は不要と考える",
+      "全ユーザーに UNMASK を付与する"
+    ],
+    "answers": [
+      0,
+      1,
+      2
+    ],
+    "explanation": "DDM はマスク定義、最小限の UNMASK、非特権ユーザーでの検証を組み合わせて運用する。",
+    "source": "https://learn.microsoft.com/en-us/fabric/data-warehouse/dynamic-data-masking",
+    "origin": "pa50-ja",
+    "selectCount": 3
+  },
+  {
+    "id": "PA50-20",
+    "objectiveId": "O18",
+    "domain": "分析ソリューションの実装と管理",
+    "group": "Practice Assessment論点再構成",
+    "skill": "",
+    "difficulty": "Hard",
+    "type": "multi",
+    "question": "同じ Pipeline を複数環境・複数テーブルで再利用し、接続先やテーブル名のハードコードを減らしたい。適切な手法を2つ選べ。",
+    "choices": [
+      "Pipeline parameters を定義する",
+      "Dynamic expressions で実行時値を参照する",
+      "環境ごとに Pipeline を完全複製する",
+      "本番値を各 Activity に直接入力する"
+    ],
+    "answers": [
+      0,
+      1
+    ],
+    "explanation": "パラメーターと動的式を使うと、同じオーケストレーションを実行時値で再利用できる。",
+    "source": "https://learn.microsoft.com/en-us/fabric/data-factory/parameters",
+    "origin": "pa50-ja",
+    "selectCount": 2
+  },
+  {
+    "id": "PA50-21",
+    "objectiveId": "O35",
+    "domain": "データの取り込みと変換",
+    "group": "Practice Assessment論点再構成",
+    "skill": "",
+    "difficulty": "Hard",
+    "type": "single",
+    "question": "IoT イベントを継続的に変換し、Lakehouse の Delta テーブルへ低遅延で書き込みたい。最も適切な処理方式はどれか。",
+    "choices": [
+      "毎晩のバッチ Copy activity",
+      "Spark Structured Streaming",
+      "Deployment pipeline",
+      "Database Project"
+    ],
+    "answers": [
+      1
+    ],
+    "explanation": "継続的なストリーム変換と Delta への書き込みには Spark Structured Streaming が適する。",
+    "source": "https://learn.microsoft.com/en-us/fabric/data-engineering/structured-streaming-overview",
+    "origin": "pa50-ja"
+  },
+  {
+    "id": "PA50-22",
+    "objectiveId": "O19",
+    "domain": "データの取り込みと変換",
+    "group": "Practice Assessment論点再構成",
+    "skill": "",
+    "difficulty": "Hard",
+    "type": "multi",
+    "question": "Blob Storage に多数の CSV があり、Fabric Warehouse へ効率的に一括ロードしたい。運用性も考慮した適切な設計を3つ選べ。",
+    "choices": [
+      "COPY INTO を使用する",
+      "ファイルパスに wildcard を使用して複数ファイルを対象にする",
+      "必要に応じて rejected row の出力先を設定する",
+      "1ファイルずつ手動 INSERT する",
+      "Workspace Admin を増やす"
+    ],
+    "answers": [
+      0,
+      1,
+      2
+    ],
+    "explanation": "Warehouse の大量ファイル取り込みでは COPY INTO と wildcard が有効で、拒否行の扱いも設計できる。",
+    "source": "https://learn.microsoft.com/en-us/fabric/data-warehouse/ingest-data-copy",
+    "origin": "pa50-ja",
+    "selectCount": 3
+  },
+  {
+    "id": "PA50-23",
+    "objectiveId": "O19",
+    "domain": "データの取り込みと変換",
+    "group": "Practice Assessment論点再構成",
+    "skill": "",
+    "difficulty": "Hard",
+    "type": "single",
+    "question": "Lakehouse の /Files/sales/ に継続的に新規ファイルが追加される。処理済みファイルを毎回読み直さず、障害後も続きから処理したい。最も適切な設計はどれか。",
+    "choices": [
+      "Structured Streaming のファイルソースと永続的な checkpoint を使用する",
+      "毎回フォルダー全件をバッチ読み込みする",
+      "Deployment pipeline を使って差分検知する",
+      "RLS で処理済みファイルを除外する"
+    ],
+    "answers": [
+      0
+    ],
+    "explanation": "ストリーミング処理では checkpoint に進捗を保持することで、再起動時に継続処理しやすくなる。",
+    "source": "https://learn.microsoft.com/en-us/fabric/data-engineering/structured-streaming-overview",
+    "origin": "pa50-ja"
+  },
+  {
+    "id": "PA50-24",
+    "objectiveId": "O22",
+    "domain": "データの取り込みと変換",
+    "group": "Practice Assessment論点再構成",
+    "skill": "",
+    "difficulty": "Hard",
+    "type": "single",
+    "question": "半構造化ファイルを含む多様なデータを保存し、PySpark と SQL の両方で加工・分析したい。最も適切なデータストアはどれか。",
+    "choices": [
+      "Lakehouse",
+      "Deployment pipeline",
+      "Dataflow のみ",
+      "Sensitivity label"
+    ],
+    "answers": [
+      0
+    ],
+    "explanation": "Lakehouse は OneLake/Delta を基盤に、Spark と SQL の両方からデータを扱える。",
+    "source": "https://learn.microsoft.com/en-us/fabric/fundamentals/store-data",
+    "origin": "pa50-ja"
+  },
+  {
+    "id": "PA50-25",
+    "objectiveId": "O34",
+    "domain": "データの取り込みと変換",
+    "group": "Practice Assessment論点再構成",
+    "skill": "",
+    "difficulty": "Hard",
+    "type": "single",
+    "question": "Azure Event Hubs から受け取るイベントを、不要フィールド削除や計算列追加を行ってから KQL Database に保存したい。最も適切な Fabric 機能はどれか。",
+    "choices": [
+      "Database Project",
+      "Deployment pipeline",
+      "Eventstream",
+      "Workspace role"
+    ],
+    "answers": [
+      2
+    ],
+    "explanation": "Eventstream はストリーミングデータの取り込み、変換、ルーティングを低コードで構成できる。",
+    "source": "https://learn.microsoft.com/en-us/fabric/real-time-hub/process-data-streams-using-transformations",
+    "origin": "pa50-ja"
+  },
+  {
+    "id": "PA50-26",
+    "objectiveId": "O27",
+    "domain": "データの取り込みと変換",
+    "group": "Practice Assessment論点再構成",
+    "skill": "",
+    "difficulty": "Hard",
+    "type": "code",
+    "question": "sales_df から status='Completed' の行だけを対象に、region・channel 別に amount を合計し、合計が 50000 を超えるグループだけ残したい。正しい PySpark はどれか。",
+    "choices": [
+      "sales_df.filter(F.col('status')=='Completed').groupBy('region','channel').agg(F.sum('amount').alias('total_sales')).filter(F.col('total_sales')>50000)",
+      "sales_df.groupBy('status').count().filter(F.col('amount')>50000)",
+      "sales_df.select('region','channel').distinct()",
+      "sales_df.orderBy('amount').limit(50000)"
+    ],
+    "answers": [
+      0
+    ],
+    "explanation": "filter→groupBy→agg→集計結果への filter の順で要件を満たす。",
+    "source": "https://learn.microsoft.com/en-us/training/modules/fabric-transform-data-notebooks/",
+    "origin": "pa50-ja",
+    "code": "from pyspark.sql import functions as F"
+  },
+  {
+    "id": "PA50-27",
+    "objectiveId": "O22",
+    "domain": "データの取り込みと変換",
+    "group": "Practice Assessment論点再構成",
+    "skill": "",
+    "difficulty": "Hard",
+    "type": "single",
+    "question": "1日5TB規模を取り込み、高い同時実行性で Power BI から SQL 分析し、T-SQL ストアドプロシージャも利用したい。最も適切なデータストアはどれか。",
+    "choices": [
+      "Warehouse",
+      "Eventstream",
+      "Notebook",
+      "Deployment pipeline"
+    ],
+    "answers": [
+      0
+    ],
+    "explanation": "SQL 中心・高並行分析・T-SQL の要件には Warehouse が適する。",
+    "source": "https://learn.microsoft.com/en-us/fabric/fundamentals/store-data",
+    "origin": "pa50-ja"
+  },
+  {
+    "id": "PA50-28",
+    "objectiveId": "O35",
+    "domain": "データの取り込みと変換",
+    "group": "Practice Assessment論点再構成",
+    "skill": "",
+    "difficulty": "Hard",
+    "type": "multi",
+    "question": "Structured Streaming の結果を Delta テーブルへ継続追記し、障害後も重複や読み飛ばしを抑えて再開したい。適切な設定を2つ選べ。",
+    "choices": [
+      "出力モードを append とする",
+      "永続的な checkpointLocation を設定する",
+      "毎回 checkpoint を削除する",
+      "Complete モードだけを使用し続ける"
+    ],
+    "answers": [
+      0,
+      1
+    ],
+    "explanation": "追記型ストリームでは append と永続 checkpoint の組み合わせが基本となる。",
+    "source": "https://learn.microsoft.com/en-us/fabric/data-engineering/structured-streaming-overview",
+    "origin": "pa50-ja",
+    "selectCount": 2
+  },
+  {
+    "id": "PA50-29",
+    "objectiveId": "O37",
+    "domain": "データの取り込みと変換",
+    "group": "Practice Assessment論点再構成",
+    "skill": "",
+    "difficulty": "Hard",
+    "type": "code",
+    "question": "同じストリームを 1分・15分・30分・60分の複数ウィンドウで同時集計し、結果にどのウィンドウかを識別する値も出したい。適切な構文はどれか。",
+    "choices": [
+      "GROUP BY Windows(Window('1m',TumblingWindow(minute,1)), Window('15m',TumblingWindow(minute,15))) のように各 Window に ID を付け、SELECT で System.Window().Id を参照する",
+      "複数ウィンドウは1クエリでは定義できない",
+      "ORDER BY だけでウィンドウを作る",
+      "Workspace role をウィンドウ ID として使う"
+    ],
+    "answers": [
+      0
+    ],
+    "explanation": "複数 Window 定義に ID を付け、System.Window().Id でどのウィンドウの結果か識別できる。",
+    "source": "https://learn.microsoft.com/en-us/stream-analytics-query/windows-azure-stream-analytics",
+    "origin": "pa50-ja",
+    "code": "-- 複数の時間ウィンドウを1つのクエリで扱う"
+  },
+  {
+    "id": "PA50-30",
+    "objectiveId": "O36",
+    "domain": "データの取り込みと変換",
+    "group": "Practice Assessment論点再構成",
+    "skill": "",
+    "difficulty": "Hard",
+    "type": "single",
+    "question": "Eventhouse で取り込んだ生イベントをそのまま保持しつつ、正規化・派生列を付けた別テーブルも自動維持したい。最も適切な設計はどれか。",
+    "choices": [
+      "生テーブルを上書きして派生列だけ保存する",
+      "生テーブルをソースにした KQL update policy を派生テーブルへ設定する",
+      "Deployment pipeline で行ごとにコピーする",
+      "Power BI レポート更新で変換する"
+    ],
+    "answers": [
+      1
+    ],
+    "explanation": "Update policy を使うと、ソーステーブルへの取り込みを契機に KQL 変換した結果を別テーブルへ取り込める。",
+    "source": "https://learn.microsoft.com/en-us/fabric/real-time-intelligence/table-update-policy",
+    "origin": "pa50-ja"
+  },
+  {
+    "id": "PA50-31",
+    "objectiveId": "O34",
+    "domain": "データの取り込みと変換",
+    "group": "Practice Assessment論点再構成",
+    "skill": "",
+    "difficulty": "Hard",
+    "type": "single",
+    "question": "毎秒大量の JSON イベントを取り込み、KQL Database へ保存する前に必要なフィールドだけへ整形したい。最も適切なのはどれか。",
+    "choices": [
+      "Eventstream で変換してから送信する",
+      "Database Project でストリームを処理する",
+      "Deployment pipeline でリアルタイム変換する",
+      "Sensitivity label で列を削除する"
+    ],
+    "answers": [
+      0
+    ],
+    "explanation": "Eventstream はリアルタイム取り込み経路上でフィルターや変換を適用できる。",
+    "source": "https://learn.microsoft.com/en-us/fabric/real-time-hub/process-data-streams-using-transformations",
+    "origin": "pa50-ja"
+  },
+  {
+    "id": "PA50-32",
+    "objectiveId": "O35",
+    "domain": "データの取り込みと変換",
+    "group": "Practice Assessment論点再構成",
+    "skill": "",
+    "difficulty": "Hard",
+    "type": "single",
+    "question": "Kafka の既存メッセージは初回に読み飛ばし、開始後に到着した新規メッセージだけ処理したい。再起動後は前回の続きから再開する必要がある。最も適切な構成はどれか。",
+    "choices": [
+      "startingOffsets='earliest' と毎回新しい checkpoint",
+      "startingOffsets='latest' と永続 checkpoint を使用し、出力は append とする",
+      "毎回全トピックをバッチ読み込みする",
+      "checkpoint を無効化する"
+    ],
+    "answers": [
+      1
+    ],
+    "explanation": "初回を最新位置から始め、以降は checkpoint が進捗を保持する構成が要件に合う。",
+    "source": "https://learn.microsoft.com/en-us/fabric/data-engineering/structured-streaming-overview",
+    "origin": "pa50-ja"
+  },
+  {
+    "id": "PA50-33",
+    "objectiveId": "O25",
+    "domain": "データの取り込みと変換",
+    "group": "Practice Assessment論点再構成",
+    "skill": "",
+    "difficulty": "Hard",
+    "type": "single",
+    "question": "Azure SQL Database の変更を大きな ETL を作らず、ほぼリアルタイムに OneLake へ反映したい。最も適切な機能はどれか。",
+    "choices": [
+      "毎日 CSV エクスポート",
+      "Fabric Mirroring",
+      "Deployment pipeline",
+      "Dynamic Data Masking"
+    ],
+    "answers": [
+      1
+    ],
+    "explanation": "Mirroring は対応データベースの変更を継続的に Fabric/OneLake 側へ複製する用途に適する。",
+    "source": "https://learn.microsoft.com/en-us/fabric/mirroring/overview",
+    "origin": "pa50-ja"
+  },
+  {
+    "id": "PA50-34",
+    "objectiveId": "O28",
+    "domain": "データの取り込みと変換",
+    "group": "Practice Assessment論点再構成",
+    "skill": "",
+    "difficulty": "Hard",
+    "type": "single",
+    "question": "Product→Subcategory→Category の正規化された商品階層を、分析用 Gold 層で結合回数を減らして使いたい。最も適切な形はどれか。",
+    "choices": [
+      "ProductKey を粒度にし、Product/Subcategory/Category 属性を1つのディメンションへ展開する",
+      "階層の各テーブルをさらに細分化する",
+      "すべて JSON 文字列1列にする",
+      "主キーを削除する"
+    ],
+    "answers": [
+      0
+    ],
+    "explanation": "分析用ディメンションでは階層属性を適切に非正規化し、使いやすい粒度へ整える。",
+    "source": "https://learn.microsoft.com/en-us/fabric/data-warehouse/dimensional-modeling-dimension-tables",
+    "origin": "pa50-ja"
+  },
+  {
+    "id": "PA50-35",
+    "objectiveId": "O35",
+    "domain": "データの取り込みと変換",
+    "group": "Practice Assessment論点再構成",
+    "skill": "",
+    "difficulty": "Hard",
+    "type": "single",
+    "question": "イベントをリアルタイム変換しながら Lakehouse に保存し、Delta の信頼性も利用したい。最も適切な組み合わせはどれか。",
+    "choices": [
+      "Spark Structured Streaming + Delta",
+      "Git integration + CSV",
+      "Deployment pipeline + DDM",
+      "Database Project + Eventstream"
+    ],
+    "answers": [
+      0
+    ],
+    "explanation": "Spark Structured Streaming と Delta の組み合わせで継続処理とトランザクション対応の保存を構成できる。",
+    "source": "https://learn.microsoft.com/en-us/fabric/data-engineering/structured-streaming-overview",
+    "origin": "pa50-ja"
+  },
+  {
+    "id": "PA50-36",
+    "objectiveId": "O18",
+    "domain": "分析ソリューションの実装と管理",
+    "group": "Practice Assessment論点再構成",
+    "skill": "",
+    "difficulty": "Hard",
+    "type": "single",
+    "question": "親 Pipeline から子 Pipeline へ配列パラメーターを渡したつもりだが、子の ForEach では String と評価されて失敗する。親側で配列値を構築する方法として適切なのはどれか。",
+    "choices": [
+      "createArray() を用いて配列としてパラメーターを渡す",
+      "文字列をさらに concat する",
+      "ForEach を削除する",
+      "値を Markdown に記載する"
+    ],
+    "answers": [
+      0
+    ],
+    "explanation": "Execute Pipeline で配列が文字列化されるケースでは、親側で createArray() を使って配列として渡す方法がある。",
+    "source": "https://learn.microsoft.com/en-us/fabric/data-factory/pipeline-troubleshoot-guide",
+    "origin": "pa50-ja"
+  },
+  {
+    "id": "PA50-37",
+    "objectiveId": "O44",
+    "domain": "分析ソリューションの監視と最適化",
+    "group": "Practice Assessment論点再構成",
+    "skill": "",
+    "difficulty": "Hard",
+    "type": "single",
+    "question": "特定 Notebook が非アクティブ後にセッション切れとなる。Workspace 全体は変えず、その Notebook だけタイムアウトを延ばして管理負荷を抑えたい。どこで変更するか。",
+    "choices": [
+      "Notebook の Session ready indicator から session timeout を変更する",
+      "Fabric administrator に capacity 再開を毎回依頼する",
+      "AutoSave を有効にする",
+      "Deployment pipeline の stage timeout を変更する"
+    ],
+    "answers": [
+      0
+    ],
+    "explanation": "Notebook 単位の timeout は Session ready indicator から調整できる。",
+    "source": "https://learn.microsoft.com/en-us/fabric/data-science/fabric-notebooks-troubleshooting-guide",
+    "origin": "pa50-ja"
+  },
+  {
+    "id": "PA50-38",
+    "objectiveId": "O42",
+    "domain": "分析ソリューションの監視と最適化",
+    "group": "Practice Assessment論点再構成",
+    "skill": "",
+    "difficulty": "Hard",
+    "type": "single",
+    "question": "Pipeline が断続的に失敗する。失敗した Run と Activity、入出力、エラー詳細を追跡して原因を切り分けたい。まず使うべきものはどれか。",
+    "choices": [
+      "Monitoring hub",
+      "Sensitivity label",
+      "Database Project",
+      "OneLake shortcut"
+    ],
+    "answers": [
+      0
+    ],
+    "explanation": "Pipeline の実行履歴と Activity 詳細の確認には Monitoring hub を使用する。",
+    "source": "https://learn.microsoft.com/en-us/fabric/data-factory/monitor-data-factory",
+    "origin": "pa50-ja"
+  },
+  {
+    "id": "PA50-39",
+    "objectiveId": "O18",
+    "domain": "分析ソリューションの実装と管理",
+    "group": "Practice Assessment論点再構成",
+    "skill": "",
+    "difficulty": "Hard",
+    "type": "single",
+    "question": "子 Pipeline の TableList パラメーターには JSON 配列を表す文字列が渡される。ForEach の items が配列を要求している場合、最も適切な式はどれか。",
+    "choices": [
+      "@json(pipeline().parameters.TableList)",
+      "@string(pipeline().parameters.TableList)",
+      "@concat(pipeline().parameters.TableList)",
+      "@base64(pipeline().parameters.TableList)"
+    ],
+    "answers": [
+      0
+    ],
+    "explanation": "json() で JSON 文字列を配列/オブジェクトとして解釈すれば ForEach の items に渡せる。",
+    "source": "https://learn.microsoft.com/en-us/fabric/data-factory/parameters",
+    "origin": "pa50-ja"
+  },
+  {
+    "id": "PA50-40",
+    "objectiveId": "O52",
+    "domain": "分析ソリューションの監視と最適化",
+    "group": "Practice Assessment論点再構成",
+    "skill": "",
+    "difficulty": "Hard",
+    "type": "single",
+    "question": "Eventhouse がアイドル時に自動休止し、次回クエリ時の再開待ちが許容できない。常時利用可能性を優先したい。現在の名称で最も適切な設定はどれか。",
+    "choices": [
+      "Capacity Planner mode を使用する（旧 Always-on）",
+      "Query acceleration だけを有効化する",
+      "Power BI レポートを5分ごとに空実行する",
+      "Workspace Viewer を増やす"
+    ],
+    "answers": [
+      0
+    ],
+    "explanation": "現在は Capacity Planner mode（旧 Always-on）を使用して、Eventhouse の自動スケーリング/休止動作を制御できる。",
+    "source": "https://learn.microsoft.com/en-us/fabric/real-time-intelligence/eventhouse-smart-capacity-control",
+    "origin": "pa50-ja"
+  },
+  {
+    "id": "PA50-41",
+    "objectiveId": "O39",
+    "domain": "分析ソリューションの監視と最適化",
+    "group": "Practice Assessment論点再構成",
+    "skill": "",
+    "difficulty": "Hard",
+    "type": "multi",
+    "question": "取り込み・変換の遅延によりデータ提供が遅れている。原因特定と改善のため適切な対応を2つ選べ。",
+    "choices": [
+      "監視画面で実行状態・開始時刻・処理時間を確認する",
+      "ボトルネックとなる変換処理や構成を特定して最適化する",
+      "監視せず capacity だけ増やす",
+      "Sensitivity label を変更する"
+    ],
+    "answers": [
+      0,
+      1
+    ],
+    "explanation": "まず監視データで遅延箇所を特定し、対象の変換や実行構成を最適化する。",
+    "source": "https://learn.microsoft.com/en-us/fabric/data-factory/monitor-data-factory",
+    "origin": "pa50-ja",
+    "selectCount": 2
+  },
+  {
+    "id": "PA50-42",
+    "objectiveId": "O19",
+    "domain": "データの取り込みと変換",
+    "group": "Practice Assessment論点再構成",
+    "skill": "",
+    "difficulty": "Hard",
+    "type": "single",
+    "question": "Blob Storage にある大量の CSV を Fabric Warehouse にロードしたい。ファイル名パターンで複数ファイルをまとめて取り込むのに適した方法はどれか。",
+    "choices": [
+      "COPY INTO で wildcard を使用する",
+      "1行ずつ INSERT する",
+      "Deployment pipeline を使用する",
+      "Dynamic Data Masking を使用する"
+    ],
+    "answers": [
+      0
+    ],
+    "explanation": "Warehouse のファイル取り込みでは COPY INTO で複数ファイルを効率的にロードできる。",
+    "source": "https://learn.microsoft.com/en-us/fabric/data-warehouse/ingest-data-copy",
+    "origin": "pa50-ja"
+  },
+  {
+    "id": "PA50-43",
+    "objectiveId": "O38",
+    "domain": "分析ソリューションの監視と最適化",
+    "group": "Practice Assessment論点再構成",
+    "skill": "",
+    "difficulty": "Hard",
+    "type": "single",
+    "question": "データ取り込み処理が時々失敗し、レポートへの反映が遅れる。失敗 Run を状態や開始時刻で絞り込みたい。最も適切な機能はどれか。",
+    "choices": [
+      "Monitoring hub",
+      "Database Project",
+      "Deployment pipeline",
+      "Sensitivity label"
+    ],
+    "answers": [
+      0
+    ],
+    "explanation": "Monitoring hub ではデータ処理の実行状況を確認・絞り込みできる。",
+    "source": "https://learn.microsoft.com/en-us/fabric/data-factory/monitor-data-factory",
+    "origin": "pa50-ja"
+  },
+  {
+    "id": "PA50-44",
+    "objectiveId": "O39",
+    "domain": "分析ソリューションの監視と最適化",
+    "group": "Practice Assessment論点再構成",
+    "skill": "",
+    "difficulty": "Hard",
+    "type": "single",
+    "question": "Pipeline は成功しているが、Lakehouse へのロード時間が想定より長い。どの実行や Activity が時間を使っているか確認したい。最も適切なのはどれか。",
+    "choices": [
+      "Dataflow を新規作成する",
+      "Pipeline を複製する",
+      "Activator",
+      "Monitoring hub"
+    ],
+    "answers": [
+      3
+    ],
+    "explanation": "成功/失敗にかかわらず実行時間や Activity の状況を調べるには Monitoring hub が適する。",
+    "source": "https://learn.microsoft.com/en-us/fabric/data-factory/monitor-data-factory",
+    "origin": "pa50-ja"
+  },
+  {
+    "id": "PA50-45",
+    "objectiveId": "O43",
+    "domain": "分析ソリューションの監視と最適化",
+    "group": "Practice Assessment論点再構成",
+    "skill": "",
+    "difficulty": "Hard",
+    "type": "single",
+    "question": "オンプレミス データ ゲートウェイを使う Dataflow Gen2 が、およそ1時間実行した後に失敗する。原因切り分けの最初の確認として適切なのはどれか。",
+    "choices": [
+      "オンプレミス データ ゲートウェイがサポート対象の最新バージョンか確認する",
+      "Pipeline の最大パラメーター数を確認する",
+      "Workspace の色テーマを確認する",
+      "Semantic model の endorsement を変更する"
+    ],
+    "answers": [
+      0
+    ],
+    "explanation": "ゲートウェイ利用時の長時間実行問題では、まずサポート対象バージョンかを確認する。",
+    "source": "https://learn.microsoft.com/en-us/data-integration/gateway/service-gateway-tshoot",
+    "origin": "pa50-ja"
+  },
+  {
+    "id": "PA50-46",
+    "objectiveId": "O39",
+    "domain": "分析ソリューションの監視と最適化",
+    "group": "Practice Assessment論点再構成",
+    "skill": "",
+    "difficulty": "Hard",
+    "type": "code",
+    "question": "Workspace monitoring を有効化した環境で、Pipeline1 内の Notebook Activity のうち、過去24時間で実行時間が長い上位5件を確認したい。正しい KQL はどれか。",
+    "choices": [
+      "FabricDataPipelinesActivityRunsLogs\n| where ItemName == 'Pipeline1' and ActivityType == 'Notebook'\n| where OperationStartTime >= ago(24h)\n| top 5 by DurationMs desc",
+      "EventhouseQueryLogs\n| where ItemName == 'Pipeline1'\n| take 5",
+      "ItemJobEventLogs\n| where Status == 'Failed'\n| top 5 by Timestamp asc",
+      "FabricDataPipelinesActivityRunsLogs\n| summarize count() by ItemName"
+    ],
+    "answers": [
+      0
+    ],
+    "explanation": "Pipeline Activity の詳細は FabricDataPipelinesActivityRunsLogs を使い、対象 Activity・期間を絞って DurationMs の降順上位5件を取る。",
+    "source": "https://learn.microsoft.com/en-us/fabric/data-factory/workspace-monitoring",
+    "origin": "pa50-ja",
+    "code": "-- Workspace monitoring の KQL"
+  },
+  {
+    "id": "PA50-47",
+    "objectiveId": "O38",
+    "domain": "分析ソリューションの監視と最適化",
+    "group": "Practice Assessment論点再構成",
+    "skill": "",
+    "difficulty": "Hard",
+    "type": "single",
+    "question": "Lakehouse へのデータ取り込み処理の実行状況を Fabric 上で確認したい。最も適切な監視先はどれか。",
+    "choices": [
+      "Monitor hub",
+      "Fabric Capacity Metrics app だけ",
+      "Real-Time hub だけ",
+      "Azure Monitor だけ"
+    ],
+    "answers": [
+      0
+    ],
+    "explanation": "Fabric の各種ジョブ/Activity の実行監視には Monitor hub が中心的な入口となる。",
+    "source": "https://learn.microsoft.com/en-us/fabric/data-factory/monitor-data-factory",
+    "origin": "pa50-ja"
+  },
+  {
+    "id": "PA50-48",
+    "objectiveId": "O21",
+    "domain": "データの取り込みと変換",
+    "group": "Practice Assessment論点再構成",
+    "skill": "",
+    "difficulty": "Hard",
+    "type": "single",
+    "question": "リアルタイム分析で、データ到着から利用可能になるまでの遅延が問題になっている。継続的な低遅延取り込み・処理へ移行したい。最も適切な方式はどれか。",
+    "choices": [
+      "日次 Full load",
+      "Spark Structured Streaming",
+      "Deployment pipeline",
+      "データを手動でパーティション分割するだけ"
+    ],
+    "answers": [
+      1
+    ],
+    "explanation": "継続的なストリーム処理には Spark Structured Streaming が適する。",
+    "source": "https://learn.microsoft.com/en-us/fabric/data-engineering/structured-streaming-overview",
+    "origin": "pa50-ja"
+  },
+  {
+    "id": "PA50-49",
+    "objectiveId": "O43",
+    "domain": "分析ソリューションの監視と最適化",
+    "group": "Practice Assessment論点再構成",
+    "skill": "",
+    "difficulty": "Hard",
+    "type": "multi",
+    "question": "Dataflow Gen2 の公開時に、Orders は DestinationQueryNotFound、Customers は MultipleDestinationQueries で検証エラーとなった。意図した宛先を維持して直す方法を2つ選べ。",
+    "choices": [
+      "Orders は既存の壊れたデータ宛先設定を削除し、正しい宛先を再構成する",
+      "Customers は重複したデータ宛先を削除し、1つの有効な宛先設定にする",
+      "Orders はゲートウェイを再認証するだけ",
+      "Customers はすべての宛先を追加して数を増やす"
+    ],
+    "answers": [
+      0,
+      1
+    ],
+    "explanation": "DestinationQueryNotFound は宛先設定の再構成、MultipleDestinationQueries は重複宛先を1つに整理するのが基本。",
+    "source": "https://learn.microsoft.com/en-us/fabric/data-factory/dataflow-gen2-data-destinations-validation-rules",
+    "origin": "pa50-ja",
+    "selectCount": 2
+  },
+  {
+    "id": "PA50-50",
+    "objectiveId": "O49",
+    "domain": "分析ソリューションの監視と最適化",
+    "group": "Practice Assessment論点再構成",
+    "skill": "",
+    "difficulty": "Hard",
+    "type": "single",
+    "question": "Lakehouse テーブルで小さい Parquet ファイルが大量に生成され、クエリ性能が低下している。最も直接的な改善策はどれか。",
+    "choices": [
+      "V-Order だけを適用する",
+      "OPTIMIZE を実行して小さいファイルをコンパクションする",
+      "Lakehouse API で手動削除する",
+      "VACUUM だけを実行する"
+    ],
+    "answers": [
+      1
+    ],
+    "explanation": "OPTIMIZE は小さいファイルをより大きなファイルへ統合し、読み取り効率を改善する。",
+    "source": "https://learn.microsoft.com/en-us/fabric/data-engineering/lakehouse-table-maintenance",
+    "origin": "pa50-ja"
+  }
+];
+for(const item of PA50_REAUTHORED) q.push(item);
+
 for(const item of q){ if(CURRENT_SKILL_NAMES[item.objectiveId]) item.skill=CURRENT_SKILL_NAMES[item.objectiveId]; }
 
 const CURRENT_OBJECTIVES=O
@@ -398,14 +1539,15 @@ for(const item of q){
 
 window.DP700_META={
  title:"DP-700 過去問道場",
- version:"2026.11.03-v4",
+ version:"2026.11.04-v5",
  officialGuide:S.GUIDE,
  objectiveCount:49,
  questionCount:q.length,
  skillsMeasuredAsOf:"2026-10-19",
  guideLastChecked:"2026-11-03",
  practiceAssessmentUrl:"https://learn.microsoft.com/en-us/credentials/certifications/fabric-data-engineer-associate/?practice-assessment-type=certification",
- practiceAssessmentNote:"新版Practice AssessmentはAI Skills Navigator上で提供され、本試験体験により近い。実問題は転載せず、道場では形式・難易度・弱点診断を近づける。",
+ practiceAssessmentNote:"新版Practice AssessmentはAI Skills Navigator上で提供される。ユーザー提供スクリーンショットで確認した50問の論点は、原文を転載せず日本語オリジナル問題として再構成している。",
+ paReauthoredCount:50,
  disclaimer:"Microsoft公式Study Guide（2026-10-30更新、skills measured as of 2026-10-19）に基づく独自問題です。実試験の流出問題・再現問題ではありません。"
 };
 window.DP700_OBJECTIVES=CURRENT_OBJECTIVES;
