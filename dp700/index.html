@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#0f172a">
 <title>DP-700 過去問道場</title>
-<meta name="description" content="Microsoft DP-700対策。200問超、現行公式49項目100%対応、コード・複数選択・ケース・並べ替え・100分模試。">
+<meta name="description" content="Microsoft DP-700対策。270問超、現行公式49項目100%対応、コード・複数選択・ケース・並べ替え・100分模試。">
 <style>
 :root{--bg:#f8fafc;--card:#fff;--ink:#0f172a;--muted:#64748b;--line:#e2e8f0;--accent:#2563eb;--accent2:#1d4ed8;--ok:#15803d;--bad:#b91c1c;--warn:#b45309}
 *{box-sizing:border-box}body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans JP",sans-serif;background:var(--bg);color:var(--ink);line-height:1.55}
@@ -54,7 +54,8 @@ h2{font-size:18px;margin:0 0 12px}h3{font-size:15px}.modes{display:grid;grid-tem
     <button class="btn primary" data-mode="quick10">10問</button>
     <button class="btn secondary" data-mode="train20">20問</button>
     <button class="btn secondary" data-mode="mock45">45問 / 100分模試</button>
-    <button class="btn secondary" data-mode="pa25">公式PA予行25問</button>
+    <button class="btn secondary" data-mode="pa25">PA予行25問</button>
+    <button class="btn primary" data-mode="pa50ja">PA論点50問（日本語）</button>
     <button class="btn secondary" data-mode="code">コード20問</button>
     <button class="btn ghost" data-mode="wrong">間違い復習</button>
     <button class="btn ghost" data-mode="due">期限復習</button>
@@ -75,7 +76,8 @@ h2{font-size:18px;margin:0 0 12px}h3{font-size:15px}.modes{display:grid;grid-tem
     <li>各3分野 80%以上</li>
     <li>20問演習 85%以上を3回</li>
     <li>45問/100分模試 85%以上を2回</li>
-    <li>公式PA予行25問で85%以上</li>
+    <li>PA論点50問（日本語）で85%以上</li>
+    <li>PA予行25問で85%以上</li>
     <li>最後にMicrosoft公式Practice Assessmentで85%以上</li>
   </ul>
   <p class="small" style="margin-bottom:0">Microsoft本試験の700点は単純な正答率70%ではありません。道場では安全側に85%を目標にします。</p>
@@ -98,7 +100,7 @@ h2{font-size:18px;margin:0 0 12px}h3{font-size:15px}.modes{display:grid;grid-tem
 
 <section class="card">
   <h2>Microsoft公式Practice Assessment</h2>
-  <p class="small">新版Practice AssessmentはAI Skills Navigator上で提供され、Microsoftは本試験体験により近いと案内しています。この道場は実際のPractice Assessment問題を転載せず、公式範囲・問題形式・難易度に寄せた予行モードを用意しています。</p>
+  <p class="small">新版Practice AssessmentはAI Skills Navigator上で提供されています。「PA論点50問（日本語）」は、ユーザー提供の英語スクリーンショットで確認した50問の論点を、Microsoft公式ドキュメントで確認しながら日本語のオリジナル問題へ再構成したものです。元の設問文・選択肢をそのまま転載したものではありません。</p>
   <a class="btn primary" style="display:block;text-align:center;text-decoration:none" href="https://learn.microsoft.com/en-us/credentials/certifications/fabric-data-engineer-associate/?practice-assessment-type=certification" target="_blank" rel="noopener">公式Practice Assessmentを開く</a>
 </section>
 <section class="card">
@@ -139,7 +141,7 @@ h2{font-size:18px;margin:0 0 12px}h3{font-size:15px}.modes{display:grid;grid-tem
 </section>
 
 <div class="footer">
-DP-700 Dojo v4 • <a href="https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/dp-700" target="_blank" rel="noopener">Microsoft公式 Study Guide</a>
+DP-700 Dojo v5 • <a href="https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/dp-700" target="_blank" rel="noopener">Microsoft公式 Study Guide</a>
 </div>
 </main>
 <script src="./questions.js"></script>
