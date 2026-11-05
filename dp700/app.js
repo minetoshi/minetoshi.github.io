@@ -1,6 +1,6 @@
 (() => {
 "use strict";
-const MID=window.DP700_INTERMEDIATE||[], BASIC=window.DP700_BASICS||[], Q=window.DP700_QUESTIONS||[], META=window.DP700_META||{}, OBJ=window.DP700_OBJECTIVES||[];
+const ADV=window.DP700_ADVANCED||[], MID=window.DP700_INTERMEDIATE||[], BASIC=window.DP700_BASICS||[], Q=window.DP700_QUESTIONS||[], META=window.DP700_META||{}, OBJ=window.DP700_OBJECTIVES||[];
 const KEY="dp700-dojo-v2";
 const $=id=>document.getElementById(id);
 const els={
@@ -26,7 +26,7 @@ function renderHome(){
  clearTimer();
  els.attempts.textContent=store.totalAttempts;
  els.rate.textContent=store.totalAttempts?pct(store.totalCorrect,store.totalAttempts)+"%":"--";
- els.wrong.textContent=[...Q,...BASIC,...MID].filter(q=>itemStat(q.id).lastWrong).length;
+ els.wrong.textContent=[...Q,...BASIC,...MID,...ADV].filter(q=>itemStat(q.id).lastWrong).length;
  const ds=domains();
  els.domainSelect.innerHTML=ds.map(d=>'<option value="'+escapeHtml(d)+'">'+escapeHtml(d)+'</option>').join("");
  els.domainStats.innerHTML=ds.map(d=>{const s=domainAgg(d);return '<div class="domain"><div class="row"><b>'+escapeHtml(d)+'</b><span class="small">'+(s.attempts?s.rate+"%":"--")+' ・ '+s.attempted+'/'+s.total+'問経験</span></div><div class="bar"><i style="width:'+(s.attempts?s.rate:0)+'%"></i></div></div>';}).join("");
@@ -48,6 +48,7 @@ function stratified(n){
  return shuffle(out);
 }
 function choose(mode,domain){
+ if(mode==="adv15")return ADV.slice();
  if(mode==="mid15")return MID.slice();
  if(mode==="basic15")return BASIC.slice();
  if(mode==="quick10")return sample(Q,10);
@@ -64,12 +65,12 @@ function choose(mode,domain){
  }
  if(mode==="code")return sample(Q.filter(q=>q.type==="code"),20);
  if(mode==="wrong")return sample(Q.filter(q=>itemStat(q.id).lastWrong),25);
- if(mode==="due"){const now=Date.now();return sample([...Q,...BASIC,...MID].filter(q=>{const s=itemStat(q.id);return s.nextReview&&s.nextReview<=now;}),25);}
+ if(mode==="due"){const now=Date.now();return sample([...Q,...BASIC,...MID,...ADV].filter(q=>{const s=itemStat(q.id);return s.nextReview&&s.nextReview<=now;}),25);}
  if(mode==="domain")return sample(Q.filter(q=>q.domain===domain),20);
  if(mode==="domainAll")return shuffle(Q.filter(q=>q.domain===domain));
  return sample(Q,10);
 }
-function modeLabel(m){return ({mid15:"中級ステップ",basic15:"初級ステップ",pdf90:"図解PDF 全90問",pdf1:"図解模試 第1回",pdf2:"図解模試 第2回",pdf3:"図解模試 第3回",quick10:"10問クイック",train20:"20問演習",mock45:"本番模試45問",pa25:"PA予行25問",pa50ja:"PA論点50問（日本語）",code:"コード20問",wrong:"間違い復習",due:"期限復習",domain:"分野別20問",domainAll:"このジャンルを全問"})[m]||"演習";}
+function modeLabel(m){return ({adv15:"上級ステップ",mid15:"中級ステップ",basic15:"初級ステップ",pdf90:"図解PDF 全90問",pdf1:"図解模試 第1回",pdf2:"図解模試 第2回",pdf3:"図解模試 第3回",quick10:"10問クイック",train20:"20問演習",mock45:"本番模試45問",pa25:"PA予行25問",pa50ja:"PA論点50問（日本語）",code:"コード20問",wrong:"間違い復習",due:"期限復習",domain:"分野別20問",domainAll:"このジャンルを全問"})[m]||"演習";}
 function start(mode,domain){
  const questions=choose(mode,domain);if(!questions.length){alert(mode==="wrong"?"間違い復習の対象はありません。":"復習対象がありません。");return;}
  session={mode,domain,questions,index:0,selected:new Set(),results:[],answered:false,mock:mode==="mock45",choiceOrders:{},orderState:{},startedAt:Date.now(),deadline:mode==="mock45"?Date.now()+100*60*1000:null};
@@ -161,17 +162,17 @@ function finish(timeout){
  store.sessions.unshift({at:Date.now(),mode:session.mode,total,correct,rate,durationSec:Math.round((Date.now()-session.startedAt)/1000)});store.sessions=store.sessions.slice(0,40);save();
  els.quiz.classList.add("hidden");els.result.classList.remove("hidden");
  els.resultPct.textContent=rate+"%";els.resultPct.className=rate>=85?"good":rate>=75?"mid":"low";
- $("nextLearningStep").hidden=!["basic15","mid15"].includes(session.mode);
- $("nextLearningStep").textContent=session.mode==="basic15"?"中級ステップへ":"図解模試 第1回へ";
- $("nextLearningStep").onclick=()=>start(session.mode==="basic15"?"mid15":"pdf1");
- els.resultMsg.textContent=session.mode==="basic15"||session.mode==="mid15"?"間違えた問題の解説を見直してから、次のレベルへ進みましょう。":timeout?"時間切れです。未回答は不正解として集計しました。":rate>=85?"合格圏の目安です。この水準を安定させましょう。":rate>=75?"あと少し。誤答を即復習してください。":"基礎と誤答を優先して復習してください。";
+ $("nextLearningStep").hidden=!["basic15","mid15","adv15"].includes(session.mode);
+ $("nextLearningStep").textContent=session.mode==="basic15"?"中級ステップへ":session.mode==="mid15"?"上級ステップへ":"図解模試 第1回へ";
+ $("nextLearningStep").onclick=()=>start(session.mode==="basic15"?"mid15":session.mode==="mid15"?"adv15":"pdf1");
+ els.resultMsg.textContent=["basic15","mid15","adv15"].includes(session.mode)?"間違えた問題の解説を見直してから、次のレベルへ進みましょう。":timeout?"時間切れです。未回答は不正解として集計しました。":rate>=85?"合格圏の目安です。この水準を安定させましょう。":rate>=75?"あと少し。誤答を即復習してください。":"基礎と誤答を優先して復習してください。";
  const ds=domains();
  const byDomain=ds.map(d=>{const rows=session.results.filter(r=>r.domain===d);if(!rows.length)return"";const c=rows.filter(r=>r.correct).length;return '<div class="domain"><div class="row"><b>'+escapeHtml(d)+'</b><span>'+c+'/'+rows.length+'（'+pct(c,rows.length)+'%）</span></div></div>';}).join("");
  const types=[...new Set(session.results.map(r=>r.type))];
  const byType=types.map(t=>{const rows=session.results.filter(r=>r.type===t),c=rows.filter(r=>r.correct).length;return '<div class="domain"><div class="row"><b>'+typeLabel(t)+'</b><span>'+c+'/'+rows.length+'（'+pct(c,rows.length)+'%）</span></div></div>';}).join("");
  els.resultBreakdown.innerHTML="<h3>分野別</h3>"+byDomain+"<h3>形式別</h3>"+byType;
  const wrongIds=session.results.filter(r=>!r.correct).map(r=>r.id);$("retryWrongBtn").disabled=!wrongIds.length;
- $("retryWrongBtn").onclick=()=>{if(!wrongIds.length)return;const set=new Set(wrongIds),arr=[...Q,...BASIC,...MID].filter(q=>set.has(q.id));session={mode:"wrong",questions:shuffle(arr),index:0,selected:new Set(),results:[],answered:false,mock:false,choiceOrders:{},orderState:{},startedAt:Date.now(),deadline:null};els.result.classList.add("hidden");els.quiz.classList.remove("hidden");renderQuestion();};
+ $("retryWrongBtn").onclick=()=>{if(!wrongIds.length)return;const set=new Set(wrongIds),arr=[...Q,...BASIC,...MID,...ADV].filter(q=>set.has(q.id));session={mode:"wrong",questions:shuffle(arr),index:0,selected:new Set(),results:[],answered:false,mock:false,choiceOrders:{},orderState:{},startedAt:Date.now(),deadline:null};els.result.classList.add("hidden");els.quiz.classList.remove("hidden");renderQuestion();};
 }
 document.querySelectorAll("[data-mode]").forEach(b=>b.addEventListener("click",()=>start(b.dataset.mode)));
 $("domainStart").addEventListener("click",()=>start("domain",els.domainSelect.value));
