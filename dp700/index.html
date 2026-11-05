@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#0f172a">
 <title>DP-700 過去問道場</title>
-<meta name="description" content="Microsoft DP-700対策。270問超、現行公式49項目100%対応、コード・複数選択・ケース・並べ替え・100分模試。">
+<meta name="description" content="Microsoft DP-700対策。図解PDFの模擬問題90問収録、現行公式49項目100%対応、コード・複数選択・ケース・並べ替え・100分模試。">
 <style>
 :root{--bg:#f8fafc;--card:#fff;--ink:#0f172a;--muted:#64748b;--line:#e2e8f0;--accent:#2563eb;--accent2:#1d4ed8;--ok:#15803d;--bad:#b91c1c;--warn:#b45309}
 *{box-sizing:border-box}body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans JP",sans-serif;background:var(--bg);color:var(--ink);line-height:1.55}
@@ -34,6 +34,7 @@ h2{font-size:18px;margin:0 0 12px}h3{font-size:15px}.modes{display:grid;grid-tem
 <header class="hero">
   <h1>DP-700 過去問道場</h1>
   <p>問題を解く → 弱点を特定 → 間違いだけ反復。Microsoft Fabric初心者から合格圏へ。</p>
+  <p><a style="color:#fff" href="./DP700_Visual_Guide_JA.pdf" target="_blank" rel="noopener">図解PDFを開く</a></p>
   <span class="badge" id="bankInfo">問題バンクを読込中...</span>
 </header>
 
@@ -56,6 +57,10 @@ h2{font-size:18px;margin:0 0 12px}h3{font-size:15px}.modes{display:grid;grid-tem
     <button class="btn secondary" data-mode="mock45">45問 / 100分模試</button>
     <button class="btn secondary" data-mode="pa25">PA予行25問</button>
     <button class="btn primary" data-mode="pa50ja">PA論点50問（日本語）</button>
+    <button class="btn secondary" data-mode="pdf90">図解PDF 全90問</button>
+    <button class="btn secondary" data-mode="pdf1">図解模試 第1回（30問）</button>
+    <button class="btn secondary" data-mode="pdf2">図解模試 第2回（30問）</button>
+    <button class="btn secondary" data-mode="pdf3">図解模試 第3回（30問）</button>
     <button class="btn secondary" data-mode="code">コード20問</button>
     <button class="btn ghost" data-mode="wrong">間違い復習</button>
     <button class="btn ghost" data-mode="due">期限復習</button>
@@ -145,6 +150,7 @@ DP-700 Dojo v5 • <a href="https://learn.microsoft.com/en-us/credentials/certif
 </div>
 </main>
 <script src="./questions.js"></script>
+<script src="./pdf-questions.js"></script>
 <script src="./app.js"></script>
 </body>
 </html>
