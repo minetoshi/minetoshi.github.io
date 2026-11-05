@@ -54,6 +54,7 @@ h2{font-size:18px;margin:0 0 12px}h3{font-size:15px}.modes{display:grid;grid-tem
   <h2>すぐ始める</h2>
   <div class="modes">
     <button class="btn primary" data-mode="basic15">初級ステップ（順番に15問）</button>
+    <button class="btn secondary" data-mode="mid15">中級ステップ（順番に15問）</button>
     <button class="btn primary" data-mode="quick10">10問</button>
     <button class="btn secondary" data-mode="train20">20問</button>
     <button class="btn secondary" data-mode="mock45">45問 / 100分模試</button>
@@ -143,7 +144,8 @@ h2{font-size:18px;margin:0 0 12px}h3{font-size:15px}.modes{display:grid;grid-tem
   <section class="card">
     <div class="resultScore"><span class="small">今回の結果</span><strong id="resultPct">0%</strong><div id="resultMsg"></div></div>
     <div id="resultBreakdown"></div>
-    <div class="actions"><button class="btn primary" id="retryWrongBtn">今回の誤答を復習</button><button class="btn ghost" id="homeBtn">ホームへ</button></div>
+    <div class="actions"><button class="btn primary" id="nextLearningStep" hidden>次のレベルへ</button>
+    <button class="btn primary" id="retryWrongBtn">今回の誤答を復習</button><button class="btn ghost" id="homeBtn">ホームへ</button></div>
   </section>
 </section>
 
@@ -154,6 +156,7 @@ DP-700 Dojo v6 • <a href="https://learn.microsoft.com/en-us/credentials/certif
 <script src="./questions.js"></script>
 <script src="./pdf-questions.js"></script>
 <script src="./beginner.js"></script>
-<script src="./app.js?v=basic15-1"></script>
+<script src="./intermediate.js"></script>
+<script src="./app.js?v=mid15-1"></script>
 </body>
 </html>
