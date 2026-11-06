@@ -95,6 +95,101 @@ window.DP700_ADVANCED=[
     "source": "https://learn.microsoft.com/en-us/fabric/real-time-intelligence/event-streams/overview"
   },
   {
+    "id": "ADV-16",
+    "origin": "adv15",
+    "domain": "データの取り込みと変換",
+    "skill": "ステップ7 · 増分の境界",
+    "difficulty": "Hard",
+    "type": "single",
+    "question": "前回は更新時刻12:00以下を処理済み。今回の上限は13:00。今回の条件は？",
+    "choices": [
+      "12:00より後、13:00以下",
+      "12:00以上、13:00未満",
+      "13:00より後"
+    ],
+    "answers": [
+      0
+    ],
+    "explanation": "前回含めた下限を除き、今回の上限を含めます。",
+    "source": "https://learn.microsoft.com/en-us/fabric/data-factory/tutorial-incremental-copy-data-warehouse-lakehouse"
+  },
+  {
+    "id": "ADV-17",
+    "origin": "adv15",
+    "domain": "データの取り込みと変換",
+    "skill": "ステップ7 · 再送時の更新",
+    "difficulty": "Hard",
+    "type": "single",
+    "question": "宛先の顧客Aは版5。版4と版6がその順に到着した。新しい版だけ反映する場合、何が起こる？",
+    "choices": [
+      "版4を無視し版6に更新",
+      "版4に戻してから版6に更新",
+      "両方無視"
+    ],
+    "answers": [
+      0
+    ],
+    "explanation": "版番号を宛先と比較します。古い版は更新せず、新しい版だけ採用します。",
+    "source": "https://learn.microsoft.com/en-us/fabric/data-warehouse/tsql-surface-area"
+  },
+  {
+    "id": "ADV-18",
+    "origin": "adv15",
+    "domain": "データの取り込みと変換",
+    "skill": "ステップ7 · 元データからの独立",
+    "difficulty": "Hard",
+    "type": "single",
+    "question": "参照元の削除後も監査用に当日の内容を保存したい。選ぶのは？",
+    "choices": [
+      "独立したスナップショットを保存",
+      "Shortcutだけ作る",
+      "参照元の名前を記録"
+    ],
+    "answers": [
+      0
+    ],
+    "explanation": "監査用の時点データは独立して保存します。Shortcutは元データへの参照です。",
+    "source": "https://learn.microsoft.com/en-us/fabric/onelake/onelake-shortcuts"
+  },
+  {
+    "id": "ADV-19",
+    "origin": "adv15",
+    "domain": "分析ソリューションの実装と管理",
+    "skill": "ステップ7 · 列の保護",
+    "difficulty": "Hard",
+    "type": "single",
+    "question": "同じ行は全員に見せるが、原価列は一部の担当者にだけ参照させたい。適切な制御は？",
+    "choices": [
+      "列レベルのアクセス制御",
+      "地域による行フィルター",
+      "全員に編集権限を付与"
+    ],
+    "answers": [
+      0
+    ],
+    "explanation": "対象は行ではなく列です。原価列への参照権限を担当者ごとに分けます。",
+    "source": "https://learn.microsoft.com/en-us/fabric/data-warehouse/column-level-security"
+  },
+  {
+    "id": "ADV-20",
+    "origin": "adv15",
+    "domain": "データの取り込みと変換",
+    "skill": "ステップ7 · 後続処理の条件",
+    "difficulty": "Hard",
+    "type": "single",
+    "question": "コピーが失敗したら通知し、成功した場合だけ集計したい。どう分ける？",
+    "choices": [
+      "成功の依存関係で集計、失敗の依存関係で通知",
+      "完了の依存関係で両方を実行",
+      "すべて並列で実行"
+    ],
+    "answers": [
+      0
+    ],
+    "explanation": "成功と失敗の分岐を別々に設定すれば、失敗したデータを集計せずに通知できます。",
+    "source": "https://learn.microsoft.com/en-us/fabric/data-factory/pipeline-overview"
+  },
+  {
     "id": "ADV-6",
     "origin": "adv15",
     "domain": "分析ソリューションの監視と最適化",
@@ -187,6 +282,101 @@ window.DP700_ADVANCED=[
       0
     ],
     "explanation": "チェックポイントは処理の進み具合や状態の復旧に使われます。互換性のある再起動では同じ場所を維持します。",
+    "source": "https://learn.microsoft.com/en-us/fabric/data-engineering/structured-streaming-overview"
+  },
+  {
+    "id": "ADV-21",
+    "origin": "adv15",
+    "domain": "分析ソリューションの監視と最適化",
+    "skill": "ステップ8 · 接続の切り分け",
+    "difficulty": "Hard",
+    "type": "single",
+    "question": "コピーはソースの認証エラーで停止し、宛先に書き込みがありません。最初に調べるのは？",
+    "choices": [
+      "ソース接続と実行時の認証情報",
+      "宛先の集計式",
+      "下流レポートのフィルター"
+    ],
+    "answers": [
+      0
+    ],
+    "explanation": "エラーが発生した接続を先に調べます。下流はまだ実行されていません。",
+    "source": "https://learn.microsoft.com/en-us/fabric/data-factory/monitor-data-factory"
+  },
+  {
+    "id": "ADV-22",
+    "origin": "adv15",
+    "domain": "分析ソリューションの監視と最適化",
+    "skill": "ステップ8 · 処理量の変化",
+    "difficulty": "Hard",
+    "type": "single",
+    "question": "Sparkジョブの時間が2倍。入力も2倍で、各タスクの処理時間はほぼ同じです。まず立てる仮説は？",
+    "choices": [
+      "入力増で処理するタスクが増えた可能性",
+      "少数キーへの偏りが確定",
+      "接続資格情報の期限切れが確定"
+    ],
+    "answers": [
+      0
+    ],
+    "explanation": "処理量の増加と、個々のタスクが遅くなる問題を分けます。タスク数やステージ時間で確かめます。",
+    "source": "https://learn.microsoft.com/en-us/fabric/data-engineering/spark-monitoring-overview"
+  },
+  {
+    "id": "ADV-23",
+    "origin": "adv15",
+    "domain": "分析ソリューションの監視と最適化",
+    "skill": "ステップ8 · Deltaの読み取り",
+    "difficulty": "Hard",
+    "type": "single",
+    "question": "追記が続いて小さなファイルが増えた。行の内容を保ってファイル数を減らす操作は？",
+    "choices": [
+      "OPTIMIZE",
+      "VACUUMだけを実行",
+      "有効なファイルを手動削除"
+    ],
+    "answers": [
+      0
+    ],
+    "explanation": "OPTIMIZEで有効データのファイルをまとめます。VACUUMは未参照ファイルを保持条件に従って除去します。",
+    "source": "https://learn.microsoft.com/en-us/fabric/data-engineering/delta-optimization-and-v-order"
+  },
+  {
+    "id": "ADV-24",
+    "origin": "adv15",
+    "domain": "分析ソリューションの監視と最適化",
+    "skill": "ステップ8 · 最新時刻の確認",
+    "difficulty": "Hard",
+    "type": "single",
+    "question": "Eventstreamの入力は増えているが、宛先テーブルの最新時刻が止まった。次に確認するのは？",
+    "choices": [
+      "Eventstreamの出力と宛先書き込みの状態",
+      "ダッシュボードの色",
+      "Notebookの名前"
+    ],
+    "answers": [
+      0
+    ],
+    "explanation": "受信までは確認できています。出力・書き込みまで届いているかを切り分けます。",
+    "source": "https://learn.microsoft.com/en-us/fabric/real-time-intelligence/event-streams/overview"
+  },
+  {
+    "id": "ADV-25",
+    "origin": "adv15",
+    "domain": "分析ソリューションの監視と最適化",
+    "skill": "ステップ8 · 再開時の状態",
+    "difficulty": "Hard",
+    "type": "single",
+    "question": "互換性のあるストリーミング処理を再起動する。以前の処理位置を引き継ぐのに必要なのは？",
+    "choices": [
+      "同じチェックポイントを利用",
+      "毎回別の空ディレクトリを使う",
+      "処理位置を出力テーブルの列名で管理"
+    ],
+    "answers": [
+      0
+    ],
+    "explanation": "チェックポイントに進捗や状態が記録されます。別の場所では以前の状態を引き継げません。",
     "source": "https://learn.microsoft.com/en-us/fabric/data-engineering/structured-streaming-overview"
   },
   {
@@ -288,5 +478,100 @@ window.DP700_ADVANCED=[
     "explanation": "binは時刻を5分の境界に切り下げます。10:05ちょうどは次のグループに入ります。",
     "source": "https://learn.microsoft.com/en-us/fabric/real-time-intelligence/kusto-query-set",
     "code": "Events\n| summarize N=count() by DeviceId, bin(EventTime, 5m)"
+  },
+  {
+    "id": "ADV-26",
+    "origin": "adv15",
+    "domain": "データの取り込みと変換",
+    "skill": "ステップ9 · SQLの件数",
+    "difficulty": "Hard",
+    "type": "single",
+    "question": "LEFT JOIN後、注文がない顧客の行は注文IDがNULLです。顧客ごとにCOUNT(注文ID)とCOUNT(*)を集計すると、その顧客はそれぞれ何件？",
+    "choices": [
+      "0件と1件",
+      "両方0件",
+      "両方1件"
+    ],
+    "answers": [
+      0
+    ],
+    "explanation": "COUNT(列)はNULLを除き、COUNT(*)はLEFT JOINで残った行自体を数えます。",
+    "source": "https://learn.microsoft.com/en-us/fabric/data-warehouse/tsql-surface-area"
+  },
+  {
+    "id": "ADV-27",
+    "origin": "adv15",
+    "domain": "データの取り込みと変換",
+    "skill": "ステップ9 · SQLの最新行",
+    "difficulty": "Hard",
+    "type": "single",
+    "question": "同じ顧客に更新時刻10:00の行が2件ある。更新時刻の降順だけでROW_NUMBERを付けて1位を選ぶとき、結果を決定的にするには？",
+    "choices": [
+      "一意な変更IDなどを追加の並べ替えキーにする",
+      "顧客IDだけを追加の並べ替えキーにする",
+      "更新時刻の並べ替えを削除する"
+    ],
+    "answers": [
+      0
+    ],
+    "explanation": "同一顧客・同一時刻の候補を区別するキーを加えます。顧客IDは同じグループ内で等しいため区別できません。",
+    "source": "https://learn.microsoft.com/en-us/fabric/data-warehouse/tsql-surface-area"
+  },
+  {
+    "id": "ADV-28",
+    "origin": "adv15",
+    "domain": "データの取り込みと変換",
+    "skill": "ステップ9 · PySparkの集計順",
+    "difficulty": "Hard",
+    "type": "single",
+    "question": "東の明細は60と70、西は150。地域別の合計を出してから合計100以上を残すと？",
+    "choices": [
+      "東130と西150",
+      "西150だけ",
+      "東の60と70は別々に残る"
+    ],
+    "answers": [
+      0
+    ],
+    "explanation": "先に地域で集計するため、東も合計130として条件を満たします。明細に先に条件をかけると結果が変わります。",
+    "source": "https://learn.microsoft.com/en-us/fabric/data-engineering/spark-compute"
+  },
+  {
+    "id": "ADV-29",
+    "origin": "adv15",
+    "domain": "データの取り込みと変換",
+    "skill": "ステップ9 · KQLの条件付き集計",
+    "difficulty": "Hard",
+    "type": "single",
+    "question": "Aの温度が80、90、Bは79。DeviceId別に countif(Temperature >= 80) を求めると？",
+    "choices": [
+      "Aが2件、Bが0件",
+      "Aが1件、Bが0件",
+      "Aが2件だけ"
+    ],
+    "answers": [
+      0
+    ],
+    "explanation": "80ちょうども条件を満たします。Bには入力行があるのでグループ自体は残ります。",
+    "source": "https://learn.microsoft.com/en-us/fabric/real-time-intelligence/kusto-query-set"
+  },
+  {
+    "id": "ADV-30",
+    "origin": "adv15",
+    "domain": "データの取り込みと変換",
+    "skill": "ステップ9 · KQLの時間窓",
+    "difficulty": "Hard",
+    "type": "single",
+    "question": "UTCの10:04、10:05、10:09、10:10を5分ごとにbin集計すると？",
+    "choices": [
+      "10:00が1件、10:05が2件、10:10が1件",
+      "10:00が2件、10:05が2件",
+      "10:05が3件、10:10が1件"
+    ],
+    "answers": [
+      0
+    ],
+    "explanation": "binは境界に切り下げます。10:05と10:10のちょうどは、それぞれ新しい枠に入ります。",
+    "source": "https://learn.microsoft.com/en-us/fabric/real-time-intelligence/kusto-query-set"
   }
 ];
