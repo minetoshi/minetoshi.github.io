@@ -1625,21 +1625,21 @@ const PA_LIVE_20261106=[
     "skill": "",
     "difficulty": "Hard",
     "type": "multi",
-    "question": "Eventstream のランタイムエラーを調査し、原因を修正したい。直接的に有効な対応を3つ選べ。",
+    "question": "Eventstream のランタイムエラーを調査し、原因を特定したい。診断のために有効な対応を3つ選べ。",
     "choices": [
-      "Data insights のイベント件数だけを見る",
+      "Data insights でイベント処理メトリクスを確認する",
       "データ変換をすべて無効化する",
       "Runtime logs をエラー重大度で絞り込む",
-      "問題のある変換ロジックを修正する",
+      "原因を確認せず変換ロジックを書き換える",
       "Runtime logs でエラー詳細を確認する"
     ],
     "answers": [
+      0,
       2,
-      3,
       4
     ],
-    "explanation": "Runtime logs で詳細を確認し、重大度で絞り込み、原因となる変換ロジックを修正する流れが直接的。",
-    "memoryTip": "Eventstreamエラー → Runtime logs → 絞る → 直す",
+    "explanation": "まず Data insights で処理状況やメトリクスを把握し、Runtime logs で詳細を確認して severity などで絞り込む。原因特定前に変換ロジックを変更するのは一般的な診断手順ではない。",
+    "memoryTip": "Eventstream診断 → Data insights → Runtime logs → severityで絞る",
     "source": "https://learn.microsoft.com/en-us/fabric/real-time-intelligence/event-streams/monitor",
     "origin": "pa-live-20261106",
     "selectCount": 3
@@ -1940,19 +1940,19 @@ const PA_LIVE_20261106=[
     "skill": "",
     "difficulty": "Hard",
     "type": "single",
-    "question": "Warehouse と Lakehouse のデータを低コードで統合し、1つの分析用テーブルへまとめたい。開発工数を抑えるには何を使うか。",
+    "question": "Warehouse と Lakehouse のデータを結合し、その結果を新しい Warehouse テーブルとして作成したい。開発工数を最小化する方法として最も適切なのはどれか。",
     "choices": [
-      "Azure Data Factory のみ",
-      "CTASだけ",
-      "Dataflow Gen2",
-      "SELECT INTOだけ"
+      "Azure Data Factory で個別のコピー処理を作成する",
+      "CTAS（CREATE TABLE AS SELECT）でクロスデータベースクエリの結果からテーブルを作成する",
+      "Dataflow Gen2 で別の変換フローを新規作成する",
+      "SELECT INTO のみを使用する"
     ],
     "answers": [
-      2
+      1
     ],
-    "explanation": "Dataflow Gen2 は Power Query ベースで複数ソースの取り込み・結合・変換を低コードで行える。",
-    "memoryTip": "複数ソースを低コード統合 → Dataflow Gen2",
-    "source": "https://learn.microsoft.com/en-us/fabric/data-factory/dataflows-gen2-overview",
+    "explanation": "Fabric Warehouse では Lakehouse と Warehouse をクロスデータベースクエリで参照できる。結果をそのまま新規テーブルへ物理化する要件なら CTAS が簡潔で、追加のETLフローを作るより開発工数を抑えやすい。",
+    "memoryTip": "Warehouse + Lakehouse をSQLで結合して新表作成 → CTAS",
+    "source": "https://learn.microsoft.com/en-us/fabric/data-warehouse/ingest-data-tsql",
     "origin": "pa-live-20261106"
   },
   {
@@ -2741,7 +2741,7 @@ for(const item of q){
 
 window.DP700_META={
  title:"DP-700 過去問道場",
- version:"2026.11.06-v6",
+ version:"2026.11.06-v6.1",
  officialGuide:S.GUIDE,
  objectiveCount:49,
  questionCount:q.length,
