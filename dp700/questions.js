@@ -1498,6 +1498,1208 @@ const PA50_REAUTHORED=[
 ];
 for(const item of PA50_REAUTHORED) q.push(item);
 
+
+// Japanese original practice set re-authored from the user's DP-700 Practice Assessment session on 2026-11-06.
+// It preserves the tested concepts without reproducing the original assessment wording.
+const PA_LIVE_20261106=[
+  {
+    "id": "PALIVE-20261106-01",
+    "objectiveId": "O44",
+    "domain": "分析ソリューションの監視と最適化",
+    "group": "Practice Assessment実戦論点 2026-11-06",
+    "skill": "",
+    "difficulty": "Hard",
+    "type": "single",
+    "question": "Notebook を実行すると「非アクティブのためセッションがタイムアウトした」と表示されるが、Notebook上で手動でセッションを開始すると正常に実行できる。管理負荷を最小にして改善するには何をするか。",
+    "choices": [
+      "Fabric 管理者に Capacity の再開を依頼する",
+      "Workspace 全体のセッションタイムアウトを延長する",
+      "AutoSave を有効にする",
+      "Session ready インジケーターからセッションタイムアウト時間を変更する"
+    ],
+    "answers": [
+      3
+    ],
+    "explanation": "手動でセッションを開始すれば動くため、Notebook固有のセッション設定が論点。Session ready インジケーターからタイムアウト時間を調整する。",
+    "memoryTip": "手動Session開始で動く → Session ready の timeout",
+    "source": "https://learn.microsoft.com/en-us/fabric/data-science/fabric-notebooks-troubleshooting-guide",
+    "origin": "pa-live-20261106"
+  },
+  {
+    "id": "PALIVE-20261106-02",
+    "objectiveId": "O18",
+    "domain": "分析ソリューションの実装と管理",
+    "group": "Practice Assessment実戦論点 2026-11-06",
+    "skill": "",
+    "difficulty": "Hard",
+    "type": "single",
+    "question": "子 Pipeline の ForEach に JSON 配列を表す文字列パラメーター TableList が渡される。ForEach の items が配列を要求している場合、最も適切な式はどれか。",
+    "choices": [
+      "@string(pipeline().parameters.TableList)",
+      "@json(pipeline().parameters.TableList)",
+      "@concat(pipeline().parameters.TableList)",
+      "@base64(pipeline().parameters.TableList)"
+    ],
+    "answers": [
+      1
+    ],
+    "explanation": "JSON文字列を配列として解釈するには json() を使用する。",
+    "memoryTip": "JSON文字列を読む → json()",
+    "source": "https://learn.microsoft.com/en-us/fabric/data-factory/parameters",
+    "origin": "pa-live-20261106"
+  },
+  {
+    "id": "PALIVE-20261106-03",
+    "objectiveId": "O53",
+    "domain": "分析ソリューションの監視と最適化",
+    "group": "Practice Assessment実戦論点 2026-11-06",
+    "skill": "",
+    "difficulty": "Hard",
+    "type": "single",
+    "question": "Delta データに対する複雑な変換・集計を行う Spark ジョブを、既存コードを変更せず高速化したい。最も適切な機能はどれか。",
+    "choices": [
+      "Adaptive Query Execution",
+      "Dynamic Allocation",
+      "High concurrency mode",
+      "Native execution engine"
+    ],
+    "answers": [
+      3
+    ],
+    "explanation": "Native execution engine は Delta/Parquet を使う複雑な変換・集計をネイティブ実行で高速化でき、コード変更を抑えられる。",
+    "memoryTip": "Delta + 複雑集計 + コード変更なし → Native engine",
+    "source": "https://learn.microsoft.com/en-us/fabric/data-engineering/native-execution-engine-overview",
+    "origin": "pa-live-20261106"
+  },
+  {
+    "id": "PALIVE-20261106-04",
+    "objectiveId": "O41",
+    "domain": "分析ソリューションの監視と最適化",
+    "group": "Practice Assessment実戦論点 2026-11-06",
+    "skill": "",
+    "difficulty": "Hard",
+    "type": "single",
+    "question": "Dataflow Gen2 の取り込み遅延や失敗を、変化するデータの条件に応じて自動検知し通知したい。何を使うか。",
+    "choices": [
+      "Activator",
+      "Capacity",
+      "Monitor hub",
+      "OneLake"
+    ],
+    "answers": [
+      0
+    ],
+    "explanation": "Activator はデータを監視し、条件成立時に通知やアクションを自動実行する用途に適する。",
+    "memoryTip": "条件成立で自動通知 → Activator",
+    "source": "https://learn.microsoft.com/en-us/fabric/real-time-intelligence/data-activator/activator-introduction",
+    "origin": "pa-live-20261106"
+  },
+  {
+    "id": "PALIVE-20261106-05",
+    "objectiveId": "O18",
+    "domain": "分析ソリューションの実装と管理",
+    "group": "Practice Assessment実戦論点 2026-11-06",
+    "skill": "",
+    "difficulty": "Hard",
+    "type": "single",
+    "question": "親 Pipeline から子 Pipeline の Array 型パラメーター tables に値を渡す際、String と評価されて ForEach が失敗する。親側で配列として渡すには何を使うか。",
+    "choices": [
+      "子側を String 型へ変更する",
+      "@string(...) を使う",
+      "Execute Pipeline の値を createArray(...) で構築する",
+      "ForEach に実行IDを渡す"
+    ],
+    "answers": [
+      2
+    ],
+    "explanation": "親側で createArray() を使い、配列として子 Pipeline に渡す。",
+    "memoryTip": "配列を作って渡す → createArray()",
+    "source": "https://learn.microsoft.com/en-us/fabric/data-factory/parameters",
+    "origin": "pa-live-20261106"
+  },
+  {
+    "id": "PALIVE-20261106-06",
+    "objectiveId": "O46",
+    "domain": "分析ソリューションの監視と最適化",
+    "group": "Practice Assessment実戦論点 2026-11-06",
+    "skill": "",
+    "difficulty": "Hard",
+    "type": "multi",
+    "question": "Eventstream のランタイムエラーを調査し、原因を修正したい。直接的に有効な対応を3つ選べ。",
+    "choices": [
+      "Data insights のイベント件数だけを見る",
+      "データ変換をすべて無効化する",
+      "Runtime logs をエラー重大度で絞り込む",
+      "問題のある変換ロジックを修正する",
+      "Runtime logs でエラー詳細を確認する"
+    ],
+    "answers": [
+      2,
+      3,
+      4
+    ],
+    "explanation": "Runtime logs で詳細を確認し、重大度で絞り込み、原因となる変換ロジックを修正する流れが直接的。",
+    "memoryTip": "Eventstreamエラー → Runtime logs → 絞る → 直す",
+    "source": "https://learn.microsoft.com/en-us/fabric/real-time-intelligence/event-streams/monitor",
+    "origin": "pa-live-20261106",
+    "selectCount": 3
+  },
+  {
+    "id": "PALIVE-20261106-07",
+    "objectiveId": "O39",
+    "domain": "分析ソリューションの監視と最適化",
+    "group": "Practice Assessment実戦論点 2026-11-06",
+    "skill": "",
+    "difficulty": "Hard",
+    "type": "single",
+    "question": "Lakehouse のデータ変換処理でボトルネックや失敗を検出し、性能改善につなげたい。最も適切な対応はどれか。",
+    "choices": [
+      "失敗通知だけを設定する",
+      "詳細ログを有効にして性能分析する",
+      "原因を調べず自動スケールだけ有効にする",
+      "基本監視だけに限定する"
+    ],
+    "answers": [
+      1
+    ],
+    "explanation": "性能問題の特定には詳細ログを使い、処理時間やエラーの手掛かりを得る必要がある。",
+    "memoryTip": "遅い理由を探す → 詳細ログ",
+    "source": "https://learn.microsoft.com/en-us/fabric/data-factory/monitor-data-factory",
+    "origin": "pa-live-20261106"
+  },
+  {
+    "id": "PALIVE-20261106-08",
+    "objectiveId": "O43",
+    "domain": "分析ソリューションの監視と最適化",
+    "group": "Practice Assessment実戦論点 2026-11-06",
+    "skill": "",
+    "difficulty": "Hard",
+    "type": "multi",
+    "question": "Dataflow Gen2 で Orders は DestinationQueryNotFound、Customers は MultipleDestinationQueries となった。適切な修正を2つ選べ。",
+    "choices": [
+      "Orders の宛先を再構成する",
+      "Customers の重複した宛先を削除する",
+      "Orders は接続再認証だけ行う",
+      "Customers の宛先をさらに追加する"
+    ],
+    "answers": [
+      0,
+      1
+    ],
+    "explanation": "見つからない宛先設定は再構成し、複数宛先競合は重複を取り除く。",
+    "memoryTip": "NotFound → 再設定 / Multiple → 重複削除",
+    "source": "https://learn.microsoft.com/en-us/fabric/data-factory/dataflow-gen2-data-destinations-validation-rules",
+    "origin": "pa-live-20261106",
+    "selectCount": 2
+  },
+  {
+    "id": "PALIVE-20261106-09",
+    "objectiveId": "O21",
+    "domain": "データの取り込みと変換",
+    "group": "Practice Assessment実戦論点 2026-11-06",
+    "skill": "",
+    "difficulty": "Hard",
+    "type": "single",
+    "question": "リアルタイム分析でデータ利用可能になるまでの遅延が問題になっている。継続的な低遅延処理に適するものはどれか。",
+    "choices": [
+      "パーティション分割だけ行う",
+      "データノードを増やすだけ",
+      "日次バッチに切り替える",
+      "Spark Structured Streaming"
+    ],
+    "answers": [
+      3
+    ],
+    "explanation": "継続的に到着するデータを増分処理するには Structured Streaming が適する。",
+    "memoryTip": "リアルタイム継続処理 → Structured Streaming",
+    "source": "https://learn.microsoft.com/en-us/fabric/data-engineering/structured-streaming-overview",
+    "origin": "pa-live-20261106"
+  },
+  {
+    "id": "PALIVE-20261106-10",
+    "objectiveId": "O42",
+    "domain": "分析ソリューションの監視と最適化",
+    "group": "Practice Assessment実戦論点 2026-11-06",
+    "skill": "",
+    "difficulty": "Hard",
+    "type": "single",
+    "question": "Data Pipeline が断続的に失敗している。失敗 Run の詳細や Activity のエラーを確認して根本原因を調べるには何を使うか。",
+    "choices": [
+      "Timeout を延長する",
+      "調べず再実行する",
+      "サードパーティ製監視だけを使う",
+      "Monitoring hub"
+    ],
+    "answers": [
+      3
+    ],
+    "explanation": "Monitoring hub から Pipeline Run と Activity の状態・エラー詳細を追跡できる。",
+    "memoryTip": "Pipeline失敗の原因調査 → Monitoring hub",
+    "source": "https://learn.microsoft.com/en-us/fabric/data-factory/monitor-data-factory",
+    "origin": "pa-live-20261106"
+  },
+  {
+    "id": "PALIVE-20261106-11",
+    "objectiveId": "O42",
+    "domain": "分析ソリューションの監視と最適化",
+    "group": "Practice Assessment実戦論点 2026-11-06",
+    "skill": "",
+    "difficulty": "Hard",
+    "type": "multi",
+    "question": "Lookup で対象データが0件だった場合に、指定したエラー内容で Pipeline を終了させたい。必要な対応を2つ選べ。",
+    "choices": [
+      "Lookup 後に Fail activity を配置する",
+      "Retry activity を追加する",
+      "Wait activity を追加する",
+      "Fail activity に独自のエラーコード/メッセージを設定する",
+      "Retry だけで処理する"
+    ],
+    "answers": [
+      0,
+      3
+    ],
+    "explanation": "意図的に失敗終了させるには Fail activity を使い、明確なコードとメッセージを設定する。",
+    "memoryTip": "理由付きで意図的に失敗 → Fail activity",
+    "source": "https://learn.microsoft.com/en-us/fabric/data-factory/fail-activity",
+    "origin": "pa-live-20261106",
+    "selectCount": 2
+  },
+  {
+    "id": "PALIVE-20261106-12",
+    "objectiveId": "O42",
+    "domain": "分析ソリューションの監視と最適化",
+    "group": "Practice Assessment実戦論点 2026-11-06",
+    "skill": "",
+    "difficulty": "Hard",
+    "type": "single",
+    "question": "Lookup でデータソース欠落を検知した際、分かりやすいエラーコードとメッセージを残して Pipeline を終了したい。最適な方法はどれか。",
+    "choices": [
+      "条件分岐だけ作る",
+      "Fail activity にカスタムエラーを設定する",
+      "ログだけ残して続行する",
+      "自動Retryだけ行う"
+    ],
+    "answers": [
+      1
+    ],
+    "explanation": "Fail activity は明示的なエラーコードとメッセージで Pipeline を失敗終了できる。",
+    "memoryTip": "明確な失敗理由 → Fail activity",
+    "source": "https://learn.microsoft.com/en-us/fabric/data-factory/fail-activity",
+    "origin": "pa-live-20261106"
+  },
+  {
+    "id": "PALIVE-20261106-13",
+    "objectiveId": "O39",
+    "domain": "分析ソリューションの監視と最適化",
+    "group": "Practice Assessment実戦論点 2026-11-06",
+    "skill": "",
+    "difficulty": "Hard",
+    "type": "single",
+    "question": "Pipeline は成功しているが Lakehouse へのロードが想定より遅い。実行時間や遅い Activity を特定するには何を使うか。",
+    "choices": [
+      "Dataflow を新規作成する",
+      "Pipeline を複製する",
+      "Activator",
+      "Monitoring hub"
+    ],
+    "answers": [
+      3
+    ],
+    "explanation": "成功した Run でも Monitoring hub で実行時間や Activity 状況を確認できる。",
+    "memoryTip": "成功してるけど遅い → Monitoring hub",
+    "source": "https://learn.microsoft.com/en-us/fabric/data-factory/monitor-data-factory",
+    "origin": "pa-live-20261106"
+  },
+  {
+    "id": "PALIVE-20261106-14",
+    "objectiveId": "O49",
+    "domain": "分析ソリューションの監視と最適化",
+    "group": "Practice Assessment実戦論点 2026-11-06",
+    "skill": "",
+    "difficulty": "Hard",
+    "type": "single",
+    "question": "Structured Streaming が毎分 Delta テーブルへ書き込み、小さい Parquet ファイルが大量発生している。書き込み時の小ファイルを減らし、残りも自動統合したい。何を有効にするか。",
+    "choices": [
+      "V-Order だけ",
+      "RDD へ変更",
+      "各バッチ後に VACUUM",
+      "Optimize Write と Auto Compact"
+    ],
+    "answers": [
+      3
+    ],
+    "explanation": "Optimize Write は書き込み時に適切なサイズへまとめ、Auto Compact は残った小ファイルを自動統合する。",
+    "memoryTip": "予防 = Optimize Write / 後処理 = Auto Compact",
+    "source": "https://learn.microsoft.com/en-us/fabric/fundamentals/table-maintenance-optimization",
+    "origin": "pa-live-20261106"
+  },
+  {
+    "id": "PALIVE-20261106-15",
+    "objectiveId": "O39",
+    "domain": "分析ソリューションの監視と最適化",
+    "group": "Practice Assessment実戦論点 2026-11-06",
+    "skill": "",
+    "difficulty": "Hard",
+    "type": "multi",
+    "question": "データ取り込み・変換が遅延している。原因を特定して改善するために優先すべき対応を2つ選べ。",
+    "choices": [
+      "Activity を状態と開始時刻で絞り込む",
+      "ストレージ容量だけ増やす",
+      "遅い変換処理を特定し最適化する",
+      "通知だけ設定する"
+    ],
+    "answers": [
+      0,
+      2
+    ],
+    "explanation": "まず監視情報で遅い処理を絞り込み、その処理自体を最適化する。",
+    "memoryTip": "遅延 → 絞り込み → 最適化",
+    "source": "https://learn.microsoft.com/en-us/fabric/data-factory/monitor-data-factory",
+    "origin": "pa-live-20261106",
+    "selectCount": 2
+  },
+  {
+    "id": "PALIVE-20261106-16",
+    "objectiveId": "O35",
+    "domain": "データの取り込みと変換",
+    "group": "Practice Assessment実戦論点 2026-11-06",
+    "skill": "",
+    "difficulty": "Hard",
+    "type": "single",
+    "question": "IoT ストリーミングデータを Fabric でリアルタイム変換し、Delta テーブルへ保存したい。最適なものはどれか。",
+    "choices": [
+      "Azure Data Factory のみ",
+      "Event Hubs のみ",
+      "Azure Stream Analytics のみ",
+      "Spark Structured Streaming + Delta"
+    ],
+    "answers": [
+      3
+    ],
+    "explanation": "Fabric で Spark を使い継続変換し、Delta に保存する構成が要件に合う。",
+    "memoryTip": "Fabricストリーム変換 → Structured Streaming + Delta",
+    "source": "https://learn.microsoft.com/en-us/fabric/data-engineering/structured-streaming-overview",
+    "origin": "pa-live-20261106"
+  },
+  {
+    "id": "PALIVE-20261106-17",
+    "objectiveId": "O27",
+    "domain": "データの取り込みと変換",
+    "group": "Practice Assessment実戦論点 2026-11-06",
+    "skill": "",
+    "difficulty": "Hard",
+    "type": "code",
+    "question": "sales_df から Completed の行だけを対象に region・channel ごとの amount 合計を求め、50000超のみ残したい。正しい処理はどれか。",
+    "choices": [
+      "filter → groupBy(region,channel) → sum(amount) → total_sales>50000 でfilter",
+      "groupBy(status) → count → amountでfilter",
+      "region,channelのdistinctだけ",
+      "amountで並べて50000件取得"
+    ],
+    "answers": [
+      0
+    ],
+    "explanation": "条件で絞り、region/channel で集計し、合計値に対して再度 filter する。",
+    "memoryTip": "filter → groupBy → sum → filter",
+    "source": "https://learn.microsoft.com/en-us/training/modules/fabric-transform-data-notebooks/",
+    "origin": "pa-live-20261106",
+    "code": "sales_df.filter(...).groupBy(...).agg(...).filter(...)"
+  },
+  {
+    "id": "PALIVE-20261106-18",
+    "objectiveId": "O35",
+    "domain": "データの取り込みと変換",
+    "group": "Practice Assessment実戦論点 2026-11-06",
+    "skill": "",
+    "difficulty": "Hard",
+    "type": "multi",
+    "question": "ストリーミングデータを Lakehouse に保存する前に、無効な行を除外し計算列を追加したい。適切な対応を3つ選べ。",
+    "choices": [
+      "Spark SQL 式で計算列を追加する",
+      "重要列が NULL の行を除外する",
+      "CSVへ書き出して後でバッチ処理する",
+      "バッチ変換だけにする",
+      "Spark Structured Streaming でストリームを読む"
+    ],
+    "answers": [
+      0,
+      1,
+      4
+    ],
+    "explanation": "Structured Streaming で読み、無効行を filter し、必要な計算列を追加する。",
+    "memoryTip": "読む → Filter → 列追加",
+    "source": "https://learn.microsoft.com/en-us/fabric/data-engineering/structured-streaming-overview",
+    "origin": "pa-live-20261106",
+    "selectCount": 3
+  },
+  {
+    "id": "PALIVE-20261106-19",
+    "objectiveId": "O23",
+    "domain": "データの取り込みと変換",
+    "group": "Practice Assessment実戦論点 2026-11-06",
+    "skill": "",
+    "difficulty": "Hard",
+    "type": "single",
+    "question": "Warehouse と Lakehouse のデータを低コードで統合し、1つの分析用テーブルへまとめたい。開発工数を抑えるには何を使うか。",
+    "choices": [
+      "Azure Data Factory のみ",
+      "CTASだけ",
+      "Dataflow Gen2",
+      "SELECT INTOだけ"
+    ],
+    "answers": [
+      2
+    ],
+    "explanation": "Dataflow Gen2 は Power Query ベースで複数ソースの取り込み・結合・変換を低コードで行える。",
+    "memoryTip": "複数ソースを低コード統合 → Dataflow Gen2",
+    "source": "https://learn.microsoft.com/en-us/fabric/data-factory/dataflows-gen2-overview",
+    "origin": "pa-live-20261106"
+  },
+  {
+    "id": "PALIVE-20261106-20",
+    "objectiveId": "O34",
+    "domain": "データの取り込みと変換",
+    "group": "Practice Assessment実戦論点 2026-11-06",
+    "skill": "",
+    "difficulty": "Hard",
+    "type": "single",
+    "question": "PlantA と PlantB の2ストリームを、equipmentId・temperature・eventTime の3列だけに揃え、入力イベント1件につき出力1件として縦に統合したい。適切な順序はどれか。",
+    "choices": [
+      "PlantBをExpand → Join",
+      "PlantBをFilter → Join",
+      "PlantBをManage fieldsで列名・型・不要列を整える → Union",
+      "PlantBをJoin → Manage fields"
+    ],
+    "answers": [
+      2
+    ],
+    "explanation": "まず Manage fields でスキーマを揃え、その後 Union でストリームを縦結合する。",
+    "memoryTip": "列を揃える → Manage fields / 縦結合 → Union",
+    "source": "https://learn.microsoft.com/en-us/fabric/real-time-intelligence/event-streams/overview",
+    "origin": "pa-live-20261106"
+  },
+  {
+    "id": "PALIVE-20261106-21",
+    "objectiveId": "O28",
+    "domain": "データの取り込みと変換",
+    "group": "Practice Assessment実戦論点 2026-11-06",
+    "skill": "",
+    "difficulty": "Hard",
+    "type": "single",
+    "question": "Product→Subcategory→Category の階層を Gold 層で使いやすくし、Sales から1回の Join で商品・サブカテゴリ・カテゴリ名を取得したい。最適な設計はどれか。",
+    "choices": [
+      "1商品1行で商品・サブカテゴリ・カテゴリの説明属性を持つ",
+      "商品バージョンごとに1行",
+      "Sales明細ごとに1行",
+      "サブカテゴリごとに1行"
+    ],
+    "answers": [
+      0
+    ],
+    "explanation": "現在値だけ必要なら商品粒度で階層属性を非正規化すると、Salesから ProductKey で1回Joinできる。",
+    "memoryTip": "Goldの階層 → 商品粒度で非正規化",
+    "source": "https://learn.microsoft.com/en-us/fabric/data-warehouse/dimensional-modeling-dimension-tables",
+    "origin": "pa-live-20261106"
+  },
+  {
+    "id": "PALIVE-20261106-22",
+    "objectiveId": "O19",
+    "domain": "データの取り込みと変換",
+    "group": "Practice Assessment実戦論点 2026-11-06",
+    "skill": "",
+    "difficulty": "Hard",
+    "type": "single",
+    "question": "完全なカテゴリスナップショットは毎回全置換し、Customer は既存行を更新・新規行を追加したい。正しい組み合わせはどれか。",
+    "choices": [
+      "Category=DELETE / Customer=UPDATE",
+      "Category=INSERT INTO / Customer=INSERT INTO",
+      "Category=INSERT OVERWRITE / Customer=MERGE",
+      "Category=MERGE / Customer=DELETE"
+    ],
+    "answers": [
+      2
+    ],
+    "explanation": "全置換は INSERT OVERWRITE、既存更新＋新規追加は MERGE が適する。",
+    "memoryTip": "全部入替 → INSERT OVERWRITE / あれば更新・なければ追加 → MERGE",
+    "source": "https://learn.microsoft.com/en-us/fabric/data-engineering/lakehouse-and-delta-tables",
+    "origin": "pa-live-20261106"
+  },
+  {
+    "id": "PALIVE-20261106-23",
+    "objectiveId": "O35",
+    "domain": "データの取り込みと変換",
+    "group": "Practice Assessment実戦論点 2026-11-06",
+    "skill": "",
+    "difficulty": "Hard",
+    "type": "single",
+    "question": "Kafka の既存イベントは初回に読み込まず、開始後の新規イベントだけ Delta に追記し、中断後は前回の続きから再開したい。適切な構成はどれか。",
+    "choices": [
+      "earliest + append + durable checkpoint",
+      "latest + append + durable checkpoint",
+      "latest + append + 毎回新checkpoint",
+      "latest + append + checkpointなし"
+    ],
+    "answers": [
+      1
+    ],
+    "explanation": "初回は latest、出力は append、再開位置の保持には永続 checkpoint を使う。",
+    "memoryTip": "今後だけ=latest / 追記=append / 再開=durable checkpoint",
+    "source": "https://learn.microsoft.com/en-us/fabric/data-engineering/structured-streaming-overview",
+    "origin": "pa-live-20261106"
+  },
+  {
+    "id": "PALIVE-20261106-24",
+    "objectiveId": "O19",
+    "domain": "データの取り込みと変換",
+    "group": "Practice Assessment実戦論点 2026-11-06",
+    "skill": "",
+    "difficulty": "Hard",
+    "type": "multi",
+    "question": "毎回フルリロードしている大量Factロードの時間とリソースを削減したい。効果的な対策を2つ選べ。",
+    "choices": [
+      "計算資源だけ増やしてフルロード継続",
+      "増分ロードを導入する",
+      "手動パーティションだけ行う",
+      "別ETL製品へ変えるだけ",
+      "CDCで変更を追跡する"
+    ],
+    "answers": [
+      1,
+      4
+    ],
+    "explanation": "変更分だけ処理する増分ロードと、変更検出のCDCを組み合わせるとフルロードを避けられる。",
+    "memoryTip": "フルロードが重い → Incremental + CDC",
+    "source": "https://learn.microsoft.com/en-us/fabric/data-warehouse/load-data",
+    "origin": "pa-live-20261106",
+    "selectCount": 2
+  },
+  {
+    "id": "PALIVE-20261106-25",
+    "objectiveId": "O22",
+    "domain": "データの取り込みと変換",
+    "group": "Practice Assessment実戦論点 2026-11-06",
+    "skill": "",
+    "difficulty": "Hard",
+    "type": "single",
+    "question": "構造化・半構造化・非構造化データを扱い、Fabric 上で PySpark と SQL の両方を使って分析・変換したい。最も適切な Fabric データストアはどれか。",
+    "choices": [
+      "Warehouse",
+      "Eventhouse",
+      "Lakehouse",
+      "SQL database"
+    ],
+    "answers": [
+      2
+    ],
+    "explanation": "Lakehouse は多様なデータ形式を扱い、Spark/PySpark と SQL analytics endpoint の両方を利用できる。",
+    "memoryTip": "多様な形式 + Spark + SQL → Lakehouse",
+    "source": "https://learn.microsoft.com/en-us/fabric/fundamentals/store-data",
+    "origin": "pa-live-20261106"
+  },
+  {
+    "id": "PALIVE-20261106-26",
+    "objectiveId": "O20",
+    "domain": "データの取り込みと変換",
+    "group": "Practice Assessment実戦論点 2026-11-06",
+    "skill": "",
+    "difficulty": "Hard",
+    "type": "multi",
+    "question": "ADLS Gen2 や SQL Server など複数ソースから取り込み、ディメンショナルモデル向けに効率よくETLしたい。適切な対応を3つ選べ。",
+    "choices": [
+      "ステージングを使わず直接ロードする",
+      "品質確認を省略する",
+      "ロード前にステージングする",
+      "モデルに合わせて変換する",
+      "自動化のない基本ETLだけ使う",
+      "Data Factory pipeline でオーケストレーションする"
+    ],
+    "answers": [
+      2,
+      3,
+      5
+    ],
+    "explanation": "複数ソースをステージングし、モデルに合わせて変換し、Pipeline で順序や依存関係を自動化する。",
+    "memoryTip": "Stage → Transform → Pipeline",
+    "source": "https://learn.microsoft.com/en-us/fabric/data-warehouse/load-data",
+    "origin": "pa-live-20261106",
+    "selectCount": 3
+  },
+  {
+    "id": "PALIVE-20261106-27",
+    "objectiveId": "O37",
+    "domain": "データの取り込みと変換",
+    "group": "Practice Assessment実戦論点 2026-11-06",
+    "skill": "",
+    "difficulty": "Hard",
+    "type": "single",
+    "question": "同一クエリで1分Tumblingと15/30/60分Hoppingを集計し、出力にどのWindowの結果か識別子も出したい。適切な方法はどれか。",
+    "choices": [
+      "Windowsに各Windowを置くだけでIDは不要",
+      "すべてTumblingWindowにする",
+      "各Windowを Window('ラベル', ...) で定義し System.Window().Id を取得する",
+      "別クエリを4本作る"
+    ],
+    "answers": [
+      2
+    ],
+    "explanation": "複数Windowを同一クエリで識別するには各WindowへIDを付与し、System.Window().Id を参照する。",
+    "memoryTip": "複数Window識別 → Window('名前',...) + System.Window().Id",
+    "source": "https://learn.microsoft.com/en-us/stream-analytics-query/windows-azure-stream-analytics",
+    "origin": "pa-live-20261106"
+  },
+  {
+    "id": "PALIVE-20261106-28",
+    "objectiveId": "O27",
+    "domain": "データの取り込みと変換",
+    "group": "Practice Assessment実戦論点 2026-11-06",
+    "skill": "",
+    "difficulty": "Hard",
+    "type": "single",
+    "question": "大規模な Delta データセットを機械学習前処理向けに柔軟に変換したい。Fabric で最も適したアイテムはどれか。",
+    "choices": [
+      "Notebook",
+      "Azure Data Factory",
+      "Power BI Dataflow",
+      "SQL Server Management Studio"
+    ],
+    "answers": [
+      0
+    ],
+    "explanation": "Notebook なら Spark/PySpark により大規模Deltaデータを分散処理できる。",
+    "memoryTip": "大規模Delta + ML前処理 → Notebook/Spark",
+    "source": "https://learn.microsoft.com/en-us/fabric/data-engineering/author-execute-notebook",
+    "origin": "pa-live-20261106"
+  },
+  {
+    "id": "PALIVE-20261106-29",
+    "objectiveId": "O27",
+    "domain": "データの取り込みと変換",
+    "group": "Practice Assessment実戦論点 2026-11-06",
+    "skill": "",
+    "difficulty": "Hard",
+    "type": "code",
+    "question": "orders から status='F' の行だけを対象に、priority ごとの件数 n_orders を求め、件数降順にしたい。正しい流れはどれか。",
+    "choices": [
+      "filter(status='F') → groupBy(priority) → count(orderkey) as n_orders → n_orders desc",
+      "filter → groupBy(priority) → count(totalprice) → priority desc",
+      "groupBy(priority,status) → count → desc",
+      "groupBy → count → 後からstatusでfilter"
+    ],
+    "answers": [
+      0
+    ],
+    "explanation": "集計前に対象行を絞り、priorityでグループ化して注文キーを数え、集計結果で降順にする。",
+    "memoryTip": "絞る → まとめる → 数える → 並べる",
+    "source": "https://learn.microsoft.com/en-us/training/modules/fabric-transform-data-notebooks/",
+    "origin": "pa-live-20261106",
+    "code": "df.filter(...).groupBy(...).agg(count(...).alias('n_orders')).sort(col('n_orders').desc())"
+  },
+  {
+    "id": "PALIVE-20261106-30",
+    "objectiveId": "O35",
+    "domain": "データの取り込みと変換",
+    "group": "Practice Assessment実戦論点 2026-11-06",
+    "skill": "",
+    "difficulty": "Hard",
+    "type": "multi",
+    "question": "近リアルタイムのストリームを本番ジョブとして取り込み、Delta テーブルへ保存し、障害後も再開したい。必要な要素を3つ選べ。",
+    "choices": [
+      "Structured Streaming の Python を含む Spark Job Definition",
+      "永続 checkpoint location",
+      "JSONファイルだけへ保存",
+      "バッチ処理だけにする",
+      "Delta table を sink にする"
+    ],
+    "answers": [
+      0,
+      1,
+      4
+    ],
+    "explanation": "本番実行は Spark Job Definition、再開性は checkpoint、保存先は Delta が適する。",
+    "memoryTip": "本番Streaming → SJD + checkpoint + Delta",
+    "source": "https://learn.microsoft.com/en-us/fabric/data-engineering/spark-job-definition",
+    "origin": "pa-live-20261106",
+    "selectCount": 3
+  },
+  {
+    "id": "PALIVE-20261106-31",
+    "objectiveId": "O16",
+    "domain": "分析ソリューションの実装と管理",
+    "group": "Practice Assessment実戦論点 2026-11-06",
+    "skill": "",
+    "difficulty": "Hard",
+    "type": "single",
+    "question": "ADLS Gen2 の CSV を Lakehouse にロードする処理を、対話的に試しながら共同開発したい。最も適切な Fabric アイテムはどれか。",
+    "choices": [
+      "Data pipeline",
+      "Dataflow",
+      "Notebook",
+      "Spark Job Definition"
+    ],
+    "answers": [
+      2
+    ],
+    "explanation": "Notebook は対話的実行と共同開発に適し、Sparkを使った取り込み・変換も行える。",
+    "memoryTip": "対話的に試す・共同開発 → Notebook",
+    "source": "https://learn.microsoft.com/en-us/fabric/data-engineering/author-execute-notebook",
+    "origin": "pa-live-20261106"
+  },
+  {
+    "id": "PALIVE-20261106-32",
+    "objectiveId": "O06",
+    "domain": "分析ソリューションの実装と管理",
+    "group": "Practice Assessment実戦論点 2026-11-06",
+    "skill": "",
+    "difficulty": "Hard",
+    "type": "single",
+    "question": "SDK-style SQL Database Project をCIで検証し、DBへ接続せず後続デプロイ用の dacpac を生成したい。使うコマンドはどれか。",
+    "choices": [
+      "dotnet build",
+      "SqlPackage /Action:DeployReport",
+      "SqlPackage /Action:Publish",
+      "SqlPackage /Action:Script"
+    ],
+    "answers": [
+      0
+    ],
+    "explanation": "SDK-style project は dotnet build でビルド検証と dacpac 生成ができる。",
+    "memoryTip": "CIで検証＋dacpac → dotnet build",
+    "source": "https://learn.microsoft.com/en-us/fabric/data-warehouse/develop-warehouse-project",
+    "origin": "pa-live-20261106"
+  },
+  {
+    "id": "PALIVE-20261106-33",
+    "objectiveId": "O09",
+    "domain": "分析ソリューションの実装と管理",
+    "group": "Practice Assessment実戦論点 2026-11-06",
+    "skill": "",
+    "difficulty": "Hard",
+    "type": "single",
+    "question": "Workspace から外したユーザーに、Lakehouse1 の読み取りだけを最小権限で与えたい。最適な方法はどれか。",
+    "choices": [
+      "Contributor を付与",
+      "Member を付与",
+      "Viewer を付与",
+      "Lakehouse1 の item permissions を設定"
+    ],
+    "answers": [
+      3
+    ],
+    "explanation": "Workspace全体ではなく対象アイテムだけに権限を付与する方が最小権限。",
+    "memoryTip": "特定アイテムだけ → Item permissions",
+    "source": "https://learn.microsoft.com/en-us/fabric/data-warehouse/security",
+    "origin": "pa-live-20261106"
+  },
+  {
+    "id": "PALIVE-20261106-34",
+    "objectiveId": "O01",
+    "domain": "分析ソリューションの実装と管理",
+    "group": "Practice Assessment実戦論点 2026-11-06",
+    "skill": "",
+    "difficulty": "Hard",
+    "type": "single",
+    "question": "Notebook が複数同時利用者で Spark セッションを共有できる High concurrency mode を使うようにしたい。Workspace のどこで設定するか。",
+    "choices": [
+      "Data Engineering/Science > Spark settings",
+      "Data Factory",
+      "Data Warehouse",
+      "Delegated Settings"
+    ],
+    "answers": [
+      0
+    ],
+    "explanation": "High concurrency は Workspace の Spark settings から構成する。",
+    "memoryTip": "Notebookのセッション共有 → Spark settings",
+    "source": "https://learn.microsoft.com/en-us/fabric/data-engineering/configure-starter-pools",
+    "origin": "pa-live-20261106"
+  },
+  {
+    "id": "PALIVE-20261106-35",
+    "objectiveId": "O26",
+    "domain": "データの取り込みと変換",
+    "group": "Practice Assessment実戦論点 2026-11-06",
+    "skill": "",
+    "difficulty": "Hard",
+    "type": "single",
+    "question": "Data Factory Pipeline の Copy Data activity の主目的はどれか。",
+    "choices": [
+      "取り込んだデータを複雑変換する",
+      "ソースから宛先へデータをコピーする",
+      "Spark Notebookを実行する",
+      "SQLコードを実行する"
+    ],
+    "answers": [
+      1
+    ],
+    "explanation": "Copy Data activity はソースから宛先へのデータ移動を担当する。",
+    "memoryTip": "Copy Data = データ移動",
+    "source": "https://learn.microsoft.com/en-us/fabric/data-factory/copy-data-activity",
+    "origin": "pa-live-20261106"
+  },
+  {
+    "id": "PALIVE-20261106-36",
+    "objectiveId": "O18",
+    "domain": "分析ソリューションの実装と管理",
+    "group": "Practice Assessment実戦論点 2026-11-06",
+    "skill": "",
+    "difficulty": "Hard",
+    "type": "single",
+    "question": "データソースやテーブル名を実行時に切り替えながら、1つの Pipeline を再利用して Lakehouse へロードしたい。最適な設計はどれか。",
+    "choices": [
+      "ソースごとに個別Pipelineを作る",
+      "Pipeline parameters と dynamic expressions を使う",
+      "パラメーターなしNotebookに全部書く",
+      "固定値だけを使う"
+    ],
+    "answers": [
+      1
+    ],
+    "explanation": "パラメーターと動的式により同じPipelineを実行時値で再利用できる。",
+    "memoryTip": "動的・再利用 → Parameters + Dynamic expressions",
+    "source": "https://learn.microsoft.com/en-us/fabric/data-factory/parameters",
+    "origin": "pa-live-20261106"
+  },
+  {
+    "id": "PALIVE-20261106-37",
+    "objectiveId": "O18",
+    "domain": "分析ソリューションの実装と管理",
+    "group": "Practice Assessment実戦論点 2026-11-06",
+    "skill": "",
+    "difficulty": "Hard",
+    "type": "single",
+    "question": "毎日01:00に、Copy Data → Dataflow Gen2 → Spark Notebook を前段成功後に順番に実行したい。最も適切なものはどれか。",
+    "choices": [
+      "Data Factory pipeline",
+      "Eventstream",
+      "Notebook単体",
+      "Semantic model"
+    ],
+    "answers": [
+      0
+    ],
+    "explanation": "複数処理の依存関係とスケジュール実行をまとめて制御するには Pipeline が適する。",
+    "memoryTip": "複数処理を順番に自動実行 → Pipeline",
+    "source": "https://learn.microsoft.com/en-us/fabric/data-factory/pipeline-runs",
+    "origin": "pa-live-20261106"
+  },
+  {
+    "id": "PALIVE-20261106-38",
+    "objectiveId": "O06",
+    "domain": "分析ソリューションの実装と管理",
+    "group": "Practice Assessment実戦論点 2026-11-06",
+    "skill": "",
+    "difficulty": "Hard",
+    "type": "single",
+    "question": "既存 Fabric Warehouse のスキーマを VS Code の Database Project に取り込み、作成時には既存DBを変更したくない。最初に何をするか。",
+    "choices": [
+      "Manage Packages",
+      "Warehouse接続を右クリックして Create Project From Database",
+      "New Query",
+      "Create Project From Scratch"
+    ],
+    "answers": [
+      1
+    ],
+    "explanation": "Create Project From Database で既存スキーマをプロジェクトとして抽出でき、元DBは変更しない。",
+    "memoryTip": "既存DBをプロジェクト化 → Create Project From Database",
+    "source": "https://learn.microsoft.com/en-us/fabric/data-warehouse/develop-warehouse-project",
+    "origin": "pa-live-20261106"
+  },
+  {
+    "id": "PALIVE-20261106-39",
+    "objectiveId": "O02",
+    "domain": "分析ソリューションの実装と管理",
+    "group": "Practice Assessment実戦論点 2026-11-06",
+    "skill": "",
+    "difficulty": "Hard",
+    "type": "multi",
+    "question": "Fabric の Data Mesh で業務部門へガバナンスを委任したい。基本構成として適切なものを3つ選べ。",
+    "choices": [
+      "ドメイン固有のSensitivity labelだけ設定",
+      "Workspace を Domain に割り当てる",
+      "Tenant settings を Domain に委任する",
+      "Domain-level sensitivity labelsだけを有効化する",
+      "RLSだけ実装する",
+      "Domain administrators を指定する"
+    ],
+    "answers": [
+      1,
+      2,
+      5
+    ],
+    "explanation": "WorkspaceをDomainに所属させ、Domain adminを指定し、委任可能なTenant settingをDomainへ委任する。",
+    "memoryTip": "Data Mesh → Workspace→Domain / Domain Admin / 設定委任",
+    "source": "https://learn.microsoft.com/en-us/fabric/governance/domains",
+    "origin": "pa-live-20261106",
+    "selectCount": 3
+  },
+  {
+    "id": "PALIVE-20261106-40",
+    "objectiveId": "O17",
+    "domain": "分析ソリューションの実装と管理",
+    "group": "Practice Assessment実戦論点 2026-11-06",
+    "skill": "",
+    "difficulty": "Hard",
+    "type": "single",
+    "question": "Blob Storage の /sales/daily/ にファイルが作成された瞬間、Pipeline を自動起動したい。最適な設定はどれか。",
+    "choices": [
+      "毎回手動実行",
+      "Scheduled runの失敗通知",
+      "定期スケジュール実行",
+      "/sales/daily/ を絞り込む storage event trigger"
+    ],
+    "answers": [
+      3
+    ],
+    "explanation": "ファイル作成イベントで起動し、対象パスをフィルターする。",
+    "memoryTip": "ファイル到着で起動 → Storage event trigger",
+    "source": "https://learn.microsoft.com/en-us/fabric/data-factory/pipeline-runs",
+    "origin": "pa-live-20261106"
+  },
+  {
+    "id": "PALIVE-20261106-41",
+    "objectiveId": "O01",
+    "domain": "分析ソリューションの実装と管理",
+    "group": "Practice Assessment実戦論点 2026-11-06",
+    "skill": "",
+    "difficulty": "Hard",
+    "type": "single",
+    "question": "共有リソース需要の変動で Spark ジョブが遅延している。Custom Spark pool でピーク時だけノードを増やしたい。何を使うか。",
+    "choices": [
+      "Autoscaling を有効にし最大ノードをピークに合わせる",
+      "静的ノード割当",
+      "静的executor割当",
+      "固定ノード数"
+    ],
+    "answers": [
+      0
+    ],
+    "explanation": "Autoscaling により需要に応じてノード数を増減できる。",
+    "memoryTip": "負荷変動 → Custom pool + Autoscale",
+    "source": "https://learn.microsoft.com/en-us/fabric/data-engineering/configure-starter-pools",
+    "origin": "pa-live-20261106"
+  },
+  {
+    "id": "PALIVE-20261106-42",
+    "objectiveId": "O07",
+    "domain": "分析ソリューションの実装と管理",
+    "group": "Practice Assessment実戦論点 2026-11-06",
+    "skill": "",
+    "difficulty": "Hard",
+    "type": "single",
+    "question": "Deployment pipeline で、検証済みの変更だけを Production へ昇格したい。最も適切な機能はどれか。",
+    "choices": [
+      "同じWorkspaceを全Stageへ割当",
+      "Deployment rulesだけ",
+      "全Stageへ同時Deploy",
+      "Selective deployment"
+    ],
+    "answers": [
+      3
+    ],
+    "explanation": "Selective deployment なら対象アイテムを選び、検証済み変更だけ昇格できる。",
+    "memoryTip": "検証済みだけ本番へ → Selective deployment",
+    "source": "https://learn.microsoft.com/en-us/fabric/cicd/deployment-pipelines/deploy-content",
+    "origin": "pa-live-20261106"
+  },
+  {
+    "id": "PALIVE-20261106-43",
+    "objectiveId": "O10",
+    "domain": "分析ソリューションの実装と管理",
+    "group": "Practice Assessment実戦論点 2026-11-06",
+    "skill": "",
+    "difficulty": "Hard",
+    "type": "multi",
+    "question": "Warehouse の Salary と SocialSecurityNumber を HR だけが参照できるようにしたい。適切な対応を3つ選べ。",
+    "choices": [
+      "Viewだけ作る",
+      "HR用ロールを作成しHRを所属させる",
+      "他ロールの機密列SELECTを許可しない/必要に応じて拒否する",
+      "HRロールに機密列のSELECTを付与する",
+      "Dynamic Data Maskingだけに頼る"
+    ],
+    "answers": [
+      1,
+      2,
+      3
+    ],
+    "explanation": "専用ロールと列レベルSELECT権限で、HRだけが機密列へアクセスできるようにする。",
+    "memoryTip": "特定列を特定部署だけ → Role + 列SELECT",
+    "source": "https://learn.microsoft.com/en-us/fabric/data-warehouse/column-level-security",
+    "origin": "pa-live-20261106",
+    "selectCount": 3
+  },
+  {
+    "id": "PALIVE-20261106-44",
+    "objectiveId": "O53",
+    "domain": "分析ソリューションの監視と最適化",
+    "group": "Practice Assessment実戦論点 2026-11-06",
+    "skill": "",
+    "difficulty": "Hard",
+    "type": "single",
+    "question": "Spark のリソースをワークロード需要に応じて自動調整し、無駄と遅延を減らしたい。何を有効にするか。",
+    "choices": [
+      "Autoscaling",
+      "Fixed resource allocation",
+      "固定executor数",
+      "常にLargeノード"
+    ],
+    "answers": [
+      0
+    ],
+    "explanation": "需要変動へ追随するには Autoscaling が適する。",
+    "memoryTip": "負荷に応じて増減 → Autoscaling",
+    "source": "https://learn.microsoft.com/en-us/fabric/data-engineering/configure-starter-pools",
+    "origin": "pa-live-20261106"
+  },
+  {
+    "id": "PALIVE-20261106-45",
+    "objectiveId": "O18",
+    "domain": "分析ソリューションの実装と管理",
+    "group": "Practice Assessment実戦論点 2026-11-06",
+    "skill": "",
+    "difficulty": "Hard",
+    "type": "single",
+    "question": "入力パラメーターに応じて複数データセットを効率よく処理し、Pipelineを再利用したい。何を実装するか。",
+    "choices": [
+      "データセットごとに別Pipeline",
+      "Parameterized pipelines",
+      "パラメーターなしの単一Pipeline",
+      "ハードコード"
+    ],
+    "answers": [
+      1
+    ],
+    "explanation": "Pipelineをパラメーター化することで同一処理を異なる入力で再利用できる。",
+    "memoryTip": "動的処理・再利用 → Parameterized Pipeline",
+    "source": "https://learn.microsoft.com/en-us/fabric/data-factory/parameters",
+    "origin": "pa-live-20261106"
+  },
+  {
+    "id": "PALIVE-20261106-46",
+    "objectiveId": "O18",
+    "domain": "分析ソリューションの実装と管理",
+    "group": "Practice Assessment実戦論点 2026-11-06",
+    "skill": "",
+    "difficulty": "Hard",
+    "type": "single",
+    "question": "Pipeline の RunDate を Notebook の process_date の既定値へ上書きして渡したい。正しい組み合わせはどれか。",
+    "choices": [
+      "NotebookはMarkdown cell / 値は@variables('RunDate')",
+      "NotebookはParameters cell / 値は@pipeline().parameters.RunDate",
+      "NotebookはLocked cell / 値はprocess_date",
+      "NotebookはFrozen cell / 値はActivity出力"
+    ],
+    "answers": [
+      1
+    ],
+    "explanation": "Notebook側は Parameters cell とし、Notebook activity の base parameter に Pipeline の RunDate を渡す。",
+    "memoryTip": "Notebookへ値を渡す → Parameters cell + pipeline parameter",
+    "source": "https://learn.microsoft.com/en-us/fabric/data-engineering/author-execute-notebook",
+    "origin": "pa-live-20261106"
+  },
+  {
+    "id": "PALIVE-20261106-47",
+    "objectiveId": "O17",
+    "domain": "分析ソリューションの実装と管理",
+    "group": "Practice Assessment実戦論点 2026-11-06",
+    "skill": "",
+    "difficulty": "Hard",
+    "type": "multi",
+    "question": "/retail 配下に追加された CSV だけで Pipeline1 を起動し、Pipeline1 成功後に Dataflow1 を起動したい。適切な設定を2つ選べ。",
+    "choices": [
+      "Pipeline1: Blob created + .csvのみ",
+      "Pipeline1: Blob created + /retailのみ",
+      "Pipeline1: Blob created + /retail + .csv",
+      "Dataflow1: Job created; Pipeline1",
+      "Dataflow1: Job succeeded; Pipeline1"
+    ],
+    "answers": [
+      2,
+      4
+    ],
+    "explanation": "Pipeline1はパスと拡張子の両方で絞り込み、Dataflow1はPipeline1成功を条件にする。",
+    "memoryTip": "入口は Blob条件 / 後段は Job succeeded",
+    "source": "https://learn.microsoft.com/en-us/fabric/data-factory/pipeline-runs",
+    "origin": "pa-live-20261106",
+    "selectCount": 2
+  },
+  {
+    "id": "PALIVE-20261106-48",
+    "objectiveId": "O05",
+    "domain": "分析ソリューションの実装と管理",
+    "group": "Practice Assessment実戦論点 2026-11-06",
+    "skill": "",
+    "difficulty": "Hard",
+    "type": "single",
+    "question": "Notebook の変更履歴を管理し、任意の過去状態へ戻せるようにしたい。最も適切な方法はどれか。",
+    "choices": [
+      "Data Factory pipelineへ追加",
+      "WorkspaceをGit repositoryへ接続",
+      "Deployment pipelineだけ作成",
+      "Workspace内でbranch名だけ作成"
+    ],
+    "answers": [
+      1
+    ],
+    "explanation": "Git integration により変更をコミットとして管理し、過去状態へ戻せる。",
+    "memoryTip": "過去状態へ戻す → Git",
+    "source": "https://learn.microsoft.com/en-us/fabric/cicd/git-integration/intro-to-git-integration",
+    "origin": "pa-live-20261106"
+  },
+  {
+    "id": "PALIVE-20261106-49",
+    "objectiveId": "O44",
+    "domain": "分析ソリューションの監視と最適化",
+    "group": "Practice Assessment実戦論点 2026-11-06",
+    "skill": "",
+    "difficulty": "Hard",
+    "type": "multi",
+    "question": "Spark runtime 更新後にライブラリ互換性が崩れてジョブが失敗する。根本対応として適切なものを2つ選べ。",
+    "choices": [
+      "executor memoryだけ変更",
+      "非互換ライブラリを除去してEnvironmentを再Publish",
+      "必ず旧runtimeへ戻す",
+      "新runtimeに対応するライブラリ版へ更新",
+      "古いライブラリを使い続ける"
+    ],
+    "answers": [
+      1,
+      3
+    ],
+    "explanation": "新runtimeへライブラリを合わせ、不要な非互換ライブラリを削除したうえでEnvironmentを再Publishする。",
+    "memoryTip": "Runtimeを上げたらLibraryも合わせる → 再Publish",
+    "source": "https://learn.microsoft.com/en-us/fabric/data-engineering/environment-manage-library",
+    "origin": "pa-live-20261106",
+    "selectCount": 2
+  },
+  {
+    "id": "PALIVE-20261106-50",
+    "objectiveId": "O10",
+    "domain": "分析ソリューションの実装と管理",
+    "group": "Practice Assessment実戦論点 2026-11-06",
+    "skill": "",
+    "difficulty": "Hard",
+    "type": "single",
+    "question": "Patients テーブルの MedicalHistory 列だけを、許可された医療従事者に限定したい。最も適切な制御はどれか。",
+    "choices": [
+      "Column-Level Security",
+      "Dynamic Data Masking",
+      "Row-Level Security",
+      "Workspace Roles"
+    ],
+    "answers": [
+      0
+    ],
+    "explanation": "特定列へのアクセス可否を制御する要件には Column-Level Security が適する。",
+    "memoryTip": "列=CLS / 行=RLS / 見せるが隠す=DDM",
+    "source": "https://learn.microsoft.com/en-us/fabric/data-warehouse/column-level-security",
+    "origin": "pa-live-20261106"
+  }
+];
+for(const item of PA_LIVE_20261106){ if(CURRENT_SKILL_NAMES[item.objectiveId]) item.skill=CURRENT_SKILL_NAMES[item.objectiveId]; }
+window.DP700_PA_LIVE_20261106=PA_LIVE_20261106;
+
 for(const item of q){ if(CURRENT_SKILL_NAMES[item.objectiveId]) item.skill=CURRENT_SKILL_NAMES[item.objectiveId]; }
 
 const CURRENT_OBJECTIVES=O
@@ -1539,7 +2741,7 @@ for(const item of q){
 
 window.DP700_META={
  title:"DP-700 過去問道場",
- version:"2026.11.04-v5",
+ version:"2026.11.06-v6",
  officialGuide:S.GUIDE,
  objectiveCount:49,
  questionCount:q.length,
@@ -1548,6 +2750,7 @@ window.DP700_META={
  practiceAssessmentUrl:"https://learn.microsoft.com/en-us/credentials/certifications/fabric-data-engineer-associate/?practice-assessment-type=certification",
  practiceAssessmentNote:"新版Practice AssessmentはAI Skills Navigator上で提供される。ユーザー提供スクリーンショットで確認した50問の論点は、原文を転載せず日本語オリジナル問題として再構成している。",
  paReauthoredCount:50,
+ practiceLive20261106Count:50,
  disclaimer:"Microsoft公式Study Guide（2026-10-30更新、skills measured as of 2026-10-19）に基づく独自問題です。実試験の流出問題・再現問題ではありません。"
 };
 window.DP700_OBJECTIVES=CURRENT_OBJECTIVES;
