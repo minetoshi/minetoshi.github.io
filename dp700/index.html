@@ -87,6 +87,7 @@ h2{font-size:18px;margin:0 0 12px}h3{font-size:15px}.modes{display:grid;grid-tem
     <button class="btn secondary" data-mode="code">コード20問</button>
     <button class="btn ghost" data-mode="wrong">間違い復習</button>
     <button class="btn ghost" data-mode="due">期限復習</button>
+    <button class="btn ghost" data-glossary-open>用語解説（検索）</button>
     <button class="btn ghost" id="resetBtn">履歴リセット</button>
   </div>
 </section>
@@ -110,6 +111,12 @@ h2{font-size:18px;margin:0 0 12px}h3{font-size:15px}.modes{display:grid;grid-tem
     <li>最後にMicrosoft公式Practice Assessmentで85%以上</li>
   </ul>
   <p class="small" style="margin-bottom:0">Microsoft本試験の700点は単純な正答率70%ではありません。道場では安全側に85%を目標にします。</p>
+</section>
+
+<section class="card">
+  <h2>用語解説</h2>
+  <p class="small">DP-700で頻出するFabric用語を、意味・使う場面・似た用語との違い・覚え方の4点で整理しています。問題演習中にも開けます。</p>
+  <button class="btn primary" style="width:100%" data-glossary-open>用語集を開く・検索する</button>
 </section>
 
 <section class="card">
@@ -141,6 +148,7 @@ h2{font-size:18px;margin:0 0 12px}h3{font-size:15px}.modes{display:grid;grid-tem
 <section id="quiz" class="hidden">
   <div class="top">
     <button class="btn ghost" id="quitBtn">← 終了</button>
+    <button class="btn ghost glossaryTopBtn" data-glossary-open>用語解説</button>
     <div class="small"><span id="quizMode"></span>　<span id="quizCounter"></span></div>
     <div id="timer" class="timer"></div>
   </div>
@@ -200,6 +208,7 @@ DP-700 Dojo v6.2 • <a href="https://learn.microsoft.com/en-us/credentials/cert
 <script src="./intermediate.js"></script>
 <script src="./advanced.js?v=30"></script>
 <script src="./bridge.js?v=18"></script>
-<script src="./glossary.js?v=1"></script>\n<script src="./app.js?v=bridge9-1"></script>
+<script src="./glossary.js?v=1"></script>
+<script src="./app.js?v=bridge9-1"></script>
 </body>
 </html>
