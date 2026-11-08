@@ -9,7 +9,7 @@
 <style>
 :root{--bg:#f8fafc;--card:#fff;--ink:#0f172a;--muted:#64748b;--line:#e2e8f0;--accent:#2563eb;--accent2:#1d4ed8;--ok:#15803d;--bad:#b91c1c;--warn:#b45309}
 *{box-sizing:border-box}body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans JP",sans-serif;background:var(--bg);color:var(--ink);line-height:1.55}
-button,select{font:inherit}.shell{max-width:960px;margin:0 auto;padding:16px 16px 56px}.hero{background:linear-gradient(135deg,#0f172a,#1e3a8a);color:#fff;padding:22px;border-radius:20px;box-shadow:0 12px 30px #0f172a22;margin:8px 0 16px}
+button,select,input{font:inherit}.shell{max-width:960px;margin:0 auto;padding:16px 16px 56px}.hero{background:linear-gradient(135deg,#0f172a,#1e3a8a);color:#fff;padding:22px;border-radius:20px;box-shadow:0 12px 30px #0f172a22;margin:8px 0 16px}
 .hero h1{font-size:clamp(25px,6vw,38px);margin:0 0 6px}.hero p{margin:0;color:#dbeafe}.badge{display:inline-block;background:#ffffff22;border:1px solid #ffffff44;padding:4px 9px;border-radius:999px;font-size:12px;margin-top:10px}
 .grid{display:grid;grid-template-columns:repeat(12,1fr);gap:12px}.card{grid-column:span 12;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px;box-shadow:0 3px 12px #0f172a08}
 @media(min-width:760px){.half{grid-column:span 6}.third{grid-column:span 4}}
@@ -26,6 +26,23 @@ h2{font-size:18px;margin:0 0 12px}h3{font-size:15px}.modes{display:grid;grid-tem
 .actions{display:flex;gap:8px;margin-top:14px}.actions .btn{flex:1}.resultScore{text-align:center;padding:12px}.resultScore strong{font-size:48px;display:block}.good{color:var(--ok)}.mid{color:var(--warn)}.low{color:var(--bad)}
 .list{margin:0;padding-left:20px}.footer{font-size:12px;color:var(--muted);text-align:center;margin-top:22px}.footer a{color:var(--accent)}select{width:100%;padding:12px;border-radius:12px;border:1px solid var(--line);background:#fff}
 .auditGrid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}.auditItem{border:1px solid var(--line);border-radius:10px;padding:10px;background:#f8fafc}.auditItem b{display:block}
+
+.glossaryModal{position:fixed;inset:0;z-index:9999;background:#0f172acc;display:flex;align-items:center;justify-content:center;padding:12px}
+.glossaryPanel{width:min(920px,100%);max-height:92vh;overflow:auto;background:#fff;border-radius:18px;box-shadow:0 24px 70px #0005}
+.glossarySticky{position:sticky;top:0;z-index:3;background:#fff;border-bottom:1px solid var(--line);padding:14px 16px}
+.glossaryTitleRow{display:flex;align-items:center;justify-content:space-between;gap:12px}.glossaryTitleRow h2{margin:0}
+.glossaryToolbar{display:grid;grid-template-columns:2fr 1fr;gap:8px;margin-top:10px}
+.glossaryToolbar input,.glossaryToolbar select{width:100%;padding:11px 12px;border:1px solid var(--line);border-radius:10px;background:#fff}
+.glossaryBody{padding:14px 16px 20px}.glossaryContext{font-size:13px;color:var(--muted);margin-bottom:12px}
+.glossaryResults{display:grid;gap:10px}.glossaryCard{border:1px solid var(--line);border-radius:14px;padding:14px;background:#fff}
+.glossaryHead{display:flex;justify-content:space-between;align-items:center;gap:8px}.glossaryHead b{font-size:17px}
+.glossaryAliases{font-size:12px;color:var(--muted);margin-top:2px}.glossaryCard p{margin:9px 0;font-size:14px}
+.glossaryMemory{background:#eff6ff;border:1px solid #bfdbfe;color:#1e3a8a;border-radius:10px;padding:9px 10px;font-weight:700;font-size:13px}
+.glossarySource{display:inline-block;margin-top:9px;color:var(--accent);font-size:13px}
+.contextBadge{display:inline-block;margin-left:7px;font-size:11px;background:#dcfce7;color:#166534;border:1px solid #86efac;border-radius:999px;padding:2px 6px;vertical-align:2px}
+.termChip{border:1px solid #bfdbfe;background:#eff6ff;color:#1e40af;border-radius:999px;padding:4px 8px;margin:2px;cursor:pointer;font-size:12px}
+.modalOpen{overflow:hidden}.glossaryTopBtn{padding:8px 10px}
+@media(max-width:640px){.glossaryToolbar{grid-template-columns:1fr}.glossaryPanel{max-height:96vh}.glossaryCard p{font-size:13px}}
 </style>
 </head>
 <body>
@@ -36,7 +53,7 @@ h2{font-size:18px;margin:0 0 12px}h3{font-size:15px}.modes{display:grid;grid-tem
   <p>問題を解く → 弱点を特定 → 間違いだけ反復。Microsoft Fabric初心者から合格圏へ。</p>
   <p><a style="color:#fff" href="./DP700_Visual_Guide_JA.pdf" target="_blank" rel="noopener">図解PDFを開く</a></p>
   <span class="badge">初級ステップ15問</span>
-  <span class="badge" id="bankInfo">問題バンクを読込中...</span>
+  <span class="badge" id="bankInfo">問題バンクを読込中...</span>\n  <span class="badge" id="glossaryBankCount">用語集を読込中...</span>
 </header>
 
 <div class="grid">
@@ -70,6 +87,7 @@ h2{font-size:18px;margin:0 0 12px}h3{font-size:15px}.modes{display:grid;grid-tem
     <button class="btn secondary" data-mode="code">コード20問</button>
     <button class="btn ghost" data-mode="wrong">間違い復習</button>
     <button class="btn ghost" data-mode="due">期限復習</button>
+    <button class="btn ghost" data-glossary-open>用語解説（検索）</button>
     <button class="btn ghost" id="resetBtn">履歴リセット</button>
   </div>
 </section>
@@ -93,6 +111,12 @@ h2{font-size:18px;margin:0 0 12px}h3{font-size:15px}.modes{display:grid;grid-tem
     <li>最後にMicrosoft公式Practice Assessmentで85%以上</li>
   </ul>
   <p class="small" style="margin-bottom:0">Microsoft本試験の700点は単純な正答率70%ではありません。道場では安全側に85%を目標にします。</p>
+</section>
+
+<section class="card">
+  <h2>用語解説</h2>
+  <p class="small">DP-700で頻出するFabric用語を、意味・使う場面・似た用語との違い・覚え方の4点で整理しています。問題演習中にも開けます。</p>
+  <button class="btn primary" style="width:100%" data-glossary-open>用語集を開く・検索する</button>
 </section>
 
 <section class="card">
@@ -124,6 +148,7 @@ h2{font-size:18px;margin:0 0 12px}h3{font-size:15px}.modes{display:grid;grid-tem
 <section id="quiz" class="hidden">
   <div class="top">
     <button class="btn ghost" id="quitBtn">← 終了</button>
+    <button class="btn ghost glossaryTopBtn" data-glossary-open>用語解説</button>
     <div class="small"><span id="quizMode"></span>　<span id="quizCounter"></span></div>
     <div id="timer" class="timer"></div>
   </div>
@@ -153,8 +178,28 @@ h2{font-size:18px;margin:0 0 12px}h3{font-size:15px}.modes{display:grid;grid-tem
   </section>
 </section>
 
+
+<section id="glossaryModal" class="glossaryModal hidden" aria-hidden="true">
+  <div class="glossaryPanel" role="dialog" aria-modal="true" aria-labelledby="glossaryTitle">
+    <div class="glossarySticky">
+      <div class="glossaryTitleRow">
+        <div><h2 id="glossaryTitle">DP-700 用語解説</h2><div class="small"><span id="glossaryCount">0語</span> ・ Microsoft Learnリンク付き</div></div>
+        <button class="btn ghost" id="glossaryClose" type="button">閉じる</button>
+      </div>
+      <div class="glossaryToolbar">
+        <input id="glossarySearch" type="search" placeholder="用語・説明から検索（例: Shortcut, RLS, checkpoint）" autocomplete="off">
+        <select id="glossaryCategory" aria-label="用語カテゴリ"></select>
+      </div>
+    </div>
+    <div class="glossaryBody">
+      <div id="glossaryContextHint" class="glossaryContext"></div>
+      <div id="glossaryResults" class="glossaryResults"></div>
+    </div>
+  </div>
+</section>
+
 <div class="footer">
-DP-700 Dojo v6 • <a href="https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/dp-700" target="_blank" rel="noopener">Microsoft公式 Study Guide</a>
+DP-700 Dojo v6.2 • <a href="https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/dp-700" target="_blank" rel="noopener">Microsoft公式 Study Guide</a>
 </div>
 </main>
 <script src="./questions.js"></script>
@@ -163,6 +208,7 @@ DP-700 Dojo v6 • <a href="https://learn.microsoft.com/en-us/credentials/certif
 <script src="./intermediate.js"></script>
 <script src="./advanced.js?v=30"></script>
 <script src="./bridge.js?v=18"></script>
+<script src="./glossary.js?v=1"></script>
 <script src="./app.js?v=bridge9-1"></script>
 </body>
 </html>
