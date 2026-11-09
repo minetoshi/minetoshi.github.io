@@ -14,7 +14,7 @@ const RULES = [
   {re:/配列|Array|ForEach|JSON/i,label:"配列・JSON",detail:"文字列と配列の型を区別し、ForEach が扱える配列へ変換する"},
   {re:/パラメータ|parameter|Base parameters|dynamic expression/i,label:"パラメーター",detail:"実行時の値をハードコードせず正しい型で受け渡す"},
   {re:/最小権限|read-only|閲覧|権限|RLS|CLS|OLS|DDM|機密/i,label:"セキュリティ",detail:"行・列・オブジェクト・マスクなど、必要最小限の粒度で制御する"},
-  {re:/Git|version control|変更履歴|revert|PR|レビュー/i,label:"変更管理",detail:"変更履歴を残し、レビューや復元ができる仕組みを選ぶ"},
+  {re:/Git|version control|変更履歴|revert|\bPR\b|レビュー/i,label:"変更管理",detail:"変更履歴を残し、レビューや復元ができる仕組みを選ぶ"},
   {re:/Deployment pipeline|Dev|Test|Prod|本番|昇格/i,label:"環境間デプロイ",detail:"開発・テスト・本番の間で検証済み変更だけを昇格する"},
   {re:/Pipeline|Activity|依存関係|オーケストレーション|trigger|トリガ/i,label:"オーケストレーション",detail:"処理の順序、依存関係、イベントやスケジュール起動を正しく構成する"},
   {re:/増分|incremental|CDC|変更分|full load|全件/i,label:"ロード方式",detail:"全件か差分かを要件に応じて選び、不要な再処理を避ける"},
@@ -47,16 +47,26 @@ function glossary(){
 
 function textTerms(text){
   const t=String(text||"").toLowerCase();
-  const found=[];
+  const hits=[];
   for(const g of glossary()){
-    const names=[g.term,...(g.aliases||[])].filter(Boolean).sort((a,b)=>b.length-a.length);
-    if(names.some(n => {
-      const x=n.toLowerCase();
-      if(x.length<3) return false;
-      return t.includes(x);
-    })) found.push(g);
+    const names=[g.term,...(g.aliases||[])].filter(Boolean);
+    let best="";
+    for(const n of names){
+      const x=String(n).toLowerCase();
+      if(x.length<3) continue;
+      if(t.includes(x) && x.length>best.length) best=x;
+    }
+    if(best) hits.push({g,match:best});
   }
-  return found.filter((x,i,a)=>a.findIndex(y=>y.term===x.term)===i).slice(0,3);
+  hits.sort((a,b)=>b.match.length-a.match.length);
+  const selected=[];
+  for(const h of hits){
+    if(selected.some(x=>x.match.includes(h.match))) continue;
+    if(selected.some(x=>x.g.term===h.g.term)) continue;
+    selected.push(h);
+    if(selected.length>=3) break;
+  }
+  return selected.map(x=>x.g);
 }
 
 function requirementItems(q){
