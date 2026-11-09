@@ -109,6 +109,56 @@ function generatedMemory(q){
   return answers.length ? "正解の役割を一言で言えるようにする → "+answers.join(" / ") : "設問の要件と各機能の主用途を対応づける";
 }
 
+const CUE_RULES = [
+  {re:/リアルタイム.*Delta|Delta.*リアルタイム|Lakehouse.*Delta.*リアルタイム|Structured Streaming/i,cue:"「リアルタイム」＋「Delta」"},
+  {re:/ForEach.*String|String.*ForEach|配列.*文字列化|文字列.*配列/i,cue:"「ForEach」＋「String/文字列」"},
+  {re:/JSON.*文字列|文字列.*JSON/i,cue:"「JSON文字列」→ 配列として解釈"},
+  {re:/手動.*セッション|Session ready|非アクティブ.*タイムアウト/i,cue:"「手動Sessionなら動く」＋「タイムアウト」"},
+  {re:/コード.*変更.*せず|コード変更なし|既存コードを変更せず/i,cue:"「コード変更なし」＋「高速化」"},
+  {re:/条件.*自動.*通知|自動検知.*通知|変化するデータ.*通知/i,cue:"「条件成立」＋「自動通知」"},
+  {re:/小さな.*ファイル|small files|Optimize Write|Auto Compact/i,cue:"「小ファイル」＋「今後も継続書き込み」"},
+  {re:/クロスデータベース|Warehouse.*Lakehouse|Lakehouse.*Warehouse/i,cue:"「Warehouse＋Lakehouse」＋「新しいテーブル」"},
+  {re:/変更分|CDC|増分|incremental/i,cue:"「毎回全件は重い」＋「変更分だけ」"},
+  {re:/Create Project From Database|既存.*Warehouse.*VS Code|既存.*スキーマ.*Project/i,cue:"「既存Warehouse」＋「Database Project化」"},
+  {re:/dotnet build|接続.*せず.*検証|DB.*接続.*せず/i,cue:"「DB接続なし」＋「検証/成果物」"},
+  {re:/read-only|読み取り専用|最小権限.*Lakehouse|Lakehouse.*最小権限/i,cue:"「特定Lakehouseだけ」＋「最小権限」"},
+  {re:/revert|以前の状態|変更履歴.*戻/i,cue:"「変更履歴」＋「以前へ戻す」"},
+  {re:/Salary|SSN|MedicalHistory|機密.*列|特定列/i,cue:"「特定の列だけ」＋「許可ユーザーだけ」"},
+  {re:/マスク|伏字|UNMASK/i,cue:"「列は見せる」＋「値だけ隠す」"},
+  {re:/Autoscale|負荷.*変動|需要.*変動|executor.*変動/i,cue:"「負荷が変動」＋「リソースを自動調整」"},
+  {re:/検証済み.*変更|verified changes|Selective deployment/i,cue:"「検証済みだけ」＋「本番へ昇格」"},
+  {re:/Blob.*created|ファイル.*到着|storage event trigger|CSV.*到着/i,cue:"「ファイル到着」＋「イベント起動」"},
+  {re:/checkpoint|途中.*再開|last offset|offset/i,cue:"「障害後も途中から再開」"},
+  {re:/watermark|遅延到着/i,cue:"「遅れて届くイベント」＋「待つ範囲」"},
+  {re:/Tumbling|Hopping|時間窓|window/i,cue:"「固定窓か重なる窓か」"},
+  {re:/RLS|行レベル/i,cue:"「行ごとに見せ分け」"},
+  {re:/CLS|Column-Level|列レベル/i,cue:"「列そのものを見せない」"},
+  {re:/DDM|Dynamic Data Masking/i,cue:"「列は見えるが値を伏字」"},
+  {re:/Eventstream.*Eventhouse|Eventhouse.*Eventstream/i,cue:"「流す」か「保存して分析」かを分ける"},
+  {re:/Monitoring hub|Monitor hub/i,cue:"「実行状況・失敗を見る」"},
+  {re:/Activator/i,cue:"「条件成立で自動アクション」"},
+  {re:/Dataflow Gen2/i,cue:"「GUI/Power Queryで変換」"},
+  {re:/Notebook/i,cue:"「対話的・コード中心・Spark」"},
+  {re:/Deployment pipeline/i,cue:"「Dev→Test→Prod」"},
+  {re:/Git integration/i,cue:"「変更履歴・版管理」"},
+  {re:/CTAS|CREATE TABLE AS SELECT/i,cue:"「SELECT結果から新表」"}
+];
+
+function examCue(q){
+  const src=[q.question,q.caseText,q.skill,...(q.choices||[])].filter(Boolean).join(" ");
+  const answers=(q.answers||[]).map(i=>q.choices?.[i]).filter(Boolean);
+  const hit=CUE_RULES.find(x=>x.re.test(src));
+  let cue=hit?.cue;
+  if(!cue){
+    const req=requirementItems(q);
+    const terms=textTerms(q.question||"").slice(0,2).map(x=>x.term);
+    const keys=terms.length ? terms : req.slice(0,2).map(x=>x.label);
+    cue=keys.length ? keys.map(x=>"「"+x+"」").join("＋") : "設問の主要キーワード";
+  }
+  const answer=answers.length ? answers.join(" / ") : "正解";
+  return cue+" を見たら → "+answer;
+}
+
 function explain(q, displayOrder){
   if(!q || !["pa50-ja","pa-live-20261106"].includes(q.origin)) return "";
 
@@ -144,7 +194,10 @@ function explain(q, displayOrder){
     ? '<div class="paTerms"><b>関連用語：</b>'+glossaryHits.map(g=>'<span>'+esc(g.term)+'</span>').join("")+'</div>'
     : '';
 
+  const cue=examCue(q);
+
   return '<div class="paDeepExplain">'+
+    '<div class="paExamCue"><b>試験での見抜き方：</b>'+esc(cue)+'</div>'+
     '<h4>この問題の解き方</h4>'+
     reqHtml+
     '<h4>正解になる理由</h4>'+
