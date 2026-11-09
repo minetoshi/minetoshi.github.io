@@ -148,9 +148,10 @@ function answer(){
  }
  els.feedback.className="feedback "+(correct?"ok":"bad");
  let correctText=q.type==="order"?q.orderItems.map((x,i)=>(i+1)+". "+x).join("<br>"):q.answers.map(i=>escapeHtml(q.choices[i])).join(" / ");
- const notes=q.choiceNotes?'<ul>'+getOrder(q).map((original,i)=>'<li><b>'+String.fromCharCode(65+i)+'.</b> '+escapeHtml(q.choiceNotes[original])+'</li>').join('')+'</ul>':'';
+ const paDetail=window.DP700_PA_EXPLAIN?window.DP700_PA_EXPLAIN(q,getOrder(q)):"";
+ const notes=paDetail?"":(q.choiceNotes?'<ul>'+getOrder(q).map((original,i)=>'<li><b>'+String.fromCharCode(65+i)+'.</b> '+escapeHtml(q.choiceNotes[original])+'</li>').join('')+'</ul>':'');
  const pdf=q.pdfPage?'<p><a href="./DP700_Visual_Guide_JA.pdf#page='+q.pdfPage+'" target="_blank" rel="noopener">図解PDFの'+q.pdfPage+'ページで復習 →</a></p>':'';
- els.feedback.innerHTML="<h3>"+(correct?"正解":"不正解")+"</h3><div><b>正解：</b> "+correctText+"</div><p>"+escapeHtml(q.explanation)+"</p>"+(q.memoryTip?"<p><b>覚え方：</b> "+escapeHtml(q.memoryTip)+"</p>":"")+notes+pdf+"<a href='"+escapeHtml(q.source)+"' target='_blank' rel='noopener'>Microsoft公式資料を確認 →</a>";
+ els.feedback.innerHTML="<h3>"+(correct?"正解":"不正解")+"</h3><div><b>正解：</b> "+correctText+"</div>"+(paDetail?paDetail:"<p>"+escapeHtml(q.explanation)+"</p>"+(q.memoryTip?"<p><b>覚え方：</b> "+escapeHtml(q.memoryTip)+"</p>":"")+notes)+pdf+"<a href='"+escapeHtml(q.source)+"' target='_blank' rel='noopener'>Microsoft公式資料を確認 →</a>";
  els.answerBtn.classList.add("hidden");els.nextBtn.classList.remove("hidden");els.nextBtn.textContent=session.index===session.questions.length-1?"結果を見る":"次へ";
 }
 function next(){if(session.index<session.questions.length-1){session.index++;renderQuestion();}else finish(false);}
