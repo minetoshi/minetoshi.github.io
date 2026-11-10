@@ -1013,9 +1013,9 @@ const PA50_REAUTHORED=[
     "skill": "",
     "difficulty": "Hard",
     "type": "code",
-    "question": "同じストリームを 1分・15分・30分・60分の複数ウィンドウで同時集計し、結果にどのウィンドウかを識別する値も出したい。適切な構文はどれか。",
+    "question": "同じストリームで1分Tumblingと15分・30分・60分Hopping（各ホップは1分）を同時集計し、結果にどのウィンドウかを識別する値も出したい。適切な構文はどれか。",
     "choices": [
-      "GROUP BY Windows(Window('1m',TumblingWindow(minute,1)), Window('15m',TumblingWindow(minute,15))) のように各 Window に ID を付け、SELECT で System.Window().Id を参照する",
+      "GROUP BY Windows(Window('1 min',TumblingWindow(minute,1)), Window('15 min',HoppingWindow(minute,15,1)), Window('30 min',HoppingWindow(minute,30,1)), Window('60 min',HoppingWindow(minute,60,1))) とし、SELECT で System.Window().Id を参照する",
       "複数ウィンドウは1クエリでは定義できない",
       "ORDER BY だけでウィンドウを作る",
       "Workspace role をウィンドウ ID として使う"
@@ -1023,7 +1023,7 @@ const PA50_REAUTHORED=[
     "answers": [
       0
     ],
-    "explanation": "複数 Window 定義に ID を付け、System.Window().Id でどのウィンドウの結果か識別できる。",
+    "explanation": "Windows() に一意のIDを付けた1分Tumblingと15/30/60分Hoppingを指定し、SELECT の System.Window().Id で由来のウィンドウを識別する。",
     "source": "https://learn.microsoft.com/en-us/stream-analytics-query/windows-azure-stream-analytics",
     "origin": "pa50-ja",
     "code": "-- 複数の時間ウィンドウを1つのクエリで扱う"

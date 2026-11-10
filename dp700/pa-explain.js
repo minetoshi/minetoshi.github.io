@@ -162,6 +162,29 @@ function examCue(q){
 function explain(q, displayOrder){
   if(!q || !["pa50-ja","pa-live-20261106"].includes(q.origin)) return "";
 
+  // PAの100問は個別に監査した解説を使う。選択肢のキーワードによる推測説明は使わない。
+  const manual=window.DP700_PA_COACH && window.DP700_PA_COACH[q.id];
+  if(manual && Array.isArray(manual.choices) && manual.choices.length===q.choices.length){
+    const order=Array.isArray(displayOrder) && displayOrder.length===q.choices.length
+      ? displayOrder : q.choices.map((_,i)=>i);
+    const correct=new Set(q.answers||[]);
+    const choiceItems=order.map((orig,shown)=>{
+      const right=correct.has(orig);
+      const reason=manual.choices[orig];
+      return '<li class="'+(right?'paChoiceOk':'paChoiceNg')+'"><b>'+
+        String.fromCharCode(65+shown)+'. '+esc(q.choices[orig])+
+        '</b><div class="paChoiceReason">'+esc(reason)+'</div></li>';
+    }).join("");
+    const hint=q.memoryTip || manual.cue;
+    return '<div class="paDeepExplain paManualExplain">'+
+      '<div class="paExamCue"><b>試験での見抜き方：</b>'+esc(manual.cue)+'</div>'+
+      '<h4>要件を分けると</h4><p>'+esc(manual.analysis)+'</p>'+
+      '<h4>正解になる理由</h4><p>'+esc(q.explanation||manual.analysis)+'</p>'+
+      '<h4>各選択肢の理由</h4><ul class="paChoiceList">'+choiceItems+'</ul>'+
+      '<div class="paMemory"><b>覚え方：</b>'+esc(hint)+'</div>'+
+      '</div>';
+  }
+
   const req=requirementItems(q);
   const summary=requirementSummary(q);
   const order=Array.isArray(displayOrder)&&displayOrder.length ? displayOrder : (q.choices||[]).map((_,i)=>i);
