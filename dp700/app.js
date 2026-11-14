@@ -1,6 +1,6 @@
 (() => {
 "use strict";
-const BRIDGE=window.DP700_BRIDGE||[], ADV=window.DP700_ADVANCED||[], MID=window.DP700_INTERMEDIATE||[], BASIC=window.DP700_BASICS||[], Q=window.DP700_QUESTIONS||[], PA_LIVE=window.DP700_PA_LIVE_20261106||[], META=window.DP700_META||{}, OBJ=window.DP700_OBJECTIVES||[];
+const BRIDGE=window.DP700_BRIDGE||[], ADV=window.DP700_ADVANCED||[], MID=window.DP700_INTERMEDIATE||[], BASIC=window.DP700_BASICS||[], Q=window.DP700_QUESTIONS||[], PA_LIVE=window.DP700_PA_LIVE_20261106||[], PA_NOV14=window.DP700_PA_20261114||[], META=window.DP700_META||{}, OBJ=window.DP700_OBJECTIVES||[];
 const KEY="dp700-dojo-v2";
 const $=id=>document.getElementById(id);
 const els={
@@ -26,7 +26,7 @@ function renderHome(){
  clearTimer();
  els.attempts.textContent=store.totalAttempts;
  els.rate.textContent=store.totalAttempts?pct(store.totalCorrect,store.totalAttempts)+"%":"--";
- els.wrong.textContent=[...Q,...BASIC,...MID,...ADV,...BRIDGE].filter(q=>itemStat(q.id).lastWrong).length;
+ els.wrong.textContent=[...Q,...BASIC,...MID,...ADV,...BRIDGE,...PA_NOV14].filter(q=>itemStat(q.id).lastWrong).length;
  const ds=domains();
  els.domainSelect.innerHTML=ds.map(d=>'<option value="'+escapeHtml(d)+'">'+escapeHtml(d)+'</option>').join("");
  els.domainStats.innerHTML=ds.map(d=>{const s=domainAgg(d);return '<div class="domain"><div class="row"><b>'+escapeHtml(d)+'</b><span class="small">'+(s.attempts?s.rate+"%":"--")+' ・ '+s.attempted+'/'+s.total+'問経験</span></div><div class="bar"><i style="width:'+(s.attempts?s.rate:0)+'%"></i></div></div>';}).join("");
@@ -59,6 +59,7 @@ function choose(mode,domain){
  if(/^pdf[123]$/.test(mode))return Q.filter(q=>q.origin==="pdf90"&&q.pdfExam===Number(mode.slice(3)));
  if(mode==="pa50ja")return shuffle(Q.filter(q=>q.origin==="pa50-ja"));
  if(mode==="paLive50")return PA_LIVE.slice();
+ if(mode==="paNov14")return PA_NOV14.slice();
  if(mode==="pa25"){
    const preferred=Q.filter(q=>q.difficulty==="Hard" || ["case","multi","code","order"].includes(q.type));
    const ds=domains(), base=Math.floor(25/ds.length), rem=25%ds.length; let out=[];
@@ -66,13 +67,13 @@ function choose(mode,domain){
    return shuffle(out);
  }
  if(mode==="code")return sample(Q.filter(q=>q.type==="code"),20);
- if(mode==="wrong")return sample(Q.filter(q=>itemStat(q.id).lastWrong),25);
- if(mode==="due"){const now=Date.now();return sample([...Q,...BASIC,...MID,...ADV,...BRIDGE].filter(q=>{const s=itemStat(q.id);return s.nextReview&&s.nextReview<=now;}),25);}
+ if(mode==="wrong")return sample([...Q,...PA_NOV14].filter(q=>itemStat(q.id).lastWrong),25);
+ if(mode==="due"){const now=Date.now();return sample([...Q,...BASIC,...MID,...ADV,...BRIDGE,...PA_NOV14].filter(q=>{const s=itemStat(q.id);return s.nextReview&&s.nextReview<=now;}),25);}
  if(mode==="domain")return sample(Q.filter(q=>q.domain===domain),20);
  if(mode==="domainAll")return shuffle(Q.filter(q=>q.domain===domain));
  return sample(Q,10);
 }
-function modeLabel(m){return ({bridge9:"最上級ステップ",adv15:"上級ステップ",mid15:"中級ステップ",basic15:"初級ステップ",pdf90:"図解PDF 全90問",pdf1:"図解模試 第1回",pdf2:"図解模試 第2回",pdf3:"図解模試 第3回",quick10:"10問クイック",train20:"20問演習",mock45:"本番模試45問",pa25:"PA予行25問",pa50ja:"PA論点50問（日本語）",paLive50:"PA実戦50問（2026/11/6）",code:"コード20問",wrong:"間違い復習",due:"期限復習",domain:"分野別20問",domainAll:"このジャンルを全問"})[m]||"演習";}
+function modeLabel(m){return ({bridge9:"最上級ステップ",adv15:"上級ステップ",mid15:"中級ステップ",basic15:"初級ステップ",pdf90:"図解PDF 全90問",pdf1:"図解模試 第1回",pdf2:"図解模試 第2回",pdf3:"図解模試 第3回",quick10:"10問クイック",train20:"20問演習",mock45:"本番模試45問",pa25:"PA予行25問",pa50ja:"PA論点50問（日本語）",paLive50:"PA実戦50問（2026/11/6）",paNov14:"PA復習50問（2026/11/14）",code:"コード20問",wrong:"間違い復習",due:"期限復習",domain:"分野別20問",domainAll:"このジャンルを全問"})[m]||"演習";}
 function start(mode,domain){
  const questions=choose(mode,domain);if(!questions.length){alert(mode==="wrong"?"間違い復習の対象はありません。":"復習対象がありません。");return;}
  session={mode,domain,questions,index:0,selected:new Set(),results:[],answered:false,mock:mode==="mock45",choiceOrders:{},orderState:{},startedAt:Date.now(),deadline:mode==="mock45"?Date.now()+100*60*1000:null};
@@ -175,7 +176,7 @@ function finish(timeout){
  const byType=types.map(t=>{const rows=session.results.filter(r=>r.type===t),c=rows.filter(r=>r.correct).length;return '<div class="domain"><div class="row"><b>'+typeLabel(t)+'</b><span>'+c+'/'+rows.length+'（'+pct(c,rows.length)+'%）</span></div></div>';}).join("");
  els.resultBreakdown.innerHTML="<h3>分野別</h3>"+byDomain+"<h3>形式別</h3>"+byType;
  const wrongIds=session.results.filter(r=>!r.correct).map(r=>r.id);$("retryWrongBtn").disabled=!wrongIds.length;
- $("retryWrongBtn").onclick=()=>{if(!wrongIds.length)return;const set=new Set(wrongIds),arr=[...Q,...BASIC,...MID,...ADV,...BRIDGE].filter(q=>set.has(q.id));session={mode:"wrong",questions:shuffle(arr),index:0,selected:new Set(),results:[],answered:false,mock:false,choiceOrders:{},orderState:{},startedAt:Date.now(),deadline:null};els.result.classList.add("hidden");els.quiz.classList.remove("hidden");renderQuestion();};
+ $("retryWrongBtn").onclick=()=>{if(!wrongIds.length)return;const set=new Set(wrongIds),arr=[...Q,...BASIC,...MID,...ADV,...BRIDGE,...PA_NOV14].filter(q=>set.has(q.id));session={mode:"wrong",questions:shuffle(arr),index:0,selected:new Set(),results:[],answered:false,mock:false,choiceOrders:{},orderState:{},startedAt:Date.now(),deadline:null};els.result.classList.add("hidden");els.quiz.classList.remove("hidden");renderQuestion();};
 }
 document.querySelectorAll("[data-mode]").forEach(b=>b.addEventListener("click",()=>start(b.dataset.mode)));
 $("domainStart").addEventListener("click",()=>start("domain",els.domainSelect.value));
