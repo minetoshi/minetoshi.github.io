@@ -3,7 +3,7 @@ for(const key of keys)for(const q of b[key]){
  const fail=m=>errors.push(q.id+': '+m);
  if(!q.id||seen.has(q.id))fail('ID欠落・重複');seen.add(q.id);
  if(!q.question?.trim())fail('問題文なし');
- if(!/どれ|何|どう|選|並べ|完成|設定|方法|操作|適切|必要|実行|対応/.test(q.question))warnings.push(q.id+': 問いの意味的確認が必要');
+ if(!/どれ|何|どう|選|並べ|完成|設定|方法|操作|適切|必要|実行|対応|は[？?]|か[。？?]|と[？?]|には[？?]|合う|使う|結果/.test(q.question))warnings.push(q.id+': 問いの意味的確認が必要');
  if(!q.explanation?.trim())fail('解説なし');
  if(!/^https:\/\/learn\.microsoft\.com\//.test(q.source||''))fail('Microsoft Learn根拠URLなし');
  if(q.type!=='order'&&(!q.choices||q.choices.length<2))fail('選択肢不足');

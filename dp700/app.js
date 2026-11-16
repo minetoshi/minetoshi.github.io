@@ -3,6 +3,7 @@
 const BRIDGE=window.DP700_BRIDGE||[], ADV=window.DP700_ADVANCED||[], MID=window.DP700_INTERMEDIATE||[], BASIC=window.DP700_BASICS||[], Q=window.DP700_QUESTIONS||[], PA_LIVE=window.DP700_PA_LIVE_20261106||[], PA_NOV14=window.DP700_PA_20261114||[], PA_PDF=window.DP700_PA_PDF_20261112||[], META=window.DP700_META||{}, OBJ=window.DP700_OBJECTIVES||[];
 const ALL=[...new Map([...Q,...BASIC,...MID,...ADV,...BRIDGE,...PA_LIVE,...PA_NOV14,...PA_PDF].map(q=>[q.id,q])).values()];
 const ungradedQuestion=q=>q.reviewStatus==="review"||q.scorable===false;
+const provisionalQuestion=q=>String(q.origin||"").startsWith("pa");
 const KEY="dp700-dojo-v2";
 const $=id=>document.getElementById(id);
 const els={
@@ -52,6 +53,7 @@ function stratified(n){
  return shuffle(out);
 }
 function choose(mode,domain){
+ if(mode==="allQuestions")return ALL.slice();
  if(mode==="bridge9")return BRIDGE.slice();
  if(mode==="adv15")return ADV.slice();
  if(mode==="mid15")return MID.slice();
@@ -78,7 +80,7 @@ function choose(mode,domain){
  if(mode==="domainAll")return shuffle(Q.filter(q=>q.domain===domain));
  return sample(Q,10);
 }
-function modeLabel(m){return ({bridge9:"最上級ステップ",adv15:"上級ステップ",mid15:"中級ステップ",basic15:"初級ステップ",pdf90:"図解PDF 全90問",pdf1:"図解模試 第1回",pdf2:"図解模試 第2回",pdf3:"図解模試 第3回",quick10:"10問クイック",train20:"20問演習",mock45:"本番模試45問",pa25:"PA予行25問",pa50ja:"PA論点50問（日本語）",paLive50:"PA実戦50問（2026/11/6）",paNov14:"PA復習50問（2026/11/14）",paPdf50:"PDF検証版50問（2026/11/12）",code:"コード20問",wrong:"間違い復習",due:"期限復習",domain:"分野別20問",domainAll:"このジャンルを全問"})[m]||"演習";}
+function modeLabel(m){return ({allQuestions:"全バンク全問（"+ALL.length+"問）",bridge9:"最上級ステップ",adv15:"上級ステップ",mid15:"中級ステップ",basic15:"初級ステップ",pdf90:"図解PDF 全90問",pdf1:"図解模試 第1回",pdf2:"図解模試 第2回",pdf3:"図解模試 第3回",quick10:"10問クイック",train20:"20問演習",mock45:"本番模試45問",pa25:"PA予行25問",pa50ja:"PA論点50問（日本語）",paLive50:"PA実戦50問（2026/11/6）",paNov14:"PA復習50問（2026/11/14）",paPdf50:"PDF検証版50問（2026/11/12）",code:"コード20問",wrong:"間違い復習",due:"期限復習",domain:"分野別20問",domainAll:"このジャンルを全問"})[m]||"演習";}
 function start(mode,domain){
  const questions=choose(mode,domain);if(!questions.length){alert(mode==="wrong"?"間違い復習の対象はありません。":"復習対象がありません。");return;}
  session={mode,domain,questions,index:0,selected:new Set(),results:[],answered:false,mock:mode==="mock45",choiceOrders:{},orderState:{},startedAt:Date.now(),deadline:mode==="mock45"?Date.now()+100*60*1000:null};
@@ -103,7 +105,7 @@ function renderQuestion(){
  const q=session.questions[session.index];session.selected=new Set();session.answered=false;
  els.quizMode.textContent=modeLabel(session.mode);els.quizCounter.textContent=(session.index+1)+" / "+session.questions.length;
  els.progress.style.width=Math.round(session.index/session.questions.length*100)+"%";
- els.qDomain.textContent=q.domain;els.qSkill.textContent=q.id;els.qDiff.textContent=ungradedQuestion(q)?"判定保留・採点対象外":q.answerEvidence==="spec-verified"?"公式仕様照合（独自採点）":q.difficulty;els.qType.textContent=typeLabel(q.type);
+ els.qDomain.textContent=q.domain;els.qSkill.textContent=q.id;els.qDiff.textContent=ungradedQuestion(q)?"判定保留・採点対象外":q.answerEvidence==="spec-verified"?"公式仕様照合（独自採点）":provisionalQuestion(q)?"想定解による学習用採点":q.difficulty;els.qType.textContent=typeLabel(q.type);
  els.qText.textContent=q.question+"\n"+(q.instruction||(q.type==="order"?"すべての項目を正しい順に並べてください。":`選択肢から${q.selectCount||q.answers.length}つ選んでください。`));
  els.caseBox.classList.toggle("hidden",!q.caseText);els.caseBox.textContent=q.caseText||"";
  els.codeBox.classList.toggle("hidden",!q.code);els.codeBox.textContent=q.code||"";
@@ -162,18 +164,18 @@ function answer(){
  session.results.push({id:q.id,domain:q.domain,type:q.type,correct:ungraded?null:correct});session.answered=true;
  if(session.mock){next();return;}
  if(q.type==="group"){
- els.choices.querySelectorAll("button").forEach(b=>{b.disabled=true;const gi=Number(b.dataset.g),i=Number(b.dataset.i);if(!ungraded&&q.groups[gi].answer===i)b.classList.add("correct");if(!ungraded&&session.groupSelected[gi]===i&&q.groups[gi].answer!==i)b.classList.add("wrong");});
+ els.choices.querySelectorAll("button").forEach(b=>{b.disabled=true;const gi=Number(b.dataset.g),i=Number(b.dataset.i);if(!ungraded&&!provisionalQuestion(q)&&q.groups[gi].answer===i)b.classList.add("correct");if(!ungraded&&!provisionalQuestion(q)&&session.groupSelected[gi]===i&&q.groups[gi].answer!==i)b.classList.add("wrong");});
  }else if(q.type!=="order"){
-  [...els.choices.children].forEach(b=>{b.disabled=true;const orig=Number(b.dataset.i);if(!ungraded&&q.answers.includes(orig))b.classList.add("correct");if(!ungraded&&session.selected.has(orig)&&!q.answers.includes(orig))b.classList.add("wrong");});
+  [...els.choices.children].forEach(b=>{b.disabled=true;const orig=Number(b.dataset.i);if(!ungraded&&!provisionalQuestion(q)&&q.answers.includes(orig))b.classList.add("correct");if(!ungraded&&!provisionalQuestion(q)&&session.selected.has(orig)&&!q.answers.includes(orig))b.classList.add("wrong");});
  }else{
   [...els.choices.querySelectorAll("button")].forEach(b=>b.disabled=true);
  }
- els.feedback.className="feedback "+(ungraded?"":correct?"ok":"bad");
+ els.feedback.className="feedback "+(ungraded||provisionalQuestion(q)?"":correct?"ok":"bad");
  let correctText=q.type==="group"?q.groups.map(g=>escapeHtml(g.label)+"："+escapeHtml(q.choices[g.answer])).join("<br>"):q.type==="order"?q.orderItems.map((x,i)=>(i+1)+". "+x).join("<br>"):q.answers.map(i=>escapeHtml(q.choices[i])).join(" / ");
  const paDetail=!ungraded&&!q.qualityRevision&&window.DP700_PA_EXPLAIN?window.DP700_PA_EXPLAIN(q,getOrder(q)):"";
  const notes=paDetail?"":(q.choiceNotes?'<ul>'+getOrder(q).map((original,i)=>'<li><b>'+String.fromCharCode(65+i)+'.</b> '+escapeHtml(q.choiceNotes[original])+'</li>').join('')+'</ul>':'');
  const pdf=q.pdfPage?'<p><a href="./DP700_Visual_Guide_JA.pdf#page='+q.pdfPage+'" target="_blank" rel="noopener">図解PDFの'+q.pdfPage+'ページで復習 →</a></p>':'';
- els.feedback.innerHTML="<h3>"+(ungraded?"判定保留（採点対象外）":["pa-20261114","pa-pdf-20261112"].includes(q.origin)?(correct?"想定解答と一致":"想定解答と不一致"):(correct?"正解":"不正解"))+"</h3><div><b>"+(ungraded?"参考候補（未確定）：":["pa-20261114","pa-pdf-20261112"].includes(q.origin)?"想定解答：":"正解：")+"</b> "+correctText+"</div>"+(paDetail?paDetail:"<p>"+(q.holdReason?"保留理由："+escapeHtml(q.holdReason)+"<br>":"")+escapeHtml(q.explanation)+"</p>"+(q.memoryTip?"<p><b>覚え方：</b> "+escapeHtml(q.memoryTip)+"</p>":"")+notes)+pdf+"<a href='"+escapeHtml(q.source)+"' target='_blank' rel='noopener'>Microsoft公式資料を確認 →</a>";
+ els.feedback.innerHTML="<h3>"+(ungraded?"判定保留（採点対象外）":provisionalQuestion(q)?(correct?"想定解答と一致":"想定解答と不一致"):(correct?"正解":"不正解"))+"</h3><div><b>"+(ungraded?"参考候補（未確定）：":provisionalQuestion(q)?"想定解答：":"正解：")+"</b> "+correctText+"</div>"+(paDetail?paDetail:"<p>"+(q.holdReason?"保留理由："+escapeHtml(q.holdReason)+"<br>":"")+escapeHtml(q.explanation)+"</p>"+(q.memoryTip?"<p><b>覚え方：</b> "+escapeHtml(q.memoryTip)+"</p>":"")+notes)+pdf+"<a href='"+escapeHtml(q.source)+"' target='_blank' rel='noopener'>Microsoft公式資料を確認 →</a>";
  els.answerBtn.classList.add("hidden");els.nextBtn.classList.remove("hidden");els.nextBtn.textContent=session.index===session.questions.length-1?"結果を見る":"次へ";
 }
 function next(){if(session.index<session.questions.length-1){session.index++;renderQuestion();}else finish(false);}

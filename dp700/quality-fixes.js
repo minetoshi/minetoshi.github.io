@@ -140,9 +140,26 @@
     "code": "from pyspark.sql import functions as F\nresult = fact.join(F.broadcast(dim), 'ProductId')"
   },
   "PA-20261114-16": {
-    "reviewStatus": "review",
-    "scorable": false,
-    "holdReason": "ホッピング窓の移動間隔が欠落し、実行可能な構文も提示されていない。"
+    "reviewStatus": "spec-reviewed",
+    "scorable": true,
+    "holdReason": "",
+    "question": "【独自練習問題：構文を明示して再設計】Azure Stream Analytics互換のストリームSQLで、入力InputのTollIdごとにイベントを集計します。EntryTimeはイベント時刻です。1分の重ならない窓と、1分間隔で動く15分・30分・60分の窓を同時に使い、各結果の窓をWindowIdで区別します。空欄①に入る式を1つ選んでください。",
+    "code": "SELECT TollId, System.Window().Id AS WindowId, COUNT(*) AS N\nFROM Input TIMESTAMP BY EntryTime\nGROUP BY TollId, ［①］",
+    "choices": [
+      "Windows(Window('one', TumblingWindow(minute, 1)), Window('fifteen', TumblingWindow(minute, 15)), Window('thirty', TumblingWindow(minute, 30)), Window('sixty', TumblingWindow(minute, 60)))",
+      "Windows(TumblingWindow(minute, 1), HoppingWindow(minute, 15, 1), HoppingWindow(minute, 30, 1), HoppingWindow(minute, 60, 1))",
+      "Windows(Window('one', TumblingWindow(minute, 1)), Window('fifteen', HoppingWindow(minute, 15, 1)), Window('thirty', HoppingWindow(minute, 30, 1)), Window('sixty', HoppingWindow(minute, 60, 1)))",
+      "Windows(Window('one', TumblingWindow(minute, 1)), Window('fifteen', HoppingWindow(minute, 15, 5)), Window('thirty', HoppingWindow(minute, 30, 5)), Window('sixty', HoppingWindow(minute, 60, 5)))"
+    ],
+    "type": "code",
+    "answers": [
+      2
+    ],
+    "selectCount": 1,
+    "reconstructed": true,
+    "answerEvidence": "spec-verified",
+    "source": "https://learn.microsoft.com/en-us/stream-analytics-query/windows-azure-stream-analytics",
+    "explanation": "1分窓はTumblingWindow、15・30・60分窓はホップ幅1分のHoppingWindowを指定します。Windowでそれぞれ異なるIDを与えるとSystem.Window().Idで識別できます。IDを付けない式では識別値がNULLになります。すべてTumblingWindowにすると長い窓が1分ごとに移動しません。ホップ幅5分の式も指定された1分間隔を満たしません。"
   },
   "PA-PDF-20261112-29": {
     "reviewStatus": "review",
@@ -158,6 +175,88 @@
     "reviewStatus": "review",
     "scorable": false,
     "holdReason": "配列の実値と渡し方が欠落し、JSON文字列の変換と配列の構築を区別できない。"
+  },
+  "PALIVE-20261106-01": {
+    "question": "Notebook1を対話的に使用しています。作業を中断すると非アクティブによるセッションタイムアウトが発生しますが、手動で再開すれば処理は成功します。他のNotebookに適用されるワークスペース設定を変更せず、Notebook1のセッションが非アクティブで維持される時間を延ばす操作を1つ選んでください。",
+    "reconstructed": true,
+    "explanation": "稼働中のNotebookのSession readyインジケーターからタイムアウトを調整します。ワークスペース全体の変更は他のNotebookにも影響するため条件外です。容量再開は容量停止への対処で、AutoSaveは編集内容の保存です。タイムアウトを延ばしても無期限にセッションが維持されるわけではありません。",
+    "answerEvidence": "spec-verified"
+  },
+  "PA-20261114-01": {
+    "question": "Notebook1を対話的に使用しています。作業を中断すると非アクティブによるセッションタイムアウトが発生しますが、手動で再開すれば処理は成功します。他のNotebookに適用されるワークスペース設定を変更せず、Notebook1のセッションが非アクティブで維持される時間を延ばす操作を1つ選んでください。",
+    "reconstructed": true,
+    "explanation": "稼働中のNotebookのSession readyインジケーターからタイムアウトを調整します。ワークスペース全体の変更は他のNotebookにも影響するため条件外です。容量再開は容量停止への対処で、AutoSaveは編集内容の保存です。タイムアウトを延ばしても無期限にセッションが維持されるわけではありません。",
+    "answerEvidence": "spec-verified"
+  },
+  "PA-PDF-20261112-01": {
+    "question": "Notebook1を対話的に使用しています。作業を中断すると非アクティブによるセッションタイムアウトが発生しますが、手動で再開すれば処理は成功します。他のNotebookに適用されるワークスペース設定を変更せず、Notebook1のセッションが非アクティブで維持される時間を延ばす操作を1つ選んでください。",
+    "reconstructed": true,
+    "explanation": "稼働中のNotebookのSession readyインジケーターからタイムアウトを調整します。ワークスペース全体の変更は他のNotebookにも影響するため条件外です。容量再開は容量停止への対処で、AutoSaveは編集内容の保存です。タイムアウトを延ばしても無期限にセッションが維持されるわけではありません。",
+    "answerEvidence": "spec-verified"
+  },
+  "PALIVE-20261106-19": {
+    "reviewStatus": "review",
+    "scorable": false,
+    "holdReason": "現行のFabric WarehouseはCTASとSELECT INTOの双方に対応する。提示条件では後者を一意に不正解にできない。",
+    "explanation": "CTASで結合結果から新しいテーブルを作成できます。一方、現行公式資料ではSELECT INTOもテーブル作成と結果の挿入に対応しています。「開発工数を最小化」だけでは両者を区別できないため、旧想定解CTASによる採点を保留します。",
+    "source": "https://learn.microsoft.com/en-us/fabric/data-warehouse/ingest-data-tsql"
+  },
+  "C-KQL-10": {
+    "source": "https://learn.microsoft.com/en-us/kusto/management/show-external-table-operations-query-acceleration-statistics?view=microsoft-fabric",
+    "answerEvidence": "spec-verified"
+  },
+  "C-KQL-07": {
+    "source": "https://learn.microsoft.com/en-us/fabric/real-time-intelligence/query-acceleration-overview"
+  },
+  "C-KQL-05": {
+    "source": "https://learn.microsoft.com/en-us/kusto/query/bin-function?view=microsoft-fabric"
+  },
+  "PA50-29": {
+    "question": "【独自練習問題：構文を明示して再設計】Azure Stream Analytics互換のストリームSQLで、入力InputのTollIdごとにイベントを集計します。EntryTimeはイベント時刻です。1分の重ならない窓と、1分間隔で動く15分・30分・60分の窓を同時に使い、各結果の窓をWindowIdで区別します。空欄①に入る式を1つ選んでください。",
+    "code": "SELECT TollId, System.Window().Id AS WindowId, COUNT(*) AS N\nFROM Input TIMESTAMP BY EntryTime\nGROUP BY TollId, ［①］",
+    "choices": [
+      "Windows(Window('one', TumblingWindow(minute, 1)), Window('fifteen', HoppingWindow(minute, 15, 1)), Window('thirty', HoppingWindow(minute, 30, 1)), Window('sixty', HoppingWindow(minute, 60, 1)))",
+      "Windows(TumblingWindow(minute, 1), HoppingWindow(minute, 15, 1), HoppingWindow(minute, 30, 1), HoppingWindow(minute, 60, 1))",
+      "Windows(Window('one', TumblingWindow(minute, 1)), Window('fifteen', TumblingWindow(minute, 15)), Window('thirty', TumblingWindow(minute, 30)), Window('sixty', TumblingWindow(minute, 60)))",
+      "Windows(Window('one', TumblingWindow(minute, 1)), Window('fifteen', HoppingWindow(minute, 15, 5)), Window('thirty', HoppingWindow(minute, 30, 5)), Window('sixty', HoppingWindow(minute, 60, 5)))"
+    ],
+    "type": "code",
+    "answers": [
+      0
+    ],
+    "selectCount": 1,
+    "reconstructed": true,
+    "reviewStatus": "spec-reviewed",
+    "scorable": true,
+    "answerEvidence": "spec-verified",
+    "holdReason": "",
+    "source": "https://learn.microsoft.com/en-us/stream-analytics-query/windows-azure-stream-analytics",
+    "explanation": "1分窓はTumblingWindow、15・30・60分窓はホップ幅1分のHoppingWindowを指定します。Windowでそれぞれ異なるIDを与えるとSystem.Window().Idで識別できます。IDを付けない式では識別値がNULLになります。すべてTumblingWindowにすると長い窓が1分ごとに移動しません。ホップ幅5分の式も指定された1分間隔を満たしません。"
+  },
+  "PALIVE-20261106-27": {
+    "question": "【独自練習問題：構文を明示して再設計】Azure Stream Analytics互換のストリームSQLで、入力InputのTollIdごとにイベントを集計します。EntryTimeはイベント時刻です。1分の重ならない窓と、1分間隔で動く15分・30分・60分の窓を同時に使い、各結果の窓をWindowIdで区別します。空欄①に入る式を1つ選んでください。",
+    "code": "SELECT TollId, System.Window().Id AS WindowId, COUNT(*) AS N\nFROM Input TIMESTAMP BY EntryTime\nGROUP BY TollId, ［①］",
+    "choices": [
+      "Windows(Window('one', TumblingWindow(minute, 1)), Window('fifteen', TumblingWindow(minute, 15)), Window('thirty', TumblingWindow(minute, 30)), Window('sixty', TumblingWindow(minute, 60)))",
+      "Windows(TumblingWindow(minute, 1), HoppingWindow(minute, 15, 1), HoppingWindow(minute, 30, 1), HoppingWindow(minute, 60, 1))",
+      "Windows(Window('one', TumblingWindow(minute, 1)), Window('fifteen', HoppingWindow(minute, 15, 1)), Window('thirty', HoppingWindow(minute, 30, 1)), Window('sixty', HoppingWindow(minute, 60, 1)))",
+      "Windows(Window('one', TumblingWindow(minute, 1)), Window('fifteen', HoppingWindow(minute, 15, 5)), Window('thirty', HoppingWindow(minute, 30, 5)), Window('sixty', HoppingWindow(minute, 60, 5)))"
+    ],
+    "type": "code",
+    "answers": [
+      2
+    ],
+    "selectCount": 1,
+    "reconstructed": true,
+    "reviewStatus": "spec-reviewed",
+    "scorable": true,
+    "answerEvidence": "spec-verified",
+    "holdReason": "",
+    "source": "https://learn.microsoft.com/en-us/stream-analytics-query/windows-azure-stream-analytics",
+    "explanation": "1分窓はTumblingWindow、15・30・60分窓はホップ幅1分のHoppingWindowを指定します。Windowでそれぞれ異なるIDを与えるとSystem.Window().Idで識別できます。IDを付けない式では識別値がNULLになります。すべてTumblingWindowにすると長い窓が1分ごとに移動しません。ホップ幅5分の式も指定された1分間隔を満たしません。"
+  },
+  "PDF-M3-02": {
+    "code": "from pyspark.sql.window import Window\nfrom pyspark.sql.functions import col, row_number\n\nw = Window.partitionBy(\"id\").orderBy(col(\"ts\").desc(), col(\"seq\").desc())\nresult = df.withColumn(\"rn\", row_number().over(w)).filter(\"rn = 1\")"
   }
 };
 for(const name of ["DP700_QUESTIONS","DP700_BASICS","DP700_INTERMEDIATE","DP700_ADVANCED","DP700_BRIDGE","DP700_PA_LIVE_20261106","DP700_PA_20261114","DP700_PA_PDF_20261112"]){for(const q of window[name]||[]){if(patches[q.id])Object.assign(q,patches[q.id],{qualityRevision:"2026-11-16"});

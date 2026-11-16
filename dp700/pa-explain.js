@@ -160,6 +160,7 @@ function examCue(q){
 }
 
 function explain(q, displayOrder){
+  if(q?.reviewStatus==="review"||q?.scorable===false||q?.qualityRevision)return "";
   if(!q || !["pa50-ja","pa-live-20261106"].includes(q.origin)) return "";
 
   // PAの100問は個別に監査した解説を使う。選択肢のキーワードによる推測説明は使わない。
@@ -179,7 +180,7 @@ function explain(q, displayOrder){
     return '<div class="paDeepExplain paManualExplain">'+
       '<div class="paExamCue"><b>試験での見抜き方：</b>'+esc(manual.cue)+'</div>'+
       '<h4>要件を分けると</h4><p>'+esc(manual.analysis)+'</p>'+
-      '<h4>正解になる理由</h4><p>'+esc(q.explanation||manual.analysis)+'</p>'+
+      '<h4>想定解と判断した理由</h4><p>'+esc(q.explanation||manual.analysis)+'</p>'+
       '<h4>各選択肢の理由</h4><ul class="paChoiceList">'+choiceItems+'</ul>'+
       '<div class="paMemory"><b>覚え方：</b>'+esc(hint)+'</div>'+
       '</div>';
@@ -208,7 +209,7 @@ function explain(q, displayOrder){
         ? role+" ただし今回の主要件「"+summary+"」を直接満たす手段ではない。"
         : "この選択肢は今回の主要件「"+summary+"」への直接的な解決策ではない。";
     }
-    return '<li class="'+(ok?'paChoiceOk':'paChoiceNg')+'"><b>'+String.fromCharCode(65+shown)+'. '+esc(choice)+'</b><br><span>'+(ok?'○ ':'× ')+esc(reason)+'</span></li>';
+    return '<li class="'+'paChoiceNeutral'+'"><b>'+String.fromCharCode(65+shown)+'. '+esc(choice)+'</b><br><span>'+(ok?'○ ':'× ')+esc(reason)+'</span></li>';
   }).join("");
 
   const memory=q.memoryTip || generatedMemory(q);
@@ -223,7 +224,7 @@ function explain(q, displayOrder){
     '<div class="paExamCue"><b>試験での見抜き方：</b>'+esc(cue)+'</div>'+
     '<h4>この問題の解き方</h4>'+
     reqHtml+
-    '<h4>正解になる理由</h4>'+
+    '<h4>想定解と判断した理由</h4>'+
     '<p>'+esc(q.explanation||"正解は設問の主要件に最も直接対応する選択肢。")+'</p>'+
     '<h4>選択肢ごとの整理</h4>'+
     '<ul class="paChoiceList">'+choices+'</ul>'+

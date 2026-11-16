@@ -33,10 +33,10 @@ const {chromium}=require('playwright');const fs=require('node:fs');fs.mkdirSync(
    if(mode!=='mock45'){
     const feedback=await page.locator('#feedback').innerText();
     if(ungraded){assert(feedback.includes('判定保留'));assert.equal(await page.locator('.choice.correct,.choice.wrong').count(),0);}
-    else assert(feedback.includes(chooseWrong?(/pa-(20261114|pdf)/.test(q.origin||'')?'想定解答と不一致':'不正解'):(/pa-(20261114|pdf)/.test(q.origin||'')?'想定解答と一致':'正解')));
+    else assert(feedback.includes(chooseWrong?(/^pa/.test(q.origin||'')?'想定解答と不一致':'不正解'):(/^pa/.test(q.origin||'')?'想定解答と一致':'正解')));
     assert(await page.locator('#feedback a').count()>0);await page.locator('#nextBtn').click();
    }
-   count++;assert(count<=400);
+   count++;assert(count<=700);
   }
   assert.equal(await page.locator('#resultPct').innerText(),graded?Math.round(correct/graded*100)+'%':'採点対象なし');
   results.push({width,mode,count,graded,correct});console.error(JSON.stringify(results.at(-1)));
