@@ -145,7 +145,7 @@ function answer(){
  session.results.push({id:q.id,domain:q.domain,type:q.type,correct:ungraded?null:correct});session.answered=true;
  if(session.mock){next();return;}
  if(q.type!=="order"){
-  [...els.choices.children].forEach(b=>{b.disabled=true;const orig=Number(b.dataset.i);if(q.answers.includes(orig))b.classList.add("correct");if(session.selected.has(orig)&&!q.answers.includes(orig))b.classList.add("wrong");});
+  [...els.choices.children].forEach(b=>{b.disabled=true;const orig=Number(b.dataset.i);if(!ungraded&&q.answers.includes(orig))b.classList.add("correct");if(!ungraded&&session.selected.has(orig)&&!q.answers.includes(orig))b.classList.add("wrong");});
  }else{
   [...els.choices.querySelectorAll("button")].forEach(b=>b.disabled=true);
  }
@@ -154,7 +154,7 @@ function answer(){
  const paDetail=window.DP700_PA_EXPLAIN?window.DP700_PA_EXPLAIN(q,getOrder(q)):"";
  const notes=paDetail?"":(q.choiceNotes?'<ul>'+getOrder(q).map((original,i)=>'<li><b>'+String.fromCharCode(65+i)+'.</b> '+escapeHtml(q.choiceNotes[original])+'</li>').join('')+'</ul>':'');
  const pdf=q.pdfPage?'<p><a href="./DP700_Visual_Guide_JA.pdf#page='+q.pdfPage+'" target="_blank" rel="noopener">図解PDFの'+q.pdfPage+'ページで復習 →</a></p>':'';
- els.feedback.innerHTML="<h3>"+(ungraded?"判定保留（採点対象外）":["pa-20261114","pa-pdf-20261112"].includes(q.origin)?(correct?"想定解答と一致":"想定解答と不一致"):(correct?"正解":"不正解"))+"</h3><div><b>"+(["pa-20261114","pa-pdf-20261112"].includes(q.origin)?"解答候補：":"正解：")+"</b> "+correctText+"</div>"+(paDetail?paDetail:"<p>"+escapeHtml(q.explanation)+"</p>"+(q.memoryTip?"<p><b>覚え方：</b> "+escapeHtml(q.memoryTip)+"</p>":"")+notes)+pdf+"<a href='"+escapeHtml(q.source)+"' target='_blank' rel='noopener'>Microsoft公式資料を確認 →</a>";
+ els.feedback.innerHTML="<h3>"+(ungraded?"判定保留（採点対象外）":["pa-20261114","pa-pdf-20261112"].includes(q.origin)?(correct?"想定解答と一致":"想定解答と不一致"):(correct?"正解":"不正解"))+"</h3><div><b>"+(ungraded?"参考候補（未確定）：":["pa-20261114","pa-pdf-20261112"].includes(q.origin)?"想定解答：":"正解：")+"</b> "+correctText+"</div>"+(paDetail?paDetail:"<p>"+escapeHtml(q.explanation)+"</p>"+(q.memoryTip?"<p><b>覚え方：</b> "+escapeHtml(q.memoryTip)+"</p>":"")+notes)+pdf+"<a href='"+escapeHtml(q.source)+"' target='_blank' rel='noopener'>Microsoft公式資料を確認 →</a>";
  els.answerBtn.classList.add("hidden");els.nextBtn.classList.remove("hidden");els.nextBtn.textContent=session.index===session.questions.length-1?"結果を見る":"次へ";
 }
 function next(){if(session.index<session.questions.length-1){session.index++;renderQuestion();}else finish(false);}
