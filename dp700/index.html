@@ -59,6 +59,7 @@ h2{font-size:18px;margin:0 0 12px}h3{font-size:15px}.modes{display:grid;grid-tem
 .paManualExplain .paChoiceOk b{color:var(--ok)}.paManualExplain .paChoiceNg b{color:var(--bad)}
 .paManualExplain .paExamCue{font-size:15px;line-height:1.7}
 @media(max-width:640px){.paManualExplain .paChoiceReason{font-size:13px;padding:8px}.paManualExplain h4{font-size:14px}}
+fieldset{min-width:0;margin:12px 0;border:1px solid #cbd5e1;border-radius:8px} .choice{white-space:pre-wrap;overflow-wrap:anywhere} #qText{white-space:pre-line} pre{max-width:100%;overflow:auto}
 </style>
 </head>
 <body>
@@ -90,6 +91,7 @@ h2{font-size:18px;margin:0 0 12px}h3{font-size:15px}.modes{display:grid;grid-tem
     <button class="btn secondary" data-mode="mid15">中級ステップ（順番に15問）</button>
     <button class="btn secondary" data-mode="adv15">上級ステップ（順番に30問）</button>
     <button class="btn secondary" data-mode="bridge9">最上級ステップ（模試への橋渡し・18問）</button>
+    <button class="btn secondary" data-mode="allQuestions">全バンク全問（589問）</button>
     <button class="btn primary" data-mode="quick10">10問</button>
     <button class="btn secondary" data-mode="train20">20問</button>
     <button class="btn secondary" data-mode="mock45">45問 / 100分模試</button>
@@ -146,7 +148,7 @@ h2{font-size:18px;margin:0 0 12px}h3{font-size:15px}.modes{display:grid;grid-tem
   <h2>この問題集の監査基準</h2>
   <div class="auditGrid small">
     <div class="auditItem"><b>公式範囲</b>2026-10-30更新Study Guideの49項目を全件マッピング</div>
-    <div class="auditItem"><b>問題形式</b>単一 / 複数 / ケース / コード / 並べ替え</div>
+    <div class="auditItem"><b>問題形式</b>単一 / 複数 / 組み合わせ / ケース / コード / 並べ替え</div>
     <div class="auditItem"><b>模試</b>3分野均等の45問・100分</div>
     <div class="auditItem"><b>根拠</b>各問から個別のMicrosoft Learnへ直接参照</div>
   </div>
@@ -154,7 +156,8 @@ h2{font-size:18px;margin:0 0 12px}h3{font-size:15px}.modes{display:grid;grid-tem
 
 <section class="card">
   <h2>Microsoft公式Practice Assessment</h2>
-  <p class="small">新版Practice AssessmentはAI Skills Navigator上で提供されています。「PA論点50問（日本語）」に加え、2026年11月6日に実際に解いた別セット50問を「PA実戦50問（2026/11/6）」として追加しています。いずれも英語原文を転載せず、論点を日本語のオリジナル問題へ再構成したものです。元の設問文・選択肢をそのまま転載したものではありません。2026年11月14日の復習50問はMicrosoft Learnを参照して作成した独自の演習で、正解は個別の公式採点ではなく仕様に基づく推定です。設問に曖昧さがある場合は解説で明記しています。追加の「PDF検証版50問（2026/11/12）」は利用者提供の日本語学習PDFを元に再構成した独立セットです。付録の検証結果（当初の整合38問、留保11問、コード不備1問）を踏まえ、2026年11月16日にMicrosoft公式資料で再監査した結果、4問を修正して採点対象に戻しました。現在は42問を暫定採点、8問を採点対象外にしています。公式の解答表とは異なります。</p>
+  <p class="small">PA論点・PA実戦・PA復習は、Practice Assessmentの論点を学ぶための独自の日本語演習です。PDF検証版は利用者提供の日本語学習PDFを基に再構成しています。Microsoftの公式個別解答キーではありません。条件やコードを追加して再設計した問題にはその旨を表示し、判定保留の問題は正答率・誤答復習・期限復習から除外します。</p>
+  <p class="small">2026年11月16日品質修正：<a href="./QUALITY_AUDIT_20261116.md">監査結果・問題番号別の変更履歴</a>。出題数には判定保留も含み、結果画面に採点対象数を表示します。</p>
   <a class="btn primary" style="display:block;text-align:center;text-decoration:none" href="https://learn.microsoft.com/en-us/credentials/certifications/fabric-data-engineer-associate/?practice-assessment-type=certification" target="_blank" rel="noopener">公式Practice Assessmentを開く</a>
 </section>
 <section class="card">
@@ -236,6 +239,7 @@ DP-700 Dojo v6.5 • <a href="https://learn.microsoft.com/en-us/credentials/cert
 <script src="./pa-20261114-b.js?v=1"></script>
 <script src="./pa-pdf-20261112-a.js?v=20261116-audit"></script>
 <script src="./pa-pdf-20261112-b.js?v=20261116-audit"></script>
+<script src="./quality-fixes.js?v=20261116"></script>
 <script src="./app.js?v=20261116-pa-audit"></script>
 </body>
 </html>
