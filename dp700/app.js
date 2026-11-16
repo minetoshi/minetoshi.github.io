@@ -23,11 +23,13 @@ function pct(a,b){return b?Math.round(a/b*100):0;}
 function itemStat(id){return store.items[id]||{attempts:0,correct:0,streak:0,lastWrong:false,nextReview:0};}
 function escapeHtml(s){return String(s??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#039;"}[m]));}
 function typeLabel(t){return ({single:"単一選択",multi:"複数選択",case:"ケース",code:"コード",order:"並べ替え",group:"組み合わせ・穴埋め"})[t]||t;}
-function domainAgg(d){const ids=Q.filter(q=>q.domain===d).map(q=>q.id);let a=0,c=0,attempted=0;ids.forEach(id=>{const s=itemStat(id);a+=s.attempts;c+=s.correct;if(s.attempts)attempted++;});return {attempts:a,correct:c,attempted,total:ids.length,rate:pct(c,a)};}
+function domainAgg(d){const ids=ALL.filter(q=>q.domain===d&&!ungradedQuestion(q)).map(q=>q.id);let a=0,c=0,attempted=0;ids.forEach(id=>{const s=itemStat(id);a+=s.attempts;c+=s.correct;if(s.attempts)attempted++;});return {attempts:a,correct:c,attempted,total:ids.length,rate:pct(c,a)};}
 function renderHome(){
  clearTimer();
- els.attempts.textContent=store.totalAttempts;
- els.rate.textContent=store.totalAttempts?pct(store.totalCorrect,store.totalAttempts)+"%":"--";
+ const activeStats=ALL.filter(q=>!ungradedQuestion(q)).map(q=>itemStat(q.id));
+ const activeAttempts=activeStats.reduce((n,x)=>n+x.attempts,0),activeCorrect=activeStats.reduce((n,x)=>n+x.correct,0);
+ els.attempts.textContent=activeAttempts;
+ els.rate.textContent=activeAttempts?pct(activeCorrect,activeAttempts)+"%":"--";
  els.wrong.textContent=ALL.filter(q=>!ungradedQuestion(q)&&itemStat(q.id).lastWrong).length;
  const ds=domains();
  els.domainSelect.innerHTML=ds.map(d=>'<option value="'+escapeHtml(d)+'">'+escapeHtml(d)+'</option>').join("");
@@ -35,11 +37,11 @@ function renderHome(){
  const uniqueObj=new Set(Q.map(q=>q.objectiveId).filter(x=>/^O\d+/.test(x))).size;
  const codeCount=Q.filter(q=>q.type==="code").length, multiCount=Q.filter(q=>q.type==="multi").length, caseCount=Q.filter(q=>q.type==="case").length, orderCount=Q.filter(q=>q.type==="order").length;
  if(els.bankInfo){const target=META.objectiveCount||49;els.bankInfo.textContent=Q.length+"問 / 公式"+target+"項目 "+uniqueObj+"/"+target+" / コード"+codeCount+" / 複数選択"+multiCount+" / ケース"+caseCount+" / 並べ替え"+orderCount;}
- const overall=store.totalAttempts?pct(store.totalCorrect,store.totalAttempts):0;
+ const overall=activeAttempts?pct(activeCorrect,activeAttempts):0;
  const minDomain=Math.min(...ds.map(d=>domainAgg(d).attempts?domainAgg(d).rate:0));
- const distinct=Object.values(store.items).filter(x=>x.attempts>0).length;
+ const distinct=activeStats.filter(x=>x.attempts>0).length;
  if(distinct<30) els.readiness.textContent="まず30問ほど解いて現在地を診断してください。現在 "+distinct+"問経験済みです。";
- else if(overall>=85&&minDomain>=80) els.readiness.textContent="合格圏の目安です。45問/100分模試で85%以上を2回安定させ、最後に公式Practice Assessmentへ進んでください。";
+ else if(overall>=85&&minDomain>=80) els.readiness.textContent="この問題集では高い正答率です。公式Practice Assessmentと実操作で理解を確認してください。";
  else if(overall>=75) els.readiness.textContent="あと一段です。80%未満の分野と間違い復習を優先してください。";
  else els.readiness.textContent="基礎固めが必要です。分野別20問→解説→間違い復習の順で進めてください。";
  els.home.classList.remove("hidden");els.quiz.classList.add("hidden");els.result.classList.add("hidden");
@@ -101,7 +103,7 @@ function renderQuestion(){
  const q=session.questions[session.index];session.selected=new Set();session.answered=false;
  els.quizMode.textContent=modeLabel(session.mode);els.quizCounter.textContent=(session.index+1)+" / "+session.questions.length;
  els.progress.style.width=Math.round(session.index/session.questions.length*100)+"%";
- els.qDomain.textContent=q.domain;els.qSkill.textContent=q.id;els.qDiff.textContent=["pa-20261114","pa-pdf-20261112"].includes(q.origin)?(q.reviewStatus==="review"?"要確認・採点対象外":"資料ベースの想定解答"):q.difficulty;els.qType.textContent=typeLabel(q.type);
+ els.qDomain.textContent=q.domain;els.qSkill.textContent=q.id;els.qDiff.textContent=ungradedQuestion(q)?"判定保留・採点対象外":q.answerEvidence==="spec-verified"?"公式仕様照合（独自採点）":q.difficulty;els.qType.textContent=typeLabel(q.type);
  els.qText.textContent=q.question+"\n"+(q.instruction||(q.type==="order"?"すべての項目を正しい順に並べてください。":`選択肢から${q.selectCount||q.answers.length}つ選んでください。`));
  els.caseBox.classList.toggle("hidden",!q.caseText);els.caseBox.textContent=q.caseText||"";
  els.codeBox.classList.toggle("hidden",!q.code);els.codeBox.textContent=q.code||"";
@@ -168,10 +170,10 @@ function answer(){
  }
  els.feedback.className="feedback "+(ungraded?"":correct?"ok":"bad");
  let correctText=q.type==="group"?q.groups.map(g=>escapeHtml(g.label)+"："+escapeHtml(q.choices[g.answer])).join("<br>"):q.type==="order"?q.orderItems.map((x,i)=>(i+1)+". "+x).join("<br>"):q.answers.map(i=>escapeHtml(q.choices[i])).join(" / ");
- const paDetail=window.DP700_PA_EXPLAIN?window.DP700_PA_EXPLAIN(q,getOrder(q)):"";
+ const paDetail=!ungraded&&!q.qualityRevision&&window.DP700_PA_EXPLAIN?window.DP700_PA_EXPLAIN(q,getOrder(q)):"";
  const notes=paDetail?"":(q.choiceNotes?'<ul>'+getOrder(q).map((original,i)=>'<li><b>'+String.fromCharCode(65+i)+'.</b> '+escapeHtml(q.choiceNotes[original])+'</li>').join('')+'</ul>':'');
  const pdf=q.pdfPage?'<p><a href="./DP700_Visual_Guide_JA.pdf#page='+q.pdfPage+'" target="_blank" rel="noopener">図解PDFの'+q.pdfPage+'ページで復習 →</a></p>':'';
- els.feedback.innerHTML="<h3>"+(ungraded?"判定保留（採点対象外）":["pa-20261114","pa-pdf-20261112"].includes(q.origin)?(correct?"想定解答と一致":"想定解答と不一致"):(correct?"正解":"不正解"))+"</h3><div><b>"+(ungraded?"参考候補（未確定）：":["pa-20261114","pa-pdf-20261112"].includes(q.origin)?"想定解答：":"正解：")+"</b> "+correctText+"</div>"+(paDetail?paDetail:"<p>"+escapeHtml(q.explanation)+"</p>"+(q.memoryTip?"<p><b>覚え方：</b> "+escapeHtml(q.memoryTip)+"</p>":"")+notes)+pdf+"<a href='"+escapeHtml(q.source)+"' target='_blank' rel='noopener'>Microsoft公式資料を確認 →</a>";
+ els.feedback.innerHTML="<h3>"+(ungraded?"判定保留（採点対象外）":["pa-20261114","pa-pdf-20261112"].includes(q.origin)?(correct?"想定解答と一致":"想定解答と不一致"):(correct?"正解":"不正解"))+"</h3><div><b>"+(ungraded?"参考候補（未確定）：":["pa-20261114","pa-pdf-20261112"].includes(q.origin)?"想定解答：":"正解：")+"</b> "+correctText+"</div>"+(paDetail?paDetail:"<p>"+(q.holdReason?"保留理由："+escapeHtml(q.holdReason)+"<br>":"")+escapeHtml(q.explanation)+"</p>"+(q.memoryTip?"<p><b>覚え方：</b> "+escapeHtml(q.memoryTip)+"</p>":"")+notes)+pdf+"<a href='"+escapeHtml(q.source)+"' target='_blank' rel='noopener'>Microsoft公式資料を確認 →</a>";
  els.answerBtn.classList.add("hidden");els.nextBtn.classList.remove("hidden");els.nextBtn.textContent=session.index===session.questions.length-1?"結果を見る":"次へ";
 }
 function next(){if(session.index<session.questions.length-1){session.index++;renderQuestion();}else finish(false);}
@@ -188,8 +190,8 @@ function finish(timeout){
  $("nextLearningStep").hidden=!["basic15","mid15","adv15","bridge9"].includes(session.mode);
  $("nextLearningStep").textContent=session.mode==="basic15"?"中級ステップへ":session.mode==="mid15"?"上級ステップへ":session.mode==="adv15"?"最上級ステップへ":"図解模試 第1回へ";
  $("nextLearningStep").onclick=()=>start(session.mode==="basic15"?"mid15":session.mode==="mid15"?"adv15":session.mode==="adv15"?"bridge9":"pdf1");
- els.resultMsg.textContent=(ungradedCount?"判定保留 "+ungradedCount+"問はスコアから除外しています。 ":"")+(["paNov14","paPdf50"].includes(session.mode)?"公式の個別採点結果ではなく、資料と製品仕様に基づく暫定採点です。 ":"")+(["basic15","mid15","adv15","bridge9"].includes(session.mode)?"間違えた問題の解説を見直してから、次のレベルへ進みましょう。":timeout?"時間切れです。未回答は不正解として集計しました。":rate>=85?"合格圏の目安です。この水準を安定させましょう。":rate>=75?"あと少し。誤答を即復習してください。":"基礎と誤答を優先して復習してください。");
- const ds=domains();
+ els.resultMsg.textContent=(ungradedCount?"判定保留 "+ungradedCount+"問はスコアから除外しています。 ":"")+(["paNov14","paPdf50"].includes(session.mode)?"公式の個別採点結果ではなく、資料と製品仕様に基づく暫定採点です。 ":"")+(["basic15","mid15","adv15","bridge9"].includes(session.mode)?"間違えた問題の解説を見直してから、次のレベルへ進みましょう。":timeout?"時間切れです。未回答は不正解として集計しました。":rate>=85?"この問題集で高い正答率です。本試験の合否を保証する指標ではありません。":rate>=75?"あと少し。誤答を即復習してください。":"基礎と誤答を優先して復習してください。");
+ const ds=[...new Set(graded.map(r=>r.domain))];
  const byDomain=ds.map(d=>{const rows=graded.filter(r=>r.domain===d);if(!rows.length)return"";const c=rows.filter(r=>r.correct).length;return '<div class="domain"><div class="row"><b>'+escapeHtml(d)+'</b><span>'+c+'/'+rows.length+'（'+pct(c,rows.length)+'%）</span></div></div>';}).join("");
  const types=[...new Set(graded.map(r=>r.type))];
  const byType=types.map(t=>{const rows=graded.filter(r=>r.type===t),c=rows.filter(r=>r.correct).length;return '<div class="domain"><div class="row"><b>'+typeLabel(t)+'</b><span>'+c+'/'+rows.length+'（'+pct(c,rows.length)+'%）</span></div></div>';}).join("");

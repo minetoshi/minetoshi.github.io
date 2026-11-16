@@ -1,4 +1,4 @@
-const {chromium}=require('playwright');const assert=require('node:assert/strict');const {load,keys}=require('./banks.cjs');const data=load();const all=keys.flatMap(k=>data[k]);const byId=new Map(all.map(q=>[q.id,q]));
+const {chromium}=require('playwright');const fs=require('node:fs');fs.mkdirSync('browser-screenshots',{recursive:true});const assert=require('node:assert/strict');const {load,keys}=require('./banks.cjs');const data=load();const all=keys.flatMap(k=>data[k]);const byId=new Map(all.map(q=>[q.id,q]));
 (async()=>{
  const browser=await chromium.launch({headless:true,args:['--no-sandbox']});
  const results=[];
@@ -26,6 +26,7 @@ const {chromium}=require('playwright');const assert=require('node:assert/strict'
     let picks=[...q.answers];if(chooseWrong){const wrong=q.choices.findIndex((_,i)=>!q.answers.includes(i));picks[0]=wrong;}
     for(const i of picks)await page.locator(`button.choice[data-i="${i}"]`).click();
    }
+   if(['PA-PDF-20261112-11','PA-PDF-20261112-48'].includes(id))await page.screenshot({path:`browser-screenshots/${width}-${id}.png`,fullPage:true});
    assert(await page.locator('#answerBtn').isEnabled());await page.locator('#answerBtn').click();
    const ungraded=q.reviewStatus==='review'||q.scorable===false;
    if(!ungraded){graded++;if(!chooseWrong)correct++;}
@@ -38,7 +39,29 @@ const {chromium}=require('playwright');const assert=require('node:assert/strict'
    count++;assert(count<=400);
   }
   assert.equal(await page.locator('#resultPct').innerText(),graded?Math.round(correct/graded*100)+'%':'採点対象なし');
-  results.push({width,mode,count,graded,correct});
+  results.push({width,mode,count,graded,correct});console.error(JSON.stringify(results.at(-1)));
+ }
+ // Seed history from every bank plus a held question and an unknown legacy ID.
+ await page.goto(url);
+ const seeds=keys.map(k=>data[k].find(q=>q.reviewStatus!=='review'&&q.scorable!==false).id);
+ await page.evaluate(({seeds})=>{const items={};for(const id of seeds)items[id]={attempts:1,correct:0,streak:0,lastWrong:true,nextReview:1};items['PA-PDF-20261112-02']={attempts:9,correct:9,lastWrong:true,nextReview:1};items['legacy-id']={attempts:3,correct:2};localStorage.setItem('dp700-dojo-v2',JSON.stringify({items,totalAttempts:20,totalCorrect:11,sessions:[]}));},{seeds});
+ for(const mode of ['wrong','due']){
+  await page.reload();assert.equal(await page.locator('#statAttempts').innerText(),String(seeds.length));await page.locator(`[data-mode="${mode}"]`).click();
+  const seen=[];
+  while(await page.locator('#quiz').isVisible()){
+   const id=await page.locator('#qSkill').innerText();seen.push(id);const q=byId.get(id);
+   for(const i of q.answers)await page.locator(`button.choice[data-i="${i}"]`).click();
+   await page.locator('#answerBtn').click();await page.locator('#nextBtn').click();
+  }
+  assert.deepEqual([...seen].sort(),[...seeds].sort());
+  const saved=await page.evaluate(()=>JSON.parse(localStorage.getItem('dp700-dojo-v2')));
+  assert.equal(saved.items['PA-PDF-20261112-02'].attempts,9);assert.equal(saved.items['legacy-id'].attempts,3);
+  // Restore due dates and wrong flags for the second review route.
+  await page.evaluate(seeds=>{const s=JSON.parse(localStorage.getItem('dp700-dojo-v2'));for(const id of seeds)s.items[id]={attempts:1,correct:0,streak:0,lastWrong:true,nextReview:1};localStorage.setItem('dp700-dojo-v2',JSON.stringify(s));},seeds);
+ }
+ await page.goto(url);
+ for(const action of ['domainStart','domainAllStart']){
+  await page.goto(url);await page.locator('#'+action).click();assert(await page.locator('#qText').isVisible());const q=byId.get(await page.locator('#qSkill').innerText());if(q.type!=='order')for(const i of q.answers)await page.locator(`button.choice[data-i="${i}"]`).click();await page.locator('#answerBtn').click();assert(await page.locator('#feedback').isVisible());await page.locator('#nextBtn').click();
  }
  assert.deepEqual(errors,[]);await page.close();
  }

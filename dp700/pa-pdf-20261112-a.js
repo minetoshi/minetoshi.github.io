@@ -306,7 +306,7 @@ window.DP700_PA_PDF_20261112=(window.DP700_PA_PDF_20261112||[]).concat([
       2
     ],
     "selectCount": 2,
-    "explanation": "問題は「原因を特定し、解決する」2段階です。Aでどの実行が遅いかを絞り、CでSQL・PySpark・変換構成を改善します。 通知を増やしても遅延そのものは解消しません。\n試験での見抜き方：「Identify and resolve」→ 実行を絞り込む＋処理を改善する。",
+    "explanation": "実行状態・開始時刻で遅い処理を絞り込み、その変換ロジックや実行構成を改善します。ストレージ容量の追加だけでは変換のボトルネックを解消できません。遅延アラートは検知に有用ですが、原因の特定と処理の改善そのものではありません。",
     "source": "https://learn.microsoft.com/en-us/fabric/data-factory/workspace-monitoring",
     "reviewStatus": "pdf-reviewed",
     "origin": "pa-pdf-20261112",
@@ -379,10 +379,10 @@ window.DP700_PA_PDF_20261112=(window.DP700_PA_PDF_20261112||[]).concat([
     "skill": "Eventhouseのアイドル休止を防止する",
     "difficulty": "Medium",
     "type": "single",
-    "question": "Eventhouse1は10分間利用されないと自動休止し、次のクエリ前に再起動が必要です。管理負荷を抑え、手動再起動を必要とせず休止を防止するにはどうすべきですか？",
+    "question": "Eventhouseが非アクティブ時に休止し、次のクエリで再開待ちが生じます。再開の遅延を避け、Eventhouseを常時稼働させる設定を1つ選んでください。",
     "choices": [
       "Power BIレポートを5分ごとにEventhouse1へ問い合わせるよう設定する。",
-      "Eventhouse1のAlways-Onを有効にする。",
+      "EventhouseでCapacity Planner mode（旧Always-on）を有効にする。",
       "Fabric CapacityのAutoscaleを有効にする。",
       "Eventhouse1でクエリ高速化キャッシュを有効にする。"
     ],
@@ -390,13 +390,13 @@ window.DP700_PA_PDF_20261112=(window.DP700_PA_PDF_20261112||[]).concat([
       1
     ],
     "selectCount": 1,
-    "explanation": "休止動作そのものを変更する設定が必要です。定期クエリで疑似的に稼働させる方法は保守的でなく、Autoscaleやキャッシュは目的が異なります。\n試験での見抜き方：「Inactivityで休止」「手動再起動を防ぐ」→ 常時稼働設定。\n資料の注意点：注：Fabricの現行UIではAlways-Onと異なる名称（Capacity Planner mode等）が使われる場合があります。問題文の名称と現行画面を読み替えてください。",
+    "explanation": "Capacity Planner modeは非アクティブによるサービス休止を防ぎます。定期的なダミークエリは継続稼働のための正式な設定ではありません。Capacityのスケール調整とクエリ高速化キャッシュは、Eventhouseの休止を防ぐ設定とは役割が異なります。",
     "source": "https://learn.microsoft.com/en-us/fabric/real-time-intelligence/eventhouse-smart-capacity-control",
     "reviewStatus": "pdf-reviewed",
     "origin": "pa-pdf-20261112",
     "sourcePage": 26,
     "pdfAnswer": "B（設問上の名称）",
-    "answerEvidence": "expected",
+    "answerEvidence": "spec-verified",
     "instruction": "選択肢から1つ選んでください。"
   },
   {

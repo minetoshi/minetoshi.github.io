@@ -24,4 +24,6 @@ jobs:
         if: always()
         with:
           name: dp700-browser-results
-          path: browser-results.json
+          path: |
+            browser-results.json
+            browser-screenshots/

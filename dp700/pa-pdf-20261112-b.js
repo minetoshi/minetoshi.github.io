@@ -8,7 +8,7 @@ window.DP700_PA_PDF_20261112=(window.DP700_PA_PDF_20261112||[]).concat([
     "skill": "Data Meshの管理対象・設定・責任者",
     "difficulty": "Medium",
     "type": "multi",
-    "question": "FabricでData Meshを構築し、IT部門がガバナンス管理を各業務部門へ委任します。業務部門ごとに独立してデータを管理するため、3つの操作を選びます。",
+    "question": "Fabricで業務部門ごとのDomainを使用します。部門のWorkspaceを分類し、委任可能なガバナンス設定を部門側へ移し、その設定を管理する責任者を置く必要があります。この構成に必要な操作を3つ選んでください。",
     "choices": [
       "ドメイン固有の機密ラベルを割り当てる。",
       "WorkspaceをDomainへ割り当てる。",
@@ -419,7 +419,7 @@ window.DP700_PA_PDF_20261112=(window.DP700_PA_PDF_20261112||[]).concat([
       4
     ],
     "selectCount": 3,
-    "explanation": "3つの要件は、継続読込、無効行の除外、計算列の追加です。Structured Streamingで読み、filterでNULLを除き、式で派生列を作成してLakehouseへ保存します。別のバッチへ退避するとストリーム性が損なわれます。\n試験での見抜き方：「Streaming」＋「Invalid data」＋「Calculated fields」→ E＋B＋A。",
+    "explanation": "Structured Streamingで継続的に読み取り、重要列がNULLの行をfilterで除き、Spark SQLの式で計算列を追加します。CSVへの退避やバッチだけへの切り替えは、継続的なストリーム処理という条件を満たしません。",
     "source": "https://learn.microsoft.com/en-us/fabric/data-engineering/structured-streaming-overview",
     "reviewStatus": "pdf-reviewed",
     "origin": "pa-pdf-20261112",
@@ -504,7 +504,7 @@ window.DP700_PA_PDF_20261112=(window.DP700_PA_PDF_20261112||[]).concat([
     ],
     "selectCount": 1,
     "explanation": "Type 2は、部署や住所が変わったとき、新しい行を作り、過去行も残す方式です。通常は有効期間やCurrentフラグ、 Surrogate keyも管理します。Type 4は別の履歴テーブルを使います。\n試験での見抜き方：1＝上書き／2＝行追加／3＝列追加／4＝履歴を別表。",
-    "source": "https://learn.microsoft.com/en-us/fabric/data-factory/cdc-copy-job",
+    "source": "https://learn.microsoft.com/en-us/fabric/data-warehouse/dimensional-modeling-dimension-tables",
     "reviewStatus": "pdf-reviewed",
     "origin": "pa-pdf-20261112",
     "sourcePage": 86,
@@ -531,7 +531,7 @@ window.DP700_PA_PDF_20261112=(window.DP700_PA_PDF_20261112||[]).concat([
       1
     ],
     "selectCount": 1,
-    "explanation": "目標は行を返すことで件数集計ではありません。まず時間で絞り、extendでJSON内のLevelとDeviceIdを型変換して列化し、その後デバイスIDで絞り、projectで必要な4列のみ返します。Aはsummarizeで元列を失い、Cは先にAdditionalContextをprojectで落とし、Dは最後にcountへ変えてしまいます。\n試験での見抜き方：「直近5分」where ago(5m) → 「JSONの値」extend → 「ID一致」where → 「4列のみ」project。\n2026-11-16校正：原PDFの選択肢B・C・DにはDeviceIDと書かれた箇所がありましたが、JSONに定義されたキー名DeviceIdに修正済みです。追加の処理順序にも注意してください。",
+    "explanation": "時間で絞った後、extendでdynamic値のLevelとDeviceIdを型変換して列化し、DeviceIdで絞り、projectで4列を返します。先にsummarizeする式は必要な明細列を失います。先にTimeGeneratedとMessageだけをprojectする式はAdditionalContextを失います。最後がcountの式は明細4列ではなく件数を返します。JSONのキーはDeviceIdで、大文字小文字も一致させます。",
     "source": "https://learn.microsoft.com/en-us/kusto/query/scalar-data-types/dynamic?view=microsoft-fabric",
     "reviewStatus": "pdf-reviewed",
     "origin": "pa-pdf-20261112",
