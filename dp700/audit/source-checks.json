@@ -1,0 +1,2091 @@
+[
+  {
+    "url": "https://learn.microsoft.com/en-us/azure/databricks/pyspark/basics",
+    "questionIds": [
+      "PALIVE-20261106-17",
+      "PALIVE-20261106-29",
+      "PA-PDF-20261112-47",
+      "PA-PDF-20261112-48"
+    ],
+    "checkedAt": "2026-11-16T09:45:27.488026+00:00",
+    "status": 200,
+    "finalUrl": "https://learn.microsoft.com/en-us/azure/databricks/pyspark/basics",
+    "title": "PySpark basics - Azure Databricks | Microsoft Learn",
+    "sha256": "f866fa156f1381afd63e0756af4b40092880f4c4fe2065d57559fddae971ecea"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/azure/stream-analytics/streaming-technologies",
+    "questionIds": [
+      "PA-PDF-20261112-38"
+    ],
+    "checkedAt": "2026-11-16T09:45:27.488983+00:00",
+    "status": 200,
+    "finalUrl": "https://learn.microsoft.com/en-us/azure/stream-analytics/streaming-technologies",
+    "title": "Choose a real-time and stream processing solution on Azure - Azure Stream Analytics | Microsoft Learn",
+    "sha256": "892b77a7cef6eecce50c4f68da83d7b353db9ab393bdeb880af2864a4378e05b"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/data-integration/gateway/service-gateway-tshoot",
+    "questionIds": [
+      "PA50-45"
+    ],
+    "checkedAt": "2026-11-16T09:49:06.491495+00:00",
+    "status": 200,
+    "finalUrl": "https://learn.microsoft.com/en-us/data-integration/gateway/service-gateway-tshoot",
+    "title": "Troubleshoot the on-premises data gateway | Microsoft Learn",
+    "sha256": "e704061ef9cb71a3539573a4d817182daaecdb0d596b3dd2fa21df9a916227f2"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/fabric/admin/delegate-settings",
+    "questionIds": [
+      "PA-PDF-20261112-18",
+      "PA-PDF-20261112-26"
+    ],
+    "checkedAt": "2026-11-16T09:45:27.489442+00:00",
+    "status": 200,
+    "finalUrl": "https://learn.microsoft.com/en-us/fabric/admin/delegate-settings",
+    "title": "Delegate tenant settings - Microsoft Fabric | Microsoft Learn",
+    "sha256": "c4a4934f548c6723c88723028dee19f6ea25ebb65d9ada9f8604420a9dd439fe"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/fabric/admin/endorsement-certification-enable",
+    "questionIds": [
+      "PA50-14",
+      "PA-PDF-20261112-22"
+    ],
+    "checkedAt": "2026-11-16T09:45:27.490020+00:00",
+    "status": 200,
+    "finalUrl": "https://learn.microsoft.com/en-us/fabric/admin/endorsement-certification-enable",
+    "title": "Enable item certification - Microsoft Fabric | Microsoft Learn",
+    "sha256": "b104195219d36488792aaf7436b3ecb80d429fab6eb1a1a2f6d437851c361d39"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/fabric/admin/service-admin-portal-onelake",
+    "questionIds": [
+      "PDF-M3-25"
+    ],
+    "checkedAt": "2026-11-16T09:45:27.490535+00:00",
+    "status": 200,
+    "finalUrl": "https://learn.microsoft.com/en-us/fabric/admin/service-admin-portal-onelake",
+    "title": "OneLake tenant settings - Microsoft Fabric | Microsoft Learn",
+    "sha256": "daa9f2c636d76b83170933831df9f453b7ea971626d25362152436b0bcdfd3fd"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/fabric/cicd/deployment-pipelines/assign-pipeline",
+    "questionIds": [
+      "PA-20261114-40"
+    ],
+    "checkedAt": "2026-11-16T09:45:27.491184+00:00",
+    "status": 200,
+    "finalUrl": "https://learn.microsoft.com/en-us/fabric/cicd/deployment-pipelines/assign-pipeline",
+    "title": "Assign a workspace to a deployment pipeline - Microsoft Fabric | Microsoft Learn",
+    "sha256": "2668d8b5f9d52564c91364f5d9c0b5fb50dadbe16f183f4c49ae4fa23f2afed1"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/fabric/cicd/deployment-pipelines/deploy-content",
+    "questionIds": [
+      "PA50-11",
+      "PALIVE-20261106-42",
+      "PA-20261114-33",
+      "PA-20261114-46"
+    ],
+    "checkedAt": "2026-11-16T09:45:27.491974+00:00",
+    "status": 200,
+    "finalUrl": "https://learn.microsoft.com/en-us/fabric/cicd/deployment-pipelines/deploy-content",
+    "title": "Fabric Application lifecycle management (ALM) deployment pipelines deploy content - Microsoft Fabric | Microsoft Learn",
+    "sha256": "66b2505532f5485c47ba9b0751f3854f924200c3a88ecd3ee5ae3e548173577f"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/fabric/cicd/deployment-pipelines/intro-to-deployment-pipelines",
+    "questionIds": [
+      "O07-A",
+      "O07-B",
+      "O07-C",
+      "ORD-03",
+      "O07-D"
+    ],
+    "checkedAt": "2026-11-16T09:45:27.493312+00:00",
+    "status": 200,
+    "finalUrl": "https://learn.microsoft.com/en-us/fabric/cicd/deployment-pipelines/intro-to-deployment-pipelines",
+    "title": "Overview of Fabric deployment pipelines - Microsoft Fabric | Microsoft Learn",
+    "sha256": "50ba680d8e80a87093d425e892501677c1921bbe87b768eb034511a3cdf10303"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/fabric/cicd/deployment-pipelines/understand-the-deployment-process",
+    "questionIds": [
+      "PA-PDF-20261112-30"
+    ],
+    "checkedAt": "2026-11-16T09:45:34.573868+00:00",
+    "status": 200,
+    "finalUrl": "https://learn.microsoft.com/en-us/fabric/cicd/deployment-pipelines/understand-the-deployment-process",
+    "title": "The Microsoft Fabric deployment pipelines process - Microsoft Fabric | Microsoft Learn",
+    "sha256": "cb8860653e36faa203822cd2b85aab52dc2f10101cebb7346f42642249aab2fd"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/fabric/cicd/git-integration/git-integration-process",
+    "questionIds": [
+      "PA-PDF-20261112-31",
+      "PA-PDF-20261112-32"
+    ],
+    "checkedAt": "2026-11-16T09:45:34.590224+00:00",
+    "status": 200,
+    "finalUrl": "https://learn.microsoft.com/en-us/fabric/cicd/git-integration/git-integration-process",
+    "title": "Git integration process - Microsoft Fabric | Microsoft Learn",
+    "sha256": "1c600548b64db2437acc88a84464bc764aeae2ed4137389b138fec2a5cfb7b1b"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/fabric/cicd/git-integration/intro-to-git-integration",
+    "questionIds": [
+      "O05-A",
+      "O05-B",
+      "O05-C",
+      "ORD-01",
+      "O05-D",
+      "PALIVE-20261106-48",
+      "PA-20261114-32"
+    ],
+    "checkedAt": "2026-11-16T09:45:34.606164+00:00",
+    "status": 200,
+    "finalUrl": "https://learn.microsoft.com/en-us/fabric/cicd/git-integration/intro-to-git-integration",
+    "title": "Overview of Fabric Git integration - Microsoft Fabric | Microsoft Learn",
+    "sha256": "0e411ac0a5a18090eec45e15f314f673008a0f405bbc6458905d193afe818ea3"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/fabric/data-engineering/author-execute-notebook",
+    "questionIds": [
+      "PA50-03",
+      "PA50-05",
+      "PALIVE-20261106-28",
+      "PALIVE-20261106-31",
+      "PALIVE-20261106-46",
+      "PA-PDF-20261112-33",
+      "PA-PDF-20261112-35",
+      "PA-PDF-20261112-40"
+    ],
+    "checkedAt": "2026-11-16T09:45:34.626112+00:00",
+    "status": 200,
+    "finalUrl": "https://learn.microsoft.com/en-us/fabric/data-engineering/author-execute-notebook",
+    "title": "Develop, execute, and manage notebooks - Microsoft Fabric | Microsoft Learn",
+    "sha256": "966472151e9eb0b86be5e45759368402d8d336c79f6192d4de6f6334ab96771d"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/fabric/data-engineering/configure-high-concurrency-session-notebooks",
+    "questionIds": [
+      "PA50-15"
+    ],
+    "checkedAt": "2026-11-16T09:45:34.692663+00:00",
+    "status": 200,
+    "finalUrl": "https://learn.microsoft.com/en-us/fabric/data-engineering/configure-high-concurrency-session-notebooks",
+    "title": "Configure high concurrency mode for notebooks - Microsoft Fabric | Microsoft Learn",
+    "sha256": "238c3cb293d36ec040f592e0ed95d16acf053b127955bee4bf5b91c49a3bd918"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/fabric/data-engineering/configure-starter-pools",
+    "questionIds": [
+      "PA50-02",
+      "PA50-04",
+      "PALIVE-20261106-41",
+      "PALIVE-20261106-44"
+    ],
+    "checkedAt": "2026-11-16T09:45:34.706502+00:00",
+    "status": 200,
+    "finalUrl": "https://learn.microsoft.com/en-us/fabric/data-engineering/configure-starter-pools",
+    "title": "Configure and manage starter pools in Fabric Spark - Microsoft Fabric | Microsoft Learn",
+    "sha256": "4457e1ce7f6533d9a853a75e9ef9cb431c2a015071ff8e6278071c81805b0f0b"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/fabric/data-engineering/create-custom-spark-pools",
+    "questionIds": [
+      "PA-20261114-31",
+      "PA-20261114-34",
+      "PA-20261114-41"
+    ],
+    "checkedAt": "2026-11-16T09:45:34.810377+00:00",
+    "status": 200,
+    "finalUrl": "https://learn.microsoft.com/en-us/fabric/data-engineering/create-custom-spark-pools",
+    "title": "Create custom Apache Spark pools in Fabric - Microsoft Fabric | Microsoft Learn",
+    "sha256": "bc03d0020de6f7988a4aec1fcabe8a2af93e94803dd7d04b87d83db996d296f4"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/fabric/data-engineering/custom-live-pools-configure",
+    "questionIds": [
+      "PA-PDF-20261112-20",
+      "PA-PDF-20261112-24"
+    ],
+    "checkedAt": "2026-11-16T09:45:34.930721+00:00",
+    "status": 200,
+    "finalUrl": "https://learn.microsoft.com/en-us/fabric/data-engineering/custom-live-pools-configure",
+    "title": "Configure custom live pools in Microsoft Fabric - Microsoft Fabric | Microsoft Learn",
+    "sha256": "39f643eddac7cfa4abc03f7e77b5623a916a2b04c79ee6a0daa6f6a2918dc01d"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/fabric/data-engineering/delta-lake-schema-evolution",
+    "questionIds": [
+      "PDF-M2-14"
+    ],
+    "checkedAt": "2026-11-16T09:45:41.950911+00:00",
+    "status": 200,
+    "finalUrl": "https://learn.microsoft.com/en-us/fabric/data-engineering/delta-lake-schema-evolution",
+    "title": "Schema evolution for Delta tables - Microsoft Fabric | Microsoft Learn",
+    "sha256": "760e6e2cb4cd6cfdefb4e3b4989e79ea9d668df4f443148d0601a4f6b5ef5fa6"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/fabric/data-engineering/delta-lake-vacuum",
+    "questionIds": [
+      "ORD-15"
+    ],
+    "checkedAt": "2026-11-16T09:45:41.962391+00:00",
+    "status": 200,
+    "finalUrl": "https://learn.microsoft.com/en-us/fabric/data-engineering/delta-lake-vacuum",
+    "title": "VACUUM Delta tables - Microsoft Fabric | Microsoft Learn",
+    "sha256": "bd80085ff38ae0b6f327de53d86253a4029492fecfc5d08853e72b14f573aea7"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/fabric/data-engineering/delta-optimization-and-v-order",
+    "questionIds": [
+      "ADV-8",
+      "ADV-23",
+      "PA-20261114-03",
+      "PA-20261114-08",
+      "PA-20261114-15"
+    ],
+    "checkedAt": "2026-11-16T09:45:41.996474+00:00",
+    "status": 200,
+    "finalUrl": "https://learn.microsoft.com/en-us/fabric/data-engineering/delta-optimization-and-v-order",
+    "title": "Optimize Delta Lake tables with V-Order in Fabric - Microsoft Fabric | Microsoft Learn",
+    "sha256": "487aacf2971e7a1f545f2fbd557ce4cc11f7402598b43d6886358c55d8524e07"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/fabric/data-engineering/environment-manage-library",
+    "questionIds": [
+      "PALIVE-20261106-49"
+    ],
+    "checkedAt": "2026-11-16T09:49:06.497962+00:00",
+    "status": 200,
+    "finalUrl": "https://learn.microsoft.com/en-us/fabric/data-engineering/environment-manage-library",
+    "title": "Manage libraries in Fabric environments - Microsoft Fabric | Microsoft Learn",
+    "sha256": "d6d2e0bd88ec8e70ad7e75b477aeef40ffd51677abdf3ea35beb7bcd63cf44d9"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/fabric/data-engineering/high-concurrency-overview",
+    "questionIds": [
+      "PDF-M2-19",
+      "PDF-M3-15",
+      "PALIVE-20261106-34"
+    ],
+    "checkedAt": "2026-11-16T09:45:42.003920+00:00",
+    "status": 200,
+    "finalUrl": "https://learn.microsoft.com/en-us/fabric/data-engineering/high-concurrency-overview",
+    "title": "High concurrency mode in Apache Spark compute for Fabric - Microsoft Fabric | Microsoft Learn",
+    "sha256": "b2bc7128302cfcaff5f5ed5b0caec4abb13df14170fa7f0c30727fc5a0d1e2db"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/fabric/data-engineering/how-to-use-notebook",
+    "questionIds": [
+      "BASIC-6",
+      "PA-20261114-35"
+    ],
+    "checkedAt": "2026-11-16T09:45:42.022351+00:00",
+    "status": 200,
+    "finalUrl": "https://learn.microsoft.com/en-us/fabric/data-engineering/how-to-use-notebook",
+    "title": "How to use notebooks - Microsoft Fabric | Microsoft Learn",
+    "sha256": "cf18f78783dacd2a1eb97327e429fe57e9509a0cfa5ea090c12b0beaa3f5831c"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/fabric/data-engineering/lakehouse-and-delta-tables",
+    "questionIds": [
+      "C-PY-06",
+      "PALIVE-20261106-22"
+    ],
+    "checkedAt": "2026-11-16T09:45:42.051796+00:00",
+    "status": 200,
+    "finalUrl": "https://learn.microsoft.com/en-us/fabric/data-engineering/lakehouse-and-delta-tables",
+    "title": "Lakehouse and Delta Tables - Microsoft Fabric | Microsoft Learn",
+    "sha256": "e69e61413524587c855ee1d33788d30cec0356fc6c2129c28565348e1a913308"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/fabric/data-engineering/lakehouse-overview",
+    "questionIds": [
+      "BASIC-2"
+    ],
+    "checkedAt": "2026-11-16T09:45:42.134406+00:00",
+    "status": 200,
+    "finalUrl": "https://learn.microsoft.com/en-us/fabric/data-engineering/lakehouse-overview",
+    "title": "What is a lakehouse? - Microsoft Fabric | Microsoft Learn",
+    "sha256": "bfd014d164b0228aa1ee93f8b080d6c4bc622de8250daa136de1d70159823a0b"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/fabric/data-engineering/lakehouse-sharing",
+    "questionIds": [
+      "O09-A",
+      "O09-B",
+      "O09-C",
+      "O09-D"
+    ],
+    "checkedAt": "2026-11-16T09:45:42.150716+00:00",
+    "status": 200,
+    "finalUrl": "https://learn.microsoft.com/en-us/fabric/data-engineering/lakehouse-sharing",
+    "title": "Lakehouse sharing and permission management - Microsoft Fabric | Microsoft Learn",
+    "sha256": "af8dac6d17ab344dcc2df73fb6c46630d75e47a23ede5ffa828d34acb87509d7"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/fabric/data-engineering/lakehouse-sql-analytics-endpoint",
+    "questionIds": [
+      "MID-5",
+      "PA-PDF-20261112-46"
+    ],
+    "checkedAt": "2026-11-16T09:45:48.577479+00:00",
+    "status": 200,
+    "finalUrl": "https://learn.microsoft.com/en-us/fabric/data-engineering/lakehouse-sql-analytics-endpoint",
+    "title": "What is the SQL analytics endpoint for a lakehouse? - Microsoft Fabric | Microsoft Learn",
+    "sha256": "91fd8fd459bcd5253759621d1fdc5743cd4f6097ee52e95ed08905ac54a13016"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/fabric/data-engineering/lakehouse-table-maintenance",
+    "questionIds": [
+      "O49-A",
+      "O49-B",
+      "O49-C",
+      "O49-D",
+      "PA50-50",
+      "PA-PDF-20261112-08"
+    ],
+    "checkedAt": "2026-11-16T09:45:48.599103+00:00",
+    "status": 200,
+    "finalUrl": "https://learn.microsoft.com/en-us/fabric/data-engineering/lakehouse-table-maintenance",
+    "title": "Delta Table Maintenance in Microsoft Fabric - Microsoft Fabric | Microsoft Learn",
+    "sha256": "6dbadbec31289140713e812c5de2df0904b8a4aafe65ba5b983c1fe4d280eb0c"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/fabric/data-engineering/low-shuffle-merge",
+    "questionIds": [
+      "PDF-M3-11"
+    ],
+    "checkedAt": "2026-11-16T09:45:48.631257+00:00",
+    "status": 200,
+    "finalUrl": "https://learn.microsoft.com/en-us/fabric/data-engineering/low-shuffle-merge",
+    "title": "Low shuffle merge optimization on Delta tables - Microsoft Fabric | Microsoft Learn",
+    "sha256": "a25d131eb52804df2c44ce376999b06804b8e2edcaad34725b0bd3b493349390"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/fabric/data-engineering/native-execution-engine-overview",
+    "questionIds": [
+      "PALIVE-20261106-03",
+      "PA-20261114-07"
+    ],
+    "checkedAt": "2026-11-16T09:45:48.632003+00:00",
+    "status": 200,
+    "finalUrl": "https://learn.microsoft.com/en-us/fabric/data-engineering/native-execution-engine-overview",
+    "title": "Native execution engine for Fabric Data Engineering - Microsoft Fabric | Microsoft Learn",
+    "sha256": "fe44a753297427fb81ebbf91c05a147a02d956b1d77336fb6cf5b617c01713e0"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/fabric/data-engineering/spark-compute",
+    "questionIds": [
+      "MID-12",
+      "MID-13",
+      "ADV-13",
+      "ADV-28",
+      "PA-20261114-47"
+    ],
+    "checkedAt": "2026-11-16T09:45:48.651978+00:00",
+    "status": 200,
+    "finalUrl": "https://learn.microsoft.com/en-us/fabric/data-engineering/spark-compute",
+    "title": "Apache Spark compute for Data Engineering and Data Science - Microsoft Fabric | Microsoft Learn",
+    "sha256": "3d786b0cf7313588256fcc6a103fc0149dd82894ea1c601d3aa2d6dfb4c19efe"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/fabric/data-engineering/spark-job-definition",
+    "questionIds": [
+      "PALIVE-20261106-30"
+    ],
+    "checkedAt": "2026-11-16T09:49:06.501540+00:00",
+    "status": 200,
+    "finalUrl": "https://learn.microsoft.com/en-us/fabric/data-engineering/spark-job-definition",
+    "title": "Apache Spark job definition - Microsoft Fabric | Microsoft Learn",
+    "sha256": "5fa804e26a264eefebc3035c77571dbcfbfaf1fc2a9ca02e097ed3ba87f643b0"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/fabric/data-engineering/spark-monitoring-best-practices",
+    "questionIds": [
+      "O44-A",
+      "O44-B",
+      "O44-C",
+      "O53-A",
+      "O53-B",
+      "O53-C",
+      "C-PY-04",
+      "C-PY-07",
+      "C-PY-08",
+      "ORD-17",
+      "O44-D",
+      "PDF-M1-02",
+      "PDF-M1-05",
+      "PDF-M2-10",
+      "PDF-M2-29"
+    ],
+    "checkedAt": "2026-11-16T09:45:48.677128+00:00",
+    "status": 200,
+    "finalUrl": "https://learn.microsoft.com/en-us/fabric/data-engineering/spark-monitoring-best-practices",
+    "title": "Spark monitoring and performance optimization best practices - Microsoft Fabric | Microsoft Learn",
+    "sha256": "603a749c12a192e0f73aae94c770b78e50fc2b3f35237369d7b09e4652f514c4"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/fabric/data-engineering/spark-monitoring-overview",
+    "questionIds": [
+      "MID-9",
+      "ADV-7",
+      "ADV-22",
+      "BRIDGE-3",
+      "BRIDGE-12"
+    ],
+    "checkedAt": "2026-11-16T09:45:48.742336+00:00",
+    "status": 200,
+    "finalUrl": "https://learn.microsoft.com/en-us/fabric/data-engineering/spark-monitoring-overview",
+    "title": "Apache Spark monitoring overview - Microsoft Fabric | Microsoft Learn",
+    "sha256": "b85950d4e298fd8188c33f460a66f73255b1b82e9ac055c5c566640d007c135d"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/fabric/data-engineering/structured-streaming-overview",
+    "questionIds": [
+      "O21-A",
+      "O21-B",
+      "O21-C",
+      "O35-A",
+      "O35-B",
+      "O35-C",
+      "C-PY-09",
+      "PA50-21",
+      "PA50-23",
+      "PA50-28",
+      "PA50-32",
+      "PA50-35",
+      "PA50-48",
+      "ADV-10",
+      "ADV-25",
+      "PALIVE-20261106-09",
+      "PALIVE-20261106-16",
+      "PALIVE-20261106-18",
+      "PALIVE-20261106-23",
+      "PA-20261114-13",
+      "PA-20261114-19",
+      "PA-20261114-20",
+      "PA-20261114-26",
+      "PA-20261114-29",
+      "PA-PDF-20261112-09",
+      "PA-PDF-20261112-39"
+    ],
+    "checkedAt": "2026-11-16T09:45:48.814461+00:00",
+    "status": 200,
+    "finalUrl": "https://learn.microsoft.com/en-us/fabric/data-engineering/structured-streaming-overview",
+    "title": "Overview of Structured Streaming - Microsoft Fabric | Microsoft Learn",
+    "sha256": "7e1c4aa5c56653e4e626a531eddf7488203923f0edc0a680602856ec959366a1"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/fabric/data-engineering/structured-streaming-stateful-processing",
+    "questionIds": [
+      "O30-A",
+      "O30-B",
+      "O30-C",
+      "C-PY-10",
+      "PDF-M1-08",
+      "PDF-M2-07",
+      "PDF-M3-06"
+    ],
+    "checkedAt": "2026-11-16T09:45:55.071665+00:00",
+    "status": 200,
+    "finalUrl": "https://learn.microsoft.com/en-us/fabric/data-engineering/structured-streaming-stateful-processing",
+    "title": "Stateful processing with Structured Streaming - Microsoft Fabric | Microsoft Learn",
+    "sha256": "e0bb4a2a0579db9b68b50247a95b75ee28f5ea0f560969de42cb3d7771831f57"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/fabric/data-engineering/table-compaction",
+    "questionIds": [
+      "PA-PDF-20261112-13"
+    ],
+    "checkedAt": "2026-11-16T09:45:55.076180+00:00",
+    "status": 200,
+    "finalUrl": "https://learn.microsoft.com/en-us/fabric/data-engineering/table-compaction",
+    "title": "Table Compaction - Microsoft Fabric | Microsoft Learn",
+    "sha256": "a802a891edf8dd0928bca5930b5a47e3d58725ae13e3d8f72514463b647bb277"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/fabric/data-engineering/workspace-admin-settings",
+    "questionIds": [
+      "O01-A",
+      "O01-B",
+      "O01-C",
+      "O01-D"
+    ],
+    "checkedAt": "2026-11-16T09:45:55.081712+00:00",
+    "status": 200,
+    "finalUrl": "https://learn.microsoft.com/en-us/fabric/data-engineering/workspace-admin-settings",
+    "title": "Workspace administration settings in Microsoft Fabric - Microsoft Fabric | Microsoft Learn",
+    "sha256": "9d64064e4792cf98ddc2b510b2b1d212d177f745582591d91faff091b158de51"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/fabric/data-factory/apache-airflow-compute",
+    "questionIds": [
+      "O04-A",
+      "O04-B",
+      "O04-C",
+      "O04-D",
+      "PDF-M1-27"
+    ],
+    "checkedAt": "2026-11-16T09:45:55.093468+00:00",
+    "status": 200,
+    "finalUrl": "https://learn.microsoft.com/en-us/fabric/data-factory/apache-airflow-compute",
+    "title": "Apache Airflow compute in Fabric - Microsoft Fabric | Microsoft Learn",
+    "sha256": "4d4bafb191e35f043d74d1585fd7955c9f9d89a4ee3b33b8f05f290b0dea9af4"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/fabric/data-factory/apache-airflow-jobs-migrate-azure-workflow-orchestration-manager",
+    "questionIds": [
+      "ORD-05"
+    ],
+    "checkedAt": "2026-11-16T09:45:55.131123+00:00",
+    "status": 200,
+    "finalUrl": "https://learn.microsoft.com/en-us/fabric/data-factory/apache-airflow-jobs-migrate-azure-workflow-orchestration-manager",
+    "title": "Migrate to Apache Airflow Job in Microsoft Fabric - Microsoft Fabric | Microsoft Learn",
+    "sha256": "f4eb16dbdf816891f2e7477f54727d473f1a3321fb8473e01af158114b6ae882"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/fabric/data-factory/cdc-copy-job",
+    "questionIds": [
+      "PA-20261114-27",
+      "PA-PDF-20261112-49"
+    ],
+    "checkedAt": "2026-11-16T09:45:55.131457+00:00",
+    "status": 200,
+    "finalUrl": "https://learn.microsoft.com/en-us/fabric/data-factory/cdc-copy-job",
+    "title": "Change data capture (CDC) in Copy Job - Microsoft Fabric | Microsoft Learn",
+    "sha256": "b2dfaccef8e054f78d3ef232a47dbeef88ae751d7f2cd8ae5a2cc63f6c95d809"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/fabric/data-factory/copy-activity-performance-and-scalability-guide",
+    "questionIds": [
+      "PDF-M1-06",
+      "PDF-M3-03"
+    ],
+    "checkedAt": "2026-11-16T09:45:55.170119+00:00",
+    "status": 200,
+    "finalUrl": "https://learn.microsoft.com/en-us/fabric/data-factory/copy-activity-performance-and-scalability-guide",
+    "title": "Copy Activity Performance and Scalability Guide - Microsoft Fabric | Microsoft Learn",
+    "sha256": "e59de3008249226a3b622af621432967958cfcf1e184ade1c795747ae623a7c2"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/fabric/data-factory/copy-data-activity",
+    "questionIds": [
+      "PALIVE-20261106-35",
+      "PA-20261114-36",
+      "PA-PDF-20261112-28"
+    ],
+    "checkedAt": "2026-11-16T09:45:55.194595+00:00",
+    "status": 200,
+    "finalUrl": "https://learn.microsoft.com/en-us/fabric/data-factory/copy-data-activity",
+    "title": "How to copy data using copy activity - Microsoft Fabric | Microsoft Learn",
+    "sha256": "1c9c6846c727c1c2738413da6224cfc612c550e3e9b553e56b8c87c5dad805b2"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/fabric/data-factory/create-alerts-for-pipeline-runs",
+    "questionIds": [
+      "O41-A",
+      "O41-B",
+      "O41-C",
+      "ORD-18",
+      "O41-D",
+      "PDF-M1-17",
+      "PDF-M2-05",
+      "PDF-M3-14",
+      "PDF-M3-27"
+    ],
+    "checkedAt": "2026-11-16T09:46:01.498305+00:00",
+    "status": 200,
+    "finalUrl": "https://learn.microsoft.com/en-us/fabric/data-factory/create-alerts-for-pipeline-runs",
+    "title": "Create Alerts for Pipeline Runs - Microsoft Fabric | Microsoft Learn",
+    "sha256": "6efb3e2004eb8095c83996e4f62c421a8ce5ae2e56fc7d662f210f454109fcde"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/fabric/data-factory/data-factory-limitations",
+    "questionIds": [
+      "PA-20261114-11",
+      "PA-PDF-20261112-15"
+    ],
+    "checkedAt": "2026-11-16T09:46:01.556523+00:00",
+    "status": 200,
+    "finalUrl": "https://learn.microsoft.com/en-us/fabric/data-factory/data-factory-limitations",
+    "title": "Data Factory limitations overview - Microsoft Fabric | Microsoft Learn",
+    "sha256": "99e694a73a4c886abb7d9a5166f1652f2a4fde5394adb6713fbf82f65831e1f3"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/fabric/data-factory/dataflow-gen2-data-destinations-validation-rules",
+    "questionIds": [
+      "PA50-49",
+      "PALIVE-20261106-08",
+      "PA-PDF-20261112-04"
+    ],
+    "checkedAt": "2026-11-16T09:46:01.590720+00:00",
+    "status": 200,
+    "finalUrl": "https://learn.microsoft.com/en-us/fabric/data-factory/dataflow-gen2-data-destinations-validation-rules",
+    "title": "Dataflow Gen2 data destinations validation rules - Microsoft Fabric | Microsoft Learn",
+    "sha256": "a1c4ea8058ceebc2239d5276db01afa06738c7406e7903221044ee5d5d43df17"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/fabric/data-factory/dataflow-gen2-incremental-refresh",
+    "questionIds": [
+      "PA-PDF-20261112-45"
+    ],
+    "checkedAt": "2026-11-16T09:46:01.602391+00:00",
+    "status": 200,
+    "finalUrl": "https://learn.microsoft.com/en-us/fabric/data-factory/dataflow-gen2-incremental-refresh",
+    "title": "Incremental refresh in Dataflow Gen2 - Microsoft Fabric | Microsoft Learn",
+    "sha256": "002a5334272ba23440ee420a9b5cbca1738e953edf8e16c4e7654ece70ac7488"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/fabric/data-factory/dataflow-gen2-performance-best-practices",
+    "questionIds": [
+      "PDF-M2-09"
+    ],
+    "checkedAt": "2026-11-16T09:46:01.633810+00:00",
+    "status": 200,
+    "finalUrl": "https://learn.microsoft.com/en-us/fabric/data-factory/dataflow-gen2-performance-best-practices",
+    "title": "Best practices for getting the best performance with Dataflow Gen2 in Fabric Data Factory - Microsoft Fabric | Microsoft Learn",
+    "sha256": "38f8e4b8971abe61e3fac51b09ca9758fd581008c8c2bb4db507dfbf3c79be84"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/fabric/data-factory/dataflows-gen2-monitor",
+    "questionIds": [
+      "O43-A",
+      "O43-B",
+      "O43-C",
+      "O43-D",
+      "PDF-M1-18",
+      "PDF-M2-06",
+      "PDF-M3-20"
+    ],
+    "checkedAt": "2026-11-16T09:46:01.667228+00:00",
+    "status": 200,
+    "finalUrl": "https://learn.microsoft.com/en-us/fabric/data-factory/dataflows-gen2-monitor",
+    "title": "View Dataflow Gen2 refresh history and monitoring - Microsoft Fabric | Microsoft Learn",
+    "sha256": "818f432f9fab7fcbd3dcc938bfe9aa5182ab1e185a6689fdc357b5274b040192"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/fabric/data-factory/dataflows-gen2-overview",
+    "questionIds": [
+      "O23-A",
+      "O23-B",
+      "O23-C",
+      "BASIC-7"
+    ],
+    "checkedAt": "2026-11-16T09:46:01.710297+00:00",
+    "status": 200,
+    "finalUrl": "https://learn.microsoft.com/en-us/fabric/data-factory/dataflows-gen2-overview",
+    "title": "Differences between Dataflow Gen1 and Dataflow Gen2 - Microsoft Fabric | Microsoft Learn",
+    "sha256": "9cde7e19cd9d7bcfc5ff1b0824f57e025db2bea3fcb30b0a12d5eed87261696a"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/fabric/data-factory/expression-language",
+    "questionIds": [
+      "PDF-M1-21"
+    ],
+    "checkedAt": "2026-11-16T09:46:01.745909+00:00",
+    "status": 200,
+    "finalUrl": "https://learn.microsoft.com/en-us/fabric/data-factory/expression-language",
+    "title": "Expressions and functions - Microsoft Fabric | Microsoft Learn",
+    "sha256": "24172df8fe4d46d2fbe1408a7df6f5fd17c1718a4ed10188d970acb36bd13e24"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/fabric/data-factory/fail-activity",
+    "questionIds": [
+      "PALIVE-20261106-11",
+      "PALIVE-20261106-12",
+      "PA-20261114-02",
+      "PA-PDF-20261112-05"
+    ],
+    "checkedAt": "2026-11-16T09:46:06.781505+00:00",
+    "status": 200,
+    "finalUrl": "https://learn.microsoft.com/en-us/fabric/data-factory/fail-activity",
+    "title": "Fail activity - Microsoft Fabric | Microsoft Learn",
+    "sha256": "4cd0d567cc8280b9a3102a596166fb20053a41e07db095a8ec5ba15a6fcf3d0c"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/fabric/data-factory/monitor-data-factory",
+    "questionIds": [
+      "O38-A",
+      "O38-B",
+      "O38-C",
+      "O39-A",
+      "O39-B",
+      "O39-C",
+      "O50-A",
+      "O50-B",
+      "O50-C",
+      "O38-D",
+      "O39-D",
+      "O50-D",
+      "PA50-38",
+      "PA50-41",
+      "PA50-43",
+      "PA50-44",
+      "PA50-47",
+      "BASIC-5",
+      "BASIC-13",
+      "MID-8",
+      "ADV-6",
+      "ADV-21",
+      "BRIDGE-5",
+      "BRIDGE-17",
+      "PALIVE-20261106-07",
+      "PALIVE-20261106-10",
+      "PALIVE-20261106-13",
+      "PALIVE-20261106-15",
+      "PA-20261114-06",
+      "PA-20261114-09",
+      "PA-20261114-10"
+    ],
+    "checkedAt": "2026-11-16T09:46:06.822740+00:00",
+    "status": 200,
+    "finalUrl": "https://learn.microsoft.com/en-us/fabric/data-factory/monitor-pipeline-runs",
+    "title": "Choose How to Monitor Pipeline Runs - Microsoft Fabric | Microsoft Learn",
+    "sha256": "2c157614db2dd677e311f5801bb7ea4e001326e0bb94ddb880aee8ea5535a4a5"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/fabric/data-factory/notebook-activity",
+    "questionIds": [
+      "PDF-M2-26"
+    ],
+    "checkedAt": "2026-11-16T09:46:06.850771+00:00",
+    "status": 200,
+    "finalUrl": "https://learn.microsoft.com/en-us/fabric/data-factory/notebook-activity",
+    "title": "Notebook activity - Microsoft Fabric | Microsoft Learn",
+    "sha256": "421f9719655fea2d49191d0c54544060065bc05fc6f2f1004cdbf35751aaa6f7"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/fabric/data-factory/parameters",
+    "questionIds": [
+      "O18-A",
+      "O18-B",
+      "O18-C",
+      "ORD-06",
+      "PA50-20",
+      "PA50-39",
+      "PALIVE-20261106-02",
+      "PALIVE-20261106-05",
+      "PALIVE-20261106-36",
+      "PALIVE-20261106-45",
+      "PA-20261114-37",
+      "PA-20261114-42",
+      "PA-20261114-49",
+      "PA-PDF-20261112-21"
+    ],
+    "checkedAt": "2026-11-16T09:46:06.862439+00:00",
+    "status": 200,
+    "finalUrl": "https://learn.microsoft.com/en-us/fabric/data-factory/parameters",
+    "title": "Parameters - Microsoft Fabric | Microsoft Learn",
+    "sha256": "506a7136e5c4c86821de21cb0088fb1c1cab79a4738b3e67cff3526ffee09a43"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/fabric/data-factory/pipeline-overview",
+    "questionIds": [
+      "O16-A",
+      "O16-B",
+      "O16-C",
+      "O26-A",
+      "O26-B",
+      "O26-C",
+      "BASIC-4",
+      "BASIC-11",
+      "MID-4",
+      "ADV-20",
+      "PA-PDF-20261112-25"
+    ],
+    "checkedAt": "2026-11-16T09:46:06.870457+00:00",
+    "status": 200,
+    "finalUrl": "https://learn.microsoft.com/en-us/fabric/data-factory/pipeline-overview",
+    "title": "Pipeline Overview - Microsoft Fabric | Microsoft Learn",
+    "sha256": "8789a30b78d0bfd7db28f7864a83c23bb6da540932da8be185420a719c524631"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/fabric/data-factory/pipeline-runs",
+    "questionIds": [
+      "O17-A",
+      "O17-B",
+      "O17-C",
+      "PA50-01",
+      "PDF-M2-22",
+      "PDF-M3-26",
+      "PALIVE-20261106-37",
+      "PALIVE-20261106-40",
+      "PALIVE-20261106-47",
+      "PA-20261114-44"
+    ],
+    "checkedAt": "2026-11-16T09:46:06.922279+00:00",
+    "status": 200,
+    "finalUrl": "https://learn.microsoft.com/en-us/fabric/data-factory/pipeline-runs",
+    "title": "Run, schedule, or use events to trigger a pipeline - Microsoft Fabric | Microsoft Learn",
+    "sha256": "a298f71fbc888d410d4d7100461ad7bfb2899b2a847329a504183bea786f122f"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/fabric/data-factory/pipeline-troubleshoot-guide",
+    "questionIds": [
+      "O42-A",
+      "O42-B",
+      "O42-C",
+      "ORD-13",
+      "O42-D",
+      "PA50-36"
+    ],
+    "checkedAt": "2026-11-16T09:46:06.953674+00:00",
+    "status": 200,
+    "finalUrl": "https://learn.microsoft.com/en-us/fabric/data-factory/pipeline-troubleshoot-guide",
+    "title": "General troubleshooting - Microsoft Fabric | Microsoft Learn",
+    "sha256": "6d0e878273edada189c9d48cd75c98bd3f85019d26ecfdc73c81dd5bb136c8a5"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/fabric/data-factory/tutorial-incremental-copy-data-warehouse-lakehouse",
+    "questionIds": [
+      "O19-A",
+      "O19-B",
+      "O19-C",
+      "ORD-07",
+      "BASIC-8",
+      "MID-1",
+      "ADV-16",
+      "BRIDGE-1",
+      "BRIDGE-10",
+      "BRIDGE-4",
+      "BRIDGE-13"
+    ],
+    "checkedAt": "2026-11-16T09:46:06.998603+00:00",
+    "status": 200,
+    "finalUrl": "https://learn.microsoft.com/en-us/fabric/data-factory/tutorial-incremental-copy-data-warehouse-lakehouse",
+    "title": "Incrementally load data from Data Warehouse to Lakehouse - Microsoft Fabric | Microsoft Learn",
+    "sha256": "e270ae8a860dd8b20d5f94eea94d1b53d35db4d490f008ffa43303fbee236b5d"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/fabric/data-factory/tutorial-incremental-copy-files-last-modified-date",
+    "questionIds": [
+      "PA-20261114-23"
+    ],
+    "checkedAt": "2026-11-16T09:46:12.039234+00:00",
+    "status": 200,
+    "finalUrl": "https://learn.microsoft.com/en-us/fabric/data-factory/tutorial-incremental-copy-files-last-modified-date",
+    "title": "Incrementally copy new and changed files based on the last modified date - Microsoft Fabric | Microsoft Learn",
+    "sha256": "fa6583f774f45b0c2c79dabdf7afcace6f5298b360481bbd8f6f4c6c17badbce"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/fabric/data-factory/workspace-monitoring",
+    "questionIds": [
+      "PA50-46",
+      "PA-PDF-20261112-03",
+      "PA-PDF-20261112-06",
+      "PA-PDF-20261112-10",
+      "PA-PDF-20261112-11"
+    ],
+    "checkedAt": "2026-11-16T09:46:12.050231+00:00",
+    "status": 200,
+    "finalUrl": "https://learn.microsoft.com/en-us/fabric/data-factory/workspace-monitoring",
+    "title": "Using Pipelines Workspace Monitoring (Preview) in Microsoft Fabric - Microsoft Fabric | Microsoft Learn",
+    "sha256": "4f7ea09231fd55ebce7b25ba15d28328a6fe3cb9a45685944d1a408baa5bc9f0"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/fabric/data-science/data-science-overview",
+    "questionIds": [
+      "PA-20261114-24"
+    ],
+    "checkedAt": "2026-11-16T09:46:12.159358+00:00",
+    "status": 200,
+    "finalUrl": "https://learn.microsoft.com/en-us/fabric/data-science/data-science-overview",
+    "title": "Explore Data Science in Microsoft Fabric - Microsoft Fabric | Microsoft Learn",
+    "sha256": "1de66defa982e0fe3076bb42a2b7be5669364072fb24e7c6b91bd4b30072ef76"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/fabric/data-science/fabric-notebooks-troubleshooting-guide",
+    "questionIds": [
+      "PA50-37",
+      "PALIVE-20261106-01"
+    ],
+    "checkedAt": "2026-11-16T09:49:06.504206+00:00",
+    "status": 200,
+    "finalUrl": "https://learn.microsoft.com/en-us/fabric/data-science/fabric-notebooks-troubleshooting-guide",
+    "title": "Fabric Notebooks troubleshooting guide - Microsoft Fabric | Microsoft Learn",
+    "sha256": "dcf28b0ae1b492e757b4f5abad62b8a5c62eead3d39d73b2b7e08134a214700e"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/fabric/data-warehouse/column-level-security",
+    "questionIds": [
+      "PA50-09",
+      "PA50-12",
+      "PDF-M2-13",
+      "ADV-19",
+      "PALIVE-20261106-43",
+      "PALIVE-20261106-50",
+      "PA-PDF-20261112-19"
+    ],
+    "checkedAt": "2026-11-16T09:46:12.170218+00:00",
+    "status": 200,
+    "finalUrl": "https://learn.microsoft.com/en-us/fabric/data-warehouse/column-level-security",
+    "title": "Column-Level Security in Fabric Data Warehouse - Microsoft Fabric | Microsoft Learn",
+    "sha256": "8c5862cca0d40f8380ea72054414c3b5af9cd74aed8752e211b764cbb33c4733"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/fabric/data-warehouse/data-warehousing",
+    "questionIds": [
+      "BASIC-3",
+      "BASIC-12"
+    ],
+    "checkedAt": "2026-11-16T09:46:12.178172+00:00",
+    "status": 200,
+    "finalUrl": "https://learn.microsoft.com/en-us/fabric/data-warehouse/data-warehousing",
+    "title": "What Is Fabric Data Warehouse? - Microsoft Fabric | Microsoft Learn",
+    "sha256": "2210ff07d1f25f2c4f76ca104b25de8f88cbf6b327489047908c368f7318a1f1"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/fabric/data-warehouse/develop-warehouse-project",
+    "questionIds": [
+      "O06-A",
+      "O06-B",
+      "O06-C",
+      "ORD-02",
+      "O06-D",
+      "PA50-06",
+      "PA50-08",
+      "PDF-M2-23",
+      "PALIVE-20261106-32",
+      "PALIVE-20261106-38",
+      "PA-20261114-38",
+      "PA-20261114-48",
+      "PA-PDF-20261112-23",
+      "PA-PDF-20261112-29"
+    ],
+    "checkedAt": "2026-11-16T09:46:12.182541+00:00",
+    "status": 200,
+    "finalUrl": "https://learn.microsoft.com/en-us/fabric/data-warehouse/develop-warehouse-project",
+    "title": "Develop Warehouse Projects in Visual Studio Code - Microsoft Fabric | Microsoft Learn",
+    "sha256": "2ff96be8dc7dc234362b2e0b78bc28156083cb1b7c23b69d2a5fcd581489300b"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/fabric/data-warehouse/dimensional-modeling-dimension-tables",
+    "questionIds": [
+      "O28-A",
+      "O28-B",
+      "O28-C",
+      "PA50-34",
+      "PDF-M1-04",
+      "PDF-M2-03",
+      "PDF-M3-13",
+      "PALIVE-20261106-21",
+      "PA-PDF-20261112-42"
+    ],
+    "checkedAt": "2026-11-16T09:46:12.331514+00:00",
+    "status": 200,
+    "finalUrl": "https://learn.microsoft.com/en-us/fabric/data-warehouse/dimensional-modeling-dimension-tables",
+    "title": "Modeling Dimension Tables in Warehouse - Microsoft Fabric | Microsoft Learn",
+    "sha256": "904d10e774b11a2903dd1d8254703b150a4bc6b8c09ea783e89666faf92e5191"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/fabric/data-warehouse/dimensional-modeling-overview",
+    "questionIds": [
+      "O20-A",
+      "O20-B",
+      "O20-C"
+    ],
+    "checkedAt": "2026-11-16T09:46:17.497076+00:00",
+    "status": 200,
+    "finalUrl": "https://learn.microsoft.com/en-us/fabric/data-warehouse/dimensional-modeling-overview",
+    "title": "Dimensional Modeling - Microsoft Fabric | Microsoft Learn",
+    "sha256": "cd47e5ab8bc14b393cdb287fdff30719c465a1000ae4b7e875922b9396f5d286"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/fabric/data-warehouse/dynamic-data-masking",
+    "questionIds": [
+      "O11-A",
+      "O11-B",
+      "O11-C",
+      "O11-D",
+      "PA50-10",
+      "PA50-13",
+      "PA50-17",
+      "PA50-19",
+      "PDF-M1-15",
+      "PDF-M2-28",
+      "PDF-M3-16",
+      "PA-20261114-43",
+      "PA-20261114-45",
+      "PA-20261114-50",
+      "PA-PDF-20261112-16"
+    ],
+    "checkedAt": "2026-11-16T09:46:17.497629+00:00",
+    "status": 200,
+    "finalUrl": "https://learn.microsoft.com/en-us/fabric/data-warehouse/dynamic-data-masking",
+    "title": "Dynamic Data Masking in Fabric Data Warehouse - Microsoft Fabric | Microsoft Learn",
+    "sha256": "14c33786af1c8148d60606bba15d0888d8f69390e5aa229984fccc6ee4a2e7fe"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/fabric/data-warehouse/guidelines-warehouse-performance",
+    "questionIds": [
+      "O51-A",
+      "O51-B",
+      "O51-C",
+      "O54-A",
+      "O54-B",
+      "O54-C",
+      "ORD-14",
+      "O51-D",
+      "PDF-M2-27",
+      "PA-20261114-04"
+    ],
+    "checkedAt": "2026-11-16T09:46:17.512216+00:00",
+    "status": 200,
+    "finalUrl": "https://learn.microsoft.com/en-us/fabric/data-warehouse/guidelines-warehouse-performance",
+    "title": "Performance Guidelines - Microsoft Fabric | Microsoft Learn",
+    "sha256": "8ecef4d874a337e9c55162601fce7bd21d0f810b0f688533525ab03504df30e5"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/fabric/data-warehouse/ingest-data-copy",
+    "questionIds": [
+      "PA50-22",
+      "PA50-42",
+      "PALIVE-20261106-24",
+      "PALIVE-20261106-26",
+      "PA-20261114-14"
+    ],
+    "checkedAt": "2026-11-16T09:46:17.514966+00:00",
+    "status": 200,
+    "finalUrl": "https://learn.microsoft.com/en-us/fabric/data-warehouse/ingest-data-copy",
+    "title": "Ingest Data into Your Warehouse Using the COPY Statement - Microsoft Fabric | Microsoft Learn",
+    "sha256": "7f7b2375acfe3552ae94aef3a73b4012ec01fb9c750b4d6c4a8bed8468976a84"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/fabric/data-warehouse/ingest-data-tsql",
+    "questionIds": [
+      "PALIVE-20261106-19"
+    ],
+    "checkedAt": "2026-11-16T09:49:06.504908+00:00",
+    "status": 200,
+    "finalUrl": "https://learn.microsoft.com/en-us/fabric/data-warehouse/ingest-data-tsql",
+    "title": "Ingest Data into Your Warehouse Using Transact-SQL - Microsoft Fabric | Microsoft Learn",
+    "sha256": "9b34c84b62e1d2a54df8d9fe7a97393a9693e3b4dddb160a0c38607000957f75"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/fabric/data-warehouse/query-insights",
+    "questionIds": [
+      "PDF-M2-04"
+    ],
+    "checkedAt": "2026-11-16T09:46:17.518011+00:00",
+    "status": 200,
+    "finalUrl": "https://learn.microsoft.com/en-us/fabric/data-warehouse/query-insights",
+    "title": "Query Insights - Microsoft Fabric | Microsoft Learn",
+    "sha256": "43f5448741e69f7060b5fbdd2511e5eca870b81c7b606014d7fa9dc749e763da"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/fabric/data-warehouse/row-level-security",
+    "questionIds": [
+      "PA50-07",
+      "PDF-M1-01",
+      "PDF-M3-04",
+      "BASIC-14",
+      "MID-6",
+      "ADV-4",
+      "BRIDGE-2",
+      "BRIDGE-18"
+    ],
+    "checkedAt": "2026-11-16T09:46:17.554390+00:00",
+    "status": 200,
+    "finalUrl": "https://learn.microsoft.com/en-us/fabric/data-warehouse/row-level-security",
+    "title": "Row-Level Security in Fabric Data Warehouse - Microsoft Fabric | Microsoft Learn",
+    "sha256": "4da8510ef78bb2b35bb6e07cf51559d2e79321cb8e77aae91f8f90580c3e4b11"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/fabric/data-warehouse/security",
+    "questionIds": [
+      "O47-A",
+      "O47-B",
+      "O47-C",
+      "ORD-04",
+      "O47-D",
+      "PA50-16",
+      "PA50-18",
+      "PALIVE-20261106-33"
+    ],
+    "checkedAt": "2026-11-16T09:46:17.593941+00:00",
+    "status": 200,
+    "finalUrl": "https://learn.microsoft.com/en-us/fabric/data-warehouse/security",
+    "title": "Secure Your Fabric Data Warehouse - Microsoft Fabric | Microsoft Learn",
+    "sha256": "bbf2a4e0b9ffe92693ece2306b20a25afe695008f6bf56d1d147916c200d38a1"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/fabric/data-warehouse/tsql-surface-area",
+    "questionIds": [
+      "MID-2",
+      "MID-11",
+      "ADV-1",
+      "ADV-17",
+      "ADV-11",
+      "ADV-12",
+      "ADV-26",
+      "ADV-27",
+      "BRIDGE-6",
+      "BRIDGE-15"
+    ],
+    "checkedAt": "2026-11-16T09:46:17.664926+00:00",
+    "status": 200,
+    "finalUrl": "https://learn.microsoft.com/en-us/fabric/data-warehouse/tsql-surface-area",
+    "title": "T-SQL Surface Area in Fabric Data Warehouse - Microsoft Fabric | Microsoft Learn",
+    "sha256": "364d14cec6c8136d9ee6d43f02462b61c5d6c6d79308e845f09429cce021ecf6"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/fabric/fundamentals/prepare-transform-data",
+    "questionIds": [
+      "O27-A",
+      "O27-B",
+      "O27-C",
+      "O29-A",
+      "O29-B",
+      "O29-C",
+      "PA50-26"
+    ],
+    "checkedAt": "2026-11-16T09:46:23.160609+00:00",
+    "status": 200,
+    "finalUrl": "https://learn.microsoft.com/en-us/fabric/fundamentals/prepare-transform-data",
+    "title": "Prepare and transform data in Microsoft Fabric - Microsoft Fabric | Microsoft Learn",
+    "sha256": "72c3962938fe69e83dd4e0ab94e5cd837465fa6cda747cebfcd88827972c299b"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/fabric/fundamentals/roles-workspaces",
+    "questionIds": [
+      "O08-A",
+      "O08-B",
+      "O08-C",
+      "O08-D",
+      "MID-7",
+      "ADV-3",
+      "BRIDGE-11",
+      "BRIDGE-7"
+    ],
+    "checkedAt": "2026-11-16T09:46:23.199787+00:00",
+    "status": 200,
+    "finalUrl": "https://learn.microsoft.com/en-us/fabric/fundamentals/roles-workspaces",
+    "title": "Roles in workspaces in Microsoft Fabric - Microsoft Fabric | Microsoft Learn",
+    "sha256": "01262d04531049c032f380dc259987e7c097b573f178cfc68a28a408cad054e4"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/fabric/fundamentals/store-data",
+    "questionIds": [
+      "O22-A",
+      "O22-B",
+      "O22-C",
+      "PA50-24",
+      "PA50-27",
+      "PALIVE-20261106-25",
+      "PA-20261114-21",
+      "PA-20261114-28"
+    ],
+    "checkedAt": "2026-11-16T09:46:23.247024+00:00",
+    "status": 200,
+    "finalUrl": "https://learn.microsoft.com/en-us/fabric/fundamentals/store-data",
+    "title": "Data storage options in Microsoft Fabric - Microsoft Fabric | Microsoft Learn",
+    "sha256": "c3cbd9ee0aff869e72e9c43ac21a4aee77a531de2d29ddc6c9c5e85241a006a0"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/fabric/fundamentals/table-maintenance-optimization",
+    "questionIds": [
+      "PALIVE-20261106-14"
+    ],
+    "checkedAt": "2026-11-16T09:49:06.505416+00:00",
+    "status": 200,
+    "finalUrl": "https://learn.microsoft.com/en-us/fabric/fundamentals/table-maintenance-optimization",
+    "title": "Cross-Workload Table Maintenance and Optimization in Microsoft Fabric - Microsoft Fabric | Microsoft Learn",
+    "sha256": "f239b799e49192f6fcbf1b1fd2e64a9659256e15ace2aeccca4390e0c2837db7"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/fabric/fundamentals/workspace-monitoring-overview",
+    "questionIds": [
+      "PA-PDF-20261112-14"
+    ],
+    "checkedAt": "2026-11-16T09:46:23.247499+00:00",
+    "status": 200,
+    "finalUrl": "https://learn.microsoft.com/en-us/fabric/fundamentals/workspace-monitoring-overview",
+    "title": "Workspace Monitoring Overview - Microsoft Fabric | Microsoft Learn",
+    "sha256": "3dfbd4be4555964edb510d1cb91f08bd77d2dd25a4e637e301b16b47a9f25d83"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/fabric/governance/domains",
+    "questionIds": [
+      "O02-A",
+      "O02-B",
+      "O02-C",
+      "O02-D",
+      "PDF-M2-08",
+      "PALIVE-20261106-39",
+      "PA-20261114-39"
+    ],
+    "checkedAt": "2026-11-16T09:46:23.260938+00:00",
+    "status": 200,
+    "finalUrl": "https://learn.microsoft.com/en-us/fabric/governance/domains",
+    "title": "Domains - Microsoft Fabric | Microsoft Learn",
+    "sha256": "8d4d27842858cdae68bcefc87774ae285f8c2aa7fa601ebef5175717eb1173d6"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/fabric/governance/endorsement-overview",
+    "questionIds": [
+      "O13-A",
+      "O13-B",
+      "O13-C",
+      "O13-D"
+    ],
+    "checkedAt": "2026-11-16T09:46:23.270655+00:00",
+    "status": 200,
+    "finalUrl": "https://learn.microsoft.com/en-us/fabric/governance/endorsement-overview",
+    "title": "Endorsement overview - Microsoft Fabric | Microsoft Learn",
+    "sha256": "c47d5a3394c3ea852c7917865b5cdfaef854907a58b72dc3e30630e4550e6c3a"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/fabric/governance/information-protection",
+    "questionIds": [
+      "O12-A",
+      "O12-B",
+      "O12-C",
+      "O12-D"
+    ],
+    "checkedAt": "2026-11-16T09:46:23.307669+00:00",
+    "status": 200,
+    "finalUrl": "https://learn.microsoft.com/en-us/fabric/governance/information-protection",
+    "title": "Information protection in Fabric - Microsoft Fabric | Microsoft Learn",
+    "sha256": "87d095cf120fd5f8652174c0605d4724ec59e36f9fbf0259191cf32bf7a5c371"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/fabric/mirroring/azure-sql-database-tutorial",
+    "questionIds": [
+      "PA-PDF-20261112-44"
+    ],
+    "checkedAt": "2026-11-16T09:46:23.313422+00:00",
+    "status": 200,
+    "finalUrl": "https://learn.microsoft.com/en-us/fabric/mirroring/azure-sql-database-tutorial",
+    "title": "Tutorial: Configure Microsoft Fabric Mirrored Databases From Azure SQL Database - Microsoft Fabric | Microsoft Learn",
+    "sha256": "01ebeb7911917a08b303860ae05a3c5c44a676a67ff17097a1ec2bbd6e38f2a9"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/fabric/mirroring/monitor",
+    "questionIds": [
+      "PDF-M2-20",
+      "PDF-M3-24"
+    ],
+    "checkedAt": "2026-11-16T09:46:29.390013+00:00",
+    "status": 200,
+    "finalUrl": "https://learn.microsoft.com/en-us/fabric/mirroring/monitor",
+    "title": "Monitor Mirrored Database Replication - Microsoft Fabric | Microsoft Learn",
+    "sha256": "ae2f6995bffb4b97bad6e65de0c108e9f7ae62209bf49b6febef349475bdb83f"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/fabric/mirroring/overview",
+    "questionIds": [
+      "O25-A",
+      "O25-B",
+      "O25-C",
+      "ORD-10",
+      "PA50-33"
+    ],
+    "checkedAt": "2026-11-16T09:46:29.391931+00:00",
+    "status": 200,
+    "finalUrl": "https://learn.microsoft.com/en-us/fabric/mirroring/overview",
+    "title": "Mirroring - Microsoft Fabric | Microsoft Learn",
+    "sha256": "821761ba27930e551f515dcc704fe38b3fbd73e397a8f3222054f51ef4e826cb"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/fabric/onelake/onelake-medallion-lakehouse-architecture",
+    "questionIds": [
+      "ORD-08",
+      "PA-20261114-22"
+    ],
+    "checkedAt": "2026-11-16T09:46:29.434794+00:00",
+    "status": 200,
+    "finalUrl": "https://learn.microsoft.com/en-us/fabric/onelake/onelake-medallion-lakehouse-architecture",
+    "title": "Implement Medallion Lakehouse Architecture in Fabric - Microsoft Fabric | Microsoft Learn",
+    "sha256": "0c4f879e2d2e942f9bb63d8ae8a9bab23b3214aec4173ab005c6fc40eb690aa5"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/fabric/onelake/onelake-overview",
+    "questionIds": [
+      "BASIC-1"
+    ],
+    "checkedAt": "2026-11-16T09:46:29.439793+00:00",
+    "status": 200,
+    "finalUrl": "https://learn.microsoft.com/en-us/fabric/onelake/onelake-overview",
+    "title": "OneLake, the unified data lake - Microsoft Fabric | Microsoft Learn",
+    "sha256": "1e9027788e3e0362777f3315aca09f8727f35cf419a854e1d8f01dcd51e57a8b"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/fabric/onelake/onelake-shortcuts",
+    "questionIds": [
+      "O24-A",
+      "O24-B",
+      "O24-C",
+      "ORD-09",
+      "PDF-M1-22",
+      "BASIC-10",
+      "MID-3",
+      "ADV-2",
+      "ADV-18",
+      "PA-20261114-18"
+    ],
+    "checkedAt": "2026-11-16T09:46:29.478931+00:00",
+    "status": 200,
+    "finalUrl": "https://learn.microsoft.com/en-us/fabric/onelake/onelake-shortcuts",
+    "title": "Unify Data Sources With OneLake Shortcuts - Microsoft Fabric | Microsoft Learn",
+    "sha256": "9f862151649f243d837adc0b68fe6c5c62c641848b2cf312dec8308b6235b1de"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/fabric/onelake/security/get-started-security",
+    "questionIds": [
+      "O03-A",
+      "O03-B",
+      "O03-C",
+      "O03-D"
+    ],
+    "checkedAt": "2026-11-16T09:46:29.495065+00:00",
+    "status": 200,
+    "finalUrl": "https://learn.microsoft.com/en-us/fabric/onelake/security/get-started-security",
+    "title": "Data security overview - Microsoft Fabric | Microsoft Learn",
+    "sha256": "c89c41ff4cc3995ae8916b0d64704faabb3cb0458a40ab32b75071a7a1eaa079"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/fabric/onelake/security/table-column-row-security",
+    "questionIds": [
+      "O10-A",
+      "O10-B",
+      "O10-C",
+      "O10-D"
+    ],
+    "checkedAt": "2026-11-16T09:46:29.531932+00:00",
+    "status": 200,
+    "finalUrl": "https://learn.microsoft.com/en-us/fabric/onelake/security/table-column-row-security",
+    "title": "OneLake table, column, and row-level security - Microsoft Fabric | Microsoft Learn",
+    "sha256": "3222188e1e4b5c5948da4affe85852b229e6d81d43a64a88c19b204f34670a5e"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/fabric/real-time-hub/explore-fabric-job-events",
+    "questionIds": [
+      "PA-PDF-20261112-17"
+    ],
+    "checkedAt": "2026-11-16T09:46:29.907752+00:00",
+    "status": 200,
+    "finalUrl": "https://learn.microsoft.com/en-us/fabric/real-time-hub/explore-fabric-job-events",
+    "title": "Explore Job events in Fabric Real-Time hub - Microsoft Fabric | Microsoft Learn",
+    "sha256": "4473bf7bfd63b06fbd8c6b16a8322846f22d6a06b7f2e82fa3a2989177254340"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/fabric/real-time-hub/process-data-streams-using-transformations",
+    "questionIds": [
+      "ORD-11",
+      "PA50-25",
+      "PA50-31"
+    ],
+    "checkedAt": "2026-11-16T09:46:35.630433+00:00",
+    "status": 200,
+    "finalUrl": "https://learn.microsoft.com/en-us/fabric/real-time-hub/process-data-streams-using-transformations",
+    "title": "Process data streams in Real-Time hub - Microsoft Fabric | Microsoft Learn",
+    "sha256": "c6ff55fc08875fe46890a1e5ef90b5547ecfd8a2c00b93fcf01e37e602207010"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/fabric/real-time-intelligence/dashboard-real-time-create",
+    "questionIds": [
+      "ADV-9",
+      "BRIDGE-14",
+      "BRIDGE-8"
+    ],
+    "checkedAt": "2026-11-16T09:46:35.656523+00:00",
+    "status": 200,
+    "finalUrl": "https://learn.microsoft.com/en-us/fabric/real-time-intelligence/dashboard-real-time-create",
+    "title": "Create a Real-Time Dashboard - Microsoft Fabric | Microsoft Learn",
+    "sha256": "3805c383b39f8885ec11a8a9f8d043ba21d0cfe684a1afa0cc790f289da7273a"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/fabric/real-time-intelligence/data-activator/activator-introduction",
+    "questionIds": [
+      "PALIVE-20261106-04"
+    ],
+    "checkedAt": "2026-11-16T09:46:35.662156+00:00",
+    "status": 200,
+    "finalUrl": "https://learn.microsoft.com/en-us/fabric/real-time-intelligence/data-activator/activator-introduction",
+    "title": "What is Fabric Activator? - Microsoft Fabric | Microsoft Learn",
+    "sha256": "6dbc2ae22692da2720231d9cffaec1ecc692426f07f1cfbaf0fa92db839d2b0f"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/fabric/real-time-intelligence/event-streams/monitor",
+    "questionIds": [
+      "O46-A",
+      "O46-B",
+      "O46-C",
+      "O46-D",
+      "PDF-M1-11",
+      "PDF-M2-24",
+      "PDF-M3-12",
+      "PALIVE-20261106-06",
+      "PA-PDF-20261112-02"
+    ],
+    "checkedAt": "2026-11-16T09:46:35.672346+00:00",
+    "status": 200,
+    "finalUrl": "https://learn.microsoft.com/en-us/fabric/real-time-intelligence/event-streams/monitor",
+    "title": "Monitor the Status and Performance of an Eventstream - Microsoft Fabric | Microsoft Learn",
+    "sha256": "94f30a182fb91808b8873b25244510b36683b5d5dd6a03e675abcddf962c7097"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/fabric/real-time-intelligence/event-streams/overview",
+    "questionIds": [
+      "O31-A",
+      "O31-B",
+      "O31-C",
+      "O34-A",
+      "O34-B",
+      "O34-C",
+      "BASIC-9",
+      "MID-10",
+      "ADV-5",
+      "ADV-24",
+      "PALIVE-20261106-20",
+      "PA-20261114-25",
+      "PA-20261114-30",
+      "PA-PDF-20261112-41",
+      "PA-PDF-20261112-50"
+    ],
+    "checkedAt": "2026-11-16T09:46:35.686979+00:00",
+    "status": 200,
+    "finalUrl": "https://learn.microsoft.com/en-us/fabric/real-time-intelligence/event-streams/overview",
+    "title": "Microsoft Fabric Eventstreams Overview - Microsoft Fabric | Microsoft Learn",
+    "sha256": "9dabb76feb3e7bb4d3bfdd9769a0d363f6e14e8da19ff3cc9cbb49cfa790d60c"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/fabric/real-time-intelligence/eventhouse",
+    "questionIds": [
+      "BASIC-15"
+    ],
+    "checkedAt": "2026-11-16T09:46:35.702340+00:00",
+    "status": 200,
+    "finalUrl": "https://learn.microsoft.com/en-us/fabric/real-time-intelligence/eventhouse",
+    "title": "Eventhouse overview - Microsoft Fabric | Microsoft Learn",
+    "sha256": "6865c142c7a0b9076d65cc50736a971bcdbc26cdd8da695fbc38d605996bca51"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/fabric/real-time-intelligence/eventhouse-smart-capacity-control",
+    "questionIds": [
+      "PA50-40",
+      "PA-PDF-20261112-12"
+    ],
+    "checkedAt": "2026-11-16T09:46:35.707083+00:00",
+    "status": 200,
+    "finalUrl": "https://learn.microsoft.com/en-us/fabric/real-time-intelligence/eventhouse-smart-capacity-control",
+    "title": "Schedule Eventhouse Capacity for Real-Time Analytics Workloads - Microsoft Fabric | Microsoft Learn",
+    "sha256": "55f4d0f7f846aa65c23911eba6f14965bc2b8a124ec1c6b4aa6cdcaccebecf61"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/fabric/real-time-intelligence/kusto-query-set",
+    "questionIds": [
+      "MID-14",
+      "MID-15",
+      "ADV-14",
+      "ADV-15",
+      "ADV-29",
+      "ADV-30",
+      "BRIDGE-9",
+      "BRIDGE-16",
+      "PA-20261114-17"
+    ],
+    "checkedAt": "2026-11-16T09:46:42.235391+00:00",
+    "status": 200,
+    "finalUrl": "https://learn.microsoft.com/en-us/fabric/real-time-intelligence/kusto-query-set",
+    "title": "Query data in a KQL queryset - Microsoft Fabric | Microsoft Learn",
+    "sha256": "f08e9e6fb21b6c314c37757c349c1fa6658174073404f19df52e57e45aefec73"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/fabric/real-time-intelligence/manage-monitor-eventhouse",
+    "questionIds": [
+      "O45-A",
+      "O45-B",
+      "O45-C",
+      "O52-A",
+      "O52-B",
+      "O52-C",
+      "ORD-16",
+      "O45-D",
+      "PDF-M1-14",
+      "PDF-M1-29",
+      "PDF-M3-08",
+      "PDF-M3-22"
+    ],
+    "checkedAt": "2026-11-16T09:46:42.243629+00:00",
+    "status": 200,
+    "finalUrl": "https://learn.microsoft.com/en-us/fabric/real-time-intelligence/manage-monitor-eventhouse",
+    "title": "Manage and monitor an eventhouse - Microsoft Fabric | Microsoft Learn",
+    "sha256": "66fa1d250d6bb6cb53834a93c992e0084675b9b4a6bbfa950337e780ece156e3"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/fabric/real-time-intelligence/overview",
+    "questionIds": [
+      "PA-PDF-20261112-07"
+    ],
+    "checkedAt": "2026-11-16T09:46:42.277924+00:00",
+    "status": 200,
+    "finalUrl": "https://learn.microsoft.com/en-us/fabric/real-time-intelligence/overview",
+    "title": "What Is Real-Time Intelligence in Microsoft Fabric? - Microsoft Fabric | Microsoft Learn",
+    "sha256": "13b648be3f45c8b2dc00ed7c30f4e8a002b5db8dc4455bd0be4c49aac4664acd"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/fabric/real-time-intelligence/query-acceleration-overview",
+    "questionIds": [
+      "C-KQL-07"
+    ],
+    "checkedAt": "2026-11-16T09:46:42.307177+00:00",
+    "status": 200,
+    "finalUrl": "https://learn.microsoft.com/en-us/fabric/real-time-intelligence/query-acceleration-overview",
+    "title": "Query acceleration for OneLake shortcuts - overview - Microsoft Fabric | Microsoft Learn",
+    "sha256": "0b345c35eb52dbe4ed4b782643ee59e5277e235b4231a210c4fa6262ec10390f"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/fabric/real-time-intelligence/table-update-policy",
+    "questionIds": [
+      "PA50-30",
+      "PA-PDF-20261112-36",
+      "PA-PDF-20261112-37"
+    ],
+    "checkedAt": "2026-11-16T09:46:42.316125+00:00",
+    "status": 200,
+    "finalUrl": "https://learn.microsoft.com/en-us/fabric/real-time-intelligence/table-update-policy",
+    "title": "Create a table update policy in Real-Time Intelligence - Microsoft Fabric | Microsoft Learn",
+    "sha256": "f794d44e3b861f2c370100fdaea7f2e39ad9e467056eadd96c2cfae19f048295"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/kusto/management/ingestion-failures",
+    "questionIds": [
+      "PDF-M2-15"
+    ],
+    "checkedAt": "2026-11-16T09:46:42.316502+00:00",
+    "status": 200,
+    "finalUrl": "https://learn.microsoft.com/en-us/kusto/management/ingestion-failures?view=microsoft-fabric",
+    "title": ".show ingestion failures command - Kusto | Microsoft Learn",
+    "sha256": "27ff534074bd5d4338fe02be439b01e9a5571bce52550e7cd1008ac0659428ff"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/kusto/management/materialized-views/materialized-view-overview",
+    "questionIds": [
+      "PDF-M3-07"
+    ],
+    "checkedAt": "2026-11-16T09:46:42.327005+00:00",
+    "status": 200,
+    "finalUrl": "https://learn.microsoft.com/en-us/kusto/management/materialized-views/materialized-view-overview?view=microsoft-fabric",
+    "title": "Materialized views - Kusto | Microsoft Learn",
+    "sha256": "8f119b6a2475affc6d41ed6dc400854e77800cdf4be279a196e66bd0c7cf9824"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/kusto/management/show-external-table-operations-query-acceleration-statistics?view=microsoft-fabric",
+    "questionIds": [
+      "C-KQL-10"
+    ],
+    "checkedAt": "2026-11-16T09:46:42.351064+00:00",
+    "status": 200,
+    "finalUrl": "https://learn.microsoft.com/en-us/kusto/management/show-external-table-operations-query-acceleration-statistics?view=microsoft-fabric",
+    "title": ".show external table operations query_acceleration statistics command - Kusto | Microsoft Learn",
+    "sha256": "76dd7b33ab910ffead42bb91924d65026d7321855b93759c24ff14cb3a2efe47"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/kusto/query/arg-max-aggregation-function",
+    "questionIds": [
+      "C-KQL-06",
+      "PDF-M2-11"
+    ],
+    "checkedAt": "2026-11-16T09:46:47.790235+00:00",
+    "status": 200,
+    "finalUrl": "https://learn.microsoft.com/en-us/kusto/query/arg-max-aggregation-function?view=microsoft-fabric",
+    "title": "arg_max() (aggregation function) - Kusto | Microsoft Learn",
+    "sha256": "df24d0e179794ed6343fc3235a249b1ef48bceca00e30110efdeebf22238a1a3"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/kusto/query/avg-aggregation-function",
+    "questionIds": [
+      "C-KQL-03"
+    ],
+    "checkedAt": "2026-11-16T09:46:47.791267+00:00",
+    "status": 200,
+    "finalUrl": "https://learn.microsoft.com/en-us/kusto/query/avg-aggregation-function?view=microsoft-fabric",
+    "title": "avg() (aggregation function) - Kusto | Microsoft Learn",
+    "sha256": "b3303e4851979598770dbce071fc9a5399fb743ddaa79a7719853e275e3ee0fe"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/kusto/query/best-practices",
+    "questionIds": [
+      "C-KQL-08"
+    ],
+    "checkedAt": "2026-11-16T09:46:47.824988+00:00",
+    "status": 200,
+    "finalUrl": "https://learn.microsoft.com/en-us/kusto/query/best-practices?view=microsoft-fabric",
+    "title": "Best practices for Kusto Query Language queries - Kusto | Microsoft Learn",
+    "sha256": "36b057b45c86b4326703d6333fef9acdeaddd838c9409e76dea9192a87d1df5b"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/kusto/query/bin-function",
+    "questionIds": [
+      "C-KQL-05"
+    ],
+    "checkedAt": "2026-11-16T09:46:47.828104+00:00",
+    "status": 200,
+    "finalUrl": "https://learn.microsoft.com/en-us/kusto/query/bin-function?view=microsoft-fabric",
+    "title": "bin() - Kusto | Microsoft Learn",
+    "sha256": "6bce5335709df43a4db7a68aa32cbfc495f0929bee0c884a6ca1a70beb9a9c14"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/kusto/query/functions/user-defined-functions",
+    "questionIds": [
+      "PDF-M2-30"
+    ],
+    "checkedAt": "2026-11-16T09:46:47.862006+00:00",
+    "status": 200,
+    "finalUrl": "https://learn.microsoft.com/en-us/kusto/query/functions/user-defined-functions?view=microsoft-fabric",
+    "title": "User-defined functions - Kusto | Microsoft Learn",
+    "sha256": "2afdbc8edc6f6fe144371986fdb8cd20558cea475f685cee620c73e5a98a77ad"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/kusto/query/join-inner",
+    "questionIds": [
+      "C-KQL-09"
+    ],
+    "checkedAt": "2026-11-16T09:46:47.865770+00:00",
+    "status": 200,
+    "finalUrl": "https://learn.microsoft.com/en-us/kusto/query/join-inner?view=microsoft-fabric",
+    "title": "inner join - Kusto | Microsoft Learn",
+    "sha256": "0225ccf9e9f638ba18fee2a03af05a0e8c40ce246a34832392acb30a3f1251b7"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/kusto/query/project-operator",
+    "questionIds": [
+      "C-KQL-04"
+    ],
+    "checkedAt": "2026-11-16T09:46:53.320129+00:00",
+    "status": 200,
+    "finalUrl": "https://learn.microsoft.com/en-us/kusto/query/project-operator?view=microsoft-fabric",
+    "title": "Project operator - Kusto | Microsoft Learn",
+    "sha256": "e50171186e1f70117b983569185cf3065995caf4358f99162c6864d44548d625"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/kusto/query/scalar-data-types/dynamic?view=microsoft-fabric",
+    "questionIds": [
+      "PA-PDF-20261112-43"
+    ],
+    "checkedAt": "2026-11-16T09:46:53.428182+00:00",
+    "status": 200,
+    "finalUrl": "https://learn.microsoft.com/en-us/kusto/query/scalar-data-types/dynamic?view=microsoft-fabric",
+    "title": "The dynamic data type - Kusto | Microsoft Learn",
+    "sha256": "2b5f575adea064f6f570d8f69b87c8821c17be5ad378c9ec9a607ee2114ef4dd"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/kusto/query/summarize-operator",
+    "questionIds": [
+      "C-KQL-02"
+    ],
+    "checkedAt": "2026-11-16T09:46:59.362636+00:00",
+    "status": 200,
+    "finalUrl": "https://learn.microsoft.com/en-us/kusto/query/summarize-operator?view=microsoft-fabric",
+    "title": "summarize operator - Kusto | Microsoft Learn",
+    "sha256": "482b7b279274de305232efff18efa054cfd433d3d7557134756c1b59ec032b54"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/kusto/query/tutorials/learn-common-operators",
+    "questionIds": [
+      "O36-A",
+      "O36-B",
+      "O36-C"
+    ],
+    "checkedAt": "2026-11-16T09:46:59.378735+00:00",
+    "status": 200,
+    "finalUrl": "https://learn.microsoft.com/en-us/kusto/query/tutorials/learn-common-operators?view=microsoft-fabric",
+    "title": "Tutorial: Learn Common Kusto Query Language Operators - Kusto | Microsoft Learn",
+    "sha256": "e25def57beddab810366938d4a694c40df37e0e7e4cea912a6dbd6be82bc30f3"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/kusto/query/where-operator",
+    "questionIds": [
+      "C-KQL-01"
+    ],
+    "checkedAt": "2026-11-16T09:46:59.381938+00:00",
+    "status": 200,
+    "finalUrl": "https://learn.microsoft.com/en-us/kusto/query/where-operator?view=microsoft-fabric",
+    "title": "where operator - Kusto | Microsoft Learn",
+    "sha256": "da1cec66f2e1265b179d89ed069f0839f10d947d19a6b822d9b0445690d1d0de"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/power-bi/connect-data/refresh-data",
+    "questionIds": [
+      "O40-A",
+      "O40-B",
+      "O40-C",
+      "O40-D"
+    ],
+    "checkedAt": "2026-11-16T09:46:59.386225+00:00",
+    "status": 200,
+    "finalUrl": "https://learn.microsoft.com/en-us/power-bi/connect-data/refresh-data",
+    "title": "Data refresh in Power BI - Power BI | Microsoft Learn",
+    "sha256": "962fd244403423c46836c4b3747e58ff386e9bb111e8b837244438c11e3f8f6d"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/power-query/power-query-folding",
+    "questionIds": [
+      "PDF-M1-24",
+      "PDF-M3-30"
+    ],
+    "checkedAt": "2026-11-16T09:46:59.410532+00:00",
+    "status": 200,
+    "finalUrl": "https://learn.microsoft.com/en-us/power-query/query-folding-basics",
+    "title": "Understanding Query Evaluation and Query Folding in Power Query - Power Query | Microsoft Learn",
+    "sha256": "674326b8277ea1c4d04cd8d25c0fc65eefb12e532da73492a80564827fa0f23b"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/sql/t-sql/functions/row-number-transact-sql",
+    "questionIds": [
+      "C-SQL-03"
+    ],
+    "checkedAt": "2026-11-16T09:46:59.431546+00:00",
+    "status": 200,
+    "finalUrl": "https://learn.microsoft.com/en-us/sql/t-sql/functions/row-number-transact-sql?view=sql-server-ver17",
+    "title": "ROW_NUMBER (Transact-SQL) - SQL Server | Microsoft Learn",
+    "sha256": "6eaf956fa60e7308ed1aa8c9cc67d503ef88586dbcbed69c29f59271fea5001a"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/sql/t-sql/language-elements/case-transact-sql",
+    "questionIds": [
+      "C-SQL-05"
+    ],
+    "checkedAt": "2026-11-16T09:47:06.149195+00:00",
+    "status": 200,
+    "finalUrl": "https://learn.microsoft.com/en-us/sql/t-sql/language-elements/case-transact-sql?view=sql-server-ver17",
+    "title": "CASE (Transact-SQL) - SQL Server | Microsoft Learn",
+    "sha256": "a1e40e747e3aa9d09c67a3dab827bf18e2e449be7dade7bf83ad58f27dff7066"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/sql/t-sql/language-elements/coalesce-transact-sql",
+    "questionIds": [
+      "C-SQL-02"
+    ],
+    "checkedAt": "2026-11-16T09:49:06.508368+00:00",
+    "status": 200,
+    "finalUrl": "https://learn.microsoft.com/en-us/sql/t-sql/language-elements/coalesce-transact-sql?view=sql-server-ver17",
+    "title": "COALESCE (Transact-SQL) - SQL Server | Microsoft Learn",
+    "sha256": "e2d2e1b8332a21a060f8f73afa41e22a4ea27ffe38c529fda03601ff70427303"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/sql/t-sql/queries/from-transact-sql",
+    "questionIds": [
+      "C-SQL-04"
+    ],
+    "checkedAt": "2026-11-16T09:47:06.205560+00:00",
+    "status": 200,
+    "finalUrl": "https://learn.microsoft.com/en-us/sql/t-sql/queries/from-transact-sql?view=sql-server-ver17",
+    "title": "FROM clause plus JOIN, APPLY, PIVOT (T-SQL) - SQL Server | Microsoft Learn",
+    "sha256": "9516d71feaf230d3a271df4cb130a6a0a8388d3e5d15de87917e20fbdc6b1218"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/sql/t-sql/queries/select-clause-transact-sql",
+    "questionIds": [
+      "C-SQL-08"
+    ],
+    "checkedAt": "2026-11-16T09:47:06.206033+00:00",
+    "status": 200,
+    "finalUrl": "https://learn.microsoft.com/en-us/sql/t-sql/queries/select-clause-transact-sql?view=sql-server-ver17",
+    "title": "SELECT Clause (Transact-SQL) - SQL Server | Microsoft Learn",
+    "sha256": "c2681f3e272dc7e3c5e270b4f773efc909b8287c8b3a1e439650ea33dbbf7472"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/sql/t-sql/queries/select-group-by-transact-sql",
+    "questionIds": [
+      "C-SQL-01",
+      "C-SQL-07"
+    ],
+    "checkedAt": "2026-11-16T09:47:11.302123+00:00",
+    "status": 200,
+    "finalUrl": "https://learn.microsoft.com/en-us/sql/t-sql/queries/select-group-by-transact-sql?view=sql-server-ver17",
+    "title": "GROUP BY (Transact-SQL) - SQL Server | Microsoft Learn",
+    "sha256": "002717fc15a158badc881f7d48a2de52051c471791889724ffe45c32ec7d2280"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/sql/tools/visual-studio-code-extensions/sql-database-projects/build-database-project-from-command-line?view=sql-server-ver17",
+    "questionIds": [
+      "PA-PDF-20261112-27"
+    ],
+    "checkedAt": "2026-11-16T09:47:11.342132+00:00",
+    "status": 200,
+    "finalUrl": "https://learn.microsoft.com/en-us/sql/tools/visual-studio-code-extensions/sql-database-projects/build-database-project-from-command-line?view=sql-server-ver17",
+    "title": "Build a Project from the Command Line - SQL Server | Microsoft Learn",
+    "sha256": "771880089994a6d8021ced6828016f031f89dcbf0d2a9cd17e8f0cc1d2bb8283"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/stream-analytics-query/hopping-window-azure-stream-analytics",
+    "questionIds": [
+      "PDF-M2-02"
+    ],
+    "checkedAt": "2026-11-16T09:47:11.358386+00:00",
+    "status": 200,
+    "finalUrl": "https://learn.microsoft.com/en-us/stream-analytics-query/hopping-window-azure-stream-analytics",
+    "title": "Hopping Window - Stream Analytics Query | Microsoft Learn",
+    "sha256": "cdde68b8e4ae3c155ed45b61e2cdde174f9f1faa7700070967b8059dd0b66e56"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/stream-analytics-query/tumbling-window-azure-stream-analytics",
+    "questionIds": [
+      "PDF-M1-20"
+    ],
+    "checkedAt": "2026-11-16T09:47:11.374220+00:00",
+    "status": 200,
+    "finalUrl": "https://learn.microsoft.com/en-us/stream-analytics-query/tumbling-window-azure-stream-analytics",
+    "title": "Tumbling Window - Stream Analytics Query | Microsoft Learn",
+    "sha256": "3d7c414e30689343da8a90562579c8ed5f107864ef1fb1dfb16aa387fc16867f"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/stream-analytics-query/windowing-azure-stream-analytics",
+    "questionIds": [
+      "O37-A",
+      "O37-B",
+      "O37-C"
+    ],
+    "checkedAt": "2026-11-16T09:49:06.508951+00:00",
+    "status": 200,
+    "finalUrl": "https://learn.microsoft.com/en-us/stream-analytics-query/windowing-azure-stream-analytics",
+    "title": "Windowing - Stream Analytics Query | Microsoft Learn",
+    "sha256": "e831ffd848c6acbec04cb31c4d7b2150992a998b67ecc5359fbce7ffaa83404d"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/stream-analytics-query/windows-azure-stream-analytics",
+    "questionIds": [
+      "PA50-29",
+      "PALIVE-20261106-27",
+      "PA-20261114-16"
+    ],
+    "checkedAt": "2026-11-16T09:47:11.383126+00:00",
+    "status": 200,
+    "finalUrl": "https://learn.microsoft.com/en-us/stream-analytics-query/windows-azure-stream-analytics",
+    "title": "Windows - Stream Analytics Query | Microsoft Learn",
+    "sha256": "bf06a0552abc521c9a43fce5725d65824ddd86a14de11351d4306bc90f19a95a"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/training/modules/fabric-transform-data-notebooks/",
+    "questionIds": [
+      "ORD-12"
+    ],
+    "checkedAt": "2026-11-16T09:47:16.652252+00:00",
+    "status": 200,
+    "finalUrl": "https://learn.microsoft.com/en-us/training/modules/fabric-transform-data-notebooks/",
+    "title": "Transform Data Using Notebooks in Microsoft Fabric - Training | Microsoft Learn",
+    "sha256": "d1f19a2f60e6413dada4fafc4b66e5d15a6e742296b91be9d26ba8e0dc2f5513"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/training/modules/fabric-transform-data-notebooks/4-combine-aggregate",
+    "questionIds": [
+      "PDF-M1-12",
+      "PDF-M3-21"
+    ],
+    "checkedAt": "2026-11-16T09:47:16.658043+00:00",
+    "status": 200,
+    "finalUrl": "https://learn.microsoft.com/en-us/training/modules/fabric-transform-data-notebooks/4-combine-aggregate",
+    "title": "Combine and Aggregate Data - Training | Microsoft Learn",
+    "sha256": "eb5affc96d943b8dbdc117efe7f0bbbe542654a1884bd30376b9701b543d8711"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/training/modules/fabric-transform-data-tsql/",
+    "questionIds": [
+      "C-SQL-06",
+      "C-SQL-09",
+      "C-SQL-10"
+    ],
+    "checkedAt": "2026-11-16T09:47:16.681593+00:00",
+    "status": 200,
+    "finalUrl": "https://learn.microsoft.com/en-us/training/modules/fabric-transform-data-tsql/",
+    "title": "Transform Data Using T-SQL in Microsoft Fabric - Training | Microsoft Learn",
+    "sha256": "1925f20650fd8bd89d3b327de49460ea49882995b8acc99273b3471dacc6953a"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/training/modules/fabric-transform-data-tsql/2-transform-queries",
+    "questionIds": [
+      "PDF-M3-10"
+    ],
+    "checkedAt": "2026-11-16T09:47:16.691650+00:00",
+    "status": 200,
+    "finalUrl": "https://learn.microsoft.com/en-us/training/modules/fabric-transform-data-tsql/2-transform-queries",
+    "title": "Transform Data with T-SQL Queries - Training | Microsoft Learn",
+    "sha256": "95251031820f30331e1407cdcb90598d9b89333796b00ac3b4b54a8d79cb224d"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/training/modules/get-started-lakehouses/2-fabric-lakehouse",
+    "questionIds": [
+      "PDF-M1-09",
+      "PDF-M3-29"
+    ],
+    "checkedAt": "2026-11-16T09:47:16.694026+00:00",
+    "status": 200,
+    "finalUrl": "https://learn.microsoft.com/en-us/training/modules/get-started-lakehouses/2-fabric-lakehouse",
+    "title": "Describe Lakehouse Features and Capabilities - Training | Microsoft Learn",
+    "sha256": "17c13aa0a7f193ea02cabda57e49409afedea79df68f8476b6b76cf8256c1e7e"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/training/modules/implement-cicd-in-fabric/3-implement-version-control-and-git-integration",
+    "questionIds": [
+      "PDF-M1-13",
+      "PDF-M2-12",
+      "PDF-M3-28"
+    ],
+    "checkedAt": "2026-11-16T09:47:16.694319+00:00",
+    "status": 200,
+    "finalUrl": "https://learn.microsoft.com/en-us/training/modules/implement-cicd-in-fabric/3-implement-version-control-and-git-integration",
+    "title": "Implement version control and Git integration - Training | Microsoft Learn",
+    "sha256": "b6a56920735a7f84c2c6187010380299331571b8c653db6f5ea9d3668eb84ec0"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/training/modules/implement-cicd-in-fabric/4-implement-deployment-pipelines",
+    "questionIds": [
+      "PDF-M1-26",
+      "PDF-M3-23"
+    ],
+    "checkedAt": "2026-11-16T09:47:16.732017+00:00",
+    "status": 200,
+    "finalUrl": "https://learn.microsoft.com/en-us/training/modules/implement-cicd-in-fabric/4-implement-deployment-pipelines",
+    "title": "Implement deployment pipelines - Training | Microsoft Learn",
+    "sha256": "3cd0d561aec59fcadf937214de2a92d2c7b4701fa3a2831ef5f48ebf00a50c30"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/training/modules/load-data-into-microsoft-fabric-data-warehouse/2-explore-data-load-strategies",
+    "questionIds": [
+      "PDF-M1-16",
+      "PDF-M2-01",
+      "PDF-M3-09"
+    ],
+    "checkedAt": "2026-11-16T09:47:21.846564+00:00",
+    "status": 200,
+    "finalUrl": "https://learn.microsoft.com/en-us/training/modules/load-data-into-microsoft-fabric-data-warehouse/2-explore-data-load-strategies",
+    "title": "Explore data load strategies - Training | Microsoft Learn",
+    "sha256": "d3f88630890deb3c71ef80c57486fb4d115f63028a0b8cfa221ed8e75ad2af2d"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/training/modules/monitor-fabric-items/",
+    "questionIds": [
+      "PDF-M1-28",
+      "PDF-M2-17",
+      "PDF-M3-01"
+    ],
+    "checkedAt": "2026-11-16T09:47:21.848093+00:00",
+    "status": 200,
+    "finalUrl": "https://learn.microsoft.com/en-us/training/modules/monitor-fabric-items/",
+    "title": "Monitor Activities in Microsoft Fabric - Training | Microsoft Learn",
+    "sha256": "c222db46c7020f99126c280e8fcc2931812fedbf1a1ac4d336ef3eff7789ede0"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/training/modules/secure-data-access-in-fabric/3-configure-workspace-and-item-permissions",
+    "questionIds": [
+      "PDF-M1-19",
+      "PDF-M2-25",
+      "PDF-M3-05"
+    ],
+    "checkedAt": "2026-11-16T09:47:21.861974+00:00",
+    "status": 200,
+    "finalUrl": "https://learn.microsoft.com/en-us/training/modules/secure-data-access-in-fabric/3-configure-workspace-and-item-permissions",
+    "title": "Configure Workspace and Item Permissions - Training | Microsoft Learn",
+    "sha256": "a40be34a1ed54a419b76e6b146d36b4265b2bf51121564de8136a61522a4f5ba"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/training/modules/secure-data-access-in-fabric/4-apply-granular-permissions",
+    "questionIds": [
+      "PDF-M1-03",
+      "PDF-M2-18",
+      "PDF-M3-17"
+    ],
+    "checkedAt": "2026-11-16T09:47:21.862223+00:00",
+    "status": 200,
+    "finalUrl": "https://learn.microsoft.com/en-us/training/modules/secure-data-access-in-fabric/4-apply-granular-permissions",
+    "title": "Apply Granular Permissions - Training | Microsoft Learn",
+    "sha256": "c677ffc590e8b333803a3ca28348bf4d4328c91a8b64d9ebe1d96a2ad646fd00"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/training/modules/use-apache-spark-work-files-lakehouse/2-spark",
+    "questionIds": [
+      "PDF-M1-10"
+    ],
+    "checkedAt": "2026-11-16T09:47:21.886192+00:00",
+    "status": 200,
+    "finalUrl": "https://learn.microsoft.com/en-us/training/modules/use-apache-spark-work-files-lakehouse/2-spark",
+    "title": "Prepare to use Apache Spark - Training | Microsoft Learn",
+    "sha256": "2bb63c2dec6b4f65f8fd528bc2c8fa948abf826f3da2608a5ba5ab8b93959481"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/training/modules/use-apache-spark-work-files-lakehouse/4-dataframe",
+    "questionIds": [
+      "C-PY-01",
+      "C-PY-02",
+      "C-PY-03",
+      "C-PY-05",
+      "PDF-M1-07",
+      "PDF-M2-16",
+      "PDF-M3-02"
+    ],
+    "checkedAt": "2026-11-16T09:47:21.889792+00:00",
+    "status": 200,
+    "finalUrl": "https://learn.microsoft.com/en-us/training/modules/use-apache-spark-work-files-lakehouse/4-dataframe",
+    "title": "Work with data in a Spark dataframe - Training | Microsoft Learn",
+    "sha256": "90e6e91f818f397cfe5541498bf8499b3e27cede55963dec56a1bb1db4326d34"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/training/modules/use-data-factory-pipelines-fabric/2-understand-fabric-pipeline",
+    "questionIds": [
+      "PDF-M1-25",
+      "PDF-M1-30",
+      "PDF-M3-19"
+    ],
+    "checkedAt": "2026-11-16T09:47:21.903030+00:00",
+    "status": 200,
+    "finalUrl": "https://learn.microsoft.com/en-us/training/modules/use-data-factory-pipelines-fabric/2-understand-fabric-pipeline",
+    "title": "Understand pipelines - Training | Microsoft Learn",
+    "sha256": "05211b9a24dc986b69ded362e7ffcedaa26cb9d9e2894593c41de1a06954d7a5"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/training/modules/work-delta-lake-tables-fabric/3b-optimize-delta-tables",
+    "questionIds": [
+      "PDF-M1-23",
+      "PDF-M2-21",
+      "PDF-M3-18"
+    ],
+    "checkedAt": "2026-11-16T09:47:21.933461+00:00",
+    "status": 200,
+    "finalUrl": "https://learn.microsoft.com/en-us/training/modules/work-delta-lake-tables-fabric/3b-optimize-delta-tables",
+    "title": "Optimize delta tables - Training | Microsoft Learn",
+    "sha256": "a6c3a764fee787d323a57f0085955861c317f76882d25c75588fe59d3f0e5cb8"
+  },
+  {
+    "url": "https://learn.microsoft.com/ja-jp/fabric/data-factory/pipeline-runs",
+    "questionIds": [
+      "PA-PDF-20261112-34"
+    ],
+    "checkedAt": "2026-11-16T09:47:28.810280+00:00",
+    "status": 200,
+    "finalUrl": "https://learn.microsoft.com/ja-jp/fabric/data-factory/pipeline-runs",
+    "title": "イベントを実行、スケジュール設定、または使用してパイプラインをトリガーする - Microsoft Fabric | Microsoft Learn",
+    "sha256": "153fedefac24c3ad9fa1754d8c560fb02eec733f35a0affd0848c5a7c60838f3"
+  },
+  {
+    "url": "https://learn.microsoft.com/ja-jp/fabric/data-factory/pipeline-troubleshoot-guide",
+    "questionIds": [
+      "PA-20261114-05",
+      "PA-20261114-12"
+    ],
+    "checkedAt": "2026-11-16T09:47:28.825891+00:00",
+    "status": 200,
+    "finalUrl": "https://learn.microsoft.com/ja-jp/fabric/data-factory/pipeline-troubleshoot-guide",
+    "title": "一般的なトラブルシューティング - Microsoft Fabric | Microsoft Learn",
+    "sha256": "c5356e3c431a72242e230b70ec22ad195d219d11599f73d6dc044f98fa38477c"
+  },
+  {
+    "url": "https://learn.microsoft.com/ja-jp/fabric/data-science/fabric-notebooks-troubleshooting-guide",
+    "questionIds": [
+      "PA-20261114-01",
+      "PA-PDF-20261112-01"
+    ],
+    "checkedAt": "2026-11-16T09:47:28.834333+00:00",
+    "status": 200,
+    "finalUrl": "https://learn.microsoft.com/ja-jp/fabric/data-science/fabric-notebooks-troubleshooting-guide",
+    "title": "Fabric Notebooks のトラブルシューティング ガイド - Microsoft Fabric | Microsoft Learn",
+    "sha256": "4e004cfc0cb56760d5ddcacd803d66d8589403001afb02c389c4629258d326a3"
+  }
+]

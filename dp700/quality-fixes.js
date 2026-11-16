@@ -46,7 +46,8 @@
     "question": "Event HubsのJSONイベントから不要な列を除き、列名を変更してからKQLデータベースへ送ります。Fabricの画面で変換と送信先を構成する方法を1つ選んでください。"
   },
   "PA-20261114-27": {
-    "question": "変更の追跡に対応したソースデータベースからFabric Warehouseへ増分ロードします。追加・更新・削除を取得し、毎回の全件取得を避けるために使う変更検出方式を1つ選んでください。"
+    "question": "変更の追跡に対応したソースデータベースからFabric Warehouseへ増分ロードします。追加・更新・削除を取得し、毎回の全件取得と独自の変更記録トリガーの実装を避けたいと考えています。利用する既存の変更検出方式を1つ選んでください。",
+    "reconstructed": true
   },
   "PA-20261114-30": {
     "question": "Azure Event Hubsのイベントから不要フィールドを除外し、計算フィールドを追加してからKQLテーブルへ保存します。取り込み前の変換を画面上で構成するFabricアイテムを1つ選んでください。"
@@ -131,13 +132,16 @@
     "question": "既定LakehouseのIncomingは追記専用のDeltaテーブルで、Salesと互換性のあるスキーマです。次のストリームでcheckpointLocationを指定する主な目的を1つ選んでください。"
   },
   "C-PY-04": {
-    "code": "from pyspark.sql import functions as F\nrecent = df.filter(F.col('OrderDate') >= '2026-11-01').select('OrderId','Amount')"
+    "code": "from pyspark.sql import functions as F\nrecent = df.filter(F.col('OrderDate') >= '2026-11-01').select('OrderId','Amount')",
+    "source": "https://learn.microsoft.com/en-us/fabric/data-engineering/spark-monitoring-best-practices"
   },
   "C-PY-05": {
-    "code": "from pyspark.sql import functions as F\nresult = df.withColumn('Net', F.col('Amount') - F.col('Discount'))"
+    "code": "from pyspark.sql import functions as F\nresult = df.withColumn('Net', F.col('Amount') - F.col('Discount'))",
+    "source": "https://learn.microsoft.com/en-us/training/modules/use-apache-spark-work-files-lakehouse/4-dataframe"
   },
   "C-PY-08": {
-    "code": "from pyspark.sql import functions as F\nresult = fact.join(F.broadcast(dim), 'ProductId')"
+    "code": "from pyspark.sql import functions as F\nresult = fact.join(F.broadcast(dim), 'ProductId')",
+    "source": "https://learn.microsoft.com/en-us/fabric/data-engineering/spark-monitoring-best-practices"
   },
   "PA-20261114-16": {
     "reviewStatus": "spec-reviewed",
@@ -180,7 +184,8 @@
     "question": "Notebook1を対話的に使用しています。作業を中断すると非アクティブによるセッションタイムアウトが発生しますが、手動で再開すれば処理は成功します。他のNotebookに適用されるワークスペース設定を変更せず、Notebook1のセッションが非アクティブで維持される時間を延ばす操作を1つ選んでください。",
     "reconstructed": true,
     "explanation": "稼働中のNotebookのSession readyインジケーターからタイムアウトを調整します。ワークスペース全体の変更は他のNotebookにも影響するため条件外です。容量再開は容量停止への対処で、AutoSaveは編集内容の保存です。タイムアウトを延ばしても無期限にセッションが維持されるわけではありません。",
-    "answerEvidence": "spec-verified"
+    "answerEvidence": "spec-verified",
+    "source": "https://learn.microsoft.com/en-us/fabric/data-science/fabric-notebooks-troubleshooting-guide"
   },
   "PA-20261114-01": {
     "question": "Notebook1を対話的に使用しています。作業を中断すると非アクティブによるセッションタイムアウトが発生しますが、手動で再開すれば処理は成功します。他のNotebookに適用されるワークスペース設定を変更せず、Notebook1のセッションが非アクティブで維持される時間を延ばす操作を1つ選んでください。",
@@ -209,7 +214,7 @@
     "source": "https://learn.microsoft.com/en-us/fabric/real-time-intelligence/query-acceleration-overview"
   },
   "C-KQL-05": {
-    "source": "https://learn.microsoft.com/en-us/kusto/query/bin-function?view=microsoft-fabric"
+    "source": "https://learn.microsoft.com/en-us/kusto/query/bin-function"
   },
   "PA50-29": {
     "question": "【独自練習問題：構文を明示して再設計】Azure Stream Analytics互換のストリームSQLで、入力InputのTollIdごとにイベントを集計します。EntryTimeはイベント時刻です。1分の重ならない窓と、1分間隔で動く15分・30分・60分の窓を同時に使い、各結果の窓をWindowIdで区別します。空欄①に入る式を1つ選んでください。",
@@ -257,6 +262,635 @@
   },
   "PDF-M3-02": {
     "code": "from pyspark.sql.window import Window\nfrom pyspark.sql.functions import col, row_number\n\nw = Window.partitionBy(\"id\").orderBy(col(\"ts\").desc(), col(\"seq\").desc())\nresult = df.withColumn(\"rn\", row_number().over(w)).filter(\"rn = 1\")"
+  },
+  "PA-20261114-12": {
+    "reviewStatus": "review",
+    "scorable": false,
+    "answerEvidence": "expected",
+    "holdReason": "配列の実値とExecute Pipelineの引数式がなく、createArrayによる修正かJSON文字列のjson変換かを決定できない。既存配列を包むと二重配列になる可能性もある。"
+  },
+  "PA-20261114-13": {
+    "reviewStatus": "review",
+    "scorable": false,
+    "answerEvidence": "expected",
+    "holdReason": "マイクロバッチとStructured Streamingは対立する方式ではない。遅延条件と現行処理が不明で、選択肢を一意に区別できない。"
+  },
+  "PALIVE-20261106-03": {
+    "question": "【独自練習問題：実行方式の条件を明確化】Fabricの対応Spark Runtimeで、Deltaテーブルのバッチ集計を実行します。AQEは既に有効で、ノード数を増やさず、対応する演算をJVMからベクトル化されたC++実行へ移して高速化したいと考えています。既存のSpark SQLコードを維持して有効にする機能を1つ選んでください。",
+    "explanation": "Native execution engineは対応演算をGluten/Veloxによるネイティブ実行へ移します。AQEは実行計画の適応的最適化で、ここでは既に有効です。Dynamic AllocationはExecutor数の調整、High concurrencyはセッション共有であり、演算をC++へ移す機能ではありません。非対応演算にはフォールバックがあるため、全処理の高速化を保証するものではありません。",
+    "reconstructed": true,
+    "source": "https://learn.microsoft.com/en-us/fabric/data-engineering/native-execution-engine-overview"
+  },
+  "PA-20261114-07": {
+    "question": "【独自練習問題：実行方式の条件を明確化】Fabricの対応Spark Runtimeで、Deltaテーブルのバッチ集計を実行します。AQEは既に有効で、ノード数を増やさず、対応する演算をJVMからベクトル化されたC++実行へ移して高速化したいと考えています。既存のSpark SQLコードを維持して有効にする機能を1つ選んでください。",
+    "explanation": "Native execution engineは対応演算をGluten/Veloxによるネイティブ実行へ移します。AQEは実行計画の適応的最適化で、ここでは既に有効です。Dynamic AllocationはExecutor数の調整、High concurrencyはセッション共有であり、演算をC++へ移す機能ではありません。非対応演算にはフォールバックがあるため、全処理の高速化を保証するものではありません。",
+    "reconstructed": true,
+    "source": "https://learn.microsoft.com/en-us/fabric/data-engineering/native-execution-engine-overview"
+  },
+  "PALIVE-20261106-11": {
+    "question": "Lookupの結果が0件かどうかをIf Conditionで判定済みです。0件の場合だけ、独自のエラーコードとメッセージでPipelineを失敗終了します。0件側の分岐に必要な設定を2つ選んでください。",
+    "reconstructed": true,
+    "explanation": "0件側の分岐にFail activityを配置し、そのerrorCodeとmessageを設定します。Lookupの直後へ無条件にFailをつなぐと、データがある場合も失敗します。Waitは待機、Retryは再試行で、指定コードによる明示的な失敗終了を代替しません。"
+  },
+  "PA-20261114-02": {
+    "question": "Lookupの結果が0件かどうかをIf Conditionで判定済みです。0件の場合だけ、独自のエラーコードとメッセージでPipelineを失敗終了します。0件側の分岐に必要な設定を2つ選んでください。",
+    "reconstructed": true,
+    "explanation": "0件側の分岐にFail activityを配置し、そのerrorCodeとmessageを設定します。Lookupの直後へ無条件にFailをつなぐと、データがある場合も失敗します。Waitは待機、Retryは再試行で、指定コードによる明示的な失敗終了を代替しません。"
+  },
+  "PALIVE-20261106-22": {
+    "question": "【独自練習問題：実行エンジンを明確化】Fabric NotebookのSpark SQLでDeltaテーブルを更新します。Categoryは完全なスナップショットで全件置換し、Customerは既存キーを更新、新規キーを追加します。それぞれに使うSQL操作の組み合わせを1つ選んでください。",
+    "reconstructed": true,
+    "explanation": "Spark SQLのINSERT OVERWRITEは対象データを置換し、MERGEはキー照合で更新と挿入を分けられます。DELETEだけでは新データを入れず、INSERT INTOだけでは旧データを置換せず、UPDATEだけでは新規キーを挿入できません。これはFabric WarehouseのT-SQL構文の問題ではありません。",
+    "source": "https://learn.microsoft.com/en-us/fabric/data-engineering/lakehouse-and-delta-tables"
+  },
+  "PA-20261114-48": {
+    "question": "【独自練習問題：手順の条件を明確化】VS CodeからFabric Warehouseの既存スキーマを直接読み取り、変更のビルドとデプロイに使うDatabase Projectを作成します。中間のDACパッケージのエクスポート・インポートは行わないものとします。適切な方法を1つ選んでください。",
+    "reconstructed": true
+  },
+  "C-SQL-08": {
+    "explanation": "T-SQLではCustomerId AmountはCustomerIdの別名をAmountとする有効な構文です。2列を取得するにはCustomerId, Amountとカンマで区切ります。構文エラーになるとは限りません。GROUP BY、VACUUM、Spark poolの設定は列リストの修正になりません。",
+    "source": "https://learn.microsoft.com/en-us/sql/t-sql/queries/select-clause-transact-sql"
+  },
+  "PA50-46": {
+    "code": "// 以下の選択肢はWorkspace monitoringのKQLクエリです。"
+  },
+  "ORD-05": {
+    "reviewStatus": "review",
+    "scorable": false,
+    "holdReason": "接続設定とDAGの作成の順は実装によって入れ替え可能で、全順序を一意に決める依存条件がない。"
+  },
+  "ORD-15": {
+    "reviewStatus": "review",
+    "scorable": false,
+    "holdReason": "OPTIMIZEとVACUUMは異なる目的で、提示条件では両者の実行順を一意に定められない。"
+  },
+  "ORD-18": {
+    "reviewStatus": "review",
+    "scorable": false,
+    "holdReason": "アラート条件と通知先の構成順は一意ではなく、テスト前に両方が必要という条件のみである。"
+  },
+  "O02-A": {
+    "source": "https://learn.microsoft.com/en-us/fabric/governance/domains"
+  },
+  "O02-B": {
+    "source": "https://learn.microsoft.com/en-us/fabric/governance/domains"
+  },
+  "O02-C": {
+    "source": "https://learn.microsoft.com/en-us/fabric/governance/domains"
+  },
+  "O03-A": {
+    "source": "https://learn.microsoft.com/en-us/fabric/onelake/security/get-started-security"
+  },
+  "O03-B": {
+    "source": "https://learn.microsoft.com/en-us/fabric/onelake/security/get-started-security"
+  },
+  "O03-C": {
+    "source": "https://learn.microsoft.com/en-us/fabric/onelake/security/get-started-security"
+  },
+  "O04-A": {
+    "source": "https://learn.microsoft.com/en-us/fabric/data-factory/apache-airflow-compute"
+  },
+  "O04-B": {
+    "source": "https://learn.microsoft.com/en-us/fabric/data-factory/apache-airflow-compute"
+  },
+  "O04-C": {
+    "source": "https://learn.microsoft.com/en-us/fabric/data-factory/apache-airflow-compute"
+  },
+  "O05-A": {
+    "source": "https://learn.microsoft.com/en-us/fabric/cicd/git-integration/intro-to-git-integration"
+  },
+  "O05-B": {
+    "source": "https://learn.microsoft.com/en-us/fabric/cicd/git-integration/intro-to-git-integration"
+  },
+  "O05-C": {
+    "source": "https://learn.microsoft.com/en-us/fabric/cicd/git-integration/intro-to-git-integration"
+  },
+  "O07-A": {
+    "source": "https://learn.microsoft.com/en-us/fabric/cicd/deployment-pipelines/intro-to-deployment-pipelines"
+  },
+  "O07-B": {
+    "source": "https://learn.microsoft.com/en-us/fabric/cicd/deployment-pipelines/intro-to-deployment-pipelines"
+  },
+  "O07-C": {
+    "source": "https://learn.microsoft.com/en-us/fabric/cicd/deployment-pipelines/intro-to-deployment-pipelines"
+  },
+  "O08-A": {
+    "source": "https://learn.microsoft.com/en-us/fabric/fundamentals/roles-workspaces"
+  },
+  "O08-B": {
+    "source": "https://learn.microsoft.com/en-us/fabric/fundamentals/roles-workspaces"
+  },
+  "O08-C": {
+    "source": "https://learn.microsoft.com/en-us/fabric/fundamentals/roles-workspaces"
+  },
+  "O09-A": {
+    "source": "https://learn.microsoft.com/en-us/fabric/data-engineering/lakehouse-sharing"
+  },
+  "O09-B": {
+    "source": "https://learn.microsoft.com/en-us/fabric/data-engineering/lakehouse-sharing"
+  },
+  "O09-C": {
+    "source": "https://learn.microsoft.com/en-us/fabric/data-engineering/lakehouse-sharing"
+  },
+  "O12-A": {
+    "source": "https://learn.microsoft.com/en-us/fabric/governance/information-protection"
+  },
+  "O12-B": {
+    "source": "https://learn.microsoft.com/en-us/fabric/governance/information-protection"
+  },
+  "O12-C": {
+    "source": "https://learn.microsoft.com/en-us/fabric/governance/information-protection"
+  },
+  "O13-A": {
+    "source": "https://learn.microsoft.com/en-us/fabric/governance/endorsement-overview"
+  },
+  "O13-B": {
+    "source": "https://learn.microsoft.com/en-us/fabric/governance/endorsement-overview"
+  },
+  "O13-C": {
+    "source": "https://learn.microsoft.com/en-us/fabric/governance/endorsement-overview"
+  },
+  "O19-A": {
+    "source": "https://learn.microsoft.com/en-us/fabric/data-factory/tutorial-incremental-copy-data-warehouse-lakehouse"
+  },
+  "O19-B": {
+    "source": "https://learn.microsoft.com/en-us/fabric/data-factory/tutorial-incremental-copy-data-warehouse-lakehouse"
+  },
+  "O19-C": {
+    "source": "https://learn.microsoft.com/en-us/fabric/data-factory/tutorial-incremental-copy-data-warehouse-lakehouse"
+  },
+  "O20-A": {
+    "source": "https://learn.microsoft.com/en-us/fabric/data-warehouse/dimensional-modeling-overview"
+  },
+  "O20-B": {
+    "source": "https://learn.microsoft.com/en-us/fabric/data-warehouse/dimensional-modeling-overview"
+  },
+  "O20-C": {
+    "source": "https://learn.microsoft.com/en-us/fabric/data-warehouse/dimensional-modeling-overview"
+  },
+  "O21-A": {
+    "source": "https://learn.microsoft.com/en-us/fabric/data-engineering/structured-streaming-overview"
+  },
+  "O21-B": {
+    "source": "https://learn.microsoft.com/en-us/fabric/data-engineering/structured-streaming-overview"
+  },
+  "O21-C": {
+    "source": "https://learn.microsoft.com/en-us/fabric/data-engineering/structured-streaming-overview"
+  },
+  "O23-A": {
+    "source": "https://learn.microsoft.com/en-us/fabric/data-factory/dataflows-gen2-overview"
+  },
+  "O23-B": {
+    "source": "https://learn.microsoft.com/en-us/fabric/data-factory/dataflows-gen2-overview"
+  },
+  "O23-C": {
+    "source": "https://learn.microsoft.com/en-us/fabric/data-factory/dataflows-gen2-overview"
+  },
+  "O27-A": {
+    "source": "https://learn.microsoft.com/en-us/fabric/fundamentals/prepare-transform-data"
+  },
+  "O27-B": {
+    "source": "https://learn.microsoft.com/en-us/fabric/fundamentals/prepare-transform-data"
+  },
+  "O27-C": {
+    "source": "https://learn.microsoft.com/en-us/fabric/fundamentals/prepare-transform-data"
+  },
+  "O28-A": {
+    "source": "https://learn.microsoft.com/en-us/fabric/data-warehouse/dimensional-modeling-dimension-tables"
+  },
+  "O28-B": {
+    "source": "https://learn.microsoft.com/en-us/fabric/data-warehouse/dimensional-modeling-dimension-tables"
+  },
+  "O28-C": {
+    "source": "https://learn.microsoft.com/en-us/fabric/data-warehouse/dimensional-modeling-dimension-tables"
+  },
+  "O29-A": {
+    "source": "https://learn.microsoft.com/en-us/fabric/fundamentals/prepare-transform-data"
+  },
+  "O29-B": {
+    "source": "https://learn.microsoft.com/en-us/fabric/fundamentals/prepare-transform-data"
+  },
+  "O29-C": {
+    "source": "https://learn.microsoft.com/en-us/fabric/fundamentals/prepare-transform-data"
+  },
+  "O30-A": {
+    "source": "https://learn.microsoft.com/en-us/fabric/data-engineering/structured-streaming-stateful-processing"
+  },
+  "O30-B": {
+    "source": "https://learn.microsoft.com/en-us/fabric/data-engineering/structured-streaming-stateful-processing"
+  },
+  "O30-C": {
+    "source": "https://learn.microsoft.com/en-us/fabric/data-engineering/structured-streaming-stateful-processing"
+  },
+  "O31-A": {
+    "source": "https://learn.microsoft.com/en-us/fabric/real-time-intelligence/event-streams/overview"
+  },
+  "O31-B": {
+    "source": "https://learn.microsoft.com/en-us/fabric/real-time-intelligence/event-streams/overview"
+  },
+  "O31-C": {
+    "source": "https://learn.microsoft.com/en-us/fabric/real-time-intelligence/event-streams/overview"
+  },
+  "O34-A": {
+    "source": "https://learn.microsoft.com/en-us/fabric/real-time-intelligence/event-streams/overview"
+  },
+  "O34-B": {
+    "source": "https://learn.microsoft.com/en-us/fabric/real-time-intelligence/event-streams/overview"
+  },
+  "O34-C": {
+    "source": "https://learn.microsoft.com/en-us/fabric/real-time-intelligence/event-streams/overview"
+  },
+  "O35-A": {
+    "source": "https://learn.microsoft.com/en-us/fabric/data-engineering/structured-streaming-overview"
+  },
+  "O35-B": {
+    "source": "https://learn.microsoft.com/en-us/fabric/data-engineering/structured-streaming-overview"
+  },
+  "O35-C": {
+    "source": "https://learn.microsoft.com/en-us/fabric/data-engineering/structured-streaming-overview"
+  },
+  "O36-A": {
+    "source": "https://learn.microsoft.com/en-us/kusto/query/tutorials/learn-common-operators"
+  },
+  "O36-B": {
+    "source": "https://learn.microsoft.com/en-us/kusto/query/tutorials/learn-common-operators"
+  },
+  "O36-C": {
+    "source": "https://learn.microsoft.com/en-us/kusto/query/tutorials/learn-common-operators"
+  },
+  "O37-A": {
+    "source": "https://learn.microsoft.com/en-us/stream-analytics-query/windowing-azure-stream-analytics"
+  },
+  "O37-B": {
+    "source": "https://learn.microsoft.com/en-us/stream-analytics-query/windowing-azure-stream-analytics"
+  },
+  "O37-C": {
+    "source": "https://learn.microsoft.com/en-us/stream-analytics-query/windowing-azure-stream-analytics"
+  },
+  "O40-A": {
+    "source": "https://learn.microsoft.com/en-us/power-bi/connect-data/refresh-data"
+  },
+  "O40-B": {
+    "source": "https://learn.microsoft.com/en-us/power-bi/connect-data/refresh-data"
+  },
+  "O40-C": {
+    "source": "https://learn.microsoft.com/en-us/power-bi/connect-data/refresh-data"
+  },
+  "O43-A": {
+    "source": "https://learn.microsoft.com/en-us/fabric/data-factory/dataflows-gen2-monitor"
+  },
+  "O43-B": {
+    "source": "https://learn.microsoft.com/en-us/fabric/data-factory/dataflows-gen2-monitor"
+  },
+  "O43-C": {
+    "source": "https://learn.microsoft.com/en-us/fabric/data-factory/dataflows-gen2-monitor"
+  },
+  "O44-A": {
+    "source": "https://learn.microsoft.com/en-us/fabric/data-engineering/spark-monitoring-best-practices"
+  },
+  "O44-B": {
+    "source": "https://learn.microsoft.com/en-us/fabric/data-engineering/spark-monitoring-best-practices"
+  },
+  "O44-C": {
+    "source": "https://learn.microsoft.com/en-us/fabric/data-engineering/spark-monitoring-best-practices"
+  },
+  "O46-A": {
+    "source": "https://learn.microsoft.com/en-us/fabric/real-time-intelligence/event-streams/monitor"
+  },
+  "O46-B": {
+    "source": "https://learn.microsoft.com/en-us/fabric/real-time-intelligence/event-streams/monitor"
+  },
+  "O46-C": {
+    "source": "https://learn.microsoft.com/en-us/fabric/real-time-intelligence/event-streams/monitor"
+  },
+  "O49-A": {
+    "source": "https://learn.microsoft.com/en-us/fabric/data-engineering/lakehouse-table-maintenance"
+  },
+  "O49-B": {
+    "source": "https://learn.microsoft.com/en-us/fabric/data-engineering/lakehouse-table-maintenance"
+  },
+  "O49-C": {
+    "source": "https://learn.microsoft.com/en-us/fabric/data-engineering/lakehouse-table-maintenance"
+  },
+  "O53-A": {
+    "source": "https://learn.microsoft.com/en-us/fabric/data-engineering/spark-monitoring-best-practices"
+  },
+  "O53-B": {
+    "source": "https://learn.microsoft.com/en-us/fabric/data-engineering/spark-monitoring-best-practices"
+  },
+  "O53-C": {
+    "source": "https://learn.microsoft.com/en-us/fabric/data-engineering/spark-monitoring-best-practices"
+  },
+  "O02-D": {
+    "source": "https://learn.microsoft.com/en-us/fabric/governance/domains"
+  },
+  "O03-D": {
+    "source": "https://learn.microsoft.com/en-us/fabric/onelake/security/get-started-security"
+  },
+  "O04-D": {
+    "source": "https://learn.microsoft.com/en-us/fabric/data-factory/apache-airflow-compute"
+  },
+  "O05-D": {
+    "source": "https://learn.microsoft.com/en-us/fabric/cicd/git-integration/intro-to-git-integration"
+  },
+  "O07-D": {
+    "source": "https://learn.microsoft.com/en-us/fabric/cicd/deployment-pipelines/intro-to-deployment-pipelines"
+  },
+  "O08-D": {
+    "source": "https://learn.microsoft.com/en-us/fabric/fundamentals/roles-workspaces"
+  },
+  "O09-D": {
+    "source": "https://learn.microsoft.com/en-us/fabric/data-engineering/lakehouse-sharing"
+  },
+  "O12-D": {
+    "source": "https://learn.microsoft.com/en-us/fabric/governance/information-protection"
+  },
+  "O13-D": {
+    "source": "https://learn.microsoft.com/en-us/fabric/governance/endorsement-overview"
+  },
+  "O40-D": {
+    "source": "https://learn.microsoft.com/en-us/power-bi/connect-data/refresh-data"
+  },
+  "O43-D": {
+    "source": "https://learn.microsoft.com/en-us/fabric/data-factory/dataflows-gen2-monitor"
+  },
+  "O44-D": {
+    "source": "https://learn.microsoft.com/en-us/fabric/data-engineering/spark-monitoring-best-practices"
+  },
+  "O46-D": {
+    "source": "https://learn.microsoft.com/en-us/fabric/real-time-intelligence/event-streams/monitor"
+  },
+  "O49-D": {
+    "source": "https://learn.microsoft.com/en-us/fabric/data-engineering/lakehouse-table-maintenance"
+  },
+  "PA50-11": {
+    "source": "https://learn.microsoft.com/en-us/fabric/cicd/deployment-pipelines/deploy-content"
+  },
+  "PA50-14": {
+    "source": "https://learn.microsoft.com/en-us/fabric/admin/endorsement-certification-enable"
+  },
+  "PA50-18": {
+    "source": "https://learn.microsoft.com/en-us/fabric/data-warehouse/security"
+  },
+  "PA50-21": {
+    "source": "https://learn.microsoft.com/en-us/fabric/data-engineering/structured-streaming-overview"
+  },
+  "PA50-22": {
+    "source": "https://learn.microsoft.com/en-us/fabric/data-warehouse/ingest-data-copy"
+  },
+  "PA50-23": {
+    "source": "https://learn.microsoft.com/en-us/fabric/data-engineering/structured-streaming-overview"
+  },
+  "PA50-25": {
+    "source": "https://learn.microsoft.com/en-us/fabric/real-time-hub/process-data-streams-using-transformations"
+  },
+  "PA50-26": {
+    "source": "https://learn.microsoft.com/en-us/fabric/fundamentals/prepare-transform-data"
+  },
+  "PA50-28": {
+    "source": "https://learn.microsoft.com/en-us/fabric/data-engineering/structured-streaming-overview"
+  },
+  "PA50-30": {
+    "source": "https://learn.microsoft.com/en-us/fabric/real-time-intelligence/table-update-policy"
+  },
+  "PA50-31": {
+    "source": "https://learn.microsoft.com/en-us/fabric/real-time-hub/process-data-streams-using-transformations"
+  },
+  "PA50-32": {
+    "source": "https://learn.microsoft.com/en-us/fabric/data-engineering/structured-streaming-overview"
+  },
+  "PA50-34": {
+    "source": "https://learn.microsoft.com/en-us/fabric/data-warehouse/dimensional-modeling-dimension-tables"
+  },
+  "PA50-35": {
+    "source": "https://learn.microsoft.com/en-us/fabric/data-engineering/structured-streaming-overview"
+  },
+  "PA50-37": {
+    "source": "https://learn.microsoft.com/en-us/fabric/data-science/fabric-notebooks-troubleshooting-guide"
+  },
+  "PA50-42": {
+    "source": "https://learn.microsoft.com/en-us/fabric/data-warehouse/ingest-data-copy"
+  },
+  "PA50-45": {
+    "source": "https://learn.microsoft.com/en-us/data-integration/gateway/service-gateway-tshoot"
+  },
+  "PA50-48": {
+    "source": "https://learn.microsoft.com/en-us/fabric/data-engineering/structured-streaming-overview"
+  },
+  "PA50-49": {
+    "source": "https://learn.microsoft.com/en-us/fabric/data-factory/dataflow-gen2-data-destinations-validation-rules"
+  },
+  "PA50-50": {
+    "source": "https://learn.microsoft.com/en-us/fabric/data-engineering/lakehouse-table-maintenance"
+  },
+  "PALIVE-20261106-06": {
+    "source": "https://learn.microsoft.com/en-us/fabric/real-time-intelligence/event-streams/monitor"
+  },
+  "PALIVE-20261106-08": {
+    "source": "https://learn.microsoft.com/en-us/fabric/data-factory/dataflow-gen2-data-destinations-validation-rules"
+  },
+  "PALIVE-20261106-09": {
+    "source": "https://learn.microsoft.com/en-us/fabric/data-engineering/structured-streaming-overview"
+  },
+  "PALIVE-20261106-14": {
+    "source": "https://learn.microsoft.com/en-us/fabric/fundamentals/table-maintenance-optimization"
+  },
+  "PALIVE-20261106-16": {
+    "source": "https://learn.microsoft.com/en-us/fabric/data-engineering/structured-streaming-overview"
+  },
+  "PALIVE-20261106-18": {
+    "source": "https://learn.microsoft.com/en-us/fabric/data-engineering/structured-streaming-overview"
+  },
+  "PALIVE-20261106-20": {
+    "source": "https://learn.microsoft.com/en-us/fabric/real-time-intelligence/event-streams/overview"
+  },
+  "PALIVE-20261106-21": {
+    "source": "https://learn.microsoft.com/en-us/fabric/data-warehouse/dimensional-modeling-dimension-tables",
+    "question": "Product→Subcategory→Categoryの階層について、過去属性の履歴は不要で現在値だけをGold層で使います。SalesはProductKeyで商品を参照します。商品キーごとに1回のJoinで商品・サブカテゴリ・カテゴリ名を取得するには、どの粒度のディメンションを作成しますか。",
+    "reconstructed": true
+  },
+  "PALIVE-20261106-23": {
+    "source": "https://learn.microsoft.com/en-us/fabric/data-engineering/structured-streaming-overview"
+  },
+  "PALIVE-20261106-24": {
+    "source": "https://learn.microsoft.com/en-us/fabric/data-warehouse/load-data"
+  },
+  "PALIVE-20261106-26": {
+    "source": "https://learn.microsoft.com/en-us/fabric/data-warehouse/load-data"
+  },
+  "PALIVE-20261106-28": {
+    "source": "https://learn.microsoft.com/en-us/fabric/data-engineering/author-execute-notebook"
+  },
+  "PALIVE-20261106-30": {
+    "source": "https://learn.microsoft.com/en-us/fabric/data-engineering/spark-job-definition"
+  },
+  "PALIVE-20261106-33": {
+    "source": "https://learn.microsoft.com/en-us/fabric/data-warehouse/security"
+  },
+  "PALIVE-20261106-39": {
+    "source": "https://learn.microsoft.com/en-us/fabric/governance/domains"
+  },
+  "PALIVE-20261106-42": {
+    "source": "https://learn.microsoft.com/en-us/fabric/cicd/deployment-pipelines/deploy-content"
+  },
+  "PALIVE-20261106-44": {
+    "source": "https://learn.microsoft.com/en-us/fabric/data-engineering/configure-starter-pools"
+  },
+  "PALIVE-20261106-48": {
+    "source": "https://learn.microsoft.com/en-us/fabric/cicd/git-integration/intro-to-git-integration"
+  },
+  "PALIVE-20261106-49": {
+    "source": "https://learn.microsoft.com/en-us/fabric/data-engineering/environment-manage-library"
+  },
+  "C-SQL-01": {
+    "source": "https://learn.microsoft.com/en-us/sql/t-sql/queries/select-group-by-transact-sql"
+  },
+  "C-SQL-02": {
+    "source": "https://learn.microsoft.com/en-us/sql/t-sql/language-elements/coalesce-transact-sql"
+  },
+  "C-SQL-03": {
+    "source": "https://learn.microsoft.com/en-us/sql/t-sql/functions/row-number-transact-sql"
+  },
+  "C-SQL-04": {
+    "source": "https://learn.microsoft.com/en-us/sql/t-sql/queries/from-transact-sql"
+  },
+  "C-SQL-05": {
+    "source": "https://learn.microsoft.com/en-us/sql/t-sql/language-elements/case-transact-sql"
+  },
+  "C-SQL-07": {
+    "source": "https://learn.microsoft.com/en-us/sql/t-sql/queries/select-group-by-transact-sql"
+  },
+  "C-KQL-01": {
+    "source": "https://learn.microsoft.com/en-us/kusto/query/where-operator"
+  },
+  "C-KQL-02": {
+    "source": "https://learn.microsoft.com/en-us/kusto/query/summarize-operator"
+  },
+  "C-KQL-03": {
+    "source": "https://learn.microsoft.com/en-us/kusto/query/avg-aggregation-function"
+  },
+  "C-KQL-04": {
+    "source": "https://learn.microsoft.com/en-us/kusto/query/project-operator"
+  },
+  "C-KQL-06": {
+    "source": "https://learn.microsoft.com/en-us/kusto/query/arg-max-aggregation-function"
+  },
+  "C-KQL-08": {
+    "source": "https://learn.microsoft.com/en-us/kusto/query/best-practices"
+  },
+  "C-KQL-09": {
+    "source": "https://learn.microsoft.com/en-us/kusto/query/join-inner"
+  },
+  "C-PY-01": {
+    "source": "https://learn.microsoft.com/en-us/training/modules/use-apache-spark-work-files-lakehouse/4-dataframe"
+  },
+  "C-PY-02": {
+    "source": "https://learn.microsoft.com/en-us/training/modules/use-apache-spark-work-files-lakehouse/4-dataframe"
+  },
+  "C-PY-03": {
+    "source": "https://learn.microsoft.com/en-us/training/modules/use-apache-spark-work-files-lakehouse/4-dataframe"
+  },
+  "C-PY-07": {
+    "source": "https://learn.microsoft.com/en-us/fabric/data-engineering/spark-monitoring-best-practices"
+  },
+  "ORD-17": {
+    "source": "https://learn.microsoft.com/en-us/fabric/data-engineering/spark-monitoring-best-practices"
+  },
+  "C-PY-06": {
+    "source": "https://learn.microsoft.com/en-us/fabric/data-engineering/lakehouse-and-delta-tables"
+  },
+  "C-PY-10": {
+    "source": "https://learn.microsoft.com/en-us/fabric/data-engineering/structured-streaming-stateful-processing"
+  },
+  "ORD-01": {
+    "source": "https://learn.microsoft.com/en-us/fabric/cicd/git-integration/intro-to-git-integration"
+  },
+  "ORD-03": {
+    "source": "https://learn.microsoft.com/en-us/fabric/cicd/deployment-pipelines/intro-to-deployment-pipelines"
+  },
+  "PDF-M1-04": {
+    "source": "https://learn.microsoft.com/en-us/fabric/data-warehouse/dimensional-modeling-dimension-tables"
+  },
+  "PDF-M2-03": {
+    "source": "https://learn.microsoft.com/en-us/fabric/data-warehouse/dimensional-modeling-dimension-tables"
+  },
+  "PDF-M3-13": {
+    "source": "https://learn.microsoft.com/en-us/fabric/data-warehouse/dimensional-modeling-dimension-tables"
+  },
+  "PDF-M1-27": {
+    "source": "https://learn.microsoft.com/en-us/fabric/data-factory/apache-airflow-compute"
+  },
+  "PDF-M2-04": {
+    "source": "https://learn.microsoft.com/en-us/fabric/data-warehouse/query-insights"
+  },
+  "PDF-M2-11": {
+    "source": "https://learn.microsoft.com/en-us/kusto/query/arg-max-aggregation-function"
+  },
+  "PDF-M2-13": {
+    "source": "https://learn.microsoft.com/en-us/fabric/data-warehouse/column-level-security"
+  },
+  "PDF-M2-14": {
+    "source": "https://learn.microsoft.com/en-us/fabric/data-engineering/delta-lake-schema-evolution"
+  },
+  "PDF-M2-15": {
+    "source": "https://learn.microsoft.com/en-us/kusto/management/ingestion-failures"
+  },
+  "PDF-M2-19": {
+    "source": "https://learn.microsoft.com/en-us/fabric/data-engineering/high-concurrency-overview"
+  },
+  "PDF-M3-15": {
+    "source": "https://learn.microsoft.com/en-us/fabric/data-engineering/high-concurrency-overview"
+  },
+  "PDF-M2-20": {
+    "source": "https://learn.microsoft.com/en-us/fabric/mirroring/monitor"
+  },
+  "PDF-M3-24": {
+    "source": "https://learn.microsoft.com/en-us/fabric/mirroring/monitor"
+  },
+  "PDF-M2-23": {
+    "source": "https://learn.microsoft.com/en-us/fabric/data-warehouse/develop-warehouse-project"
+  },
+  "PDF-M2-26": {
+    "source": "https://learn.microsoft.com/en-us/fabric/data-factory/notebook-activity"
+  },
+  "PDF-M2-30": {
+    "source": "https://learn.microsoft.com/en-us/kusto/query/functions/user-defined-functions"
+  },
+  "PDF-M3-07": {
+    "source": "https://learn.microsoft.com/en-us/kusto/management/materialized-views/materialized-view-overview"
+  },
+  "PDF-M3-25": {
+    "source": "https://learn.microsoft.com/en-us/fabric/admin/service-admin-portal-onelake"
+  },
+  "PDF-M1-20": {
+    "source": "https://learn.microsoft.com/en-us/stream-analytics-query/tumbling-window-azure-stream-analytics"
+  },
+  "PDF-M2-02": {
+    "source": "https://learn.microsoft.com/en-us/stream-analytics-query/hopping-window-azure-stream-analytics"
+  },
+  "PDF-M1-24": {
+    "source": "https://learn.microsoft.com/en-us/power-query/power-query-folding"
+  },
+  "PDF-M3-30": {
+    "source": "https://learn.microsoft.com/en-us/power-query/power-query-folding"
+  },
+  "PA50-07": {
+    "source": "https://learn.microsoft.com/en-us/fabric/data-warehouse/row-level-security"
+  },
+  "PA50-09": {
+    "source": "https://learn.microsoft.com/en-us/fabric/data-warehouse/column-level-security"
+  },
+  "PA50-12": {
+    "source": "https://learn.microsoft.com/en-us/fabric/data-warehouse/column-level-security"
+  },
+  "PA-PDF-20261112-30": {
+    "question": "【独自練習問題：権限対象を明確化】Fabric Deployment Pipeline自体の設定を編集する担当者を限定します。対象パイプラインで担当者に割り当てる、製品固有の権限名を1つ選んでください。",
+    "explanation": "Deployment Pipelineの設定管理にはPipeline admin権限が必要です。Workspaceの権限はコンテンツ側の操作権限であり、Pipeline自体の設定権限とは別です。Environmentアイテムの権限も対象が異なります。RBACはアクセス管理の一般概念で、ここで求める製品固有の権限名ではありません。",
+    "reconstructed": true,
+    "answerEvidence": "spec-verified"
+  },
+  "PA-PDF-20261112-09": {
+    "holdReason": "Structured Streamingは通常マイクロバッチで動作するため、両選択肢を対立する方式として採点できない。"
   }
 };
 for(const name of ["DP700_QUESTIONS","DP700_BASICS","DP700_INTERMEDIATE","DP700_ADVANCED","DP700_BRIDGE","DP700_PA_LIVE_20261106","DP700_PA_20261114","DP700_PA_PDF_20261112"]){for(const q of window[name]||[]){if(patches[q.id])Object.assign(q,patches[q.id],{qualityRevision:"2026-11-16"});
