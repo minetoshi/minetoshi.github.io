@@ -170,7 +170,7 @@ function answer(){
  }else{
   [...els.choices.querySelectorAll("button")].forEach(b=>b.disabled=true);
  }
- els.feedback.className="feedback "+(ungraded||provisionalQuestion(q)?"":correct?"ok":"bad");
+ els.feedback.className="feedback "+(ungraded?"":correct?"ok":"bad");
  let correctText=q.type==="group"?q.groups.map(g=>escapeHtml(g.label)+"："+escapeHtml(q.choices[g.answer])).join("<br>"):q.type==="order"?q.orderItems.map((x,i)=>(i+1)+". "+x).join("<br>"):q.answers.map(i=>escapeHtml(q.choices[i])).join(" / ");
  const paDetail=!ungraded&&!q.qualityRevision&&window.DP700_PA_EXPLAIN?window.DP700_PA_EXPLAIN(q,getOrder(q)):"";
  const notes=paDetail?"":(q.choiceNotes?'<ul>'+getOrder(q).map((original,i)=>'<li><b>'+String.fromCharCode(65+i)+'.</b> '+escapeHtml(q.choiceNotes[original])+'</li>').join('')+'</ul>':'');
