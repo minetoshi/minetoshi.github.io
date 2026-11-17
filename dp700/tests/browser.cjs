@@ -5,6 +5,14 @@ const {chromium}=require('playwright');const fs=require('node:fs');fs.mkdirSync(
  for(const width of [1280,390]){
  const page=await browser.newPage({viewport:{width,height:900}});const errors=[];page.on('pageerror',e=>errors.push(e.message));
  const url=process.env.DP700_URL||'http://127.0.0.1:8765/dp700/';await page.goto(url);await page.waitForSelector('[data-mode="basic15"]');
+ const pdfMode=page.locator('[data-mode="paPdf50"]');
+ await pdfMode.click();
+ const firstPdfId=await page.locator("#qSkill").innerText();
+ page.once("dialog",dialog=>dialog.accept());
+ await page.locator("#quitBtn").click();
+ await pdfMode.click();
+ assert.notEqual(await page.locator("#qSkill").innerText(),firstPdfId);
+ await page.goto(url);
  const modes=await page.locator('[data-mode]').evaluateAll(es=>es.map(e=>e.dataset.mode).filter(m=>!['wrong','due'].includes(m)));
  for(const mode of modes){
   await page.goto(url);await page.locator(`[data-mode="${mode}"]`).click();
