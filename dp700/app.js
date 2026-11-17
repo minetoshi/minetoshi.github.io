@@ -81,8 +81,19 @@ function choose(mode,domain){
  return sample(Q,10);
 }
 function modeLabel(m){return ({allQuestions:"全バンク全問（"+ALL.length+"問）",bridge9:"最上級ステップ",adv15:"上級ステップ",mid15:"中級ステップ",basic15:"初級ステップ",pdf90:"図解PDF 全90問",pdf1:"図解模試 第1回",pdf2:"図解模試 第2回",pdf3:"図解模試 第3回",quick10:"10問クイック",train20:"20問演習",mock45:"本番模試45問",pa25:"PA予行25問",pa50ja:"PA論点50問（日本語）",paLive50:"PA実戦50問（2026/11/6）",paNov14:"PA復習50問（2026/11/14）",paPdf50:"PDF検証版50問（2026/11/12）",code:"コード20問",wrong:"間違い復習",due:"期限復習",domain:"分野別20問",domainAll:"このジャンルを全問"})[m]||"演習";}
+const previousFirstQuestion = new Map();
+function shuffleForSession(questions, mode, domain){
+ const shuffled = shuffle(questions);
+ const key = JSON.stringify([mode, domain]);
+ if(shuffled.length > 1 && shuffled[0].id === previousFirstQuestion.get(key)){
+  const next = 1 + Math.floor(Math.random() * (shuffled.length - 1));
+  [shuffled[0], shuffled[next]] = [shuffled[next], shuffled[0]];
+ }
+ if(shuffled.length) previousFirstQuestion.set(key, shuffled[0].id);
+ return shuffled;
+}
 function start(mode,domain){
- const questions=choose(mode,domain);if(!questions.length){alert(mode==="wrong"?"間違い復習の対象はありません。":"復習対象がありません。");return;}
+ const questions=shuffleForSession(choose(mode,domain),mode,domain);if(!questions.length){alert(mode==="wrong"?"間違い復習の対象はありません。":"復習対象がありません。");return;}
  session={mode,domain,questions,index:0,selected:new Set(),results:[],answered:false,mock:mode==="mock45",choiceOrders:{},orderState:{},startedAt:Date.now(),deadline:mode==="mock45"?Date.now()+100*60*1000:null};
  els.home.classList.add("hidden");els.result.classList.add("hidden");els.quiz.classList.remove("hidden");
  if(session.mock)startTimer();
@@ -199,7 +210,7 @@ function finish(timeout){
  const byType=types.map(t=>{const rows=graded.filter(r=>r.type===t),c=rows.filter(r=>r.correct).length;return '<div class="domain"><div class="row"><b>'+typeLabel(t)+'</b><span>'+c+'/'+rows.length+'（'+pct(c,rows.length)+'%）</span></div></div>';}).join("");
  els.resultBreakdown.innerHTML="<h3>分野別</h3>"+byDomain+"<h3>形式別</h3>"+byType;
  const wrongIds=session.results.filter(r=>r.correct===false).map(r=>r.id);$("retryWrongBtn").disabled=!wrongIds.length;
- $("retryWrongBtn").onclick=()=>{if(!wrongIds.length)return;const set=new Set(wrongIds),arr=ALL.filter(q=>set.has(q.id));session={mode:"wrong",questions:shuffle(arr),index:0,selected:new Set(),results:[],answered:false,mock:false,choiceOrders:{},orderState:{},startedAt:Date.now(),deadline:null};els.result.classList.add("hidden");els.quiz.classList.remove("hidden");renderQuestion();};
+ $("retryWrongBtn").onclick=()=>{if(!wrongIds.length)return;const set=new Set(wrongIds),arr=ALL.filter(q=>set.has(q.id));session={mode:"wrong",questions:shuffleForSession(arr,"wrong"),index:0,selected:new Set(),results:[],answered:false,mock:false,choiceOrders:{},orderState:{},startedAt:Date.now(),deadline:null};els.result.classList.add("hidden");els.quiz.classList.remove("hidden");renderQuestion();};
 }
 document.querySelectorAll("[data-mode]").forEach(b=>b.addEventListener("click",()=>start(b.dataset.mode)));
 $("domainStart").addEventListener("click",()=>start("domain",els.domainSelect.value));
