@@ -1,0 +1,6 @@
+[
+  {
+    "id": "C-SQL-09",
+    "reason": "Fabric公式資料は列単位のUNMASK権限を明示するが、設問のON OBJECT::dbo.Customers構文と効果をこの資料では確認できないため販売対象から保留"
+  }
+]
