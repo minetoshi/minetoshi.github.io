@@ -4,6 +4,11 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#0f172a">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="DP-700道場">
+<link rel="manifest" href="./manifest.webmanifest">
+<link rel="apple-touch-icon" href="./icons/icon-192.png">
 <title>DP-700 過去問道場</title>
 <meta name="description" content="Microsoft DP-700対策。図解PDFの模擬問題90問収録、現行公式49項目100%対応、コード・複数選択・ケース・並べ替え・100分模試。">
 <style>
@@ -28,6 +33,7 @@ h2{font-size:18px;margin:0 0 12px}h3{font-size:15px}.modes{display:grid;grid-tem
 .auditGrid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}.auditItem{border:1px solid var(--line);border-radius:10px;padding:10px;background:#f8fafc}.auditItem b{display:block}
 
 .glossaryModal{position:fixed;inset:0;z-index:9999;background:#0f172acc;display:flex;align-items:center;justify-content:center;padding:12px}
+.shell{padding-top:max(16px,env(safe-area-inset-top));padding-bottom:max(56px,env(safe-area-inset-bottom))}
 .glossaryPanel{width:min(920px,100%);max-height:92vh;overflow:auto;background:#fff;border-radius:18px;box-shadow:0 24px 70px #0005}
 .glossarySticky{position:sticky;top:0;z-index:3;background:#fff;border-bottom:1px solid var(--line);padding:14px 16px}
 .glossaryTitleRow{display:flex;align-items:center;justify-content:space-between;gap:12px}.glossaryTitleRow h2{margin:0}
@@ -110,6 +116,9 @@ fieldset{min-width:0;margin:12px 0;border:1px solid #cbd5e1;border-radius:8px} .
     <button class="btn ghost" data-mode="due">期限復習</button>
     <button class="btn ghost" data-glossary-open>用語解説（検索）</button>
     <button class="btn ghost" id="resetBtn">履歴リセット</button>
+    <button class="btn ghost" id="exportHistoryBtn">学習履歴を保存</button>
+    <button class="btn ghost" id="importHistoryBtn">学習履歴を読み込む</button>
+    <input id="importHistoryFile" type="file" accept="application/json,.json" class="hidden" aria-label="学習履歴ファイル">
   </div>
 </section>
 
@@ -241,6 +250,11 @@ DP-700 Dojo v6.5 • <a href="https://learn.microsoft.com/en-us/credentials/cert
 <script src="./pa-pdf-20261112-a.js?v=20261116-quality-final"></script>
 <script src="./pa-pdf-20261112-b.js?v=20261116-quality-final"></script>
 <script src="./quality-fixes.js?v=20261116-quality-final"></script>
-<script src="./app.js?v=20261117-question-order"></script>
+<script src="./app.js?v=20261123-mobile"></script>
+<script>
+if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.hostname === 'localhost' || location.hostname === '127.0.0.1')) {
+  window.addEventListener('load', () => navigator.serviceWorker.register('./sw.js').catch(console.warn));
+}
+</script>
 </body>
 </html>
