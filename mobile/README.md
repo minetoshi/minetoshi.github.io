@@ -1,30 +1,29 @@
 # DP-700 問題道場 iPhone版
 
-このディレクトリは `dp700/` の問題データと画面を端末へ同梱する Capacitor 8 のiOSアプリです。オフラインで演習できます。iOSプロジェクトとアイコンは生成済みです。問題の更新は `npm run ios:sync` で取り込みます。
+`dp700/` の独自演習から販売対象だけを生成し、Capacitor 8でiPhoneへ同梱します。2026-11-23時点の販売対象は295問（通常217問、段階演習78問）です。買い切りを想定し、広告・アプリ内課金・アカウント・分析SDK・通知権限はありません。Web版589問とその公開URLは維持します。
 
-## App Store向けの内容と課金
+## ビルド
 
-iOSビルドには現時点で基本218問と段階演習78問、合計296問を同梱します。採点保留の3問、利用者提供PDF、PA派生問題、図解PDFは有料版に同梱しません。Web版の589問は従来のままです。現行ビルドは機能制限や広告SDKを持たない買い切りアプリとして用意しています。価格はApp Store Connectで設定し、アプリ内課金は使いません。公開前に296問の権利と内容を最終確認してください。
-
-プライバシーポリシーURLは `https://minetoshi.github.io/dp700/mobile-privacy.html` です。App Store Connectのアプリ情報へ登録してください。実機の画面を使ったスクリーンショットと説明文、サポート窓口、App Privacyの回答、税務・銀行口座設定もApp Store Connectで用意します。
-
-## Macでの仕上げ
-
-Node.js 22以上、Xcode 26以上と Xcode Command Line Tools を用意してから、リポジトリの `mobile/` で実行します。
+Node.js 22以上、Xcode 26以上を使用します。
 
 ```sh
 cd mobile
-npm install
+npm ci
 npm run ios:sync
+xcodebuild -project ios/App/App.xcodeproj -scheme App -configuration Debug -destination 'platform=iOS Simulator,name=iPhone 17 Pro' CODE_SIGNING_ALLOWED=NO build
 npm run ios:open
 ```
 
-`ios/App/App.xcodeproj` をXcodeで開き、Signing & Capabilities のTeamとBundle Identifierを確認して実機を選んで実行します。Bundle Identifier `com.minetoshi.dp700dojo` が既に使用されていれば、`capacitor.config.json` とXcode側のBundle Identifierを変更してください。後から問題を更新するときは `npm run ios:sync` を使います。
+このMacではSwift Package Managerの公式バイナリ取得が停止したため、公式配布物のSHA-256を照合して一時的にローカル参照でビルドする `npm run ios:build:fallback` も用意しました。実行後は生成マニフェストを元に戻します。通常のXcode取得が進む環境では不要です。
 
-`ios/` と `package-lock.json` はリポジトリに含まれます。配布にはXcodeで署名とアーカイブが必要です。
+`ios/App/App.xcodeproj` でTeamとBundle Identifierを設定してiPhone実機に実行します。`com.minetoshi.dp700dojo` が使用済みならCapacitor設定とXcodeの両方を変更してください。`ios:sync` は同梱問題の更新後に毎回実行します。問題数は `commercial-exclusions.json` と監査台帳に従い、ビルド時に自動計算されます。
 
 ## 学習履歴
 
-既存のWeb版の「学習履歴を保存」でJSONを保存し、アプリの「学習履歴を読み込む」で選択します。Web版とiOS版は別の保存領域です。初回起動後に一度だけ取り込んでください。読み込み時はアプリ内の現在の履歴を保存ファイルで置き換えます。
+Web版で「学習履歴を保存」からJSONを書き出し、アプリの「学習履歴を読み込む」で選択します。上書き前に確認画面を表示し、現在のアプリ履歴を端末内にバックアップします。「直前の履歴を復元」で戻せます。Web版の履歴には販売対象外IDが含まれる場合がありますが、そのレコードは保持し、販売対象の進捗計算には含めません。アプリ削除前にはファイルとして保存してください。
 
-ブラウザだけで使う場合は公開ページをiPhoneのSafariで開き、「共有」→「ホーム画面に追加」を選べます。オフライン使用は一度オンラインで画面を開いて全ファイルの保存が完了した後に確認してください。
+## 監査と公開前ゲート
+
+`node scripts/audit.cjs` が候補296問の個別記録を `audit/commercial-questions.json` に生成します。`audit/source-status-20261123.json` はURL到達性だけを示し、仕様上の正答や著作権を保証しません。Microsoft Learnに個別の公式解答キーはありません。出題文が独自作成であること、コードが第三者資料から転載されていないことを販売者が最終確認してください。
+
+実機操作、履歴のiOSファイル読み込み・共有、機内モード、外部リンク、Apple署名、TestFlight、実機スクリーンショットは販売者のiPhoneで完了する必要があります。詳細は [APP_STORE.md](APP_STORE.md)。

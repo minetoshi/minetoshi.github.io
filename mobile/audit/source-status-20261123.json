@@ -1,0 +1,462 @@
+{
+  "checkedAt": "2026-11-23T14:58:19.530272+00:00",
+  "note": "HTTP accessibility and page titles only; not semantic answer validation or copyright clearance",
+  "sources": [
+    {
+      "url": "https://learn.microsoft.com/en-us/fabric/cicd/deployment-pipelines/intro-to-deployment-pipelines",
+      "status": 200,
+      "finalUrl": "https://learn.microsoft.com/en-us/fabric/cicd/deployment-pipelines/intro-to-deployment-pipelines",
+      "title": "Overview of Fabric deployment pipelines - Microsoft Fabric | Microsoft Learn"
+    },
+    {
+      "url": "https://learn.microsoft.com/en-us/fabric/cicd/git-integration/intro-to-git-integration",
+      "status": 200,
+      "finalUrl": "https://learn.microsoft.com/en-us/fabric/cicd/git-integration/intro-to-git-integration",
+      "title": "Overview of Fabric Git integration - Microsoft Fabric | Microsoft Learn"
+    },
+    {
+      "url": "https://learn.microsoft.com/en-us/fabric/data-engineering/delta-optimization-and-v-order",
+      "status": 200,
+      "finalUrl": "https://learn.microsoft.com/en-us/fabric/data-engineering/delta-optimization-and-v-order",
+      "title": "Optimize Delta Lake tables with V-Order in Fabric - Microsoft Fabric | Microsoft Learn"
+    },
+    {
+      "url": "https://learn.microsoft.com/en-us/fabric/data-engineering/how-to-use-notebook",
+      "status": 200,
+      "finalUrl": "https://learn.microsoft.com/en-us/fabric/data-engineering/how-to-use-notebook",
+      "title": "How to use notebooks - Microsoft Fabric | Microsoft Learn"
+    },
+    {
+      "url": "https://learn.microsoft.com/en-us/fabric/data-engineering/lakehouse-and-delta-tables",
+      "status": 200,
+      "finalUrl": "https://learn.microsoft.com/en-us/fabric/data-engineering/lakehouse-and-delta-tables",
+      "title": "Lakehouse and Delta Tables - Microsoft Fabric | Microsoft Learn"
+    },
+    {
+      "url": "https://learn.microsoft.com/en-us/fabric/data-engineering/lakehouse-overview",
+      "status": 200,
+      "finalUrl": "https://learn.microsoft.com/en-us/fabric/data-engineering/lakehouse-overview",
+      "title": "What is a lakehouse? - Microsoft Fabric | Microsoft Learn"
+    },
+    {
+      "url": "https://learn.microsoft.com/en-us/fabric/data-engineering/lakehouse-sharing",
+      "status": 200,
+      "finalUrl": "https://learn.microsoft.com/en-us/fabric/data-engineering/lakehouse-sharing",
+      "title": "Lakehouse sharing and permission management - Microsoft Fabric | Microsoft Learn"
+    },
+    {
+      "url": "https://learn.microsoft.com/en-us/fabric/data-engineering/lakehouse-sql-analytics-endpoint",
+      "status": 200,
+      "finalUrl": "https://learn.microsoft.com/en-us/fabric/data-engineering/lakehouse-sql-analytics-endpoint",
+      "title": "What is the SQL analytics endpoint for a lakehouse? - Microsoft Fabric | Microsoft Learn"
+    },
+    {
+      "url": "https://learn.microsoft.com/en-us/fabric/data-engineering/lakehouse-table-maintenance",
+      "status": 200,
+      "finalUrl": "https://learn.microsoft.com/en-us/fabric/data-engineering/lakehouse-table-maintenance",
+      "title": "Delta Table Maintenance in Microsoft Fabric - Microsoft Fabric | Microsoft Learn"
+    },
+    {
+      "url": "https://learn.microsoft.com/en-us/fabric/data-engineering/spark-compute",
+      "status": 200,
+      "finalUrl": "https://learn.microsoft.com/en-us/fabric/data-engineering/spark-compute",
+      "title": "Apache Spark compute for Data Engineering and Data Science - Microsoft Fabric | Microsoft Learn"
+    },
+    {
+      "url": "https://learn.microsoft.com/en-us/fabric/data-engineering/spark-monitoring-best-practices",
+      "status": 200,
+      "finalUrl": "https://learn.microsoft.com/en-us/fabric/data-engineering/spark-monitoring-best-practices",
+      "title": "Spark monitoring and performance optimization best practices - Microsoft Fabric | Microsoft Learn"
+    },
+    {
+      "url": "https://learn.microsoft.com/en-us/fabric/data-engineering/spark-monitoring-overview",
+      "status": 200,
+      "finalUrl": "https://learn.microsoft.com/en-us/fabric/data-engineering/spark-monitoring-overview",
+      "title": "Apache Spark monitoring overview - Microsoft Fabric | Microsoft Learn"
+    },
+    {
+      "url": "https://learn.microsoft.com/en-us/fabric/data-engineering/structured-streaming-overview",
+      "status": 200,
+      "finalUrl": "https://learn.microsoft.com/en-us/fabric/data-engineering/structured-streaming-overview",
+      "title": "Overview of Structured Streaming - Microsoft Fabric | Microsoft Learn"
+    },
+    {
+      "url": "https://learn.microsoft.com/en-us/fabric/data-engineering/structured-streaming-stateful-processing",
+      "status": 200,
+      "finalUrl": "https://learn.microsoft.com/en-us/fabric/data-engineering/structured-streaming-stateful-processing",
+      "title": "Stateful processing with Structured Streaming - Microsoft Fabric | Microsoft Learn"
+    },
+    {
+      "url": "https://learn.microsoft.com/en-us/fabric/data-engineering/workspace-admin-settings",
+      "status": 200,
+      "finalUrl": "https://learn.microsoft.com/en-us/fabric/data-engineering/workspace-admin-settings",
+      "title": "Workspace administration settings in Microsoft Fabric - Microsoft Fabric | Microsoft Learn"
+    },
+    {
+      "url": "https://learn.microsoft.com/en-us/fabric/data-factory/apache-airflow-compute",
+      "status": 200,
+      "finalUrl": "https://learn.microsoft.com/en-us/fabric/data-factory/apache-airflow-compute",
+      "title": "Apache Airflow compute in Fabric - Microsoft Fabric | Microsoft Learn"
+    },
+    {
+      "url": "https://learn.microsoft.com/en-us/fabric/data-factory/create-alerts-for-pipeline-runs",
+      "status": 200,
+      "finalUrl": "https://learn.microsoft.com/en-us/fabric/data-factory/create-alerts-for-pipeline-runs",
+      "title": "Create Alerts for Pipeline Runs - Microsoft Fabric | Microsoft Learn"
+    },
+    {
+      "url": "https://learn.microsoft.com/en-us/fabric/data-factory/dataflows-gen2-monitor",
+      "status": 200,
+      "finalUrl": "https://learn.microsoft.com/en-us/fabric/data-factory/dataflows-gen2-monitor",
+      "title": "View Dataflow Gen2 refresh history and monitoring - Microsoft Fabric | Microsoft Learn"
+    },
+    {
+      "url": "https://learn.microsoft.com/en-us/fabric/data-factory/dataflows-gen2-overview",
+      "status": 200,
+      "finalUrl": "https://learn.microsoft.com/en-us/fabric/data-factory/dataflows-gen2-overview",
+      "title": "Differences between Dataflow Gen1 and Dataflow Gen2 - Microsoft Fabric | Microsoft Learn"
+    },
+    {
+      "url": "https://learn.microsoft.com/en-us/fabric/data-factory/monitor-data-factory",
+      "status": 200,
+      "finalUrl": "https://learn.microsoft.com/en-us/fabric/data-factory/monitor-pipeline-runs",
+      "title": "Choose How to Monitor Pipeline Runs - Microsoft Fabric | Microsoft Learn"
+    },
+    {
+      "url": "https://learn.microsoft.com/en-us/fabric/data-factory/parameters",
+      "status": 200,
+      "finalUrl": "https://learn.microsoft.com/en-us/fabric/data-factory/parameters",
+      "title": "Parameters - Microsoft Fabric | Microsoft Learn"
+    },
+    {
+      "url": "https://learn.microsoft.com/en-us/fabric/data-factory/pipeline-overview",
+      "status": 200,
+      "finalUrl": "https://learn.microsoft.com/en-us/fabric/data-factory/pipeline-overview",
+      "title": "Pipeline Overview - Microsoft Fabric | Microsoft Learn"
+    },
+    {
+      "url": "https://learn.microsoft.com/en-us/fabric/data-factory/pipeline-runs",
+      "status": 200,
+      "finalUrl": "https://learn.microsoft.com/en-us/fabric/data-factory/pipeline-runs",
+      "title": "Run, schedule, or use events to trigger a pipeline - Microsoft Fabric | Microsoft Learn"
+    },
+    {
+      "url": "https://learn.microsoft.com/en-us/fabric/data-factory/pipeline-troubleshoot-guide",
+      "status": 200,
+      "finalUrl": "https://learn.microsoft.com/en-us/fabric/data-factory/pipeline-troubleshoot-guide",
+      "title": "General troubleshooting - Microsoft Fabric | Microsoft Learn"
+    },
+    {
+      "url": "https://learn.microsoft.com/en-us/fabric/data-factory/tutorial-incremental-copy-data-warehouse-lakehouse",
+      "status": 200,
+      "finalUrl": "https://learn.microsoft.com/en-us/fabric/data-factory/tutorial-incremental-copy-data-warehouse-lakehouse",
+      "title": "Incrementally load data from Data Warehouse to Lakehouse - Microsoft Fabric | Microsoft Learn"
+    },
+    {
+      "url": "https://learn.microsoft.com/en-us/fabric/data-warehouse/column-level-security",
+      "status": 200,
+      "finalUrl": "https://learn.microsoft.com/en-us/fabric/data-warehouse/column-level-security",
+      "title": "Column-Level Security in Fabric Data Warehouse - Microsoft Fabric | Microsoft Learn"
+    },
+    {
+      "url": "https://learn.microsoft.com/en-us/fabric/data-warehouse/data-warehousing",
+      "status": 200,
+      "finalUrl": "https://learn.microsoft.com/en-us/fabric/data-warehouse/data-warehousing",
+      "title": "What Is Fabric Data Warehouse? - Microsoft Fabric | Microsoft Learn"
+    },
+    {
+      "url": "https://learn.microsoft.com/en-us/fabric/data-warehouse/develop-warehouse-project",
+      "status": 200,
+      "finalUrl": "https://learn.microsoft.com/en-us/fabric/data-warehouse/develop-warehouse-project",
+      "title": "Develop Warehouse Projects in Visual Studio Code - Microsoft Fabric | Microsoft Learn"
+    },
+    {
+      "url": "https://learn.microsoft.com/en-us/fabric/data-warehouse/dimensional-modeling-dimension-tables",
+      "status": 200,
+      "finalUrl": "https://learn.microsoft.com/en-us/fabric/data-warehouse/dimensional-modeling-dimension-tables",
+      "title": "Modeling Dimension Tables in Warehouse - Microsoft Fabric | Microsoft Learn"
+    },
+    {
+      "url": "https://learn.microsoft.com/en-us/fabric/data-warehouse/dimensional-modeling-overview",
+      "status": 200,
+      "finalUrl": "https://learn.microsoft.com/en-us/fabric/data-warehouse/dimensional-modeling-overview",
+      "title": "Dimensional Modeling - Microsoft Fabric | Microsoft Learn"
+    },
+    {
+      "url": "https://learn.microsoft.com/en-us/fabric/data-warehouse/dynamic-data-masking",
+      "status": 200,
+      "finalUrl": "https://learn.microsoft.com/en-us/fabric/data-warehouse/dynamic-data-masking",
+      "title": "Dynamic Data Masking in Fabric Data Warehouse - Microsoft Fabric | Microsoft Learn"
+    },
+    {
+      "url": "https://learn.microsoft.com/en-us/fabric/data-warehouse/guidelines-warehouse-performance",
+      "status": 200,
+      "finalUrl": "https://learn.microsoft.com/en-us/fabric/data-warehouse/guidelines-warehouse-performance",
+      "title": "Performance Guidelines - Microsoft Fabric | Microsoft Learn"
+    },
+    {
+      "url": "https://learn.microsoft.com/en-us/fabric/data-warehouse/row-level-security",
+      "status": 200,
+      "finalUrl": "https://learn.microsoft.com/en-us/fabric/data-warehouse/row-level-security",
+      "title": "Row-Level Security in Fabric Data Warehouse - Microsoft Fabric | Microsoft Learn"
+    },
+    {
+      "url": "https://learn.microsoft.com/en-us/fabric/data-warehouse/security",
+      "status": 200,
+      "finalUrl": "https://learn.microsoft.com/en-us/fabric/data-warehouse/security",
+      "title": "Secure Your Fabric Data Warehouse - Microsoft Fabric | Microsoft Learn"
+    },
+    {
+      "url": "https://learn.microsoft.com/en-us/fabric/data-warehouse/tsql-surface-area",
+      "status": 200,
+      "finalUrl": "https://learn.microsoft.com/en-us/fabric/data-warehouse/tsql-surface-area",
+      "title": "T-SQL Surface Area in Fabric Data Warehouse - Microsoft Fabric | Microsoft Learn"
+    },
+    {
+      "url": "https://learn.microsoft.com/en-us/fabric/fundamentals/prepare-transform-data",
+      "status": 200,
+      "finalUrl": "https://learn.microsoft.com/en-us/fabric/fundamentals/prepare-transform-data",
+      "title": "Prepare and transform data in Microsoft Fabric - Microsoft Fabric | Microsoft Learn"
+    },
+    {
+      "url": "https://learn.microsoft.com/en-us/fabric/fundamentals/roles-workspaces",
+      "status": 200,
+      "finalUrl": "https://learn.microsoft.com/en-us/fabric/fundamentals/roles-workspaces",
+      "title": "Roles in workspaces in Microsoft Fabric - Microsoft Fabric | Microsoft Learn"
+    },
+    {
+      "url": "https://learn.microsoft.com/en-us/fabric/fundamentals/store-data",
+      "status": 200,
+      "finalUrl": "https://learn.microsoft.com/en-us/fabric/fundamentals/store-data",
+      "title": "Data storage options in Microsoft Fabric - Microsoft Fabric | Microsoft Learn"
+    },
+    {
+      "url": "https://learn.microsoft.com/en-us/fabric/governance/domains",
+      "status": 200,
+      "finalUrl": "https://learn.microsoft.com/en-us/fabric/governance/domains",
+      "title": "Domains - Microsoft Fabric | Microsoft Learn"
+    },
+    {
+      "url": "https://learn.microsoft.com/en-us/fabric/governance/endorsement-overview",
+      "status": 200,
+      "finalUrl": "https://learn.microsoft.com/en-us/fabric/governance/endorsement-overview",
+      "title": "Endorsement overview - Microsoft Fabric | Microsoft Learn"
+    },
+    {
+      "url": "https://learn.microsoft.com/en-us/fabric/governance/information-protection",
+      "status": 200,
+      "finalUrl": "https://learn.microsoft.com/en-us/fabric/governance/information-protection",
+      "title": "Information protection in Fabric - Microsoft Fabric | Microsoft Learn"
+    },
+    {
+      "url": "https://learn.microsoft.com/en-us/fabric/mirroring/overview",
+      "status": 200,
+      "finalUrl": "https://learn.microsoft.com/en-us/fabric/mirroring/overview",
+      "title": "Mirroring - Microsoft Fabric | Microsoft Learn"
+    },
+    {
+      "url": "https://learn.microsoft.com/en-us/fabric/onelake/onelake-medallion-lakehouse-architecture",
+      "status": 200,
+      "finalUrl": "https://learn.microsoft.com/en-us/fabric/onelake/onelake-medallion-lakehouse-architecture",
+      "title": "Implement Medallion Lakehouse Architecture in Fabric - Microsoft Fabric | Microsoft Learn"
+    },
+    {
+      "url": "https://learn.microsoft.com/en-us/fabric/onelake/onelake-overview",
+      "status": 200,
+      "finalUrl": "https://learn.microsoft.com/en-us/fabric/onelake/onelake-overview",
+      "title": "OneLake, the unified data lake - Microsoft Fabric | Microsoft Learn"
+    },
+    {
+      "url": "https://learn.microsoft.com/en-us/fabric/onelake/onelake-shortcuts",
+      "status": 200,
+      "finalUrl": "https://learn.microsoft.com/en-us/fabric/onelake/onelake-shortcuts",
+      "title": "Unify Data Sources With OneLake Shortcuts - Microsoft Fabric | Microsoft Learn"
+    },
+    {
+      "url": "https://learn.microsoft.com/en-us/fabric/onelake/security/get-started-security",
+      "status": 200,
+      "finalUrl": "https://learn.microsoft.com/en-us/fabric/onelake/security/get-started-security",
+      "title": "Data security overview - Microsoft Fabric | Microsoft Learn"
+    },
+    {
+      "url": "https://learn.microsoft.com/en-us/fabric/onelake/security/table-column-row-security",
+      "status": 200,
+      "finalUrl": "https://learn.microsoft.com/en-us/fabric/onelake/security/table-column-row-security",
+      "title": "OneLake table, column, and row-level security - Microsoft Fabric | Microsoft Learn"
+    },
+    {
+      "url": "https://learn.microsoft.com/en-us/fabric/real-time-hub/process-data-streams-using-transformations",
+      "status": 200,
+      "finalUrl": "https://learn.microsoft.com/en-us/fabric/real-time-hub/process-data-streams-using-transformations",
+      "title": "Process data streams in Real-Time hub - Microsoft Fabric | Microsoft Learn"
+    },
+    {
+      "url": "https://learn.microsoft.com/en-us/fabric/real-time-intelligence/dashboard-real-time-create",
+      "status": 200,
+      "finalUrl": "https://learn.microsoft.com/en-us/fabric/real-time-intelligence/dashboard-real-time-create",
+      "title": "Create a Real-Time Dashboard - Microsoft Fabric | Microsoft Learn"
+    },
+    {
+      "url": "https://learn.microsoft.com/en-us/fabric/real-time-intelligence/event-streams/monitor",
+      "status": 200,
+      "finalUrl": "https://learn.microsoft.com/en-us/fabric/real-time-intelligence/event-streams/monitor",
+      "title": "Monitor the Status and Performance of an Eventstream - Microsoft Fabric | Microsoft Learn"
+    },
+    {
+      "url": "https://learn.microsoft.com/en-us/fabric/real-time-intelligence/event-streams/overview",
+      "status": 200,
+      "finalUrl": "https://learn.microsoft.com/en-us/fabric/real-time-intelligence/event-streams/overview",
+      "title": "Microsoft Fabric Eventstreams Overview - Microsoft Fabric | Microsoft Learn"
+    },
+    {
+      "url": "https://learn.microsoft.com/en-us/fabric/real-time-intelligence/eventhouse",
+      "status": 200,
+      "finalUrl": "https://learn.microsoft.com/en-us/fabric/real-time-intelligence/eventhouse",
+      "title": "Eventhouse overview - Microsoft Fabric | Microsoft Learn"
+    },
+    {
+      "url": "https://learn.microsoft.com/en-us/fabric/real-time-intelligence/kusto-query-set",
+      "status": 200,
+      "finalUrl": "https://learn.microsoft.com/en-us/fabric/real-time-intelligence/kusto-query-set",
+      "title": "Query data in a KQL queryset - Microsoft Fabric | Microsoft Learn"
+    },
+    {
+      "url": "https://learn.microsoft.com/en-us/fabric/real-time-intelligence/manage-monitor-eventhouse",
+      "status": 200,
+      "finalUrl": "https://learn.microsoft.com/en-us/fabric/real-time-intelligence/manage-monitor-eventhouse",
+      "title": "Manage and monitor an eventhouse - Microsoft Fabric | Microsoft Learn"
+    },
+    {
+      "url": "https://learn.microsoft.com/en-us/fabric/real-time-intelligence/query-acceleration-overview",
+      "status": 200,
+      "finalUrl": "https://learn.microsoft.com/en-us/fabric/real-time-intelligence/query-acceleration-overview",
+      "title": "Query acceleration for OneLake shortcuts - overview - Microsoft Fabric | Microsoft Learn"
+    },
+    {
+      "url": "https://learn.microsoft.com/en-us/kusto/management/show-external-table-operations-query-acceleration-statistics?view=microsoft-fabric",
+      "status": 200,
+      "finalUrl": "https://learn.microsoft.com/en-us/kusto/management/show-external-table-operations-query-acceleration-statistics?view=microsoft-fabric",
+      "title": ".show external table operations query_acceleration statistics command - Kusto | Microsoft Learn"
+    },
+    {
+      "url": "https://learn.microsoft.com/en-us/kusto/query/arg-max-aggregation-function",
+      "status": 200,
+      "finalUrl": "https://learn.microsoft.com/en-us/kusto/query/arg-max-aggregation-function?view=microsoft-fabric",
+      "title": "arg_max() (aggregation function) - Kusto | Microsoft Learn"
+    },
+    {
+      "url": "https://learn.microsoft.com/en-us/kusto/query/avg-aggregation-function",
+      "status": 200,
+      "finalUrl": "https://learn.microsoft.com/en-us/kusto/query/avg-aggregation-function?view=microsoft-fabric",
+      "title": "avg() (aggregation function) - Kusto | Microsoft Learn"
+    },
+    {
+      "url": "https://learn.microsoft.com/en-us/kusto/query/best-practices",
+      "status": 200,
+      "finalUrl": "https://learn.microsoft.com/en-us/kusto/query/best-practices?view=microsoft-fabric",
+      "title": "Best practices for Kusto Query Language queries - Kusto | Microsoft Learn"
+    },
+    {
+      "url": "https://learn.microsoft.com/en-us/kusto/query/bin-function",
+      "status": 200,
+      "finalUrl": "https://learn.microsoft.com/en-us/kusto/query/bin-function?view=microsoft-fabric",
+      "title": "bin() - Kusto | Microsoft Learn"
+    },
+    {
+      "url": "https://learn.microsoft.com/en-us/kusto/query/join-inner",
+      "status": 200,
+      "finalUrl": "https://learn.microsoft.com/en-us/kusto/query/join-inner?view=microsoft-fabric",
+      "title": "inner join - Kusto | Microsoft Learn"
+    },
+    {
+      "url": "https://learn.microsoft.com/en-us/kusto/query/project-operator",
+      "status": 200,
+      "finalUrl": "https://learn.microsoft.com/en-us/kusto/query/project-operator?view=microsoft-fabric",
+      "title": "Project operator - Kusto | Microsoft Learn"
+    },
+    {
+      "url": "https://learn.microsoft.com/en-us/kusto/query/summarize-operator",
+      "status": 200,
+      "finalUrl": "https://learn.microsoft.com/en-us/kusto/query/summarize-operator?view=microsoft-fabric",
+      "title": "summarize operator - Kusto | Microsoft Learn"
+    },
+    {
+      "url": "https://learn.microsoft.com/en-us/kusto/query/tutorials/learn-common-operators",
+      "status": 200,
+      "finalUrl": "https://learn.microsoft.com/en-us/kusto/query/tutorials/learn-common-operators?view=microsoft-fabric",
+      "title": "Tutorial: Learn Common Kusto Query Language Operators - Kusto | Microsoft Learn"
+    },
+    {
+      "url": "https://learn.microsoft.com/en-us/kusto/query/where-operator",
+      "status": 200,
+      "finalUrl": "https://learn.microsoft.com/en-us/kusto/query/where-operator?view=microsoft-fabric",
+      "title": "where operator - Kusto | Microsoft Learn"
+    },
+    {
+      "url": "https://learn.microsoft.com/en-us/power-bi/connect-data/refresh-data",
+      "status": 200,
+      "finalUrl": "https://learn.microsoft.com/en-us/power-bi/connect-data/refresh-data",
+      "title": "Data refresh in Power BI - Power BI | Microsoft Learn"
+    },
+    {
+      "url": "https://learn.microsoft.com/en-us/sql/t-sql/functions/row-number-transact-sql",
+      "status": 200,
+      "finalUrl": "https://learn.microsoft.com/en-us/sql/t-sql/functions/row-number-transact-sql?view=sql-server-ver17",
+      "title": "ROW_NUMBER (Transact-SQL) - SQL Server | Microsoft Learn"
+    },
+    {
+      "url": "https://learn.microsoft.com/en-us/sql/t-sql/language-elements/case-transact-sql",
+      "status": 200,
+      "finalUrl": "https://learn.microsoft.com/en-us/sql/t-sql/language-elements/case-transact-sql?view=sql-server-ver17",
+      "title": "CASE (Transact-SQL) - SQL Server | Microsoft Learn"
+    },
+    {
+      "url": "https://learn.microsoft.com/en-us/sql/t-sql/language-elements/coalesce-transact-sql",
+      "status": 200,
+      "finalUrl": "https://learn.microsoft.com/en-us/sql/t-sql/language-elements/coalesce-transact-sql?view=sql-server-ver17",
+      "title": "COALESCE (Transact-SQL) - SQL Server | Microsoft Learn"
+    },
+    {
+      "url": "https://learn.microsoft.com/en-us/sql/t-sql/queries/from-transact-sql",
+      "status": 200,
+      "finalUrl": "https://learn.microsoft.com/en-us/sql/t-sql/queries/from-transact-sql?view=sql-server-ver17",
+      "title": "FROM clause plus JOIN, APPLY, PIVOT (T-SQL) - SQL Server | Microsoft Learn"
+    },
+    {
+      "url": "https://learn.microsoft.com/en-us/sql/t-sql/queries/select-clause-transact-sql",
+      "status": 200,
+      "finalUrl": "https://learn.microsoft.com/en-us/sql/t-sql/queries/select-clause-transact-sql?view=sql-server-ver17",
+      "title": "SELECT Clause (Transact-SQL) - SQL Server | Microsoft Learn"
+    },
+    {
+      "url": "https://learn.microsoft.com/en-us/sql/t-sql/queries/select-group-by-transact-sql",
+      "status": 200,
+      "finalUrl": "https://learn.microsoft.com/en-us/sql/t-sql/queries/select-group-by-transact-sql?view=sql-server-ver17",
+      "title": "GROUP BY (Transact-SQL) - SQL Server | Microsoft Learn"
+    },
+    {
+      "url": "https://learn.microsoft.com/en-us/stream-analytics-query/windowing-azure-stream-analytics",
+      "status": 200,
+      "finalUrl": "https://learn.microsoft.com/en-us/stream-analytics-query/windowing-azure-stream-analytics",
+      "title": "Windowing - Stream Analytics Query | Microsoft Learn"
+    },
+    {
+      "url": "https://learn.microsoft.com/en-us/training/modules/fabric-transform-data-notebooks/",
+      "status": 200,
+      "finalUrl": "https://learn.microsoft.com/en-us/training/modules/fabric-transform-data-notebooks/",
+      "title": "Transform Data Using Notebooks in Microsoft Fabric - Training | Microsoft Learn"
+    },
+    {
+      "url": "https://learn.microsoft.com/en-us/training/modules/fabric-transform-data-tsql/",
+      "status": 200,
+      "finalUrl": "https://learn.microsoft.com/en-us/training/modules/fabric-transform-data-tsql/",
+      "title": "Transform Data Using T-SQL in Microsoft Fabric - Training | Microsoft Learn"
+    },
+    {
+      "url": "https://learn.microsoft.com/en-us/training/modules/use-apache-spark-work-files-lakehouse/4-dataframe",
+      "status": 200,
+      "finalUrl": "https://learn.microsoft.com/en-us/training/modules/use-apache-spark-work-files-lakehouse/4-dataframe",
+      "title": "Work with data in a Spark dataframe - Training | Microsoft Learn"
+    }
+  ]
+}

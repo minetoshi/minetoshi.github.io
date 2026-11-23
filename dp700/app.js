@@ -37,7 +37,7 @@ function renderHome(){
  els.domainStats.innerHTML=ds.map(d=>{const s=domainAgg(d);return '<div class="domain"><div class="row"><b>'+escapeHtml(d)+'</b><span class="small">'+(s.attempts?s.rate+"%":"--")+' ・ '+s.attempted+'/'+s.total+'問経験</span></div><div class="bar"><i style="width:'+(s.attempts?s.rate:0)+'%"></i></div></div>';}).join("");
  const uniqueObj=new Set(Q.map(q=>q.objectiveId).filter(x=>/^O\d+/.test(x))).size;
  const codeCount=Q.filter(q=>q.type==="code").length, multiCount=Q.filter(q=>q.type==="multi").length, caseCount=Q.filter(q=>q.type==="case").length, orderCount=Q.filter(q=>q.type==="order").length;
- if(els.bankInfo){const target=META.objectiveCount||49;els.bankInfo.textContent=Q.length+"問 / 公式"+target+"項目 "+uniqueObj+"/"+target+" / コード"+codeCount+" / 複数選択"+multiCount+" / ケース"+caseCount+" / 並べ替え"+orderCount;}
+ if(els.bankInfo){const target=META.objectiveCount||49;els.bankInfo.textContent=Q.length+"問 / "+(META.mobile?"学習":"公式")+target+"項目 "+uniqueObj+"/"+target+" / コード"+codeCount+" / 複数選択"+multiCount+" / ケース"+caseCount+" / 並べ替え"+orderCount;}
  const overall=activeAttempts?pct(activeCorrect,activeAttempts):0;
  const minDomain=Math.min(...ds.map(d=>domainAgg(d).attempts?domainAgg(d).rate:0));
  const distinct=activeStats.filter(x=>x.attempts>0).length;
@@ -45,6 +45,17 @@ function renderHome(){
  else if(overall>=85&&minDomain>=80) els.readiness.textContent="この問題集では高い正答率です。公式Practice Assessmentと実操作で理解を確認してください。";
  else if(overall>=75) els.readiness.textContent="あと一段です。80%未満の分野と間違い復習を優先してください。";
  else els.readiness.textContent="基礎固めが必要です。分野別20問→解説→間違い復習の順で進めてください。";
+ if(META.mobile){
+  const now=Date.now(), today=new Date().toDateString();
+  const due=ALL.filter(q=>itemStat(q.id).nextReview&&itemStat(q.id).nextReview<=now).length;
+  const learned=activeStats.filter(x=>x.attempts>0).length;
+  const todayCount=ALL.filter(q=>itemStat(q.id).lastAttempt&&new Date(itemStat(q.id).lastAttempt).toDateString()===today).length;
+  $("dailyProgress").textContent=`経験済み ${learned}/${ALL.length}問 ・ 今日 ${todayCount}問 ・ 期限復習 ${due}問`;
+  $("dailyProgressBar").style.width=pct(learned,ALL.length)+"%";
+  $("dailyStartBtn").textContent=due?`今日の復習を始める（${due}問）`:els.wrong.textContent>0?`間違いを復習する（${els.wrong.textContent}問）`:"今日の10問を始める";
+  $("dailyStartBtn").onclick=()=>start(due?"due":Number(els.wrong.textContent)>0?"wrong":"quick10");
+  $("restoreHistoryBtn").hidden=!localStorage.getItem(KEY+"-backup");
+ }
  els.home.classList.remove("hidden");els.quiz.classList.add("hidden");els.result.classList.add("hidden");
 }
 function stratified(n){
@@ -109,9 +120,16 @@ function updateTimer(){
  els.timer.classList.toggle("dangerText",sec<=600);
 }
 function getOrder(q){
- if(!session.choiceOrders[q.id])session.choiceOrders[q.id]=shuffle((q.choices||q.orderItems||[]).map((_,i)=>i));
+ if(!session.choiceOrders[q.id]){
+  const order=shuffle((q.choices||q.orderItems||[]).map((_,i)=>i));
+  const previous=previousChoiceOrder.get(q.id);
+  if(order.length>1&&previous&&order.every((value,i)=>value===previous[i]))[order[0],order[1]]=[order[1],order[0]];
+  previousChoiceOrder.set(q.id,order.slice());
+  session.choiceOrders[q.id]=order;
+ }
  return session.choiceOrders[q.id];
 }
+const previousChoiceOrder=new Map();
 function renderQuestion(){
  const q=session.questions[session.index];session.selected=new Set();session.answered=false;
  els.quizMode.textContent=modeLabel(session.mode);els.quizCounter.textContent=(session.index+1)+" / "+session.questions.length;
@@ -148,7 +166,7 @@ function renderGroups(q){
  }));
 }
 function renderOrder(q){
- const state=session.orderState[q.id]||(session.orderState[q.id]=shuffle(q.orderItems));
+ const state=session.orderState[q.id]||(session.orderState[q.id]=getOrder(q).map(i=>q.orderItems[i]));
  els.choices.innerHTML=state.map((txt,i)=>'<div class="orderItem"><span><b>'+(i+1)+'.</b> '+escapeHtml(txt)+'</span><span class="orderBtns"><button data-m="up" data-i="'+i+'">↑</button><button data-m="down" data-i="'+i+'">↓</button></span></div>').join("");
  [...els.choices.querySelectorAll(".orderBtns button")].forEach(b=>b.addEventListener("click",()=>{
    if(session.answered)return;const i=Number(b.dataset.i),dir=b.dataset.m,arr=session.orderState[q.id];
@@ -173,16 +191,16 @@ function answer(){
  const q=session.questions[session.index],correct=evaluate(q),ungraded=ungradedQuestion(q);
  if(!ungraded)updateStat(q,correct);
  session.results.push({id:q.id,domain:q.domain,type:q.type,correct:ungraded?null:correct});session.answered=true;
- if(session.mock){next();return;}
  if(q.type==="group"){
  els.choices.querySelectorAll("button").forEach(b=>{b.disabled=true;const gi=Number(b.dataset.g),i=Number(b.dataset.i);if(!ungraded&&!provisionalQuestion(q)&&q.groups[gi].answer===i)b.classList.add("correct");if(!ungraded&&!provisionalQuestion(q)&&session.groupSelected[gi]===i&&q.groups[gi].answer!==i)b.classList.add("wrong");});
  }else if(q.type!=="order"){
   [...els.choices.children].forEach(b=>{b.disabled=true;const orig=Number(b.dataset.i);if(!ungraded&&!provisionalQuestion(q)&&q.answers.includes(orig))b.classList.add("correct");if(!ungraded&&!provisionalQuestion(q)&&session.selected.has(orig)&&!q.answers.includes(orig))b.classList.add("wrong");});
  }else{
   [...els.choices.querySelectorAll("button")].forEach(b=>b.disabled=true);
+  [...els.choices.querySelectorAll(".orderItem")].forEach((row,i)=>row.classList.add(session.orderState[q.id][i]===q.orderItems[i]?"correct":"wrong"));
  }
  els.feedback.className="feedback "+(ungraded?"":correct?"ok":"bad");
- let correctText=q.type==="group"?q.groups.map(g=>escapeHtml(g.label)+"："+escapeHtml(q.choices[g.answer])).join("<br>"):q.type==="order"?q.orderItems.map((x,i)=>(i+1)+". "+x).join("<br>"):q.answers.map(i=>escapeHtml(q.choices[i])).join(" / ");
+ let correctText=q.type==="group"?q.groups.map(g=>escapeHtml(g.label)+"："+escapeHtml(q.choices[g.answer])).join("<br>"):q.type==="order"?q.orderItems.map((x,i)=>(i+1)+". "+escapeHtml(x)).join("<br>"):q.answers.map(i=>escapeHtml(q.choices[i])).join(" / ");
  const paDetail=!ungraded&&!q.qualityRevision&&window.DP700_PA_EXPLAIN?window.DP700_PA_EXPLAIN(q,getOrder(q)):"";
  const notes=paDetail?"":(q.choiceNotes?'<ul>'+getOrder(q).map((original,i)=>'<li><b>'+String.fromCharCode(65+i)+'.</b> '+escapeHtml(q.choiceNotes[original])+'</li>').join('')+'</ul>':'');
  const pdf=q.pdfPage?'<p><a href="./DP700_Visual_Guide_JA.pdf#page='+q.pdfPage+'" target="_blank" rel="noopener">図解PDFの'+q.pdfPage+'ページで復習 →</a></p>':'';
@@ -236,11 +254,19 @@ $("importHistoryFile").addEventListener("change",async event=>{
  const file=event.target.files[0];if(!file)return;
  try{
   const data=JSON.parse(await file.text());
-  if(!data||Array.isArray(data)||typeof data!=="object"||!data.items||Array.isArray(data.items)||typeof data.items!=="object"||!Array.isArray(data.sessions))throw Error("invalid history");
-  if(!confirm("現在の学習履歴を保存ファイルの内容で置き換えますか？"))return;
+  if(file.size>5_000_000||!data||Array.isArray(data)||typeof data!=="object"||!data.items||Array.isArray(data.items)||typeof data.items!=="object"||!Array.isArray(data.sessions)||!Number.isFinite(data.totalAttempts)||!Number.isFinite(data.totalCorrect)||Object.values(data.items).some(x=>!x||!Number.isFinite(x.attempts)||!Number.isFinite(x.correct)))throw Error("invalid history");
+  if(!confirm("現在の学習履歴をバックアップしてから、保存ファイルの内容で置き換えますか？ 前の履歴は「直前の履歴を復元」から戻せます。"))return;
+  localStorage.setItem(KEY+"-backup",localStorage.getItem(KEY)||JSON.stringify(store));
   localStorage.setItem(KEY,JSON.stringify(data));location.reload();
  }catch(error){alert("学習履歴のJSONファイルを読み込めませんでした。");}
  finally{event.target.value="";}
 });
+if(META.mobile){$("restoreHistoryBtn").addEventListener("click",()=>{
+ const backup=localStorage.getItem(KEY+"-backup");
+ if(backup&&confirm("直前の学習履歴に戻しますか？ 現在の履歴は復元用に保存されます。")){
+  localStorage.setItem(KEY+"-backup",localStorage.getItem(KEY)||JSON.stringify(store));
+  localStorage.setItem(KEY,backup);location.reload();
+ }
+});}
 renderHome();
 })();

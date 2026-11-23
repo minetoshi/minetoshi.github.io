@@ -16,7 +16,7 @@ for (const asset of ['index.html', 'manifest.webmanifest', 'DP700_Visual_Guide_J
 }
 assert(serviceWorker.includes("'./mobile-privacy.html'"));
 assert(serviceWorker.includes('cache.put(url.pathname, response.clone())'));
-for (const asset of ['index.html', 'manifest.webmanifest', 'mobile-privacy.html', ...nativeScripts])
+for (const asset of ['index.html', 'manifest.webmanifest', 'mobile-privacy.html', 'mobile-support.html', ...nativeScripts])
   assert(fs.existsSync(path.join(native, asset)), `Missing app asset ${asset}`);
 assert.equal(nativeScripts.join(','), 'commercial-data.js,glossary.js,app.js');
 for (const excluded of ['pdf90', 'pdf1', 'pdf2', 'pdf3', 'pa50ja', 'paLive50', 'paNov14', 'paPdf50'])
@@ -27,7 +27,9 @@ const context = {window: {}};
 require('node:vm').runInNewContext(nativeData, context);
 const banks = ['DP700_QUESTIONS','DP700_BASICS','DP700_INTERMEDIATE','DP700_ADVANCED','DP700_BRIDGE'];
 const questions = banks.flatMap(key => context.window[key]);
-assert.equal(questions.length, 296);
+const expectedCount = context.window.DP700_META.commercialCount;
+assert.equal(questions.length, expectedCount);
+assert(!questions.some(q => q.id === 'C-SQL-09'));
 assert.equal(new Set(questions.map(q => q.id)).size, questions.length);
 assert(questions.every(q => (!q.origin || ['basic15', 'mid15', 'adv15', 'bridge9'].includes(q.origin)) && !q.pdfPage));
 assert(questions.every(q => q.scorable !== false && q.reviewStatus !== 'review'));
@@ -71,7 +73,7 @@ assert(!fs.existsSync(path.join(native, 'DP700_Visual_Guide_JA.pdf')));
       const errors = [];
       app.on('pageerror', e => errors.push(e.message));
       await app.goto('http://127.0.0.1:8765/mobile/www/');
-      assert(await app.locator('[data-mode="allQuestions"]').innerText() === '全バンク全問（296問）');
+      assert(await app.locator('[data-mode="allQuestions"]').innerText() === `全バンク全問（${expectedCount}問）`);
       assert.equal(await app.locator('[data-mode="paPdf50"]').count(), 0);
       await app.locator('[data-mode="basic15"]').click();
       assert(await app.locator('#qText').isVisible());
@@ -90,7 +92,7 @@ assert(!fs.existsSync(path.join(native, 'DP700_Visual_Guide_JA.pdf')));
       assert.deepEqual(errors, []);
       await appContext.close();
     }
-    console.log('Commercial app bundle passed on desktop and mobile viewports: 296 candidate questions');
+    console.log(`Commercial app bundle passed on desktop and mobile viewports: ${expectedCount} questions`);
   } finally {
     await browser.close();
   }

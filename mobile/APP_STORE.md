@@ -1,36 +1,45 @@
-# App Store提出メモ
+# App Store提出メモ（2026-11-23）
 
-## 販売形態
+## 商品と表示
 
-- 買い切り有料アプリ。広告とアプリ内課金は実装しない。
-- 価格はApp Store Connectで設定する。価格設定と有料アプリ契約、税務情報、振込先の登録はアカウント保有者が行う。
-- Web版は公開中であり、「私用サイト」ではない。有料版はオフライン動作と端末内の復習履歴を訴求する。公開前に無料Web版との差別化と価格を再評価する。
+- 名称：DP-700 問題道場
+- サブタイトル案：Fabricデータエンジニア演習
+- 販売方式：購入時の買い切り。広告、サブスクリプション、アプリ内課金なし。
+- 説明文案：Microsoft Fabricのデータエンジニアリングを学ぶための日本語演習アプリ。独自演習295問を端末に収録し、オフラインで学べます。初級から最上級、分野別、45問模試、コード、間違い復習、期限復習に対応。毎日の学習画面で経験済み問題数と復習予定を確認できます。回答後に正誤と解説を表示し、必要に応じてMicrosoft Learnを開けます。学習履歴は端末内に保存し、JSONで持ち出せます。本アプリはMicrosoftの公式アプリではなく、実試験問題や公式Practice Assessmentの解答は収録しません。
+- キーワード案：DP-700,Fabric,データエンジニア,資格,演習,学習
+- サポートURL：https://minetoshi.github.io/dp700/mobile-support.html
+- プライバシーURL：https://minetoshi.github.io/dp700/mobile-privacy.html
+- 問い合わせ：fitmo.app@gmail.com
 
-## アプリ情報の下書き
+## スクリーンショット案
 
-名称：DP-700 問題道場
+1. ホーム：「今日の学習」、経験済み数、復習予定
+2. 分野別進捗と初級～最上級の入口
+3. 複数選択またはコード問題の回答画面
+4. 回答後の緑・赤の正誤表示と解説
+5. 最終スコアと分野別結果、間違い復習
 
-サブタイトル：Fabricデータエンジニア演習
+App Store Connectに要求される寸法・端末区分で、署名済みアプリを実機で動かして取得する。シミュレータの画像はレイアウト確認用と区別する。表示問題には未確定教材や個人の履歴を使わない。
 
-説明文：
+## App Privacyの回答根拠
 
-Microsoft Fabricのデータエンジニアリングを学ぶための日本語演習アプリです。296問の独自演習を端末に保存し、通信がない場所でも学習できます。初級から最上級までの段階演習、分野別演習、45問模試、コード問題、間違い復習、期限復習、用語検索を収録。回答後に解説と関連するMicrosoft公式資料へのリンクを表示します。問題の順序と選択肢の順序は演習ごとに変わります。Microsoftの公式アプリではありません。本試験の問題や公式Practice Assessmentの解答を収録したものではありません。
+学習履歴は端末のWebViewローカルストレージに保存し、運営者サーバーには送信しない。外部資料を開くと各サイトの取り扱いが適用される。アプリに広告・分析SDK、アカウント、通知権限はない。購入・決済はAppleが処理する。App Store Connectで実際のバイナリとAppleの質問票を照合して回答する。
 
-キーワード案：DP-700,Fabric,データエンジニア,資格,模擬試験,学習
+## 実施済みと残るゲート
 
-サポート：fitmo.app@gmail.com
+- 候補296問をID別台帳化。販売対象295問、保留1問。Web版589問は維持。
+- 76件のLearn URLは2026-11-23にHTTP 200。到達性は意味的な正答検証ではない。個別公式解答確認は0件。
+- リポジトリ履歴と既存監査から独自作成と評価。販売者による原稿・コードの著作権と作成経緯の最終確認は未完了。
+- Xcodeの通常ビルドはSwift Package Managerの取得で停止。公式配布物をチェックサム照合した一時的なローカル参照ではiPhoneシミュレータ向けビルド成功。ブラウザUIテストとシミュレータの表示・正誤確認は実施済み。実機とTestFlightは未実施。
+- 有料アプリ契約、税務・銀行、価格、署名の本人操作、審査への最終提出はApple Developerアカウント保有者が行う。
 
-プライバシーポリシー：https://minetoshi.github.io/dp700/mobile-privacy.html
+## 公開リポジトリからの分離手順
 
-## 提出前のゲート
+現在の公開GitHubリポジトリとGitHub Pagesには販売対象の問題文・答えも存在する。`noindex` はアクセス制御ではない。いまのiOSバイナリへ同梱しても、公開データの秘匿は実現しない。
 
-1. 同梱296問の文章、コード、画像、出典の権利と正答・解説を個別確認する。PDF由来・PA由来・判定保留の問題は同梱しない。
-2. Macで `npm ci && npm run ios:sync && npm run ios:open` を実行する。実機で全演習形式、色による正誤表示、オフライン、復習、履歴の保存・読込、外部リンクを確認する。
-3. iPhone/iPadの実画面からApp Store用スクリーンショットを作成し、App Privacy、対象年齢、サポートURL、価格を登録する。
-4. XcodeでArchiveを作成しTestFlightで配布する。実機テストを完了した後にApp Reviewへ提出する。審査通過は保証されない。
+1. Web版589問、Webの公開URL、既存履歴のIDを維持したまま、新規の販売専用問題を非公開リポジトリで独立管理する。公開問題とIDを重複させない。
+2. 非公開CIで販売専用バンクを検証し、署名用Macへ成果物を渡してアプリへ同梱する。公開GitHub Actionsのログ・artifactや公開Pagesへ販売専用データを出さない。
+3. 既に公開した295問を「非公開化」しても過去のGit履歴と既存クローンから消せない。既存問題は公開済みとして扱い、新規バンクと端末内の復習機能をアプリ価値とする。
+4. Web版を変更する場合は旧IDを保持し、履歴のエクスポート・インポートを回帰検証してから別PRで進める。過去の公開URLやWeb演習を無断で削除しない。
 
-参考：
-
-- https://developer.apple.com/help/app-store-connect/manage-app-pricing/set-a-price
-- https://developer.apple.com/app-store/review/guidelines/
-- https://learn.microsoft.com/en-us/legal/termsofuse
+参照：[Microsoft Learn利用規約](https://learn.microsoft.com/en-us/legal/termsofuse)、[Apple App Review Guidelines](https://developer.apple.com/app-store/review/guidelines/)。

@@ -15,6 +15,7 @@ jobs:
         with:
           node-version: 22
       - run: node dp700/tests/validate.cjs
+      - run: node mobile/scripts/audit.cjs
       - run: node mobile/scripts/build.cjs
       - run: pip install pyspark==3.5.3
       - run: python -P dp700/tests/pyspark.py
@@ -26,6 +27,7 @@ jobs:
       - run: |
           python3 -m http.server 8765 > /tmp/http-mobile.log 2>&1 &
           node dp700/tests/mobile.cjs
+          node mobile/tests/release.cjs
       - uses: actions/upload-artifact@v4
         if: always()
         with:

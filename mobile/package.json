@@ -6,6 +6,7 @@
     "build": "node scripts/build.cjs",
     "ios:add": "npm run build && cap add ios",
     "ios:sync": "npm run build && cap sync ios",
+    "ios:build:fallback": "bash scripts/with-local-capacitor.sh xcodebuild -project ios/App/App.xcodeproj -scheme App -configuration Debug -destination 'generic/platform=iOS Simulator' CODE_SIGNING_ALLOWED=NO build",
     "ios:open": "cap open ios"
   },
   "dependencies": {
