@@ -14,6 +14,8 @@ for (const asset of ['index.html', 'manifest.webmanifest', 'DP700_Visual_Guide_J
   assert(fs.existsSync(path.join(source, asset)), `Missing website asset ${asset}`);
   assert(serviceWorker.includes(`'./${asset}'`) || asset === 'index.html', `Missing offline asset ${asset}`);
 }
+assert(serviceWorker.includes("'./mobile-privacy.html'"));
+assert(serviceWorker.includes('cache.put(url.pathname, response.clone())'));
 for (const asset of ['index.html', 'manifest.webmanifest', 'mobile-privacy.html', ...nativeScripts])
   assert(fs.existsSync(path.join(native, asset)), `Missing app asset ${asset}`);
 assert.equal(nativeScripts.join(','), 'commercial-data.js,glossary.js,app.js');
@@ -58,6 +60,8 @@ assert(!fs.existsSync(path.join(native, 'DP700_Visual_Guide_JA.pdf')));
     assert(await page.locator('#feedback').isVisible());
     await page.locator('#nextBtn').click();
     assert(await page.locator('#qText').isVisible());
+    await page.goto(url + 'mobile-privacy.html');
+    assert((await page.locator('h1').innerText()).includes('プライバシーポリシー'));
     console.log(`Mobile offline quiz passed; PDF first questions: ${first.join(', ')}`);
     await context.close();
 
