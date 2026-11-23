@@ -219,5 +219,28 @@ els.answerBtn.addEventListener("click",answer);els.nextBtn.addEventListener("cli
 $("quitBtn").addEventListener("click",()=>{if(confirm("この演習を終了しますか？"))renderHome();});
 $("homeBtn").addEventListener("click",renderHome);
 $("resetBtn").addEventListener("click",()=>{if(confirm("学習履歴をすべて削除します。よろしいですか？")){localStorage.removeItem(KEY);location.reload();}});
+$("exportHistoryBtn").addEventListener("click",async()=>{
+ const data=localStorage.getItem(KEY)||JSON.stringify(store);
+ const file=new File([data],"dp700-learning-history.json",{type:"application/json"});
+ if(navigator.canShare?.({files:[file]})){
+  try{await navigator.share({files:[file],title:"DP-700 学習履歴"});return;}
+  catch(error){if(error.name==="AbortError")return;}
+ }
+ const url=URL.createObjectURL(file);
+ const link=document.createElement("a");link.href=url;link.download="dp700-learning-history.json";
+ document.body.appendChild(link);link.click();link.remove();
+ setTimeout(()=>URL.revokeObjectURL(url),60000);
+});
+$("importHistoryBtn").addEventListener("click",()=>$("importHistoryFile").click());
+$("importHistoryFile").addEventListener("change",async event=>{
+ const file=event.target.files[0];if(!file)return;
+ try{
+  const data=JSON.parse(await file.text());
+  if(!data||Array.isArray(data)||typeof data!=="object"||!data.items||Array.isArray(data.items)||typeof data.items!=="object"||!Array.isArray(data.sessions))throw Error("invalid history");
+  if(!confirm("現在の学習履歴を保存ファイルの内容で置き換えますか？"))return;
+  localStorage.setItem(KEY,JSON.stringify(data));location.reload();
+ }catch(error){alert("学習履歴のJSONファイルを読み込めませんでした。");}
+ finally{event.target.value="";}
+});
 renderHome();
 })();
