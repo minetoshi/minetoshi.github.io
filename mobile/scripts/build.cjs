@@ -44,6 +44,9 @@ html = html.replace('DP-700 Dojo v6.5 • ', 'DP-700 問題道場 • <a href=".
 html = html.replace('プライバシーポリシー</a> • ', 'プライバシーポリシー</a> • <a href="./mobile-support.html">サポート</a> • ');
 html = html.replace(/<script src="\.\/(?!glossary|app)[^\"]+"><\/script>\s*/g, '');
 html = html.replace(/<script src="\.\/glossary\.js/, '<script src="./commercial-data.js"></script>\n<script src="./glossary.js');
+// The native bundle already includes every asset; a Web service worker would request an absent sw.js.
+html = html.replace(/<script>\s*if \('serviceWorker' in navigator[\s\S]*?<\/script>/, '');
+if (html.includes('serviceWorker.register')) throw new Error('Unexpected service worker registration in native HTML');
 // The public website keeps all banks. The iOS binary contains only the scoped exercises.
 const scripts = [...html.matchAll(/<script src="\.\/([^"?]+)(?:\?[^\"]*)?"/g)].map(match => match[1]);
 const assets = ['index.html', 'manifest.webmanifest', 'mobile-privacy.html', 'mobile-support.html', 'icons/icon-192.png', 'icons/icon-512.png', ...scripts];
