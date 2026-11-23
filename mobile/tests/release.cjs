@@ -55,6 +55,7 @@ async function answer(page, wantCorrect) {
     await page.goto(base);
     assert((await page.locator('h1').innerText()).includes('問題道場'));
     assert((await page.locator('#dailyProgress').innerText()).includes(`${bank.length}問`));
+    assert((await page.locator('#bankInfo').innerText()).includes(`全${bank.length}問`));
 
     for (const mode of ['basic15', 'mid15', 'adv15', 'bridge9', 'domain', 'mock45', 'code']) {
       if (mode === 'domain') await page.locator('#domainStart').click();
