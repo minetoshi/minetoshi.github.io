@@ -5,6 +5,7 @@ const vm = require('node:vm');
 const path = require('node:path');
 
 const appData = fs.readFileSync(path.resolve(__dirname, '../www/commercial-data.js'), 'utf8');
+assert(!fs.readFileSync(path.resolve(__dirname, '../www/index.html'), 'utf8').includes('serviceWorker.register'));
 const contextData = { window: {} };
 vm.runInNewContext(appData, contextData);
 const bank = Object.values(contextData.window).filter(Array.isArray).flat();
