@@ -105,7 +105,40 @@ async function answer(page, wantCorrect) {
     await ctx.setOffline(true);
     await page.locator('#dailyStartBtn').click();
     assert(await page.locator('#qText').isVisible());
+    page.once('dialog', dialog => dialog.accept());
+    await page.locator('#quitBtn').click();
+    await ctx.setOffline(false);
+
+    const reviewIds = bank.slice(0, 30).map(q => q.id);
+    await page.evaluate(ids => {
+      const data = JSON.parse(localStorage.getItem('dp700-dojo-v2'));
+      for (const item of Object.values(data.items)) { item.lastWrong = false; item.nextReview = 0; }
+      for (const id of ids) data.items[id] = { attempts: 1, correct: 0, streak: 0, lastWrong: true, nextReview: 1 };
+      localStorage.setItem('dp700-dojo-v2', JSON.stringify(data));
+    }, reviewIds);
+    await page.reload();
+    assert((await page.locator('#dailyStartBtn').innerText()).includes('25問 / 対象30問'));
+    await page.locator('#dailyStartBtn').click();
+    assert.equal((await page.locator('#quizCounter').innerText()).trim(), '1 / 25');
+    page.once('dialog', dialog => dialog.accept());
+    await page.locator('#quitBtn').click();
+
+    await page.evaluate(() => {
+      const data = JSON.parse(localStorage.getItem('dp700-dojo-v2'));
+      for (const item of Object.values(data.items)) item.nextReview = 0;
+      localStorage.setItem('dp700-dojo-v2', JSON.stringify(data));
+    });
+    await page.reload();
+    assert((await page.locator('#dailyStartBtn').innerText()).includes('25問 / 対象30問'));
+    assert((await page.locator('#dailyStartBtn').innerText()).includes('間違い'));
+
+    assert(await page.locator('#restoreHistoryBtn').isVisible());
+    page.once('dialog', dialog => dialog.accept());
+    await page.locator('#resetBtn').click();
+    await page.waitForFunction(() => localStorage.getItem('dp700-dojo-v2') === null && localStorage.getItem('dp700-dojo-v2-backup') === null);
+    assert(await page.locator('#restoreHistoryBtn').isHidden());
+    assert((await page.locator('#dailyProgress').innerText()).includes('経験済み 0/'));
     assert.deepEqual(errors, []);
-    console.log(`iPhone viewport release flows passed: ${bank.length} bundled questions, modes, feedback, score, review, history restore and offline`);
+    console.log(`iPhone viewport release flows passed: ${bank.length} bundled questions, modes, feedback, score, review batches, history restore/reset and offline`);
   } finally { await browser.close(); }
 })().catch(error => { console.error(error); process.exitCode = 1; });

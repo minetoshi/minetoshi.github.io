@@ -52,8 +52,9 @@ function renderHome(){
   const todayCount=ALL.filter(q=>itemStat(q.id).lastAttempt&&new Date(itemStat(q.id).lastAttempt).toDateString()===today).length;
   $("dailyProgress").textContent=`経験済み ${learned}/${ALL.length}問 ・ 今日 ${todayCount}問 ・ 期限復習 ${due}問`;
   $("dailyProgressBar").style.width=pct(learned,ALL.length)+"%";
-  $("dailyStartBtn").textContent=due?`今日の復習を始める（${due}問）`:els.wrong.textContent>0?`間違いを復習する（${els.wrong.textContent}問）`:"今日の10問を始める";
-  $("dailyStartBtn").onclick=()=>start(due?"due":Number(els.wrong.textContent)>0?"wrong":"quick10");
+  const wrong=Number(els.wrong.textContent);
+  $("dailyStartBtn").textContent=due?`今日の復習を始める（${Math.min(due,25)}問 / 対象${due}問）`:wrong?`間違いを復習する（${Math.min(wrong,25)}問 / 対象${wrong}問）`:"今日の10問を始める";
+  $("dailyStartBtn").onclick=()=>start(due?"due":wrong?"wrong":"quick10");
   $("restoreHistoryBtn").hidden=!localStorage.getItem(KEY+"-backup");
  }
  els.home.classList.remove("hidden");els.quiz.classList.add("hidden");els.result.classList.add("hidden");
@@ -236,7 +237,7 @@ $("domainAllStart").addEventListener("click",()=>start("domainAll",els.domainSel
 els.answerBtn.addEventListener("click",answer);els.nextBtn.addEventListener("click",next);
 $("quitBtn").addEventListener("click",()=>{if(confirm("この演習を終了しますか？"))renderHome();});
 $("homeBtn").addEventListener("click",renderHome);
-$("resetBtn").addEventListener("click",()=>{if(confirm("学習履歴をすべて削除します。よろしいですか？")){localStorage.removeItem(KEY);location.reload();}});
+$("resetBtn").addEventListener("click",()=>{if(confirm("学習履歴と端末内の復元用バックアップを削除します。よろしいですか？")){localStorage.removeItem(KEY);localStorage.removeItem(KEY+"-backup");location.reload();}});
 $("exportHistoryBtn").addEventListener("click",async()=>{
  const data=localStorage.getItem(KEY)||JSON.stringify(store);
  const file=new File([data],"dp700-learning-history.json",{type:"application/json"});
