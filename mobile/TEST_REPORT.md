@@ -13,6 +13,7 @@
 - iPhone 17 Pro Simulator（iOS 26.4）：アプリ起動、295問表示、選択肢順の変化、誤答の赤・正答の緑、復習導線、再インストール後の履歴保持を画面で確認。修正後のアプリを再インストールして起動し、復習開始ボタンの件数表示も画面で確認。`screenshots/simulator-drafts/` に確認用画像を保存。
 - iPhone 17 Pro Simulator（iOS 26.4）：iOS共有シートから学習履歴JSONを「ファイル」に保存し、iOSファイル選択画面から読み込み。復元確認後に回答数が2→3→2と戻ることを画面で確認。
 - iPhone 17 Pro Simulator（iOS 26.4）：Microsoft公式Study GuideをSafariで開いてアプリに戻れることを確認。サポート・プライバシー画面の戻り導線と、スクロール中のステータスバー・用語集の安全領域を画面で確認。
+- iPhone 17 Pro Simulator（iOS 26.4）：Computer Useでホーム、演習前後の正誤表示、結果、コード問題、用語集、分野別導線、サポート・プライバシー画面を操作。プライバシー見出しの不自然な折り返しを修正し、再ビルド・再インストール後に画面で確認。
 - Xcode 26.4：`generic/platform=iOS` のRelease Archiveが署名なしで成功。アプリIDは `com.minetoshi.dp700dojo`。これはApp Storeに提出できる署名済みArchiveではない。
 
 ## 未実施・制限
