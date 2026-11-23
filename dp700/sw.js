@@ -1,6 +1,6 @@
-const CACHE = 'dp700-offline-20261123';
+const CACHE = 'dp700-offline-20261123-privacy';
 const ASSETS = [
-  './', './index.html', './manifest.webmanifest',
+  './', './index.html', './manifest.webmanifest', './mobile-privacy.html',
   './icons/icon-192.png', './icons/icon-512.png',
   './questions.js', './pdf-questions.js', './beginner.js',
   './intermediate.js', './advanced.js', './bridge.js', './glossary.js',
@@ -25,7 +25,7 @@ self.addEventListener('fetch', event => {
     if (cached) return cached;
     try {
       const response = await fetch(event.request);
-      if (response.ok) cache.put(key, response.clone());
+      if (response.ok) cache.put(url.pathname, response.clone());
       return response;
     } catch (error) {
       if (event.request.mode === 'navigate') return cache.match('./index.html');
