@@ -2,6 +2,12 @@
 
 このディレクトリは `dp700/` の問題データと画面を端末へ同梱する Capacitor 8 のiOSアプリです。オフラインで演習できます。iOSプロジェクトとアイコンは生成済みです。問題の更新は `npm run ios:sync` で取り込みます。
 
+## App Store向けの内容と課金
+
+iOSビルドには現時点で基本218問と段階演習78問、合計296問を同梱します。採点保留の3問、利用者提供PDF、PA派生問題、図解PDFは有料版に同梱しません。Web版の589問は従来のままです。現行ビルドは機能制限や広告SDKを持たない買い切りアプリとして用意しています。価格はApp Store Connectで設定し、アプリ内課金は使いません。公開前に296問の権利と内容を最終確認してください。
+
+プライバシーポリシーURLは `https://minetoshi.github.io/dp700/mobile-privacy.html` です。App Store Connectのアプリ情報へ登録してください。実機の画面を使ったスクリーンショットと説明文、サポート窓口、App Privacyの回答、税務・銀行口座設定もApp Store Connectで用意します。
+
 ## Macでの仕上げ
 
 Node.js 22以上、Xcode 26以上と Xcode Command Line Tools を用意してから、リポジトリの `mobile/` で実行します。
