@@ -56,7 +56,42 @@ async function answer(page, wantCorrect) {
     await page.goto(base);
     assert((await page.locator('h1').innerText()).includes('問題道場'));
     assert((await page.locator('#dailyProgress').innerText()).includes(`${bank.length}問`));
-    assert((await page.locator('#bankInfo').innerText()).includes(`全${bank.length}問`));
+    assert((await page.locator('#bankInfo').innerText()).includes(`独自演習${bank.length}問`));
+    assert((await page.locator('#dailyStartBtn').innerText()).includes('未着手から10問'));
+    assert((await page.locator('#focusCounts').innerText()).includes(`未着手 ${bank.length}問`));
+    const examDate = await page.evaluate(() => {
+      const date = new Date(); date.setDate(date.getDate() + 9);
+      return [date.getFullYear(), String(date.getMonth() + 1).padStart(2, '0'), String(date.getDate()).padStart(2, '0')].join('-');
+    });
+    await page.locator('#examDate').fill(examDate);
+    assert((await page.locator('#planSummary').innerText()).includes('1日30問'));
+    await page.reload();
+    assert.equal(await page.locator('#examDate').inputValue(), examDate);
+    assert((await page.locator('#dailyStartBtn').innerText()).includes('未着手から30問'));
+    const tomorrow = await page.evaluate(() => {
+      const date = new Date(); date.setDate(date.getDate() + 1);
+      return [date.getFullYear(), String(date.getMonth() + 1).padStart(2, '0'), String(date.getDate()).padStart(2, '0')].join('-');
+    });
+    await page.locator('#examDate').fill(tomorrow);
+    assert((await page.locator('#planSummary').innerText()).includes('1回最大50問'));
+    assert((await page.locator('#dailyStartBtn').innerText()).includes('未着手から50問'));
+    await page.locator('#examDate').fill(examDate);
+    assert.equal(await page.locator('#objectiveFocus [data-objective]').count(), 3);
+    const objectiveId = await page.locator('#objectiveFocus [data-objective]').first().getAttribute('data-objective');
+    await page.locator('#objectiveFocus [data-objective]').first().click();
+    assert.equal(byId.get(await page.locator('#qSkill').innerText()).objectiveId, objectiveId);
+    page.once('dialog', dialog => dialog.accept());
+    await page.locator('#quitBtn').click();
+    const weakDomain = await page.locator('#domainSelect option').first().getAttribute('value');
+    await page.locator('#weakStartBtn').click();
+    assert.equal(await page.locator('#qDomain').innerText(), weakDomain);
+    page.once('dialog', dialog => dialog.accept());
+    await page.locator('#quitBtn').click();
+    await page.locator('#dailyStartBtn').click();
+    assert.equal((await page.locator('#quizMode').innerText()).trim(), '今日の優先演習');
+    assert.equal((await page.locator('#quizCounter').innerText()).trim(), '1 / 30');
+    page.once('dialog', dialog => dialog.accept());
+    await page.locator('#quitBtn').click();
 
     for (const mode of ['basic15', 'mid15', 'adv15', 'bridge9', 'domain', 'mock45', 'code']) {
       if (mode === 'domain') await page.locator('#domainStart').click();
@@ -98,11 +133,13 @@ async function answer(page, wantCorrect) {
     await page.locator('#importHistoryFile').setInputFiles({ name: 'history.json', mimeType: 'application/json', buffer: Buffer.from(JSON.stringify(imported)) });
     await page.waitForFunction(() => JSON.parse(localStorage.getItem('dp700-dojo-v2')).totalAttempts === 7);
     assert.equal(await page.evaluate(() => JSON.parse(localStorage.getItem('dp700-dojo-v2')).totalAttempts), 7);
+    assert.equal(await page.locator('#examDate').inputValue(), '');
     assert.equal(await page.evaluate(() => localStorage.getItem('dp700-dojo-v2-backup')), original);
     page.once('dialog', dialog => dialog.accept());
     await page.locator('#restoreHistoryBtn').click();
     await page.waitForFunction(expected => localStorage.getItem('dp700-dojo-v2') === expected, original);
     assert.equal(await page.evaluate(() => localStorage.getItem('dp700-dojo-v2')), original);
+    assert.equal(await page.locator('#examDate').inputValue(), examDate);
 
     await ctx.setOffline(true);
     await page.locator('#dailyStartBtn').click();
@@ -139,7 +176,19 @@ async function answer(page, wantCorrect) {
     await page.locator('#resetBtn').click();
     await page.waitForFunction(() => localStorage.getItem('dp700-dojo-v2') === null && localStorage.getItem('dp700-dojo-v2-backup') === null);
     assert(await page.locator('#restoreHistoryBtn').isHidden());
+    assert.equal(await page.locator('#examDate').inputValue(), '');
     assert((await page.locator('#dailyProgress').innerText()).includes('経験済み 0/'));
+    const remaining = bank.slice(-3).map(q => q.id);
+    await page.evaluate(ids => {
+      const data = JSON.parse(localStorage.getItem('dp700-dojo-v2') || '{"items":{},"sessions":[],"totalAttempts":0,"totalCorrect":0}');
+      for (const id of ids) data.items[id] = { attempts: 1, correct: 1, streak: 1, lastWrong: false, nextReview: 0 };
+      localStorage.setItem('dp700-dojo-v2', JSON.stringify(data));
+    }, bank.slice(0, -3).map(q => q.id));
+    await page.reload();
+    assert((await page.locator('#dailyStartBtn').innerText()).includes('未着手から3問'));
+    await page.locator('#dailyStartBtn').click();
+    assert.equal((await page.locator('#quizCounter').innerText()).trim(), '1 / 3');
+    assert(remaining.includes(await page.locator('#qSkill').innerText()));
     assert.deepEqual(errors, []);
     console.log(`iPhone viewport release flows passed: ${bank.length} bundled questions, modes, feedback, score, review batches, history restore/reset and offline`);
   } finally { await browser.close(); }

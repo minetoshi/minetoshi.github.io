@@ -1,6 +1,7 @@
 (() => {
 "use strict";
 const BRIDGE=window.DP700_BRIDGE||[], ADV=window.DP700_ADVANCED||[], MID=window.DP700_INTERMEDIATE||[], BASIC=window.DP700_BASICS||[], Q=window.DP700_QUESTIONS||[], PA_LIVE=window.DP700_PA_LIVE_20261106||[], PA_NOV14=window.DP700_PA_20261114||[], PA_PDF=window.DP700_PA_PDF_20261112||[], META=window.DP700_META||{}, OBJ=window.DP700_OBJECTIVES||[];
+const OBJECTIVE_LABELS=META.mobile?window.DP700_OBJECTIVE_LABELS||{}:{};
 const ALL=[...new Map([...Q,...BASIC,...MID,...ADV,...BRIDGE,...PA_LIVE,...PA_NOV14,...PA_PDF].map(q=>[q.id,q])).values()];
 const ungradedQuestion=q=>q.reviewStatus==="review"||q.scorable===false;
 const provisionalQuestion=q=>String(q.origin||"").startsWith("pa");
@@ -15,7 +16,8 @@ const els={
  resultBreakdown:$("resultBreakdown"),bankInfo:$("bankInfo")
 };
 const store=load(); let session=null, timerHandle=null;
-function load(){try{const s=JSON.parse(localStorage.getItem(KEY)||"{}");return {items:s.items||{},totalAttempts:s.totalAttempts||0,totalCorrect:s.totalCorrect||0,sessions:s.sessions||[]};}catch(e){return {items:{},totalAttempts:0,totalCorrect:0,sessions:[]};}}
+function validExamDate(value){if(!/^\d{4}-\d{2}-\d{2}$/.test(value||""))return false;const [year,month,day]=value.split("-").map(Number),date=new Date(year,month-1,day);return date.getFullYear()===year&&date.getMonth()+1===month&&date.getDate()===day;}
+function load(){try{const s=JSON.parse(localStorage.getItem(KEY)||"{}");return {items:s.items||{},totalAttempts:s.totalAttempts||0,totalCorrect:s.totalCorrect||0,sessions:s.sessions||[],studyPlan:s.studyPlan&&validExamDate(s.studyPlan.examDate)?{examDate:s.studyPlan.examDate}:null};}catch(e){return {items:{},totalAttempts:0,totalCorrect:0,sessions:[],studyPlan:null};}}
 function save(){localStorage.setItem(KEY,JSON.stringify(store));}
 function shuffle(a){const x=[...a];for(let i=x.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[x[i],x[j]]=[x[j],x[i]];}return x;}
 function sample(a,n){return shuffle(a).slice(0,Math.min(n,a.length));}
@@ -25,6 +27,29 @@ function itemStat(id){return store.items[id]||{attempts:0,correct:0,streak:0,las
 function escapeHtml(s){return String(s??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#039;"}[m]));}
 function typeLabel(t){return ({single:"単一選択",multi:"複数選択",case:"ケース",code:"コード",order:"並べ替え",group:"組み合わせ・穴埋め"})[t]||t;}
 function domainAgg(d){const ids=ALL.filter(q=>q.domain===d&&!ungradedQuestion(q)).map(q=>q.id);let a=0,c=0,attempted=0;ids.forEach(id=>{const s=itemStat(id);a+=s.attempts;c+=s.correct;if(s.attempts)attempted++;});return {attempts:a,correct:c,attempted,total:ids.length,rate:pct(c,a)};}
+function localDateString(date=new Date()){return [date.getFullYear(),String(date.getMonth()+1).padStart(2,"0"),String(date.getDate()).padStart(2,"0")].join("-");}
+function daysThroughExam(examDate){const today=localDateString().split("-").map(Number),target=examDate.split("-").map(Number);return Math.round((Date.UTC(target[0],target[1]-1,target[2])-Date.UTC(today[0],today[1]-1,today[2]))/86400000)+1;}
+function dailyUnseenCount(unseen){const days=store.studyPlan?.examDate?daysThroughExam(store.studyPlan.examDate):0;return Math.min(unseen,days>0?Math.min(50,Math.ceil(unseen/days)):10);}
+function renderObjectiveFocus(){
+ const groups=new Map();for(const q of Q){if(!/^O\d+$/.test(q.objectiveId||"")||ungradedQuestion(q))continue;if(!groups.has(q.objectiveId))groups.set(q.objectiveId,{id:q.objectiveId,name:OBJECTIVE_LABELS[q.objectiveId]||q.skill||q.objectiveId,questions:[]});groups.get(q.objectiveId).questions.push(q);}
+ const rows=[...groups.values()].map(row=>{const stats=row.questions.map(q=>itemStat(q.id)),attempts=stats.reduce((n,s)=>n+s.attempts,0),correct=stats.reduce((n,s)=>n+s.correct,0),learned=stats.filter(s=>s.attempts).length;return {...row,attempts,correct,learned,rate:pct(correct,attempts)};});
+ rows.sort((a,b)=>{const priority=x=>x.attempts&&x.rate<80?0:x.learned<x.questions.length?1:2;return priority(a)-priority(b)||a.rate-b.rate||a.learned-b.learned||a.id.localeCompare(b.id);});
+ $("objectiveFocus").innerHTML=rows.slice(0,3).map(row=>`<div class="objectiveRow"><div><b>${escapeHtml(row.name)}</b><span class="small">${row.learned}/${row.questions.length}問経験${row.attempts?` ・ 正答率${row.rate}%`:" ・ 未着手"}</span></div><button class="btn secondary" data-objective="${escapeHtml(row.id)}">解く</button></div>`).join("");
+ $("objectiveFocus").querySelectorAll("[data-objective]").forEach(button=>button.addEventListener("click",()=>start("objective",button.dataset.objective)));
+}
+function renderMobileCoach(ds,activeStats,due,wrong){
+ const learned=activeStats.filter(x=>x.attempts>0).length,unseen=ALL.length-learned,examDate=store.studyPlan?.examDate||"";
+ const input=$("examDate");input.min=localDateString();input.value=examDate;
+ if(!examDate)$("planSummary").textContent=`上の欄をタップして試験日を選択。未着手${unseen}問を終えるための1日あたりの目安を表示します。`;
+ else{const days=daysThroughExam(examDate);$("planSummary").textContent=days<1?"試験日が過ぎています。新しい日付を設定してください。":unseen?`試験日まで${days}日。未着手${unseen}問を一周する目安は1日${Math.ceil(unseen/days)}問です。${Math.ceil(unseen/days)>50?"1回最大50問で、複数回に分けて進められます。":""}合格を保証する目標ではありません。`:`試験日まで${days}日。全問を一度経験済みです。期限復習と弱点演習を続けましょう。`;}
+ const candidates=ds.map(d=>({domain:d,...domainAgg(d)})).sort((a,b)=>(a.attempted>0)-(b.attempted>0)||a.rate-b.rate||a.attempted-b.attempted);
+ const weak=candidates[0];
+ if(weak){$("weakSummary").textContent=weak.attempted?`${weak.domain}：正答率${weak.rate}%・${weak.attempted}/${weak.total}問経験`:`未着手の分野：${weak.domain}（全${weak.total}問）`;$("weakStartBtn").onclick=()=>start("domain",weak.domain);}
+ $("focusCounts").textContent=`期限復習 ${due}問 ・ 間違い ${wrong}問 ・ 未着手 ${unseen}問`;
+ $("dailyStartBtn").textContent=due?`期限復習を始める（${Math.min(due,25)}問 / 対象${due}問）`:wrong?`間違いを復習する（${Math.min(wrong,25)}問 / 対象${wrong}問）`:unseen?`未着手から${dailyUnseenCount(unseen)}問を始める（残り${unseen}問）`:"定着確認の10問を始める";
+ $("dailyStartBtn").onclick=()=>start(due?"due":wrong?"wrong":"focus10");
+ renderObjectiveFocus();
+}
 function renderHome(){
  clearTimer();
  const activeStats=ALL.filter(q=>!ungradedQuestion(q)).map(q=>itemStat(q.id));
@@ -37,7 +62,7 @@ function renderHome(){
  els.domainStats.innerHTML=ds.map(d=>{const s=domainAgg(d);return '<div class="domain"><div class="row"><b>'+escapeHtml(d)+'</b><span class="small">'+(s.attempts?s.rate+"%":"--")+' ・ '+s.attempted+'/'+s.total+'問経験</span></div><div class="bar"><i style="width:'+(s.attempts?s.rate:0)+'%"></i></div></div>';}).join("");
  const uniqueObj=new Set(Q.map(q=>q.objectiveId).filter(x=>/^O\d+/.test(x))).size;
  const codeCount=Q.filter(q=>q.type==="code").length, multiCount=Q.filter(q=>q.type==="multi").length, caseCount=Q.filter(q=>q.type==="case").length, orderCount=Q.filter(q=>q.type==="order").length;
- if(els.bankInfo){const target=META.objectiveCount||49;const bankSize=META.mobile?`全${ALL.length}問（基本${Q.length}＋段階${ALL.length-Q.length}）`:Q.length+"問";els.bankInfo.textContent=bankSize+" / "+(META.mobile?"学習":"公式")+target+"項目 "+uniqueObj+"/"+target+" / コード"+codeCount+" / 複数選択"+multiCount+" / ケース"+caseCount+" / 並べ替え"+orderCount;}
+ if(els.bankInfo){const target=META.objectiveCount||49;const bankSize=META.mobile?`独自演習${ALL.length}問（基本${Q.length}＋段階${ALL.length-Q.length}）`:Q.length+"問";els.bankInfo.textContent=META.mobile?bankSize:bankSize+" / 公式"+target+"項目 "+uniqueObj+"/"+target+" / コード"+codeCount+" / 複数選択"+multiCount+" / ケース"+caseCount+" / 並べ替え"+orderCount;}
  const overall=activeAttempts?pct(activeCorrect,activeAttempts):0;
  const minDomain=Math.min(...ds.map(d=>domainAgg(d).attempts?domainAgg(d).rate:0));
  const distinct=activeStats.filter(x=>x.attempts>0).length;
@@ -53,8 +78,7 @@ function renderHome(){
   $("dailyProgress").textContent=`経験済み ${learned}/${ALL.length}問 ・ 今日 ${todayCount}問 ・ 期限復習 ${due}問`;
   $("dailyProgressBar").style.width=pct(learned,ALL.length)+"%";
   const wrong=Number(els.wrong.textContent);
-  $("dailyStartBtn").textContent=due?`今日の復習を始める（${Math.min(due,25)}問 / 対象${due}問）`:wrong?`間違いを復習する（${Math.min(wrong,25)}問 / 対象${wrong}問）`:"今日の10問を始める";
-  $("dailyStartBtn").onclick=()=>start(due?"due":wrong?"wrong":"quick10");
+  renderMobileCoach(ds,activeStats,due,wrong);
   $("restoreHistoryBtn").hidden=!localStorage.getItem(KEY+"-backup");
  }
  els.home.classList.remove("hidden");els.quiz.classList.add("hidden");els.result.classList.add("hidden");
@@ -71,6 +95,12 @@ function choose(mode,domain){
  if(mode==="mid15")return MID.slice();
  if(mode==="basic15")return BASIC.slice();
  if(mode==="quick10")return sample(Q,10);
+ if(mode==="focus10"){
+   const scorable=ALL.filter(q=>!ungradedQuestion(q)),unseen=scorable.filter(q=>!itemStat(q.id).attempts);
+   if(unseen.length)return sample(unseen,dailyUnseenCount(unseen.length));
+   const ranked=shuffle(scorable).sort((a,b)=>{const x=itemStat(a.id),y=itemStat(b.id);return (x.correct/Math.max(x.attempts,1))-(y.correct/Math.max(y.attempts,1))||x.streak-y.streak;});
+   return ranked.slice(0,10);
+ }
  if(mode==="train20")return sample(Q,20);
  if(mode==="mock45")return stratified(45);
  if(mode==="pdf90")return shuffle(Q.filter(q=>q.origin==="pdf90"));
@@ -90,9 +120,10 @@ function choose(mode,domain){
  if(mode==="due"){const now=Date.now();return sample(ALL.filter(q=>{const s=itemStat(q.id);return !ungradedQuestion(q)&&s.nextReview&&s.nextReview<=now;}),25);}
  if(mode==="domain")return sample(Q.filter(q=>q.domain===domain),20);
  if(mode==="domainAll")return shuffle(Q.filter(q=>q.domain===domain));
+ if(mode==="objective")return Q.filter(q=>q.objectiveId===domain);
  return sample(Q,10);
 }
-function modeLabel(m){return ({allQuestions:"全バンク全問（"+ALL.length+"問）",bridge9:"最上級ステップ",adv15:"上級ステップ",mid15:"中級ステップ",basic15:"初級ステップ",pdf90:"図解PDF 全90問",pdf1:"図解模試 第1回",pdf2:"図解模試 第2回",pdf3:"図解模試 第3回",quick10:"10問クイック",train20:"20問演習",mock45:"本番模試45問",pa25:"PA予行25問",pa50ja:"PA論点50問（日本語）",paLive50:"PA実戦50問（2026/11/6）",paNov14:"PA復習50問（2026/11/14）",paPdf50:"PDF検証版50問（2026/11/12）",code:"コード20問",wrong:"間違い復習",due:"期限復習",domain:"分野別20問",domainAll:"このジャンルを全問"})[m]||"演習";}
+function modeLabel(m){return ({allQuestions:"全バンク全問（"+ALL.length+"問）",bridge9:"最上級ステップ",adv15:"上級ステップ",mid15:"中級ステップ",basic15:"初級ステップ",pdf90:"図解PDF 全90問",pdf1:"図解模試 第1回",pdf2:"図解模試 第2回",pdf3:"図解模試 第3回",quick10:"10問クイック",focus10:"今日の優先演習",train20:"20問演習",mock45:"本番模試45問",pa25:"PA予行25問",pa50ja:"PA論点50問（日本語）",paLive50:"PA実戦50問（2026/11/6）",paNov14:"PA復習50問（2026/11/14）",paPdf50:"PDF検証版50問（2026/11/12）",code:"コード20問",wrong:"間違い復習",due:"期限復習",domain:"分野別20問",domainAll:"このジャンルを全問",objective:"テーマ別演習"})[m]||"演習";}
 const previousFirstQuestion = new Map();
 function shuffleForSession(questions, mode, domain){
  const shuffled = shuffle(questions);
@@ -232,6 +263,7 @@ function finish(timeout){
  $("retryWrongBtn").onclick=()=>{if(!wrongIds.length)return;const set=new Set(wrongIds),arr=ALL.filter(q=>set.has(q.id));session={mode:"wrong",questions:shuffleForSession(arr,"wrong"),index:0,selected:new Set(),results:[],answered:false,mock:false,choiceOrders:{},orderState:{},startedAt:Date.now(),deadline:null};els.result.classList.add("hidden");els.quiz.classList.remove("hidden");renderQuestion();};
 }
 document.querySelectorAll("[data-mode]").forEach(b=>b.addEventListener("click",()=>start(b.dataset.mode)));
+if(META.mobile)$("examDate").addEventListener("change",event=>{store.studyPlan=validExamDate(event.target.value)?{examDate:event.target.value}:null;save();renderHome();});
 $("domainStart").addEventListener("click",()=>start("domain",els.domainSelect.value));
 $("domainAllStart").addEventListener("click",()=>start("domainAll",els.domainSelect.value));
 els.answerBtn.addEventListener("click",answer);els.nextBtn.addEventListener("click",next);
@@ -256,7 +288,7 @@ $("importHistoryFile").addEventListener("change",async event=>{
  try{
   const data=JSON.parse(await file.text());
   if(file.size>5_000_000||!data||Array.isArray(data)||typeof data!=="object"||!data.items||Array.isArray(data.items)||typeof data.items!=="object"||!Array.isArray(data.sessions)||!Number.isFinite(data.totalAttempts)||!Number.isFinite(data.totalCorrect)||Object.values(data.items).some(x=>!x||!Number.isFinite(x.attempts)||!Number.isFinite(x.correct)))throw Error("invalid history");
-  if(!confirm("現在の学習履歴をバックアップしてから、保存ファイルの内容で置き換えますか？ 前の履歴は「直前の履歴を復元」から戻せます。"))return;
+  if(!confirm(META.mobile?"現在の学習履歴と試験日をバックアップしてから、保存ファイルの内容で置き換えますか？ 前の状態は「直前の履歴を復元」から戻せます。":"現在の学習履歴をバックアップしてから、保存ファイルの内容で置き換えますか？ 前の履歴は「直前の履歴を復元」から戻せます。"))return;
   localStorage.setItem(KEY+"-backup",localStorage.getItem(KEY)||JSON.stringify(store));
   localStorage.setItem(KEY,JSON.stringify(data));location.reload();
  }catch(error){alert("学習履歴のJSONファイルを読み込めませんでした。");}

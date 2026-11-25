@@ -73,7 +73,7 @@ assert(!fs.existsSync(path.join(native, 'DP700_Visual_Guide_JA.pdf')));
       const errors = [];
       app.on('pageerror', e => errors.push(e.message));
       await app.goto('http://127.0.0.1:8765/mobile/www/');
-      assert(await app.locator('[data-mode="allQuestions"]').innerText() === `全バンク全問（${expectedCount}問）`);
+      assert(await app.locator('[data-mode="allQuestions"]').innerText() === `全問を解く（${expectedCount}問）`);
       assert.equal(await app.locator('[data-mode="paPdf50"]').count(), 0);
       await app.locator('[data-mode="basic15"]').click();
       assert(await app.locator('#qText').isVisible());
