@@ -16,6 +16,8 @@ jobs:
           node-version: 22
       - run: node dp700/tests/validate.cjs
       - run: node mobile/scripts/audit.cjs
+      - run: node mobile/scripts/build-native.cjs
+      - run: node mobile/tests/native.cjs
       - run: node mobile/scripts/build.cjs
       - run: pip install pyspark==3.5.3
       - run: python -P dp700/tests/pyspark.py
@@ -35,3 +37,19 @@ jobs:
           path: |
             browser-results.json
             browser-screenshots/
+  ios-native:
+    runs-on: macos-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: node mobile/scripts/build-native.cjs
+      - run: node mobile/tests/native.cjs
+      - run: xcodebuild -project mobile/ios/App/App.xcodeproj -scheme App -configuration Debug -destination 'generic/platform=iOS Simulator' CODE_SIGNING_ALLOWED=NO build
+      - name: SwiftUI unit tests
+        run: |
+          simulator_id=$(xcrun simctl list devices available -j | jq -r '[.devices[][] | select(.name | startswith("iPhone")) | .udid][0]')
+          test "$simulator_id" != null
+          xcodebuild -project mobile/ios/App/App.xcodeproj -scheme App -configuration Debug -destination "platform=iOS Simulator,id=$simulator_id" CODE_SIGNING_ALLOWED=NO test

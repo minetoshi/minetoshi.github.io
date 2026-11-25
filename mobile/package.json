@@ -1,19 +1,11 @@
 {
   "name": "dp700-dojo-mobile",
   "private": true,
-  "version": "1.0.0",
+  "version": "2.0.0",
   "scripts": {
-    "build": "node scripts/build.cjs",
-    "ios:add": "npm run build && cap add ios",
-    "ios:sync": "npm run build && cap sync ios",
-    "ios:build:fallback": "bash scripts/with-local-capacitor.sh xcodebuild -project ios/App/App.xcodeproj -scheme App -configuration Debug -destination 'generic/platform=iOS Simulator' CODE_SIGNING_ALLOWED=NO build",
-    "ios:open": "cap open ios"
-  },
-  "dependencies": {
-    "@capacitor/core": "^8.0.0",
-    "@capacitor/ios": "^8.0.0"
-  },
-  "devDependencies": {
-    "@capacitor/cli": "^8.0.0"
+    "build": "node scripts/build-native.cjs",
+    "ios:project": "npm run build && xcodegen generate -s ios/App/project.yml",
+    "ios:build": "npm run build && xcodebuild -project ios/App/App.xcodeproj -scheme App -configuration Debug -destination 'generic/platform=iOS Simulator' CODE_SIGNING_ALLOWED=NO build",
+    "web:fixture": "node scripts/build.cjs"
   }
 }
