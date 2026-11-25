@@ -1,4 +1,12 @@
-# 検証記録（2026-11-25）
+# 検証記録（2026-11-26）
+
+## 2026-11-26 販売設計に沿った追加検証
+
+- 販売設計を `PRODUCT_DESIGN.md` に固定し、端末内の保存済み復習と49テーマ一覧をSwiftUIに追加。
+- `node mobile/tests/native.cjs` 成功。販売用295問、49テーマ、WebView・Webアセット非同梱を再確認。
+- Xcode 26.4、iPhone 17 Pro Simulator（iOS 26.4）の `xcodebuild test` でSwift単体テスト6件、XCUITest 2件が通過。新規テストでは回答前に保存できないこと、保存状態の永続化・旧JSON読み込み・バックアップ復元、49テーマと173問の対応、回答後の保存操作と保存済み演習、49テーマ一覧の入口を確認。
+- Computer Useで「今日」の保存済み優先演習、「進捗」と49テーマ一覧の表示を目視確認。テーマ名、経験数、要復習、テーマ別入口がiPhone画面内で読めることを確認。
+- `devicectl` ではiPhone 13とiPhone 17が `unavailable`。今回追加した保存済み復習と49テーマ一覧の実機操作は未実施。実機からのスクリーンショット、署名済みArchive、TestFlightも未実施。
 
 ## SwiftUI版で実施
 

@@ -78,4 +78,40 @@ import XCTest
         store.start("code")
         XCTAssertTrue(store.session?.questions.allSatisfy { $0.type == "code" } == true)
     }
+
+    func testSavedReviewPersistsAndSurvivesHistoryRestore() throws {
+        let store = StudyStore()
+        store.reset()
+        let question = try XCTUnwrap(store.all.first { $0.bank == "basic" })
+        store.start("test", explicitIDs: [question.id])
+        store.toggleSaved(question)
+        XCTAssertTrue(store.saved.isEmpty, "回答前には保存操作を受け付けない")
+        store.toggleChoice(0)
+        store.answer()
+        store.toggleSaved(question)
+        XCTAssertEqual(store.saved.map(\.id), [question.id])
+        XCTAssertEqual(StudyStore().saved.map(\.id), [question.id])
+        store.start("saved")
+        XCTAssertEqual(store.session?.questions.map(\.id), [question.id])
+        store.quit()
+
+        let file = FileManager.default.temporaryDirectory.appendingPathComponent("dp700-test-old-history.json")
+        let oldJSON = #"{"items":{},"totalAttempts":0,"totalCorrect":0,"sessions":[]}"#
+        try Data(oldJSON.utf8).write(to: file, options: .atomic)
+        try store.importHistory(from: file)
+        XCTAssertTrue(store.saved.isEmpty)
+        try store.restoreBackup()
+        XCTAssertEqual(store.saved.map(\.id), [question.id])
+        store.reset()
+        XCTAssertTrue(store.saved.isEmpty)
+    }
+
+    func testAll49ObjectivesHaveMappedQuestions() {
+        let store = StudyStore()
+        let objectives = store.objectiveProgress
+        XCTAssertEqual(objectives.count, 49)
+        XCTAssertEqual(Set(objectives.map(\.id)), Set(store.bank.objectiveLabels.keys))
+        XCTAssertTrue(objectives.allSatisfy { $0.total > 0 && store.domains.contains($0.domain) })
+        XCTAssertEqual(objectives.reduce(0) { $0 + $1.total }, 173)
+    }
 }
