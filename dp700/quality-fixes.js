@@ -127,12 +127,9 @@
     "reconstructed": true,
     "answerEvidence": "spec-verified"
   },
-  "C-PY-09": {
-    "code": "stream = spark.readStream.format(\"delta\").table(\"Incoming\")\nquery = (stream.writeStream.format(\"delta\")\n    .outputMode(\"append\")\n    .option(\"checkpointLocation\", \"Files/chk/incoming-to-sales\")\n    .toTable(\"Sales\"))",
-    "question": "既定LakehouseのIncomingは追記専用のDeltaテーブルで、Salesと互換性のあるスキーマです。次のストリームでcheckpointLocationを指定する主な目的を1つ選んでください。"
-  },
   "C-PY-04": {
     "code": "from pyspark.sql import functions as F\nrecent = df.filter(F.col('OrderDate') >= '2026-11-01').select('OrderId','Amount')",
+    "question": "OrderDateはdate型で有効な日付が入っています。性能面で期待する効果はどれか。",
     "source": "https://learn.microsoft.com/en-us/fabric/data-engineering/spark-monitoring-best-practices"
   },
   "C-PY-05": {
@@ -748,12 +745,6 @@
   "C-SQL-02": {
     "source": "https://learn.microsoft.com/en-us/sql/t-sql/language-elements/coalesce-transact-sql"
   },
-  "C-SQL-03": {
-    "source": "https://learn.microsoft.com/en-us/sql/t-sql/functions/row-number-transact-sql"
-  },
-  "C-SQL-04": {
-    "source": "https://learn.microsoft.com/en-us/sql/t-sql/queries/from-transact-sql"
-  },
   "C-SQL-05": {
     "source": "https://learn.microsoft.com/en-us/sql/t-sql/language-elements/case-transact-sql"
   },
@@ -761,18 +752,21 @@
     "source": "https://learn.microsoft.com/en-us/sql/t-sql/queries/select-group-by-transact-sql"
   },
   "C-KQL-01": {
+    "question": "Timestampに未来時刻の行も含み得ます。次のwhere条件で残る行はどれか。",
+    "choices": [
+      "1時間前より後の行。未来時刻の行も条件を満たす",
+      "現在から1時間前までの行だけ。未来時刻は自動で除かれる",
+      "1時間前ちょうどの行だけ",
+      "Timestampを1時間単位に集計した行"
+    ],
+    "explanation": "ago(1h)は現在から1時間前の時刻を返し、whereはそれより後かどうかを比較します。上限条件がないため未来時刻の行も残り得ます。",
     "source": "https://learn.microsoft.com/en-us/kusto/query/where-operator"
-  },
-  "C-KQL-02": {
-    "source": "https://learn.microsoft.com/en-us/kusto/query/summarize-operator"
   },
   "C-KQL-03": {
     "source": "https://learn.microsoft.com/en-us/kusto/query/avg-aggregation-function"
   },
-  "C-KQL-04": {
-    "source": "https://learn.microsoft.com/en-us/kusto/query/project-operator"
-  },
   "C-KQL-06": {
+    "explanation": "arg_maxはDeviceIdごとに最大Timestampを持つ行の列を返します。同時刻の行が複数ある場合、どの行を返すかはこのコードだけでは指定していません。",
     "source": "https://learn.microsoft.com/en-us/kusto/query/arg-max-aggregation-function"
   },
   "C-KQL-08": {
@@ -781,22 +775,17 @@
   "C-KQL-09": {
     "source": "https://learn.microsoft.com/en-us/kusto/query/join-inner"
   },
-  "C-PY-01": {
-    "source": "https://learn.microsoft.com/en-us/training/modules/use-apache-spark-work-files-lakehouse/4-dataframe"
-  },
   "C-PY-02": {
     "source": "https://learn.microsoft.com/en-us/training/modules/use-apache-spark-work-files-lakehouse/4-dataframe"
   },
   "C-PY-03": {
     "source": "https://learn.microsoft.com/en-us/training/modules/use-apache-spark-work-files-lakehouse/4-dataframe"
   },
-  "C-PY-07": {
-    "source": "https://learn.microsoft.com/en-us/fabric/data-engineering/spark-monitoring-best-practices"
-  },
   "ORD-17": {
     "source": "https://learn.microsoft.com/en-us/fabric/data-engineering/spark-monitoring-best-practices"
   },
   "C-PY-06": {
+    "question": "Salesは互換スキーマのDeltaテーブルとして既に存在します。このコードの挙動はどれか。",
     "source": "https://learn.microsoft.com/en-us/fabric/data-engineering/lakehouse-and-delta-tables"
   },
   "C-PY-10": {
@@ -804,6 +793,83 @@
   },
   "ORD-01": {
     "source": "https://learn.microsoft.com/en-us/fabric/cicd/git-integration/intro-to-git-integration"
+  },
+  "C-SQL-03": {
+    "question": "BusinessKeyが同じ行にUpdatedAtの同時刻がある。このクエリの結果について正しい説明はどれか。",
+    "choices": [
+      "各BusinessKeyの最新時刻から1行を残すが、同時刻のどの行かは確定しない",
+      "同時刻の行をすべて残す",
+      "各BusinessKeyの最も古い行を残す",
+      "同時刻の行があると必ずエラーになる"
+    ],
+    "explanation": "ROW_NUMBERはキー内でUpdatedAtの降順に番号を振り、rn=1だけを残します。同時刻の並びを一意に決める列がないため、同時刻のどの行が残るかは保証されません。",
+    "source": "https://learn.microsoft.com/en-us/sql/t-sql/functions/row-number-transact-sql"
+  },
+  "C-SQL-04": {
+    "question": "DimCustomerに同じCustomerCodeが2行ある場合、このLEFT JOINの結果はどうなる可能性があるか。",
+    "choices": [
+      "対応するStgFactの行が2行に増える",
+      "対応するStgFactの行が自動で1行に重複排除される",
+      "未一致のStgFactの行だけが削除される",
+      "結合前にDimCustomerの2行が自動で集計される"
+    ],
+    "explanation": "LEFT JOINは左側の行を保持しますが、右側に一致行が複数あればその数だけ結果行が増えます。Dimension側のキー一意性を確認する必要があります。",
+    "source": "https://learn.microsoft.com/en-us/sql/t-sql/queries/from-transact-sql"
+  },
+  "C-PY-01": {
+    "question": "BusinessKeyが同じでUpdatedAtだけ異なる2行がある。この処理について正しい説明はどれか。",
+    "choices": [
+      "1行に減るが、UpdatedAtが新しい行を選ぶ保証はない",
+      "UpdatedAtが新しい行を必ず残す",
+      "UpdatedAtが異なるため2行とも残す",
+      "2行のUpdatedAtを平均して1行にする"
+    ],
+    "explanation": "dropDuplicates(['BusinessKey'])は比較対象をBusinessKeyに限定します。残す行をUpdatedAtで指定していないため、最新行を選ぶ処理ではありません。",
+    "source": "https://learn.microsoft.com/en-us/training/modules/use-apache-spark-work-files-lakehouse/4-dataframe"
+  },
+  "C-PY-07": {
+    "question": "CustomerIdに偏りがあるデータで、次のコードについて保証される内容はどれか。",
+    "choices": [
+      "CustomerIdを分割キーとする32個のパーティションを作る",
+      "32個のパーティションの行数が必ず等しくなる",
+      "同じCustomerIdの行を32個へ均等に分散する",
+      "CustomerIdが異なる行を必ず別々のパーティションに置く"
+    ],
+    "explanation": "repartition(32, 'CustomerId')は指定列でハッシュ分割します。同じキーの行は同じ分割先になり、キーの偏りだけでは行数の均等化は保証されません。",
+    "source": "https://learn.microsoft.com/en-us/fabric/data-engineering/spark-monitoring-best-practices"
+  },
+  "C-PY-09": {
+    "code": "stream = spark.readStream.format(\"delta\").table(\"Incoming\")\nquery = (stream.writeStream.format(\"delta\")\n    .outputMode(\"append\")\n    .option(\"checkpointLocation\", \"Files/chk/incoming-to-sales\")\n    .toTable(\"Sales\"))",
+    "question": "既定LakehouseのIncomingは追記専用のDeltaテーブルで、Salesと互換性のあるスキーマです。次のストリームでcheckpointLocationを指定する主な目的を1つ選んでください。",
+    "choices": [
+      "停止後に同じチェックポイントから処理の進捗や状態を復元する",
+      "Salesのすべての重複行を自動で削除する",
+      "Incomingのスキーマ変更を無条件で受け入れる",
+      "入力テーブルの過去データを自動でVACUUMする"
+    ],
+    "explanation": "checkpointLocationには処理済み入力の位置や状態などが保存され、同じクエリを再開するときの復元に使われます。重複排除や任意のスキーマ変更を単独で保証する設定ではありません。"
+  },
+  "C-KQL-02": {
+    "question": "Errorsという列には何が記録されるか。",
+    "choices": [
+      "Serviceごとの全イベント件数",
+      "Serviceごとのエラーイベントだけの件数",
+      "全Serviceをまとめた1件の合計行数",
+      "Serviceごとの異なるDeviceIdの数"
+    ],
+    "explanation": "count()は各Serviceの全入力行を数えます。Errorsは出力列の別名であり、エラー条件による絞り込みは行っていません。",
+    "source": "https://learn.microsoft.com/en-us/kusto/query/summarize-operator"
+  },
+  "C-KQL-04": {
+    "question": "このprojectの結果について正しい説明はどれか。",
+    "choices": [
+      "出力を指定した3列に絞り、行を条件で除外しない",
+      "先頭の3行だけを残す",
+      "指定した3列を削除して他の列を残す",
+      "Service別にMessageの件数を集計する"
+    ],
+    "explanation": "projectは出力する列を指定します。このクエリに行の抽出条件や集計はありません。",
+    "source": "https://learn.microsoft.com/en-us/kusto/query/project-operator"
   },
   "ORD-03": {
     "source": "https://learn.microsoft.com/en-us/fabric/cicd/deployment-pipelines/intro-to-deployment-pipelines"
@@ -893,7 +959,8 @@
     "holdReason": "Structured Streamingは通常マイクロバッチで動作するため、両選択肢を対立する方式として採点できない。"
   }
 };
-for(const name of ["DP700_QUESTIONS","DP700_BASICS","DP700_INTERMEDIATE","DP700_ADVANCED","DP700_BRIDGE","DP700_PA_LIVE_20261106","DP700_PA_20261114","DP700_PA_PDF_20261112"]){for(const q of window[name]||[]){if(patches[q.id])Object.assign(q,patches[q.id],{qualityRevision:"2026-11-16"});
+const currentRevisions=new Set(["C-SQL-03","C-SQL-04","C-PY-01","C-PY-04","C-PY-06","C-PY-07","C-PY-09","C-KQL-01","C-KQL-02","C-KQL-04","C-KQL-06"]);
+for(const name of ["DP700_QUESTIONS","DP700_BASICS","DP700_INTERMEDIATE","DP700_ADVANCED","DP700_BRIDGE","DP700_PA_LIVE_20261106","DP700_PA_20261114","DP700_PA_PDF_20261112"]){for(const q of window[name]||[]){if(patches[q.id])Object.assign(q,patches[q.id],{qualityRevision:currentRevisions.has(q.id)?"2026-11-26":"2026-11-16"});
 const urlFixes={"https://learn.microsoft.com/en-us/fabric/data-engineering/spark-streaming-overview":"https://learn.microsoft.com/en-us/fabric/data-engineering/structured-streaming-overview","https://learn.microsoft.com/en-us/fabric/data-factory/cdc-overview":"https://learn.microsoft.com/en-us/fabric/data-factory/cdc-copy-job","https://learn.microsoft.com/en-us/fabric/data-warehouse/load-data":"https://learn.microsoft.com/en-us/fabric/data-warehouse/ingest-data-copy","https://learn.microsoft.com/en-us/fabric/fundamentals/monitoring-hub":"https://learn.microsoft.com/en-us/fabric/data-factory/monitor-data-factory"};
 if(urlFixes[q.source])q.source=urlFixes[q.source];}}
 })();

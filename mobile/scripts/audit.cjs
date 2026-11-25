@@ -40,7 +40,9 @@ const rows = all.map(({ bank, q }) => {
     answerIndices: q.answers || null,
     correctChoices: q.type === 'order' ? q.orderItems : q.answers.map(i => q.choices[i]),
     explanation: q.explanation, source: q.source,
-    contentReview: prior.has(q.id) ? '2026-11-16 prior question-level review; current structural recheck; content hash locked' : 'missing',
+    contentReview: !prior.has(q.id) ? 'missing' : q.qualityRevision === '2026-11-26'
+      ? '2026-11-26 independent code semantics and distractor review; see code-order-review-20261126.md; content hash locked'
+      : '2026-11-16 prior question-level review; current structural recheck; content hash locked',
     specEvidence: q.answerEvidence === 'spec-verified' ? 'previously marked spec-verified' : 'independent expected answer; Learn URL is a reference, not an official individual answer',
     officialIndividualAnswer: false,
     rightsReview: 'No PDF or Practice Assessment origin metadata and no embedded third-party image; exact content is locked for future review',
