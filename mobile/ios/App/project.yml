@@ -36,6 +36,7 @@ targets:
     scheme:
       testTargets:
         - AppTests
+        - AppUITests
   AppTests:
     type: bundle.unit-test
     platform: iOS
@@ -46,4 +47,15 @@ targets:
     settings:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: com.minetoshi.dp700dojo.tests
+        SWIFT_VERSION: "5.0"
+  AppUITests:
+    type: bundle.ui-testing
+    platform: iOS
+    sources:
+      - path: AppUITests
+    dependencies:
+      - target: App
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.minetoshi.dp700dojo.uitests
         SWIFT_VERSION: "5.0"

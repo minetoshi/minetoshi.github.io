@@ -3,11 +3,12 @@
 ## SwiftUI版で実施
 
 - `node mobile/scripts/build-native.cjs` と `node mobile/tests/native.cjs`：販売用295問、49テーマ、除外IDとXcodeターゲットにWebView・HTML/JavaScriptを含まないことを確認。
-- Xcode 26.4でSwiftUI版のiPhone 17 Pro Simulator向けDebugビルド成功。`xcodebuild test` でSwift単体テスト4件通過（複数選択、並べ替え、誤答、模試、コード、試験日、履歴読込・復元）。
+- Xcode 26.4でSwiftUI版のiPhone 17 Pro Simulator向けDebugビルド成功。`xcodebuild test` でSwift単体テスト4件とXCUITest 1件が通過（複数選択、並べ替え、誤答、模試、コード、試験日、履歴読込・復元、回答前後の表示）。
 - 新規iPhone 17 Pro SimulatorでComputer UseによりSwiftUIホーム、演習一覧、回答前の選択表示、回答後の緑表示と解説、コード問題と採点を操作。初回の画面余白はLaunchScreen指定を修正して再確認。
 - 旧Capacitor版のシミュレーターを複製してネイティブ版を上書きインストール。旧WebKitのSQLiteから回答4件・試験日・復元用バックアップを初回起動時にネイティブJSONへコピーしたことを確認。元の旧版シミュレーターとWebKitデータは保持。
 - 複製したシミュレーターで「履歴リセット」を操作し、ネイティブ履歴とバックアップの削除、旧WebKitの対象履歴キー2件の削除、再起動後も旧履歴を取り込まないこと、復元ボタンが消えることを確認。元の旧版シミュレーターは変更していない。
 - SwiftUI版の署名なしRelease Archiveが `generic/platform=iOS` で成功。これは提出可能な署名済みArchiveではない。
+- 旧Capacitorの起動画像を削除し、SwiftUI版のアプリ名を示す起動画面に差し替えた後もXcodeビルド成功。
 
 ## 旧Capacitor版で実施した検査（現行SwiftUI版の確認とは区別）
 

@@ -13,9 +13,17 @@
 		4865D1D7E2D2A5C918F8D2EF /* StudyStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 058B17C102F4A75F8EBF4893 /* StudyStore.swift */; };
 		49D96037291D94033D01A8EF /* DojoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED48C545F876F1E1B6501384 /* DojoApp.swift */; };
 		561A509D5DF0BEE7BB77B1F4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 93C888C89BB3AC8AC93B282D /* LaunchScreen.storyboard */; };
+		95A0E45A9E51317F89BE0C73 /* DojoUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 977F02279C778FDE40F27D85 /* DojoUITests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		153CAF5D8AA6467EC9F5920C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6B590BF25178DC7D824D09CE /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 93E9E330FC2CE7458D9C925F;
+			remoteInfo = App;
+		};
 		32EAB22E4CA94300DDDCDCCB /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 6B590BF25178DC7D824D09CE /* Project object */;
@@ -31,7 +39,9 @@
 		5E68E6C394E305665F5C3D8C /* StudyStoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyStoreTests.swift; sourceTree = "<group>"; };
 		67D83BB06CDF61A19253995F /* questions.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = questions.json; sourceTree = "<group>"; };
 		76989E05CECAD7B8B3C424A7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		77F070B46A94D035DD2F7165 /* AppUITests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = AppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		93C888C89BB3AC8AC93B282D /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
+		977F02279C778FDE40F27D85 /* DojoUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DojoUITests.swift; sourceTree = "<group>"; };
 		C8A9A2F9E029400EE1562218 /* AppTests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = AppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED48C545F876F1E1B6501384 /* DojoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DojoApp.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -50,6 +60,7 @@
 			children = (
 				443E9F32F0EC65EEBF466F3B /* App */,
 				3758C7D38467770096A83ED5 /* AppTests */,
+				9ACB69BD4D16D27DDA9609F6 /* AppUITests */,
 				8082EA8F345256DFAADCE10A /* Base.lproj */,
 				F7564104E5288B3BF50E3C88 /* Resources */,
 				7F78907537685DA9B94ECD46 /* Sources */,
@@ -84,11 +95,20 @@
 			path = App/Base.lproj;
 			sourceTree = "<group>";
 		};
+		9ACB69BD4D16D27DDA9609F6 /* AppUITests */ = {
+			isa = PBXGroup;
+			children = (
+				977F02279C778FDE40F27D85 /* DojoUITests.swift */,
+			);
+			path = AppUITests;
+			sourceTree = "<group>";
+		};
 		E9C3DB3EC6D7655028A9C0D3 /* Products */ = {
 			isa = PBXGroup;
 			children = (
 				49D88A349FD70A9153DD2C03 /* App.app */,
 				C8A9A2F9E029400EE1562218 /* AppTests.xctest */,
+				77F070B46A94D035DD2F7165 /* AppUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -141,6 +161,24 @@
 			productReference = C8A9A2F9E029400EE1562218 /* AppTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		C460F2384F904D87838B32F7 /* AppUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3F778A5D58B271B27B6A13EE /* Build configuration list for PBXNativeTarget "AppUITests" */;
+			buildPhases = (
+				049B66CF9C6C34AA66A24E6E /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				31D421ABCD4F6B5F08290174 /* PBXTargetDependency */,
+			);
+			name = AppUITests;
+			packageProductDependencies = (
+			);
+			productName = AppUITests;
+			productReference = 77F070B46A94D035DD2F7165 /* AppUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -152,6 +190,9 @@
 				TargetAttributes = {
 					93E9E330FC2CE7458D9C925F = {
 						ProvisioningStyle = Automatic;
+					};
+					C460F2384F904D87838B32F7 = {
+						TestTargetID = 93E9E330FC2CE7458D9C925F;
 					};
 				};
 			};
@@ -171,6 +212,7 @@
 			targets = (
 				93E9E330FC2CE7458D9C925F /* App */,
 				99DCC7BD0ABB09C467644299 /* AppTests */,
+				C460F2384F904D87838B32F7 /* AppUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -189,6 +231,14 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		049B66CF9C6C34AA66A24E6E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				95A0E45A9E51317F89BE0C73 /* DojoUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		B77F0AF073564580D75A2CF1 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -209,6 +259,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		31D421ABCD4F6B5F08290174 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 93E9E330FC2CE7458D9C925F /* App */;
+			targetProxy = 153CAF5D8AA6467EC9F5920C /* PBXContainerItemProxy */;
+		};
 		96AA6D50C1AA746282D306B3 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 93E9E330FC2CE7458D9C925F /* App */;
@@ -217,6 +272,23 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
+		1932487F2E9FB8ADDC383B96 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.minetoshi.dp700dojo.uitests;
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = App;
+			};
+			name = Debug;
+		};
 		2EF40DF1E108E618D0D1371B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -308,6 +380,23 @@
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		BD25F0BD6670BC892D41A30E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.minetoshi.dp700dojo.uitests;
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = App;
 			};
 			name = Release;
 		};
@@ -415,6 +504,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		3F778A5D58B271B27B6A13EE /* Build configuration list for PBXNativeTarget "AppUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1932487F2E9FB8ADDC383B96 /* Debug */,
+				BD25F0BD6670BC892D41A30E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
 		B3FD05C59F197F398A0B04AB /* Build configuration list for PBXProject "App" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
