@@ -1,7 +1,7 @@
 {
-  "method": "NFKC-normalized character trigrams; maximum Dice coefficient of full item, prompt (30+ characters) or code (80+ characters). Topic overlap is not proof of copying, and a low score is not proof of authorship.",
-  "commercialCount": 295,
-  "omittedCount": 294,
+  "method": "Compare included items only with noncommercial source banks (PDF, Practice Assessment and held origin items). NFKC-normalized character trigrams; maximum Dice coefficient of full item, prompt (30+ characters) or code (80+ characters). Topic overlap is not proof of copying, and a low score is not proof of authorship.",
+  "commercialCount": 220,
+  "omittedCount": 293,
   "highOverlapThreshold": 0.8,
   "highOverlap": [],
   "closest": [
@@ -14,11 +14,6 @@
       "id": "O11-B",
       "omittedId": "PA50-19",
       "score": 0.5938
-    },
-    {
-      "id": "O06-D",
-      "omittedId": "PA50-06",
-      "score": 0.5405
     },
     {
       "id": "O42-A",
@@ -86,11 +81,6 @@
       "score": 0.3908
     },
     {
-      "id": "O42-D",
-      "omittedId": "PDF-M1-28",
-      "score": 0.3896
-    },
-    {
       "id": "O35-B",
       "omittedId": "PA50-28",
       "score": 0.3883
@@ -104,6 +94,16 @@
       "id": "O45-A",
       "omittedId": "PDF-M1-29",
       "score": 0.3765
+    },
+    {
+      "id": "O36-A",
+      "omittedId": "PA50-30",
+      "score": 0.3725
+    },
+    {
+      "id": "C-PY-03",
+      "omittedId": "PA50-26",
+      "score": 0.361
     }
   ]
 }

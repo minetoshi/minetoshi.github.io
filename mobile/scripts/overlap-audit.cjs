@@ -11,7 +11,7 @@ const commercial = [
 ].filter(q => !excluded.has(q.id));
 const ids = new Set(commercial.map(q => q.id));
 const omitted = [
-  ...banks.DP700_QUESTIONS,
+  ...banks.DP700_QUESTIONS.filter(q => q.origin || q.pdfPage || q.scorable === false || q.reviewStatus === 'review'),
   ...banks.DP700_PA_LIVE_20261106,
   ...banks.DP700_PA_20261114,
   ...banks.DP700_PA_PDF_20261112
@@ -53,7 +53,7 @@ const closest = commercial.map(q => {
   return { id: q.id, omittedId: ranked[0].id, score: ranked[0].score };
 }).sort((a, b) => b.score - a.score || a.id.localeCompare(b.id));
 const report = {
-  method: 'NFKC-normalized character trigrams; maximum Dice coefficient of full item, prompt (30+ characters) or code (80+ characters). Topic overlap is not proof of copying, and a low score is not proof of authorship.',
+  method: 'Compare included items only with noncommercial source banks (PDF, Practice Assessment and held origin items). NFKC-normalized character trigrams; maximum Dice coefficient of full item, prompt (30+ characters) or code (80+ characters). Topic overlap is not proof of copying, and a low score is not proof of authorship.',
   commercialCount: commercial.length, omittedCount: omitted.length,
   highOverlapThreshold: 0.8, highOverlap: closest.filter(row => row.score >= 0.8),
   closest: closest.slice(0, 20)

@@ -61,7 +61,7 @@ struct HomeView: View {
                     Text("DP-700 問題道場").font(.largeTitle.bold())
                     Text("試験日から逆算して、今日の学習を進める。")
                         .font(.subheadline).foregroundStyle(.white.opacity(0.9))
-                    Text("独自演習295問 ・ オフライン対応")
+                    Text("独自演習\(store.all.count)問 ・ オフライン対応")
                         .font(.caption.bold())
                         .padding(.horizontal, 12).padding(.vertical, 8)
                         .background(.white.opacity(0.15), in: Capsule())
@@ -90,7 +90,7 @@ struct HomeView: View {
                     }
                     Text(planText).font(.subheadline).foregroundStyle(.secondary)
                     ProgressView(value: Double(store.learned), total: Double(store.all.count))
-                    Text("経験済み \(store.learned)/295問  ・  今日 \(store.todayCount)問")
+                    Text("経験済み \(store.learned)/\(store.all.count)問  ・  今日 \(store.todayCount)問")
                         .font(.subheadline.bold())
                     Text("期限 \(store.due.count)問  ・  保存 \(store.saved.count)問  ・  間違い \(store.wrong.count)問  ・  未着手 \(store.unseen)問")
                         .font(.caption).foregroundStyle(.secondary)
@@ -193,7 +193,7 @@ struct PracticeView: View {
             Section("短時間で解く") {
                 mode("10問クイック", "quick10", "bolt.fill")
                 mode("20問演習", "train20", "square.stack.fill")
-                mode("全問を解く（295問）", "allQuestions", "books.vertical.fill")
+                mode("全問を解く（\(store.all.count)問）", "allQuestions", "books.vertical.fill")
             }
             Section("模試・応用") {
                 mode("45問模試・100分", "mock45", "timer")
@@ -427,7 +427,7 @@ struct StudyProgressView: View {
     var body: some View {
         List {
             Section("学習状況") {
-                LabeledContent("経験済み", value: "\(store.learned) / 295問")
+                LabeledContent("経験済み", value: "\(store.learned) / \(store.all.count)問")
                 LabeledContent("総回答数", value: "\(store.history.totalAttempts)問")
                 LabeledContent("正答率", value: store.history.totalAttempts == 0 ? "—" : "\(Int((Double(store.history.totalCorrect) / Double(store.history.totalAttempts) * 100).rounded()))%")
                 LabeledContent("期限復習", value: "\(store.due.count)問")
@@ -573,7 +573,7 @@ struct SettingsView: View {
                 Link("Web版を開く", destination: URL(string: "https://minetoshi.github.io/dp700/")!)
             }
             Section("アプリについて") {
-                Text("独自演習295問を端末に収録。広告・アカウント・アプリ内課金はありません。Microsoft公式アプリではありません。")
+                Text("独自演習\(store.all.count)問を端末に収録。広告・アカウント・アプリ内課金はありません。Microsoft公式アプリではありません。")
                     .font(.footnote)
                 NavigationLink("サポート") { SupportView() }
                 NavigationLink("プライバシー") { PrivacyView() }

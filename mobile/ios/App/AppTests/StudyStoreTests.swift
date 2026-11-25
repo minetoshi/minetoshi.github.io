@@ -47,17 +47,19 @@ import XCTest
         store.reset()
         let date = Calendar.current.date(byAdding: .day, value: 9, to: Date())!
         store.setExamDate(date)
-        XCTAssertEqual(store.dailyUnseenCount, 30)
+        XCTAssertEqual(store.dailyUnseenCount, 22)
         store.start("focus10")
-        XCTAssertEqual(store.session?.questions.count, 30)
+        XCTAssertEqual(store.session?.questions.count, 22)
         store.quit()
 
         let file = FileManager.default.temporaryDirectory.appendingPathComponent("dp700-test-import.json")
-        let json = #"{"items":{"WEB-ONLY":{"attempts":1,"correct":1}},"totalAttempts":1,"totalCorrect":1,"sessions":[]}"#
+        let json = #"{"items":{"WEB-ONLY":{"attempts":1,"correct":1},"O16-C":{"attempts":2,"correct":1}},"totalAttempts":3,"totalCorrect":2,"sessions":[]}"#
         try Data(json.utf8).write(to: file, options: .atomic)
         try store.importHistory(from: file)
         XCTAssertNil(store.examDate)
         XCTAssertEqual(store.history.items["WEB-ONLY"]?.attempts, 1)
+        XCTAssertEqual(store.history.items["O16-C"]?.attempts, 2)
+        XCTAssertEqual(store.learned, 0, "販売対象外の旧履歴は保持するが、現行220問の進捗には含めない")
         XCTAssertTrue(store.hasBackup)
         try store.restoreBackup()
         XCTAssertNotNil(store.examDate)
@@ -112,6 +114,6 @@ import XCTest
         XCTAssertEqual(objectives.count, 49)
         XCTAssertEqual(Set(objectives.map(\.id)), Set(store.bank.objectiveLabels.keys))
         XCTAssertTrue(objectives.allSatisfy { $0.total > 0 && store.domains.contains($0.domain) })
-        XCTAssertEqual(objectives.reduce(0) { $0 + $1.total }, 173)
+        XCTAssertEqual(objectives.reduce(0) { $0 + $1.total }, 98)
     }
 }

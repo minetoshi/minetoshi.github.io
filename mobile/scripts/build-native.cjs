@@ -15,7 +15,7 @@ const candidates = [
 ];
 verifyContent(candidates.map(({ bank, ...question }) => question));
 const selected = candidates.filter(q => !excluded.has(q.id));
-if (selected.length !== 295 || new Set(selected.map(q => q.id)).size !== 295) throw new Error('Unexpected native question count or duplicate ID');
+if (selected.length !== 220 || new Set(selected.map(q => q.id)).size !== 220) throw new Error('Unexpected native question count or duplicate ID');
 for (const q of selected) {
   if (!/^https:\/\/learn\.microsoft\.com\//.test(q.source || '') || !q.explanation || !q.question ||
       !['single', 'multi', 'case', 'code', 'order'].includes(q.type) || q.pdfPage ||
