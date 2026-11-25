@@ -38,6 +38,7 @@ struct ItemStat: Codable {
     var lastWrong: Bool = false
     var nextReview: Int64 = 0
     var lastAttempt: Int64 = 0
+    var savedForReview: Bool = false
 
     init() {}
     init(from decoder: Decoder) throws {
@@ -48,7 +49,23 @@ struct ItemStat: Codable {
         lastWrong = try box.decodeIfPresent(Bool.self, forKey: .lastWrong) ?? false
         nextReview = try box.decodeIfPresent(Int64.self, forKey: .nextReview) ?? 0
         lastAttempt = try box.decodeIfPresent(Int64.self, forKey: .lastAttempt) ?? 0
+        savedForReview = try box.decodeIfPresent(Bool.self, forKey: .savedForReview) ?? false
     }
+}
+
+struct ObjectiveProgress: Identifiable {
+    let id: String
+    let title: String
+    let domain: String
+    let learned: Int
+    let total: Int
+    let attempts: Int
+    let correct: Int
+    let wrong: Int
+    let due: Int
+
+    var rate: Int { attempts == 0 ? 0 : Int((Double(correct) / Double(attempts) * 100).rounded()) }
+    var needsReview: Bool { wrong > 0 || due > 0 || (attempts > 0 && rate < 80) }
 }
 
 struct SessionRecord: Codable {
@@ -152,11 +169,16 @@ struct QuizSummary {
 
     var all: [Question] { bank.questions }
     var core: [Question] { all.filter { $0.bank == "core" } }
-    var domains: [String] { Array(Set(all.map(\.domain))).sorted() }
+    var domains: [String] {
+        let order = ["分析ソリューションの実装と管理", "データの取り込みと変換", "分析ソリューションの監視と最適化"]
+        let available = Set(all.map(\.domain))
+        return order.filter { available.contains($0) }
+    }
     var learned: Int { all.filter { stat($0).attempts > 0 }.count }
     var unseen: Int { all.count - learned }
     var wrong: [Question] { all.filter { stat($0).lastWrong } }
     var due: [Question] { all.filter { stat($0).nextReview > 0 && stat($0).nextReview <= nowMS } }
+    var saved: [Question] { all.filter { stat($0).savedForReview } }
     var todayCount: Int { all.filter { stat($0).lastAttempt > 0 && Calendar.current.isDate(Date(timeIntervalSince1970: Double(stat($0).lastAttempt) / 1000), inSameDayAs: .now) }.count }
     var hasHistory: Bool { FileManager.default.fileExists(atPath: historyURL.path) }
     var examDate: Date? {
@@ -188,21 +210,36 @@ struct QuizSummary {
             return x.learned < y.learned
         }
     }
-    var focusObjectives: [(id: String, title: String, learned: Int, total: Int, rate: Int)] {
+    var objectiveProgress: [ObjectiveProgress] {
         let grouped = Dictionary(grouping: core.filter {
             let id = $0.objectiveId ?? ""
             return id.count > 1 && id.first == "O" && id.dropFirst().allSatisfy(\.isNumber)
         }, by: { $0.objectiveId ?? "" })
-        return grouped.map { id, questions in
+        return bank.objectiveLabels.keys.sorted().compactMap { id in
+            guard let questions = grouped[id], let domain = questions.first?.domain else { return nil }
             let attempts = questions.reduce(0) { $0 + stat($1).attempts }
             let correct = questions.reduce(0) { $0 + stat($1).correct }
-            return (id, bank.objectiveLabels[id] ?? id, questions.filter { stat($0).attempts > 0 }.count,
-                    questions.count, attempts == 0 ? 0 : Int((Double(correct) / Double(attempts) * 100).rounded()))
-        }.sorted { a, b in
-            let ap = a.learned > 0 && a.rate < 80 ? 0 : a.learned < a.total ? 1 : 2
-            let bp = b.learned > 0 && b.rate < 80 ? 0 : b.learned < b.total ? 1 : 2
+            return ObjectiveProgress(id: id, title: bank.objectiveLabels[id] ?? id, domain: domain,
+                                     learned: questions.filter { stat($0).attempts > 0 }.count,
+                                     total: questions.count, attempts: attempts, correct: correct,
+                                     wrong: questions.filter { stat($0).lastWrong }.count,
+                                     due: questions.filter { stat($0).nextReview > 0 && stat($0).nextReview <= nowMS }.count)
+        }
+    }
+    var focusObjectives: [ObjectiveProgress] {
+        Array(objectiveProgress.sorted { a, b in
+            let ap = a.needsReview ? 0 : a.learned < a.total ? 1 : 2
+            let bp = b.needsReview ? 0 : b.learned < b.total ? 1 : 2
             return ap != bp ? ap < bp : a.rate != b.rate ? a.rate < b.rate : a.id < b.id
-        }.prefix(3).map { $0 }
+        }.prefix(3))
+    }
+
+    func toggleSaved(_ question: Question) {
+        guard session?.answered == true, session?.current.id == question.id else { return }
+        var entry = stat(question)
+        entry.savedForReview.toggle()
+        history.items[question.id] = entry
+        save()
     }
 
     func setExamDate(_ date: Date?) {
@@ -236,6 +273,7 @@ struct QuizSummary {
             case "code": questions = Array(core.filter { $0.type == "code" }.shuffled().prefix(20))
             case "wrong": questions = Array(wrong.shuffled().prefix(25))
             case "due": questions = Array(due.shuffled().prefix(25))
+            case "saved": questions = Array(saved.shuffled().prefix(25))
             case "domain": questions = Array(core.filter { $0.domain == filter }.shuffled().prefix(20))
             case "domainAll": questions = core.filter { $0.domain == filter }
             case "objective": questions = core.filter { $0.objectiveId == filter }
@@ -393,10 +431,10 @@ struct QuizSummary {
         value.dateFormat = "yyyy-MM-dd"
         return value
     }()
-    private func title(for mode: String) -> String {
+    func title(for mode: String) -> String {
         ["basic15": "初級ステップ", "mid15": "中級ステップ", "adv15": "上級ステップ", "bridge9": "最上級ステップ",
          "allQuestions": "全問演習", "quick10": "10問クイック", "train20": "20問演習", "focus10": "今日の優先演習",
-         "mock45": "45問模試", "code": "コード問題", "wrong": "間違い復習", "due": "期限復習",
+         "mock45": "45問模試", "code": "コード問題", "wrong": "間違い復習", "due": "期限復習", "saved": "保存した問題",
          "domain": "分野別20問", "domainAll": "分野別全問", "objective": "テーマ別演習", "hard25": "難問25問"][mode] ?? "演習"
     }
 }

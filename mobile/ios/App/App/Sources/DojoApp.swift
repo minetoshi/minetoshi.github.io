@@ -92,11 +92,16 @@ struct HomeView: View {
                     ProgressView(value: Double(store.learned), total: Double(store.all.count))
                     Text("経験済み \(store.learned)/295問  ・  今日 \(store.todayCount)問")
                         .font(.subheadline.bold())
-                    Text("期限復習 \(store.due.count)問  ・  間違い \(store.wrong.count)問  ・  未着手 \(store.unseen)問")
+                    Text("期限 \(store.due.count)問  ・  保存 \(store.saved.count)問  ・  間違い \(store.wrong.count)問  ・  未着手 \(store.unseen)問")
                         .font(.caption).foregroundStyle(.secondary)
                     Button(dailyTitle) { store.start(dailyMode) }
                         .buttonStyle(PrimaryButtonStyle())
                         .accessibilityIdentifier("dailyStartButton")
+
+                    if !store.saved.isEmpty && dailyMode != "saved" {
+                        Button("保存した問題を復習（\(min(25, store.saved.count))問）") { store.start("saved") }
+                            .buttonStyle(.bordered)
+                    }
 
                     if let weak = store.weakDomain {
                         Divider()
@@ -112,7 +117,7 @@ struct HomeView: View {
 
                 VStack(alignment: .leading, spacing: 12) {
                     Text("次に学ぶテーマ").font(.title2.bold())
-                    Text("未着手と正答率80%未満を優先して表示します。")
+                    Text("未着手と要復習のテーマを優先して表示します。")
                         .font(.caption).foregroundStyle(.secondary)
                     ForEach(store.focusObjectives, id: \.id) { objective in
                         Divider()
@@ -127,6 +132,9 @@ struct HomeView: View {
                                 .buttonStyle(.bordered)
                         }
                     }
+                    NavigationLink("49テーマの学習状況をすべて見る") { ObjectiveMapView() }
+                        .font(.subheadline.bold())
+                        .accessibilityIdentifier("objectiveMapLink")
                 }
                 .cardStyle()
             }
@@ -163,9 +171,10 @@ struct HomeView: View {
         let target = Int(ceil(Double(store.unseen) / Double(days)))
         return "試験日まで\(days)日。未着手\(store.unseen)問を一周する目安は1日\(target)問。" + (target > 50 ? "1回最大50問で分けて進められます。" : "")
     }
-    private var dailyMode: String { !store.due.isEmpty ? "due" : !store.wrong.isEmpty ? "wrong" : "focus10" }
+    private var dailyMode: String { !store.due.isEmpty ? "due" : !store.saved.isEmpty ? "saved" : !store.wrong.isEmpty ? "wrong" : "focus10" }
     private var dailyTitle: String {
         if !store.due.isEmpty { return "期限復習を始める（\(min(25, store.due.count))問）" }
+        if !store.saved.isEmpty { return "保存した問題を復習する（\(min(25, store.saved.count))問）" }
         if !store.wrong.isEmpty { return "間違いを復習する（\(min(25, store.wrong.count))問）" }
         return store.unseen > 0 ? "未着手から\(store.dailyUnseenCount)問を始める" : "定着確認の10問を始める"
     }
@@ -193,6 +202,7 @@ struct PracticeView: View {
             }
             Section("復習") {
                 mode("期限復習・\(store.due.count)問", "due", "calendar.badge.clock")
+                mode("保存した問題・\(store.saved.count)問", "saved", "bookmark.fill")
                 mode("間違い復習・\(store.wrong.count)問", "wrong", "arrow.counterclockwise")
             }
             Section("分野別") {
@@ -341,6 +351,7 @@ struct QuizView: View {
             Label(session.isCorrect ? "正解" : "不正解", systemImage: session.isCorrect ? "checkmark.circle.fill" : "xmark.circle.fill")
                 .font(.title3.bold())
                 .foregroundStyle(session.isCorrect ? DojoTheme.green : DojoTheme.red)
+                .accessibilityIdentifier("answerFeedback")
             Text("正解：" + (session.current.type == "order" ? session.current.options.joined(separator: " → ") : (session.current.answers ?? []).map { session.current.options[$0] }.joined(separator: " / ")))
                 .font(.subheadline.bold())
             Text(session.current.explanation).font(.body)
@@ -348,11 +359,17 @@ struct QuizView: View {
                 Label("Microsoft Learnで仕様を確認", systemImage: "arrow.up.right.square")
             }
             .font(.subheadline)
+            Button {
+                store.toggleSaved(session.current)
+            } label: {
+                Label(store.stat(session.current).savedForReview ? "保存済み・解除する" : "後で復習するため保存", systemImage: store.stat(session.current).savedForReview ? "bookmark.fill" : "bookmark")
+            }
+            .buttonStyle(.bordered)
+            .accessibilityIdentifier("saveQuestionButton")
         }
         .padding(16)
         .frame(maxWidth: .infinity, alignment: .leading)
         .background(session.isCorrect ? DojoTheme.green.opacity(0.07) : DojoTheme.red.opacity(0.07), in: RoundedRectangle(cornerRadius: 14))
-        .accessibilityIdentifier("answerFeedback")
     }
 }
 
@@ -414,6 +431,13 @@ struct StudyProgressView: View {
                 LabeledContent("総回答数", value: "\(store.history.totalAttempts)問")
                 LabeledContent("正答率", value: store.history.totalAttempts == 0 ? "—" : "\(Int((Double(store.history.totalCorrect) / Double(store.history.totalAttempts) * 100).rounded()))%")
                 LabeledContent("期限復習", value: "\(store.due.count)問")
+                LabeledContent("保存した問題", value: "\(store.saved.count)問")
+            }
+            Section("49テーマの学習状況") {
+                Text("経験した問題数と回答履歴をテーマごとに確認できます。正答率は演習中の記録で、合格予測ではありません。")
+                    .font(.footnote).foregroundStyle(.secondary)
+                NavigationLink("すべてのテーマを見る") { ObjectiveMapView() }
+                    .accessibilityIdentifier("objectiveMapProgressLink")
             }
             Section("分野別") {
                 ForEach(store.domains, id: \.self) { domain in
@@ -429,7 +453,7 @@ struct StudyProgressView: View {
             Section("最近の演習") {
                 ForEach(Array(store.history.sessions.prefix(10).enumerated()), id: \.offset) { _, record in
                     VStack(alignment: .leading) {
-                        Text(record.mode).font(.subheadline.bold())
+                        Text(store.title(for: record.mode)).font(.subheadline.bold())
                         Text("\(record.correct)/\(record.total)問 ・ \(record.rate)% ・ \(Date(timeIntervalSince1970: Double(record.at) / 1000).formatted(date: .abbreviated, time: .shortened))")
                             .font(.caption).foregroundStyle(.secondary)
                     }
@@ -437,6 +461,87 @@ struct StudyProgressView: View {
             }
         }
         .navigationTitle("進捗")
+    }
+}
+
+private enum ObjectiveMapFilter: String, CaseIterable, Identifiable {
+    case all = "すべて"
+    case untouched = "未着手"
+    case review = "要復習"
+    case inProgress = "学習中"
+    case completed = "一周済み"
+    var id: Self { self }
+}
+
+struct ObjectiveMapView: View {
+    @EnvironmentObject private var store: StudyStore
+    @State private var selection: ObjectiveMapFilter = .all
+    @State private var searchText = ""
+
+    private var visible: [ObjectiveProgress] {
+        store.objectiveProgress.filter { objective in
+            let matchesSearch = searchText.isEmpty || objective.title.localizedCaseInsensitiveContains(searchText) || objective.id.localizedCaseInsensitiveContains(searchText)
+            let matchesFilter: Bool
+            switch selection {
+            case .all: matchesFilter = true
+            case .untouched: matchesFilter = objective.learned == 0
+            case .review: matchesFilter = objective.needsReview
+            case .inProgress: matchesFilter = objective.learned > 0 && objective.learned < objective.total && !objective.needsReview
+            case .completed: matchesFilter = objective.learned == objective.total && !objective.needsReview
+            }
+            return matchesSearch && matchesFilter
+        }
+    }
+
+    var body: some View {
+        List {
+            Section {
+                Text("DP-700の学習範囲を参照した49テーマ。経験数と回答履歴を確認し、任意のテーマから演習できます。段階演習とコード・並べ替え問題は別枠です。")
+                    .font(.footnote).foregroundStyle(.secondary)
+                Picker("表示", selection: $selection) {
+                    ForEach(ObjectiveMapFilter.allCases) { filter in
+                        Text(filter.rawValue).tag(filter)
+                    }
+                }
+                .accessibilityIdentifier("objectiveFilter")
+                LabeledContent("表示中", value: "\(visible.count) / \(store.objectiveProgress.count)テーマ")
+            }
+            ForEach(store.domains, id: \.self) { domain in
+                let rows = visible.filter { $0.domain == domain }
+                if !rows.isEmpty {
+                    Section(domain) {
+                        ForEach(rows) { objective in
+                            Button { store.start("objective", filter: objective.id) } label: {
+                                HStack(alignment: .center, spacing: 12) {
+                                    VStack(alignment: .leading, spacing: 5) {
+                                        Text("\(objective.id)  \(objective.title)")
+                                            .font(.subheadline.bold())
+                                            .foregroundStyle(DojoTheme.ink)
+                                        Text(detail(for: objective))
+                                            .font(.caption).foregroundStyle(Color(uiColor: .secondaryLabel))
+                                    }
+                                    Spacer(minLength: 4)
+                                    Image(systemName: "chevron.right").font(.caption.bold()).foregroundStyle(DojoTheme.blue)
+                                }
+                                .padding(.vertical, 4)
+                            }
+                            .accessibilityIdentifier("objective-\(objective.id)")
+                        }
+                    }
+                }
+            }
+            if visible.isEmpty {
+                ContentUnavailableView.search(text: searchText)
+            }
+        }
+        .searchable(text: $searchText, prompt: "テーマ名・IDを検索")
+        .navigationTitle("49テーマ")
+    }
+
+    private func detail(for objective: ObjectiveProgress) -> String {
+        let status = objective.learned == 0 ? "未着手" : objective.needsReview ? "要復習" : objective.learned == objective.total ? "一周済み" : "学習中"
+        let accuracy = objective.attempts == 0 ? "" : " ・ 正答率\(objective.rate)%"
+        return "\(status) ・ \(objective.learned)/\(objective.total)問経験\(accuracy)"
     }
 }
 
