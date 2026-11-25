@@ -150,7 +150,7 @@ struct QuizSummary {
         guard let url = Bundle.main.url(forResource: "questions", withExtension: "json"),
               let data = try? Data(contentsOf: url),
               let decoded = try? JSONDecoder().decode(QuestionBank.self, from: data),
-              decoded.questions.count == 295 else { fatalError("販売用問題データを読み込めません") }
+              decoded.questions.count == 220 else { fatalError("販売用問題データを読み込めません") }
         bank = decoded
         let support = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask)[0]
         try? FileManager.default.createDirectory(at: support, withIntermediateDirectories: true)

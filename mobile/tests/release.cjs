@@ -64,10 +64,11 @@ async function answer(page, wantCorrect) {
       return [date.getFullYear(), String(date.getMonth() + 1).padStart(2, '0'), String(date.getDate()).padStart(2, '0')].join('-');
     });
     await page.locator('#examDate').fill(examDate);
-    assert((await page.locator('#planSummary').innerText()).includes('1日30問'));
+    const dailyTarget = Math.ceil(bank.length / 10);
+    assert((await page.locator('#planSummary').innerText()).includes(`1日${dailyTarget}問`));
     await page.reload();
     assert.equal(await page.locator('#examDate').inputValue(), examDate);
-    assert((await page.locator('#dailyStartBtn').innerText()).includes('未着手から30問'));
+    assert((await page.locator('#dailyStartBtn').innerText()).includes(`未着手から${dailyTarget}問`));
     const tomorrow = await page.evaluate(() => {
       const date = new Date(); date.setDate(date.getDate() + 1);
       return [date.getFullYear(), String(date.getMonth() + 1).padStart(2, '0'), String(date.getDate()).padStart(2, '0')].join('-');
@@ -89,7 +90,7 @@ async function answer(page, wantCorrect) {
     await page.locator('#quitBtn').click();
     await page.locator('#dailyStartBtn').click();
     assert.equal((await page.locator('#quizMode').innerText()).trim(), '今日の優先演習');
-    assert.equal((await page.locator('#quizCounter').innerText()).trim(), '1 / 30');
+    assert.equal((await page.locator('#quizCounter').innerText()).trim(), `1 / ${dailyTarget}`);
     page.once('dialog', dialog => dialog.accept());
     await page.locator('#quitBtn').click();
 
