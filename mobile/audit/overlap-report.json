@@ -1,0 +1,109 @@
+{
+  "method": "NFKC-normalized character trigrams; maximum Dice coefficient of full item, prompt (30+ characters) or code (80+ characters). Topic overlap is not proof of copying, and a low score is not proof of authorship.",
+  "commercialCount": 295,
+  "omittedCount": 294,
+  "highOverlapThreshold": 0.8,
+  "highOverlap": [],
+  "closest": [
+    {
+      "id": "O06-A",
+      "omittedId": "PA50-06",
+      "score": 0.6796
+    },
+    {
+      "id": "O11-B",
+      "omittedId": "PA50-19",
+      "score": 0.5938
+    },
+    {
+      "id": "O06-D",
+      "omittedId": "PA50-06",
+      "score": 0.5405
+    },
+    {
+      "id": "O42-A",
+      "omittedId": "PDF-M1-28",
+      "score": 0.5217
+    },
+    {
+      "id": "C-PY-04",
+      "omittedId": "PA-PDF-20261112-48",
+      "score": 0.4667
+    },
+    {
+      "id": "O18-A",
+      "omittedId": "PA50-20",
+      "score": 0.4494
+    },
+    {
+      "id": "O05-A",
+      "omittedId": "PALIVE-20261106-48",
+      "score": 0.4318
+    },
+    {
+      "id": "O21-A",
+      "omittedId": "PA50-21",
+      "score": 0.4286
+    },
+    {
+      "id": "O25-A",
+      "omittedId": "PA50-33",
+      "score": 0.4259
+    },
+    {
+      "id": "O09-A",
+      "omittedId": "PALIVE-20261106-07",
+      "score": 0.4235
+    },
+    {
+      "id": "O16-A",
+      "omittedId": "PALIVE-20261106-37",
+      "score": 0.4179
+    },
+    {
+      "id": "O34-A",
+      "omittedId": "PA50-31",
+      "score": 0.4167
+    },
+    {
+      "id": "O18-B",
+      "omittedId": "PA50-20",
+      "score": 0.4144
+    },
+    {
+      "id": "O01-A",
+      "omittedId": "PA50-15",
+      "score": 0.4133
+    },
+    {
+      "id": "O43-A",
+      "omittedId": "PDF-M2-06",
+      "score": 0.4
+    },
+    {
+      "id": "O07-B",
+      "omittedId": "PALIVE-20261106-42",
+      "score": 0.3908
+    },
+    {
+      "id": "O42-D",
+      "omittedId": "PDF-M1-28",
+      "score": 0.3896
+    },
+    {
+      "id": "O35-B",
+      "omittedId": "PA50-28",
+      "score": 0.3883
+    },
+    {
+      "id": "O49-A",
+      "omittedId": "PALIVE-20261106-07",
+      "score": 0.3778
+    },
+    {
+      "id": "O45-A",
+      "omittedId": "PDF-M1-29",
+      "score": 0.3765
+    }
+  ]
+}

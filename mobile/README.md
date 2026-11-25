@@ -17,6 +17,8 @@ xcodebuild -project ios/App/App.xcodeproj -scheme App -configuration Debug -dest
 
 `node tests/native.cjs` は295問の内訳、除外ID、出典URL、XcodeターゲットにWebViewやWebアセットが入らないことを検査します。旧Web画面の回帰確認用に `npm run web:fixture` を残していますが、生成物はiOSアプリへ組み込みません。
 
+候補296問の原稿は `audit/content-lock.json` で固定しています。設問、選択肢、正答、解説、コード、参照URLなどが変わると監査とビルドが失敗します。変更時は対象IDの内容・正答・根拠・作成経緯を再確認し、対象IDのハッシュだけを更新して差分をレビューしてください。`node scripts/overlap-audit.cjs` は販売用と除外済みの問題を照合します。検査結果は [audit/overlap-report.json](audit/overlap-report.json) に残りますが、独立作成の証明にはなりません。
+
 ## 履歴と移行
 
 履歴はApplication Support内のJSONへ保存します。旧Capacitor版と同じBundle Identifierで更新した場合、初回起動時に旧版WebKitのローカルストレージSQLiteから回答履歴、試験日、復元用バックアップを**コピー**します。旧データは削除しません。移行できない場合は画面に知らせます。シミュレーター上の旧版履歴4件、試験日、バックアップの移行を確認済みです。実機での自動移行は未確認です。
