@@ -4878,29 +4878,29 @@
     {
       "id": "C-SQL-03",
       "bank": "DP700_QUESTIONS",
-      "contentSha256": "be88b5d84e7ee5008b3f5c6691758f9fa97ca3d9e8a4c9eedd4cc183bf031ca1",
+      "contentSha256": "76b9407d3f30cfbed95fa954ac6fd260aee4754257aa8a0afd84071e62e100c4",
       "included": true,
       "exclusionReason": null,
-      "question": "このクエリの主な目的はどれか。",
+      "question": "BusinessKeyが同じ行にUpdatedAtの同時刻がある。このクエリの結果について正しい説明はどれか。",
       "caseText": null,
       "code": "WITH x AS (\n SELECT *, ROW_NUMBER() OVER(PARTITION BY BusinessKey ORDER BY UpdatedAt DESC) rn\n FROM Source\n)\nSELECT * FROM x WHERE rn = 1;",
       "type": "code",
       "choices": [
-        "BusinessKeyごとに最新行を1件残す",
-        "全行をランダム抽出する",
-        "NULLだけを削除する",
-        "テーブルを物理分割する"
+        "各BusinessKeyの最新時刻から1行を残すが、同時刻のどの行かは確定しない",
+        "同時刻の行をすべて残す",
+        "各BusinessKeyの最も古い行を残す",
+        "同時刻の行があると必ずエラーになる"
       ],
       "selectCount": 1,
       "answerIndices": [
         0
       ],
       "correctChoices": [
-        "BusinessKeyごとに最新行を1件残す"
+        "各BusinessKeyの最新時刻から1行を残すが、同時刻のどの行かは確定しない"
       ],
-      "explanation": "ROW_NUMBERでキーごとに更新日時降順の番号を振り、最新1行を残す。",
+      "explanation": "ROW_NUMBERはキー内でUpdatedAtの降順に番号を振り、rn=1だけを残します。同時刻の並びを一意に決める列がないため、同時刻のどの行が残るかは保証されません。",
       "source": "https://learn.microsoft.com/en-us/sql/t-sql/functions/row-number-transact-sql",
-      "contentReview": "2026-11-16 prior question-level review; current structural recheck; content hash locked",
+      "contentReview": "2026-11-26 independent code semantics and distractor review; see code-order-review-20261126.md; content hash locked",
       "specEvidence": "independent expected answer; Learn URL is a reference, not an official individual answer",
       "officialIndividualAnswer": false,
       "rightsReview": "No PDF or Practice Assessment origin metadata and no embedded third-party image; exact content is locked for future review",
@@ -4910,29 +4910,29 @@
     {
       "id": "C-SQL-04",
       "bank": "DP700_QUESTIONS",
-      "contentSha256": "84336682a150f80c62b51e62f89b460c1b836d4b75c2ec24aae6b5310363e62c",
+      "contentSha256": "e07e63ad988caed90483a4125603f4739d7b0ac3136061107f355b171b07c66f",
       "included": true,
       "exclusionReason": null,
-      "question": "このLEFT JOINを使う狙いとして最も適切なのはどれか。",
+      "question": "DimCustomerに同じCustomerCodeが2行ある場合、このLEFT JOINの結果はどうなる可能性があるか。",
       "caseText": null,
       "code": "SELECT f.OrderId, d.CustomerKey, f.Amount\nFROM StgFact f\nLEFT JOIN DimCustomer d ON f.CustomerCode=d.CustomerCode;",
       "type": "code",
       "choices": [
-        "Fact候補へDimensionキーを付与しつつ未一致行も保持する",
-        "未一致行を必ず捨てる",
-        "CustomerCodeを暗号化する",
-        "ストリームを5分窓にする"
+        "対応するStgFactの行が2行に増える",
+        "対応するStgFactの行が自動で1行に重複排除される",
+        "未一致のStgFactの行だけが削除される",
+        "結合前にDimCustomerの2行が自動で集計される"
       ],
       "selectCount": 1,
       "answerIndices": [
         0
       ],
       "correctChoices": [
-        "Fact候補へDimensionキーを付与しつつ未一致行も保持する"
+        "対応するStgFactの行が2行に増える"
       ],
-      "explanation": "LEFT JOINならステージング側を保持したままDimensionキーを引けるため、未一致の検知にも使える。",
+      "explanation": "LEFT JOINは左側の行を保持しますが、右側に一致行が複数あればその数だけ結果行が増えます。Dimension側のキー一意性を確認する必要があります。",
       "source": "https://learn.microsoft.com/en-us/sql/t-sql/queries/from-transact-sql",
-      "contentReview": "2026-11-16 prior question-level review; current structural recheck; content hash locked",
+      "contentReview": "2026-11-26 independent code semantics and distractor review; see code-order-review-20261126.md; content hash locked",
       "specEvidence": "independent expected answer; Learn URL is a reference, not an official individual answer",
       "officialIndividualAnswer": false,
       "rightsReview": "No PDF or Practice Assessment origin metadata and no embedded third-party image; exact content is locked for future review",
@@ -5134,29 +5134,29 @@
     {
       "id": "C-PY-01",
       "bank": "DP700_QUESTIONS",
-      "contentSha256": "4cb50260dc518cf4b3bc88e8cdfec037f2fa43017093f0761d00458e29065983",
+      "contentSha256": "6848a396ca2f63540235dc29262d1c1a1a6e08115a0d3eb1a380a4f71e3f5ecb",
       "included": true,
       "exclusionReason": null,
-      "question": "この処理の目的はどれか。",
+      "question": "BusinessKeyが同じでUpdatedAtだけ異なる2行がある。この処理について正しい説明はどれか。",
       "caseText": null,
       "code": "clean = df.dropDuplicates(['BusinessKey'])",
       "type": "code",
       "choices": [
-        "BusinessKey基準で重複行を除く",
-        "NULLを0で埋める",
-        "行を5分窓で集計する",
-        "列名を暗号化する"
+        "1行に減るが、UpdatedAtが新しい行を選ぶ保証はない",
+        "UpdatedAtが新しい行を必ず残す",
+        "UpdatedAtが異なるため2行とも残す",
+        "2行のUpdatedAtを平均して1行にする"
       ],
       "selectCount": 1,
       "answerIndices": [
         0
       ],
       "correctChoices": [
-        "BusinessKey基準で重複行を除く"
+        "1行に減るが、UpdatedAtが新しい行を選ぶ保証はない"
       ],
-      "explanation": "dropDuplicatesにキー列を渡すとそのキー基準で重複排除できる。",
+      "explanation": "dropDuplicates(['BusinessKey'])は比較対象をBusinessKeyに限定します。残す行をUpdatedAtで指定していないため、最新行を選ぶ処理ではありません。",
       "source": "https://learn.microsoft.com/en-us/training/modules/use-apache-spark-work-files-lakehouse/4-dataframe",
-      "contentReview": "2026-11-16 prior question-level review; current structural recheck; content hash locked",
+      "contentReview": "2026-11-26 independent code semantics and distractor review; see code-order-review-20261126.md; content hash locked",
       "specEvidence": "independent expected answer; Learn URL is a reference, not an official individual answer",
       "officialIndividualAnswer": false,
       "rightsReview": "No PDF or Practice Assessment origin metadata and no embedded third-party image; exact content is locked for future review",
@@ -5230,10 +5230,10 @@
     {
       "id": "C-PY-04",
       "bank": "DP700_QUESTIONS",
-      "contentSha256": "54cf646a5c29aca90b4b0193cb2ad93b73006afd2997650a6c1617de86d8b7d5",
+      "contentSha256": "1fcc023c53167b29f7dfc83dcd3151a66b6eafcf9498b390319d8b955c1f825b",
       "included": true,
       "exclusionReason": null,
-      "question": "性能面で期待する効果はどれか。",
+      "question": "OrderDateはdate型で有効な日付が入っています。性能面で期待する効果はどれか。",
       "caseText": null,
       "code": "from pyspark.sql import functions as F\nrecent = df.filter(F.col('OrderDate') >= '2026-11-01').select('OrderId','Amount')",
       "type": "code",
@@ -5252,7 +5252,7 @@
       ],
       "explanation": "早期filter/selectで後続処理量を減らせる。",
       "source": "https://learn.microsoft.com/en-us/fabric/data-engineering/spark-monitoring-best-practices",
-      "contentReview": "2026-11-16 prior question-level review; current structural recheck; content hash locked",
+      "contentReview": "2026-11-26 independent code semantics and distractor review; see code-order-review-20261126.md; content hash locked",
       "specEvidence": "independent expected answer; Learn URL is a reference, not an official individual answer",
       "officialIndividualAnswer": false,
       "rightsReview": "No PDF or Practice Assessment origin metadata and no embedded third-party image; exact content is locked for future review",
@@ -5294,10 +5294,10 @@
     {
       "id": "C-PY-06",
       "bank": "DP700_QUESTIONS",
-      "contentSha256": "0fc8777678b88b5793c49241381a8a00e063b39e65244e33e62dc7ca291cac00",
+      "contentSha256": "16b6cd2c1f819040eb20f6c2eb4b26791738eee9c6c3c9002e3b49a37acf9faf",
       "included": true,
       "exclusionReason": null,
-      "question": "このコードの挙動はどれか。",
+      "question": "Salesは互換スキーマのDeltaテーブルとして既に存在します。このコードの挙動はどれか。",
       "caseText": null,
       "code": "df.write.format('delta').mode('append').saveAsTable('Sales')",
       "type": "code",
@@ -5316,7 +5316,7 @@
       ],
       "explanation": "format delta + appendで既存データに追記する。",
       "source": "https://learn.microsoft.com/en-us/fabric/data-engineering/lakehouse-and-delta-tables",
-      "contentReview": "2026-11-16 prior question-level review; current structural recheck; content hash locked",
+      "contentReview": "2026-11-26 independent code semantics and distractor review; see code-order-review-20261126.md; content hash locked",
       "specEvidence": "independent expected answer; Learn URL is a reference, not an official individual answer",
       "officialIndividualAnswer": false,
       "rightsReview": "No PDF or Practice Assessment origin metadata and no embedded third-party image; exact content is locked for future review",
@@ -5326,29 +5326,29 @@
     {
       "id": "C-PY-07",
       "bank": "DP700_QUESTIONS",
-      "contentSha256": "fdb006c84a5c065dd1e70d9d18d5d11a80ff00a01f5b11bf73e572e38ef1a005",
+      "contentSha256": "aab5671ef8acddbe1e2283f40a6493ffa42710c183a7a703492ad9d4919b8da4",
       "included": true,
       "exclusionReason": null,
-      "question": "主な狙いはどれか。",
+      "question": "CustomerIdに偏りがあるデータで、次のコードについて保証される内容はどれか。",
       "caseText": null,
       "code": "balanced = df.repartition(32, 'CustomerId')",
       "type": "code",
       "choices": [
-        "CustomerIdを基準にデータ分布/並列度を再調整する",
-        "RLSを作る",
-        "NULLを補完する",
-        "Git branchを作る"
+        "CustomerIdを分割キーとする32個のパーティションを作る",
+        "32個のパーティションの行数が必ず等しくなる",
+        "同じCustomerIdの行を32個へ均等に分散する",
+        "CustomerIdが異なる行を必ず別々のパーティションに置く"
       ],
       "selectCount": 1,
       "answerIndices": [
         0
       ],
       "correctChoices": [
-        "CustomerIdを基準にデータ分布/並列度を再調整する"
+        "CustomerIdを分割キーとする32個のパーティションを作る"
       ],
-      "explanation": "repartitionはshuffleを伴いパーティションを再構成する。",
+      "explanation": "repartition(32, 'CustomerId')は指定列でハッシュ分割します。同じキーの行は同じ分割先になり、キーの偏りだけでは行数の均等化は保証されません。",
       "source": "https://learn.microsoft.com/en-us/fabric/data-engineering/spark-monitoring-best-practices",
-      "contentReview": "2026-11-16 prior question-level review; current structural recheck; content hash locked",
+      "contentReview": "2026-11-26 independent code semantics and distractor review; see code-order-review-20261126.md; content hash locked",
       "specEvidence": "independent expected answer; Learn URL is a reference, not an official individual answer",
       "officialIndividualAnswer": false,
       "rightsReview": "No PDF or Practice Assessment origin metadata and no embedded third-party image; exact content is locked for future review",
@@ -5390,7 +5390,7 @@
     {
       "id": "C-PY-09",
       "bank": "DP700_QUESTIONS",
-      "contentSha256": "13085e4eeae62a27751dace39433ee5192d084109b28af2699e35e01c7b678fb",
+      "contentSha256": "874bedf3eda6e4748c3c6ad5e8f9cf6be874dbe45a8f398c3ad192dd9a05c8cf",
       "included": true,
       "exclusionReason": null,
       "question": "既定LakehouseのIncomingは追記専用のDeltaテーブルで、Salesと互換性のあるスキーマです。次のストリームでcheckpointLocationを指定する主な目的を1つ選んでください。",
@@ -5398,21 +5398,21 @@
       "code": "stream = spark.readStream.format(\"delta\").table(\"Incoming\")\nquery = (stream.writeStream.format(\"delta\")\n    .outputMode(\"append\")\n    .option(\"checkpointLocation\", \"Files/chk/incoming-to-sales\")\n    .toTable(\"Sales\"))",
       "type": "code",
       "choices": [
-        "ストリーム処理の進捗/状態を復元できるようにする",
-        "Workspace roleを保存する",
-        "Git commitを保存する",
-        "DDMポリシーを保存する"
+        "停止後に同じチェックポイントから処理の進捗や状態を復元する",
+        "Salesのすべての重複行を自動で削除する",
+        "Incomingのスキーマ変更を無条件で受け入れる",
+        "入力テーブルの過去データを自動でVACUUMする"
       ],
       "selectCount": 1,
       "answerIndices": [
         0
       ],
       "correctChoices": [
-        "ストリーム処理の進捗/状態を復元できるようにする"
+        "停止後に同じチェックポイントから処理の進捗や状態を復元する"
       ],
-      "explanation": "Structured Streamingではcheckpointが障害復旧や進捗管理に重要。",
+      "explanation": "checkpointLocationには処理済み入力の位置や状態などが保存され、同じクエリを再開するときの復元に使われます。重複排除や任意のスキーマ変更を単独で保証する設定ではありません。",
       "source": "https://learn.microsoft.com/en-us/fabric/data-engineering/structured-streaming-overview",
-      "contentReview": "2026-11-16 prior question-level review; current structural recheck; content hash locked",
+      "contentReview": "2026-11-26 independent code semantics and distractor review; see code-order-review-20261126.md; content hash locked",
       "specEvidence": "independent expected answer; Learn URL is a reference, not an official individual answer",
       "officialIndividualAnswer": false,
       "rightsReview": "No PDF or Practice Assessment origin metadata and no embedded third-party image; exact content is locked for future review",
@@ -5454,29 +5454,29 @@
     {
       "id": "C-KQL-01",
       "bank": "DP700_QUESTIONS",
-      "contentSha256": "0c921f080e06264d9d48e710a3ef64e21443992d20fbd1e1bd7e0f9de064e2df",
+      "contentSha256": "98aaa300916b62429f3713f371b6561875001b7e0339c3889069bf989ea40439",
       "included": true,
       "exclusionReason": null,
-      "question": "このクエリは何をするか。",
+      "question": "Timestampに未来時刻の行も含み得ます。次のwhere条件で残る行はどれか。",
       "caseText": null,
       "code": "Events\n| where Timestamp > ago(1h)",
       "type": "code",
       "choices": [
-        "直近1時間のイベントに絞る",
-        "1時間ごとに必ず集計する",
-        "全期間を削除する",
-        "列をマスクする"
+        "1時間前より後の行。未来時刻の行も条件を満たす",
+        "現在から1時間前までの行だけ。未来時刻は自動で除かれる",
+        "1時間前ちょうどの行だけ",
+        "Timestampを1時間単位に集計した行"
       ],
       "selectCount": 1,
       "answerIndices": [
         0
       ],
       "correctChoices": [
-        "直近1時間のイベントに絞る"
+        "1時間前より後の行。未来時刻の行も条件を満たす"
       ],
-      "explanation": "whereで時間条件を適用している。",
+      "explanation": "ago(1h)は現在から1時間前の時刻を返し、whereはそれより後かどうかを比較します。上限条件がないため未来時刻の行も残り得ます。",
       "source": "https://learn.microsoft.com/en-us/kusto/query/where-operator",
-      "contentReview": "2026-11-16 prior question-level review; current structural recheck; content hash locked",
+      "contentReview": "2026-11-26 independent code semantics and distractor review; see code-order-review-20261126.md; content hash locked",
       "specEvidence": "independent expected answer; Learn URL is a reference, not an official individual answer",
       "officialIndividualAnswer": false,
       "rightsReview": "No PDF or Practice Assessment origin metadata and no embedded third-party image; exact content is locked for future review",
@@ -5486,29 +5486,29 @@
     {
       "id": "C-KQL-02",
       "bank": "DP700_QUESTIONS",
-      "contentSha256": "b6f636015301b8abd25e28274303e85b6d8aa37bdcab926d70725913dec42d57",
+      "contentSha256": "1fa4833b31e69a5d6b640f32232a394cfc8f8084694335675d37fc92c6ac38dd",
       "included": true,
       "exclusionReason": null,
-      "question": "結果はどれか。",
+      "question": "Errorsという列には何が記録されるか。",
       "caseText": null,
       "code": "Events\n| summarize Errors=count() by Service",
       "type": "code",
       "choices": [
-        "Service別イベント件数",
-        "全イベントを1行ずつ表示",
-        "Service列を削除",
-        "Git履歴を集計"
+        "Serviceごとの全イベント件数",
+        "Serviceごとのエラーイベントだけの件数",
+        "全Serviceをまとめた1件の合計行数",
+        "Serviceごとの異なるDeviceIdの数"
       ],
       "selectCount": 1,
       "answerIndices": [
         0
       ],
       "correctChoices": [
-        "Service別イベント件数"
+        "Serviceごとの全イベント件数"
       ],
-      "explanation": "summarize count() by Serviceでサービス単位に集計する。",
+      "explanation": "count()は各Serviceの全入力行を数えます。Errorsは出力列の別名であり、エラー条件による絞り込みは行っていません。",
       "source": "https://learn.microsoft.com/en-us/kusto/query/summarize-operator",
-      "contentReview": "2026-11-16 prior question-level review; current structural recheck; content hash locked",
+      "contentReview": "2026-11-26 independent code semantics and distractor review; see code-order-review-20261126.md; content hash locked",
       "specEvidence": "independent expected answer; Learn URL is a reference, not an official individual answer",
       "officialIndividualAnswer": false,
       "rightsReview": "No PDF or Practice Assessment origin metadata and no embedded third-party image; exact content is locked for future review",
@@ -5550,29 +5550,29 @@
     {
       "id": "C-KQL-04",
       "bank": "DP700_QUESTIONS",
-      "contentSha256": "c8a8b945c8743b8afd542f591263683835db778ec28e1f83a3b8a4a1badce35a",
+      "contentSha256": "4e372a6780ea70b93941363bbbd042ebd2f8a94e5fdbc184996bb0c1bd49b0fa",
       "included": true,
       "exclusionReason": null,
-      "question": "性能/可読性面の意図はどれか。",
+      "question": "このprojectの結果について正しい説明はどれか。",
       "caseText": null,
       "code": "Events\n| project Timestamp, Service, Message",
       "type": "code",
       "choices": [
-        "必要列だけに絞る",
-        "全列を複製する",
-        "行を削除する",
-        "RLSを作る"
+        "出力を指定した3列に絞り、行を条件で除外しない",
+        "先頭の3行だけを残す",
+        "指定した3列を削除して他の列を残す",
+        "Service別にMessageの件数を集計する"
       ],
       "selectCount": 1,
       "answerIndices": [
         0
       ],
       "correctChoices": [
-        "必要列だけに絞る"
+        "出力を指定した3列に絞り、行を条件で除外しない"
       ],
-      "explanation": "projectは出力列を選択する。",
+      "explanation": "projectは出力する列を指定します。このクエリに行の抽出条件や集計はありません。",
       "source": "https://learn.microsoft.com/en-us/kusto/query/project-operator",
-      "contentReview": "2026-11-16 prior question-level review; current structural recheck; content hash locked",
+      "contentReview": "2026-11-26 independent code semantics and distractor review; see code-order-review-20261126.md; content hash locked",
       "specEvidence": "independent expected answer; Learn URL is a reference, not an official individual answer",
       "officialIndividualAnswer": false,
       "rightsReview": "No PDF or Practice Assessment origin metadata and no embedded third-party image; exact content is locked for future review",
@@ -5614,7 +5614,7 @@
     {
       "id": "C-KQL-06",
       "bank": "DP700_QUESTIONS",
-      "contentSha256": "cbee454c9b5be95b99d80e69b17b6a99cd8a3dc12aa1e8dcc764d150d669f7df",
+      "contentSha256": "661a725dfbe9cfe765245baa0c77411d094d7f0c97bcb133d663a2c0e2bddd18",
       "included": true,
       "exclusionReason": null,
       "question": "主な結果はどれか。",
@@ -5634,9 +5634,9 @@
       "correctChoices": [
         "DeviceIdごとの最新イベント"
       ],
-      "explanation": "arg_maxはグループごとに最大値を持つ行を取得するのに使える。",
+      "explanation": "arg_maxはDeviceIdごとに最大Timestampを持つ行の列を返します。同時刻の行が複数ある場合、どの行を返すかはこのコードだけでは指定していません。",
       "source": "https://learn.microsoft.com/en-us/kusto/query/arg-max-aggregation-function",
-      "contentReview": "2026-11-16 prior question-level review; current structural recheck; content hash locked",
+      "contentReview": "2026-11-26 independent code semantics and distractor review; see code-order-review-20261126.md; content hash locked",
       "specEvidence": "independent expected answer; Learn URL is a reference, not an official individual answer",
       "officialIndividualAnswer": false,
       "rightsReview": "No PDF or Practice Assessment origin metadata and no embedded third-party image; exact content is locked for future review",
