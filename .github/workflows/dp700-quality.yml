@@ -16,6 +16,8 @@ jobs:
           node-version: 22
       - run: node dp700/tests/validate.cjs
       - run: node mobile/scripts/audit.cjs
+      - run: node mobile/tests/content-integrity.cjs
+      - run: node mobile/scripts/overlap-audit.cjs
       - run: node mobile/scripts/build-native.cjs
       - run: node mobile/tests/native.cjs
       - run: node mobile/scripts/build.cjs

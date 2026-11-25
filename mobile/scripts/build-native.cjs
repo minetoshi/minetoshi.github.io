@@ -1,17 +1,20 @@
 const fs = require('node:fs');
 const path = require('node:path');
 const { load } = require('../../dp700/tests/banks.cjs');
+const { verifyContent } = require('./content-integrity.cjs');
 
 const banks = load();
 const excluded = new Set(require('../commercial-exclusions.json').map(row => row.id));
 const labels = require('../objective-labels.json');
-const selected = [
-  ...banks.DP700_QUESTIONS.filter(q => !q.origin && q.scorable !== false && q.reviewStatus !== 'review' && !excluded.has(q.id)).map(q => ({ ...q, bank: 'core' })),
-  ...banks.DP700_BASICS.filter(q => !excluded.has(q.id)).map(q => ({ ...q, bank: 'basic' })),
-  ...banks.DP700_INTERMEDIATE.filter(q => !excluded.has(q.id)).map(q => ({ ...q, bank: 'intermediate' })),
-  ...banks.DP700_ADVANCED.filter(q => !excluded.has(q.id)).map(q => ({ ...q, bank: 'advanced' })),
-  ...banks.DP700_BRIDGE.filter(q => !excluded.has(q.id)).map(q => ({ ...q, bank: 'bridge' }))
+const candidates = [
+  ...banks.DP700_QUESTIONS.filter(q => !q.origin && q.scorable !== false && q.reviewStatus !== 'review').map(q => ({ ...q, bank: 'core' })),
+  ...banks.DP700_BASICS.map(q => ({ ...q, bank: 'basic' })),
+  ...banks.DP700_INTERMEDIATE.map(q => ({ ...q, bank: 'intermediate' })),
+  ...banks.DP700_ADVANCED.map(q => ({ ...q, bank: 'advanced' })),
+  ...banks.DP700_BRIDGE.map(q => ({ ...q, bank: 'bridge' }))
 ];
+verifyContent(candidates.map(({ bank, ...question }) => question));
+const selected = candidates.filter(q => !excluded.has(q.id));
 if (selected.length !== 295 || new Set(selected.map(q => q.id)).size !== 295) throw new Error('Unexpected native question count or duplicate ID');
 for (const q of selected) {
   if (!/^https:\/\/learn\.microsoft\.com\//.test(q.source || '') || !q.explanation || !q.question ||

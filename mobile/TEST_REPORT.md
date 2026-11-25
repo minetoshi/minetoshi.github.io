@@ -2,6 +2,9 @@
 
 ## 2026-11-26 販売設計に沿った追加検証
 
+- 296候補の原稿ハッシュを固定。原稿変更、未監査ID追加、欠落でビルドと監査が失敗するテストを追加。販売用295問と除外済み294問の本文・選択肢・コード・解説を照合し、全体・設問・コードの最大Dice係数0.8以上は0組。これは著作権確認の代用ではない。
+- 原稿固定と重複検査の追加後に `dp700/tests/validate.cjs`、`mobile/scripts/audit.cjs`、`mobile/tests/content-integrity.cjs`、`mobile/scripts/overlap-audit.cjs`、`mobile/scripts/build-native.cjs`、`mobile/tests/native.cjs` が通過。iPhone 17 Pro Simulator（iOS 26.4）で `xcodebuild test` が終了コード0で通過。
+
 - 販売設計を `PRODUCT_DESIGN.md` に固定し、端末内の保存済み復習と49テーマ一覧をSwiftUIに追加。
 - `node mobile/tests/native.cjs` 成功。販売用295問、49テーマ、WebView・Webアセット非同梱を再確認。
 - Xcode 26.4、iPhone 17 Pro Simulator（iOS 26.4）の `xcodebuild test` でSwift単体テスト6件、XCUITest 2件が通過。新規テストでは回答前に保存できないこと、保存状態の永続化・旧JSON読み込み・バックアップ復元、49テーマと173問の対応、回答後の保存操作と保存済み演習、49テーマ一覧の入口を確認。
