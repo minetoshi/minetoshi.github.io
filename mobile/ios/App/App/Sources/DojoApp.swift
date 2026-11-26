@@ -408,7 +408,7 @@ struct ResultView: View {
                         }
                         .frame(maxWidth: .infinity, alignment: .leading).cardStyle()
                         if !result.wrongIDs.isEmpty {
-                            Button("この演習の間違いを復習") { store.start("wrong", explicitIDs: result.wrongIDs) }
+                            Button(result.timedOut ? "誤答・未回答を復習" : "この演習の間違いを復習") { store.start("wrong", explicitIDs: result.wrongIDs) }
                                 .buttonStyle(PrimaryButtonStyle())
                         }
                         if let next = ["basic15": "mid15", "mid15": "adv15", "adv15": "bridge9", "bridge9": "hard25"][result.mode] {

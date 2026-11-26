@@ -81,6 +81,27 @@ import XCTest
         XCTAssertTrue(store.session?.questions.allSatisfy { $0.type == "code" } == true)
     }
 
+    func testTimedOutMockCountsUnansweredInScoreButNotAttemptHistory() throws {
+        let store = StudyStore()
+        store.reset()
+        store.start("mock45")
+        let first = try XCTUnwrap(store.session?.current)
+        XCTAssertEqual(store.session?.questions.count, 45)
+        if first.type == "order" {
+            store.answer()
+        } else {
+            for index in 0..<first.requiredSelection { store.toggleChoice(index) }
+            store.answer()
+        }
+        XCTAssertEqual(store.history.totalAttempts, 1)
+        store.finish(timedOut: true)
+        XCTAssertEqual(store.summary?.total, 45, "未回答は模試スコアの分母に含める")
+        XCTAssertEqual(store.history.totalAttempts, 1, "未回答を回答履歴として記録しない")
+        XCTAssertEqual(store.learned, 1)
+        XCTAssertEqual(store.history.sessions.first?.total, 45)
+        store.reset()
+    }
+
     func testSavedReviewPersistsAndSurvivesHistoryRestore() throws {
         let store = StudyStore()
         store.reset()
