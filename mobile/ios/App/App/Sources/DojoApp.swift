@@ -304,24 +304,26 @@ struct QuizView: View {
             ForEach(Array(session.order.enumerated()), id: \.offset) { displayIndex, originalIndex in
                 let isAnswer = session.current.answers?.contains(originalIndex) ?? false
                 let isSelected = session.selected.contains(originalIndex)
-                Button { store.toggleChoice(originalIndex) } label: {
-                    HStack(alignment: .top, spacing: 10) {
-                        Text("\(String(UnicodeScalar(65 + displayIndex)!)).")
-                            .fontWeight(.bold)
-                        Text(session.current.options[originalIndex]).frame(maxWidth: .infinity, alignment: .leading)
-                        if session.answered && isAnswer { Image(systemName: "checkmark.circle.fill") }
-                        else if session.answered && isSelected { Image(systemName: "xmark.circle.fill") }
-                    }
-                    .font(.body)
-                    .foregroundStyle(session.answered && isAnswer ? DojoTheme.green : session.answered && isSelected ? DojoTheme.red : DojoTheme.ink)
-                    .padding(14).frame(maxWidth: .infinity, alignment: .leading)
-                    .background(session.answered && isAnswer ? DojoTheme.green.opacity(0.12) : session.answered && isSelected ? DojoTheme.red.opacity(0.12) : isSelected ? DojoTheme.blue.opacity(0.1) : .white,
-                                in: RoundedRectangle(cornerRadius: 14))
-                    .overlay(RoundedRectangle(cornerRadius: 14).stroke(session.answered && isAnswer ? DojoTheme.green : session.answered && isSelected ? DojoTheme.red : isSelected ? DojoTheme.blue : Color(.separator), lineWidth: isSelected || session.answered && isAnswer ? 2 : 1))
+                let card = HStack(alignment: .top, spacing: 10) {
+                    Text("\(String(UnicodeScalar(65 + displayIndex)!)).")
+                        .fontWeight(.bold)
+                    Text(session.current.options[originalIndex]).frame(maxWidth: .infinity, alignment: .leading)
+                    if session.answered && isAnswer { Image(systemName: "checkmark.circle.fill") }
+                    else if session.answered && isSelected { Image(systemName: "xmark.circle.fill") }
                 }
-                .buttonStyle(.plain)
-                .disabled(session.answered)
-                .accessibilityIdentifier("choice-\(displayIndex)")
+                .font(.body)
+                .foregroundStyle(session.answered && isAnswer ? DojoTheme.green : session.answered && isSelected ? DojoTheme.red : DojoTheme.ink)
+                .padding(14).frame(maxWidth: .infinity, alignment: .leading)
+                .background(session.answered && isAnswer ? DojoTheme.green.opacity(0.12) : session.answered && isSelected ? DojoTheme.red.opacity(0.12) : isSelected ? DojoTheme.blue.opacity(0.1) : .white,
+                            in: RoundedRectangle(cornerRadius: 14))
+                .overlay(RoundedRectangle(cornerRadius: 14).stroke(session.answered && isAnswer ? DojoTheme.green : session.answered && isSelected ? DojoTheme.red : isSelected ? DojoTheme.blue : Color(.separator), lineWidth: isSelected || session.answered && isAnswer ? 2 : 1))
+                if session.answered {
+                    card.accessibilityIdentifier("choice-\(displayIndex)")
+                } else {
+                    Button { store.toggleChoice(originalIndex) } label: { card }
+                        .buttonStyle(.plain)
+                        .accessibilityIdentifier("choice-\(displayIndex)")
+                }
             }
         }
     }

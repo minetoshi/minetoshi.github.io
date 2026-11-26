@@ -11,14 +11,14 @@
       "score": 0.6796
     },
     {
-      "id": "O11-B",
-      "omittedId": "PA50-19",
-      "score": 0.5938
-    },
-    {
       "id": "O42-A",
       "omittedId": "PDF-M1-28",
       "score": 0.5217
+    },
+    {
+      "id": "O11-B",
+      "omittedId": "PA50-19",
+      "score": 0.4722
     },
     {
       "id": "C-PY-04",
@@ -61,19 +61,9 @@
       "score": 0.4167
     },
     {
-      "id": "O18-B",
-      "omittedId": "PA50-20",
-      "score": 0.4144
-    },
-    {
       "id": "O43-A",
       "omittedId": "PDF-M2-06",
       "score": 0.4
-    },
-    {
-      "id": "O35-B",
-      "omittedId": "PA50-28",
-      "score": 0.3883
     },
     {
       "id": "O49-A",
@@ -101,9 +91,19 @@
       "score": 0.3559
     },
     {
+      "id": "O26-B",
+      "omittedId": "PA-20261114-44",
+      "score": 0.3529
+    },
+    {
       "id": "BASIC-10",
       "omittedId": "PA-20261114-18",
       "score": 0.3519
+    },
+    {
+      "id": "O49-B",
+      "omittedId": "PA-20261114-08",
+      "score": 0.3486
     }
   ]
 }
