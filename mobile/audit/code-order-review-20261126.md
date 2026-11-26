@@ -47,6 +47,12 @@
 | ADV-15 | 5分binの10:05は次の境界 | 整合 |
 | BRIDGE-6 | LEFT JOINのON側に条件を置きBを保持 | 整合 |
 
+### 選択肢の追加改訂
+
+次の15問は、分野外の語だけで消去できる誤答を、同じ言語・機能の解釈を比較する誤答へ変更した。正答の選択肢番号とコードは維持した。`C-SQL-08` は選択肢に合わせて解説も更新した。
+
+`C-SQL-02`, `C-SQL-05`, `C-SQL-06`, `C-SQL-08`, `C-SQL-10`, `C-PY-02`, `C-PY-04`, `C-PY-05`, `C-PY-08`, `C-PY-09`, `C-PY-10`, `C-KQL-03`, `C-KQL-07`, `C-KQL-08`, `C-KQL-10`。
+
 ## 並べ替え15問
 
 並べ替えは公式の必須手順をそのまま問う問題ではなく、提示した4工程を安全に実施する順を問う独自演習。複数の工程を同時に行える実務状況はあるため、「唯一の製品操作順」を主張しない。
@@ -72,7 +78,9 @@
 ## 仕様の確認元
 
 - [Microsoft Learn: ROW_NUMBER](https://learn.microsoft.com/en-us/sql/t-sql/functions/row-number-transact-sql?view=fabric) は同時刻の順序が一意に定まらないことを明記する。
+- [Microsoft Learn: COALESCE](https://learn.microsoft.com/en-us/sql/t-sql/language-elements/coalesce-transact-sql?view=fabric) と [CASE](https://learn.microsoft.com/en-us/sql/t-sql/language-elements/case-transact-sql?view=fabric) はNULL値選択と条件式の結果を示す。
 - [Apache Spark: dropDuplicates](https://spark.apache.org/docs/latest/api/python/reference/pyspark.sql/api/pyspark.sql.DataFrame.dropDuplicates.html) と [repartition](https://spark.apache.org/docs/latest/api/python/reference/pyspark.sql/api/pyspark.sql.DataFrame.repartition.html) は比較列とハッシュ分割の仕様を示す。
+- [Apache Spark: fillna](https://spark.apache.org/docs/latest/api/python/reference/pyspark.sql/api/pyspark.sql.DataFrame.fillna.html) と [withColumn](https://spark.apache.org/docs/latest/api/python/reference/pyspark.sql/api/pyspark.sql.DataFrame.withColumn.html) は欠損補完と列追加・置換の仕様を示す。
 - [Microsoft Learn: Structured Streaming](https://learn.microsoft.com/en-us/fabric/data-engineering/structured-streaming-overview) はチェックポイントの復元用途とFabricでの書き込み例を示す。
 - [Microsoft Learn: KQL summarize](https://learn.microsoft.com/en-us/kusto/query/summarize-operator?view=microsoft-fabric) はグループごとの集計と `countif` の初期値を示す。
 - [Microsoft Learn: KQL ago](https://learn.microsoft.com/en-us/kusto/query/ago-function?view=microsoft-fabric) は現在から時間幅を引いた時刻を返す。

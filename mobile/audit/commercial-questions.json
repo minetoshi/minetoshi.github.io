@@ -4846,7 +4846,7 @@
     {
       "id": "C-SQL-02",
       "bank": "DP700_QUESTIONS",
-      "contentSha256": "6a6b44b9806ce75d65179595e75e0c66400cfca7a0a18a8628062dd04ad476ac",
+      "contentSha256": "a04f8d9a860e85ca9f83a9886af1a8ee3ae9775c1f28d832645b5b47a4b37aea",
       "included": true,
       "exclusionReason": null,
       "question": "COALESCEの目的はどれか。",
@@ -4854,21 +4854,21 @@
       "code": "SELECT CustomerId, COALESCE(City, 'Unknown') AS City\nFROM Customers;",
       "type": "code",
       "choices": [
-        "NULLを代替値に置換する",
-        "重複行を削除する",
-        "行を時系列に並べる",
-        "列を暗号化する"
+        "CityがNULLのときだけUnknownを返す",
+        "CityがNULLの行を結果から除外する",
+        "CityがNULL以外でもUnknownに置き換える",
+        "直前行のCityでNULLを埋める"
       ],
       "selectCount": 1,
       "answerIndices": [
         0
       ],
       "correctChoices": [
-        "NULLを代替値に置換する"
+        "CityがNULLのときだけUnknownを返す"
       ],
       "explanation": "COALESCEは最初のNULLでない値を返し、欠損値処理に使える。",
       "source": "https://learn.microsoft.com/en-us/sql/t-sql/language-elements/coalesce-transact-sql",
-      "contentReview": "2026-11-16 prior question-level review; current structural recheck; content hash locked",
+      "contentReview": "2026-11-26 independent code semantics and distractor review; see code-order-review-20261126.md; content hash locked",
       "specEvidence": "independent expected answer; Learn URL is a reference, not an official individual answer",
       "officialIndividualAnswer": false,
       "rightsReview": "No PDF or Practice Assessment origin metadata and no embedded third-party image; exact content is locked for future review",
@@ -4942,7 +4942,7 @@
     {
       "id": "C-SQL-05",
       "bank": "DP700_QUESTIONS",
-      "contentSha256": "85bad7aa0b85a660d71281075a8a4a7742046a7b9e889d1c0449b678ce579011",
+      "contentSha256": "499a89d4d473892407790dd32ed24c510a86ff3ffc7aa9ad8acfa9d816840cae",
       "included": true,
       "exclusionReason": null,
       "question": "CASE式の役割はどれか。",
@@ -4950,21 +4950,21 @@
       "code": "SELECT Amount, CASE WHEN Amount >= 100000 THEN 'High' ELSE 'Normal' END AS Tier\nFROM Sales;",
       "type": "code",
       "choices": [
-        "条件に応じて派生値を作る",
-        "テーブルをVACUUMする",
-        "権限を付与する",
-        "Gitへコミットする"
+        "Amountに応じてTier列の値を作る",
+        "Highに該当する行だけを返す",
+        "Amount列をHighという文字列に変える",
+        "HighとNormalの件数を集計する"
       ],
       "selectCount": 1,
       "answerIndices": [
         0
       ],
       "correctChoices": [
-        "条件に応じて派生値を作る"
+        "Amountに応じてTier列の値を作る"
       ],
       "explanation": "CASEは条件分岐で派生列を作る。",
       "source": "https://learn.microsoft.com/en-us/sql/t-sql/language-elements/case-transact-sql",
-      "contentReview": "2026-11-16 prior question-level review; current structural recheck; content hash locked",
+      "contentReview": "2026-11-26 independent code semantics and distractor review; see code-order-review-20261126.md; content hash locked",
       "specEvidence": "independent expected answer; Learn URL is a reference, not an official individual answer",
       "officialIndividualAnswer": false,
       "rightsReview": "No PDF or Practice Assessment origin metadata and no embedded third-party image; exact content is locked for future review",
@@ -4974,7 +4974,7 @@
     {
       "id": "C-SQL-06",
       "bank": "DP700_QUESTIONS",
-      "contentSha256": "1de3e6b555153169baf9f22e30826777a0ed5f0f200e66e43833bf147e697683",
+      "contentSha256": "00d03bf81ef18095eb814c9815c0eca598b813f725e42088bc64e35acf76c13d",
       "included": true,
       "exclusionReason": null,
       "question": "日付パーティション/クラスタリングが適切な場合、このWHEREの利点はどれか。",
@@ -4983,9 +4983,9 @@
       "type": "code",
       "choices": [
         "不要期間の読み取り削減が期待できる",
-        "必ず全表スキャンになる",
-        "RLSが無効になる",
-        "VACUUMが自動実行される"
+        "OrderDateをSELECT列に含めないとWHEREは適用されない",
+        "2026-11-01より前の分割だけを読む",
+        "OrderDateが分割列でも必ず全期間を読む"
       ],
       "selectCount": 1,
       "answerIndices": [
@@ -4996,7 +4996,7 @@
       ],
       "explanation": "早期に日付で絞ることでスキャン量を減らせる。",
       "source": "https://learn.microsoft.com/en-us/training/modules/fabric-transform-data-tsql/",
-      "contentReview": "2026-11-16 prior question-level review; current structural recheck; content hash locked",
+      "contentReview": "2026-11-26 independent code semantics and distractor review; see code-order-review-20261126.md; content hash locked",
       "specEvidence": "independent expected answer; Learn URL is a reference, not an official individual answer",
       "officialIndividualAnswer": false,
       "rightsReview": "No PDF or Practice Assessment origin metadata and no embedded third-party image; exact content is locked for future review",
@@ -5038,7 +5038,7 @@
     {
       "id": "C-SQL-08",
       "bank": "DP700_QUESTIONS",
-      "contentSha256": "55dfe7737b4d1c8a1d0668625ac82943e7d7d68b0a03b2f2fb3d8c377b5f0439",
+      "contentSha256": "0918e0bd8d4a020fa97292680472f249198572a29733e308022dd94a728b2f57",
       "included": true,
       "exclusionReason": null,
       "question": "CustomerIdとAmountの2列を選択したかった。最初に確認すべき問題はどれか。",
@@ -5046,21 +5046,21 @@
       "code": "SELECT CustomerId Amount FROM Sales;",
       "type": "code",
       "choices": [
-        "列区切りのカンマ欠落",
-        "GROUP BYの過剰指定",
-        "VACUUM不足",
-        "Spark pool不足"
+        "CustomerIdとAmountの列区切りのカンマがない",
+        "CustomerIdを角括弧で囲まないと列として認識されない",
+        "Amountの前にASを入れれば2列として取得できる",
+        "FROM句でSalesに別名を付けていない"
       ],
       "selectCount": 1,
       "answerIndices": [
         0
       ],
       "correctChoices": [
-        "列区切りのカンマ欠落"
+        "CustomerIdとAmountの列区切りのカンマがない"
       ],
-      "explanation": "T-SQLではCustomerId AmountはCustomerIdの別名をAmountとする有効な構文です。2列を取得するにはCustomerId, Amountとカンマで区切ります。構文エラーになるとは限りません。GROUP BY、VACUUM、Spark poolの設定は列リストの修正になりません。",
+      "explanation": "T-SQLではCustomerId AmountはCustomerIdをAmountという別名で返す有効な構文です。2列を取得するにはCustomerId, Amountとカンマで区切ります。ASを追加しても別名指定のままです。",
       "source": "https://learn.microsoft.com/en-us/sql/t-sql/queries/select-clause-transact-sql",
-      "contentReview": "2026-11-16 prior question-level review; current structural recheck; content hash locked",
+      "contentReview": "2026-11-26 independent code semantics and distractor review; see code-order-review-20261126.md; content hash locked",
       "specEvidence": "independent expected answer; Learn URL is a reference, not an official individual answer",
       "officialIndividualAnswer": false,
       "rightsReview": "No PDF or Practice Assessment origin metadata and no embedded third-party image; exact content is locked for future review",
@@ -5102,7 +5102,7 @@
     {
       "id": "C-SQL-10",
       "bank": "DP700_QUESTIONS",
-      "contentSha256": "f0fa23946e006f7a5ff1a8e71528b515e5198b84b70f09549f7a1008a98ee2d9",
+      "contentSha256": "2f1685cd55fb95da69118853da46d64504b417e1fba1bbb39e22ac5ba96f81fb",
       "included": true,
       "exclusionReason": null,
       "question": "SELECT *よりこの形が望ましい場合がある理由はどれか。",
@@ -5111,9 +5111,9 @@
       "type": "code",
       "choices": [
         "必要な列・行に絞りI/Oを減らせる可能性がある",
-        "必ずRLSを無効化する",
-        "Git差分が消える",
-        "Eventhouseへ自動複製される"
+        "Status条件は行の絞り込みには使われない",
+        "SELECT *でもこの2列だけが自動で返る",
+        "選択列を減らすとWHERE条件は無視される"
       ],
       "selectCount": 1,
       "answerIndices": [
@@ -5124,7 +5124,7 @@
       ],
       "explanation": "必要な列/行だけ取得することは一般的なクエリ最適化。",
       "source": "https://learn.microsoft.com/en-us/training/modules/fabric-transform-data-tsql/",
-      "contentReview": "2026-11-16 prior question-level review; current structural recheck; content hash locked",
+      "contentReview": "2026-11-26 independent code semantics and distractor review; see code-order-review-20261126.md; content hash locked",
       "specEvidence": "independent expected answer; Learn URL is a reference, not an official individual answer",
       "officialIndividualAnswer": false,
       "rightsReview": "No PDF or Practice Assessment origin metadata and no embedded third-party image; exact content is locked for future review",
@@ -5166,7 +5166,7 @@
     {
       "id": "C-PY-02",
       "bank": "DP700_QUESTIONS",
-      "contentSha256": "4a99fa694dde3673f20a453abe5f6a4f57b052c91c221e48832a0017a2c6be23",
+      "contentSha256": "1f05b2ad375794f0620d74ca7ee02d4671a8678d64cf54d476ae8692b15b7993",
       "included": true,
       "exclusionReason": null,
       "question": "この処理の目的はどれか。",
@@ -5174,21 +5174,21 @@
       "code": "clean = df.fillna({'City':'Unknown','Amount':0})",
       "type": "code",
       "choices": [
-        "指定列のNULLを既定値で補完する",
-        "重複を削除する",
-        "Spark poolを変更する",
-        "RLSを作る"
+        "指定した列のNULLを既定値で補完する",
+        "CityかAmountがNULLの行を削除する",
+        "NULL以外のCityもUnknownに置き換える",
+        "元のdfを直接書き換え、戻り値は作らない"
       ],
       "selectCount": 1,
       "answerIndices": [
         0
       ],
       "correctChoices": [
-        "指定列のNULLを既定値で補完する"
+        "指定した列のNULLを既定値で補完する"
       ],
       "explanation": "fillnaは欠損値の補完に使う。",
       "source": "https://learn.microsoft.com/en-us/training/modules/use-apache-spark-work-files-lakehouse/4-dataframe",
-      "contentReview": "2026-11-16 prior question-level review; current structural recheck; content hash locked",
+      "contentReview": "2026-11-26 independent code semantics and distractor review; see code-order-review-20261126.md; content hash locked",
       "specEvidence": "independent expected answer; Learn URL is a reference, not an official individual answer",
       "officialIndividualAnswer": false,
       "rightsReview": "No PDF or Practice Assessment origin metadata and no embedded third-party image; exact content is locked for future review",
@@ -5230,7 +5230,7 @@
     {
       "id": "C-PY-04",
       "bank": "DP700_QUESTIONS",
-      "contentSha256": "1fcc023c53167b29f7dfc83dcd3151a66b6eafcf9498b390319d8b955c1f825b",
+      "contentSha256": "38ec5e09a74c530692b0ffd5f5f119ac7aa0ad4bdffa7a97e8ce15773a09972d",
       "included": true,
       "exclusionReason": null,
       "question": "OrderDateはdate型で有効な日付が入っています。性能面で期待する効果はどれか。",
@@ -5239,9 +5239,9 @@
       "type": "code",
       "choices": [
         "早い段階で不要行・列を減らす",
-        "全列全行を必ず保持する",
-        "Git同期を高速化する",
-        "RLSを解除する"
+        "OrderDateが出力列にないためfilterは適用されない",
+        "selectは指定列で行をグループ化する",
+        "filterは各行でなくDataFrame全体の集計を返す"
       ],
       "selectCount": 1,
       "answerIndices": [
@@ -5262,7 +5262,7 @@
     {
       "id": "C-PY-05",
       "bank": "DP700_QUESTIONS",
-      "contentSha256": "20052ca88aec9fb32ae70ad541c3918ab70ef88ee2df92854225475268db7c5c",
+      "contentSha256": "50b6deb627894de464663a3f8ef5a4e52c8580e4003248c23ab5fdb3da7b3c41",
       "included": true,
       "exclusionReason": null,
       "question": "withColumnの役割はどれか。",
@@ -5270,21 +5270,21 @@
       "code": "from pyspark.sql import functions as F\nresult = df.withColumn('Net', F.col('Amount') - F.col('Discount'))",
       "type": "code",
       "choices": [
-        "派生列Netを追加/置換する",
-        "テーブルをVACUUMする",
-        "Workspace roleを変更する",
-        "Eventstreamを作る"
+        "AmountからDiscountを引いたNet列を追加または置換する",
+        "Amount列をNetへ改名するだけで値は変えない",
+        "AmountがDiscountより大きい行だけ残す",
+        "Net列が既存の場合は同名の列をもう1つ作る"
       ],
       "selectCount": 1,
       "answerIndices": [
         0
       ],
       "correctChoices": [
-        "派生列Netを追加/置換する"
+        "AmountからDiscountを引いたNet列を追加または置換する"
       ],
       "explanation": "withColumnは列の追加/置換に使う。",
       "source": "https://learn.microsoft.com/en-us/training/modules/use-apache-spark-work-files-lakehouse/4-dataframe",
-      "contentReview": "2026-11-16 prior question-level review; current structural recheck; content hash locked",
+      "contentReview": "2026-11-26 independent code semantics and distractor review; see code-order-review-20261126.md; content hash locked",
       "specEvidence": "independent expected answer; Learn URL is a reference, not an official individual answer",
       "officialIndividualAnswer": false,
       "rightsReview": "No PDF or Practice Assessment origin metadata and no embedded third-party image; exact content is locked for future review",
@@ -5358,7 +5358,7 @@
     {
       "id": "C-PY-08",
       "bank": "DP700_QUESTIONS",
-      "contentSha256": "8a0d6aceb4e661a944723ecd074f502f8ad203f2eb903140f361596c2d287e20",
+      "contentSha256": "9245439488d996d34f7bab134ff3f9a702109e0128a92aee4d345aee998fc24c",
       "included": true,
       "exclusionReason": null,
       "question": "dimが十分小さい場合の狙いはどれか。",
@@ -5366,21 +5366,21 @@
       "code": "from pyspark.sql import functions as F\nresult = fact.join(F.broadcast(dim), 'ProductId')",
       "type": "code",
       "choices": [
-        "小テーブルを配布して大規模shuffleを減らす",
-        "factを1行にする",
-        "Eventhouseへ複製する",
-        "RLSを解除する"
+        "小さいdimを各workerへ配布して大きなshuffleを減らす",
+        "大きいfactを各workerへ配布する",
+        "dimをProductIdごとに必ず1行へ集計する",
+        "ProductIdに一致しないfact行も必ず残す"
       ],
       "selectCount": 1,
       "answerIndices": [
         0
       ],
       "correctChoices": [
-        "小テーブルを配布して大規模shuffleを減らす"
+        "小さいdimを各workerへ配布して大きなshuffleを減らす"
       ],
       "explanation": "小さい参照表のbroadcast joinはshuffle削減に有効な場合がある。",
       "source": "https://learn.microsoft.com/en-us/fabric/data-engineering/spark-monitoring-best-practices",
-      "contentReview": "2026-11-16 prior question-level review; current structural recheck; content hash locked",
+      "contentReview": "2026-11-26 independent code semantics and distractor review; see code-order-review-20261126.md; content hash locked",
       "specEvidence": "independent expected answer; Learn URL is a reference, not an official individual answer",
       "officialIndividualAnswer": false,
       "rightsReview": "No PDF or Practice Assessment origin metadata and no embedded third-party image; exact content is locked for future review",
@@ -5390,7 +5390,7 @@
     {
       "id": "C-PY-09",
       "bank": "DP700_QUESTIONS",
-      "contentSha256": "874bedf3eda6e4748c3c6ad5e8f9cf6be874dbe45a8f398c3ad192dd9a05c8cf",
+      "contentSha256": "d4c20a318b33f793b9e6641ec675232556efb26a561f47cac4e13f8e257b6762",
       "included": true,
       "exclusionReason": null,
       "question": "既定LakehouseのIncomingは追記専用のDeltaテーブルで、Salesと互換性のあるスキーマです。次のストリームでcheckpointLocationを指定する主な目的を1つ選んでください。",
@@ -5399,9 +5399,9 @@
       "type": "code",
       "choices": [
         "停止後に同じチェックポイントから処理の進捗や状態を復元する",
-        "Salesのすべての重複行を自動で削除する",
-        "Incomingのスキーマ変更を無条件で受け入れる",
-        "入力テーブルの過去データを自動でVACUUMする"
+        "任意の非冪等な書き込みでも重複を必ず防ぐ",
+        "チェックポイント位置を変えても前回の進捗を復元できる",
+        "既存のSales行を削除して全件を再作成する"
       ],
       "selectCount": 1,
       "answerIndices": [
@@ -5410,7 +5410,7 @@
       "correctChoices": [
         "停止後に同じチェックポイントから処理の進捗や状態を復元する"
       ],
-      "explanation": "checkpointLocationには処理済み入力の位置や状態などが保存され、同じクエリを再開するときの復元に使われます。重複排除や任意のスキーマ変更を単独で保証する設定ではありません。",
+      "explanation": "checkpointLocationには処理済み入力の位置や状態などが保存され、同じクエリを同じ場所のチェックポイントから再開するときの復元に使われます。場所を変えると前回の進捗は引き継がれず、任意の非冪等な書き込みの重複防止を単独で保証するものでもありません。",
       "source": "https://learn.microsoft.com/en-us/fabric/data-engineering/structured-streaming-overview",
       "contentReview": "2026-11-26 independent code semantics and distractor review; see code-order-review-20261126.md; content hash locked",
       "specEvidence": "independent expected answer; Learn URL is a reference, not an official individual answer",
@@ -5422,7 +5422,7 @@
     {
       "id": "C-PY-10",
       "bank": "DP700_QUESTIONS",
-      "contentSha256": "513eef7b543cd03057495ad00bb2d4d2af63fcd374dee6e7ee20d2868d7ea56d",
+      "contentSha256": "b008edeef536473131040340934514c145937e3b7ad25a73693db7be3905eb1c",
       "included": true,
       "exclusionReason": null,
       "question": "この指定が関係する課題はどれか。",
@@ -5431,9 +5431,9 @@
       "type": "code",
       "choices": [
         "遅延到着イベントと状態保持の管理",
-        "SQL列マスキング",
-        "Git merge",
-        "Workspace共有"
+        "ストリームの処理間隔を必ず10分にする",
+        "入力元から10分より古い行を削除する",
+        "5分窓の集計を自動で作成する"
       ],
       "selectCount": 1,
       "answerIndices": [
@@ -5444,7 +5444,7 @@
       ],
       "explanation": "watermarkは遅延到着をどこまで許容するか等の状態管理に関係する。",
       "source": "https://learn.microsoft.com/en-us/fabric/data-engineering/structured-streaming-stateful-processing",
-      "contentReview": "2026-11-16 prior question-level review; current structural recheck; content hash locked",
+      "contentReview": "2026-11-26 independent code semantics and distractor review; see code-order-review-20261126.md; content hash locked",
       "specEvidence": "independent expected answer; Learn URL is a reference, not an official individual answer",
       "officialIndividualAnswer": false,
       "rightsReview": "No PDF or Practice Assessment origin metadata and no embedded third-party image; exact content is locked for future review",
@@ -5518,7 +5518,7 @@
     {
       "id": "C-KQL-03",
       "bank": "DP700_QUESTIONS",
-      "contentSha256": "f56b75d8a5efdd7c9e25479f11ee6da4f3fb8322e6dfef2c0522914d4241aaa3",
+      "contentSha256": "e69cfc6fed7f9393692d996b1c45b668775d7d1f2df3fa7bf83b54fac8fb1318",
       "included": true,
       "exclusionReason": null,
       "question": "このクエリの目的はどれか。",
@@ -5526,21 +5526,21 @@
       "code": "Metrics\n| summarize AvgCpu=avg(Cpu) by Host",
       "type": "code",
       "choices": [
-        "Host別平均CPUを計算する",
-        "CPU列を削除する",
-        "Hostを暗号化する",
-        "Eventstreamを停止する"
+        "Host別のCpu平均を計算する",
+        "Host別のCpu合計を計算する",
+        "全HostをまとめてCpu平均を1行で返す",
+        "Host別の最新Cpu値を返す"
       ],
       "selectCount": 1,
       "answerIndices": [
         0
       ],
       "correctChoices": [
-        "Host別平均CPUを計算する"
+        "Host別のCpu平均を計算する"
       ],
       "explanation": "avg(Cpu)をHost単位で集計する。",
       "source": "https://learn.microsoft.com/en-us/kusto/query/avg-aggregation-function",
-      "contentReview": "2026-11-16 prior question-level review; current structural recheck; content hash locked",
+      "contentReview": "2026-11-26 independent code semantics and distractor review; see code-order-review-20261126.md; content hash locked",
       "specEvidence": "independent expected answer; Learn URL is a reference, not an official individual answer",
       "officialIndividualAnswer": false,
       "rightsReview": "No PDF or Practice Assessment origin metadata and no embedded third-party image; exact content is locked for future review",
@@ -5646,7 +5646,7 @@
     {
       "id": "C-KQL-07",
       "bank": "DP700_QUESTIONS",
-      "contentSha256": "5a19a9da9d5d30640f06cb7006ee599679b076c5e9ba57a1e51c4a4847dbb83c",
+      "contentSha256": "386cfd7fca3731bb95a42388c8ebbc31c187c5c8f158ead7e349c4f51f2d5904",
       "included": true,
       "exclusionReason": null,
       "question": "external_tableを使う理由はどれか。",
@@ -5655,9 +5655,9 @@
       "type": "code",
       "choices": [
         "EventhouseからOneLake shortcutの外部Deltaテーブルを照会する",
-        "WarehouseのRLSを作る",
-        "Gitリポジトリを読む",
-        "Spark poolを作る"
+        "ShortcutデータをEventhouseのネイティブテーブルへ取り込む",
+        "新しい外部テーブルの定義を作成する",
+        "LakehouseのSQL analytics endpointでSQLを実行する"
       ],
       "selectCount": 1,
       "answerIndices": [
@@ -5668,7 +5668,7 @@
       ],
       "explanation": "RTIではOneLake shortcutをexternal_table()で参照する。",
       "source": "https://learn.microsoft.com/en-us/fabric/real-time-intelligence/query-acceleration-overview",
-      "contentReview": "2026-11-16 prior question-level review; current structural recheck; content hash locked",
+      "contentReview": "2026-11-26 independent code semantics and distractor review; see code-order-review-20261126.md; content hash locked",
       "specEvidence": "independent expected answer; Learn URL is a reference, not an official individual answer",
       "officialIndividualAnswer": false,
       "rightsReview": "No PDF or Practice Assessment origin metadata and no embedded third-party image; exact content is locked for future review",
@@ -5678,7 +5678,7 @@
     {
       "id": "C-KQL-08",
       "bank": "DP700_QUESTIONS",
-      "contentSha256": "cbd4e3fc9bd06461f874c8f1f2dc43a6df1e0377dc39a3a44bcc3ca159d58c34",
+      "contentSha256": "4070023925da26df39f8163a84f4c6adb0e95994336fdeef7cbaa2d6f8b41e5c",
       "included": true,
       "exclusionReason": null,
       "question": "この順序の利点として最も適切なのはどれか。",
@@ -5686,21 +5686,21 @@
       "code": "Events\n| where Timestamp > ago(1d)\n| project Timestamp, DeviceId, Value",
       "type": "code",
       "choices": [
-        "早期に期間・列を絞りスキャン/後続処理を減らせる",
-        "必ず全データをメモリへ載せる",
-        "Git同期が高速化する",
-        "DDMが有効になる"
+        "早期に期間・列を絞りスキャンや後続処理を減らせる",
+        "whereがなくてもprojectだけで直近1日に絞られる",
+        "projectによりEventsの保存列が削除される",
+        "whereは行ではなく出力列だけを限定する"
       ],
       "selectCount": 1,
       "answerIndices": [
         0
       ],
       "correctChoices": [
-        "早期に期間・列を絞りスキャン/後続処理を減らせる"
+        "早期に期間・列を絞りスキャンや後続処理を減らせる"
       ],
       "explanation": "KQLでも必要期間/列へ早く絞るのが基本。",
       "source": "https://learn.microsoft.com/en-us/kusto/query/best-practices",
-      "contentReview": "2026-11-16 prior question-level review; current structural recheck; content hash locked",
+      "contentReview": "2026-11-26 independent code semantics and distractor review; see code-order-review-20261126.md; content hash locked",
       "specEvidence": "independent expected answer; Learn URL is a reference, not an official individual answer",
       "officialIndividualAnswer": false,
       "rightsReview": "No PDF or Practice Assessment origin metadata and no embedded third-party image; exact content is locked for future review",
@@ -5742,7 +5742,7 @@
     {
       "id": "C-KQL-10",
       "bank": "DP700_QUESTIONS",
-      "contentSha256": "0bf1290ce084fa9c9297c1059891b87d5c02d299e1fafd382669588db039a98f",
+      "contentSha256": "b1e61209e692c775924450c3a0da8ae8417b01ed3ccaf1fb70613e905958eb75",
       "included": true,
       "exclusionReason": null,
       "question": "この管理コマンドの用途はどれか。",
@@ -5750,21 +5750,21 @@
       "code": ".show external table SalesShortcut operations query_acceleration statistics",
       "type": "code",
       "choices": [
-        "ShortcutのQuery acceleration状態/進捗を確認する",
-        "RLSを無効にする",
-        "WarehouseをVACUUMする",
-        "Git branchを作る"
+        "ShortcutのQuery acceleration状態や進捗を確認する",
+        "Query acceleration policyを新規作成する",
+        "ShortcutのDeltaデータを100行返す",
+        "キャッシュの保持日数を変更する"
       ],
       "selectCount": 1,
       "answerIndices": [
         0
       ],
       "correctChoices": [
-        "ShortcutのQuery acceleration状態/進捗を確認する"
+        "ShortcutのQuery acceleration状態や進捗を確認する"
       ],
       "explanation": "公式ドキュメントでQuery accelerationの監視に使うコマンドとして案内されている。",
       "source": "https://learn.microsoft.com/en-us/kusto/management/show-external-table-operations-query-acceleration-statistics?view=microsoft-fabric",
-      "contentReview": "2026-11-16 prior question-level review; current structural recheck; content hash locked",
+      "contentReview": "2026-11-26 independent code semantics and distractor review; see code-order-review-20261126.md; content hash locked",
       "specEvidence": "previously marked spec-verified",
       "officialIndividualAnswer": false,
       "rightsReview": "No PDF or Practice Assessment origin metadata and no embedded third-party image; exact content is locked for future review",
