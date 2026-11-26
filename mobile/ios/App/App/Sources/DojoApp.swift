@@ -285,6 +285,7 @@ struct QuizView: View {
                     }
                     .padding(16)
                 }
+                .id(session.index)
                 .background(DojoTheme.background)
                 .navigationTitle(session.title)
                 .navigationBarTitleDisplayMode(.inline)
@@ -645,13 +646,16 @@ struct PrivacyView: View {
 }
 
 struct PrimaryButtonStyle: ButtonStyle {
+    @Environment(\.isEnabled) private var isEnabled
+
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
             .font(.headline)
             .frame(maxWidth: .infinity)
             .padding(.vertical, 16)
             .foregroundStyle(.white)
-            .background(DojoTheme.blue.opacity(configuration.isPressed ? 0.7 : 1), in: RoundedRectangle(cornerRadius: 14))
+            .background(isEnabled ? DojoTheme.blue.opacity(configuration.isPressed ? 0.7 : 1) : Color(uiColor: .systemGray3),
+                        in: RoundedRectangle(cornerRadius: 14))
     }
 }
 
