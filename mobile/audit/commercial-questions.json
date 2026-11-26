@@ -12,29 +12,29 @@
     {
       "id": "O01-A",
       "bank": "DP700_QUESTIONS",
-      "contentSha256": "8271ce1176ba150191bf876ed6fb23de443994249b6181499b853af651de644e",
+      "contentSha256": "a68c30392acf7bc4dbbd962308e646ca939ac321a6662abfa77d6bf16e2d12c9",
       "included": true,
       "exclusionReason": null,
-      "question": "複数Notebookが使うSparkの既定ランタイムやプールをワークスペース単位で統一したい。 最も適切な対応はどれか。",
+      "question": "複数のNotebookで使う既定のSparkプールをワークスペース単位で設定したい。最も適切な操作はどれか。",
       "caseText": null,
       "code": null,
       "type": "single",
       "choices": [
-        "Workspace settings の Data Engineering/Science > Spark settings を構成する",
-        "PipelineのScheduleだけ変更する",
-        "Deployment pipelineだけでデータ変換ロジックそのものを実行する",
-        "OneLake shortcutを作成する"
+        "Workspace settingsのData Engineering/Science > Spark Computeで既定プールを設定する",
+        "各Notebookで同じプールを個別選択すればワークスペースの既定も自動で変わる",
+        "容量側でCustom Poolの利用を許可するだけで既定プールが変わる",
+        "Starter Poolの最大executor数を変えればCustom Poolが既定になる"
       ],
       "selectCount": 1,
       "answerIndices": [
         0
       ],
       "correctChoices": [
-        "Workspace settings の Data Engineering/Science > Spark settings を構成する"
+        "Workspace settingsのData Engineering/Science > Spark Computeで既定プールを設定する"
       ],
-      "explanation": "Workspace settings の Data Engineering/Science > Spark settings を構成する。必要に応じて既定環境・カスタムプールやリソース設定も管理する。",
+      "explanation": "ワークスペース管理者はData Engineering/ScienceのSpark Computeで既定プールを選択できます。Notebook個別のプール指定、容量側の許可、Starter Poolの設定だけでは既定プールの選択は変わりません。",
       "source": "https://learn.microsoft.com/en-us/fabric/data-engineering/workspace-admin-settings",
-      "contentReview": "2026-11-16 prior question-level review; current structural recheck; content hash locked",
+      "contentReview": "2026-11-27 independent core question and distractor review; see core-b-review-20261127.md; content hash locked",
       "specEvidence": "independent expected answer; Learn URL is a reference, not an official individual answer",
       "officialIndividualAnswer": false,
       "rightsReview": "No PDF or Practice Assessment origin metadata and no embedded third-party image; exact content is locked for future review",
@@ -44,18 +44,18 @@
     {
       "id": "O01-B",
       "bank": "DP700_QUESTIONS",
-      "contentSha256": "f3731a92f417d4be571909dbf427196890250b8ad836dad32a8cd3ca303df0b8",
+      "contentSha256": "bfe54e4dac289819021f50793314faf46581a38d12952d403c9a2cb8604dfb0a",
       "included": true,
       "exclusionReason": null,
-      "question": "Spark workspace settingsについて、適切な実装・判断を2つ選べ。",
+      "question": "ワークスペースの既定SparkプールをStarter PoolからCustom Poolに変える前に、正しい留意点を2つ選べ。",
       "caseText": null,
       "code": null,
       "type": "multi",
       "choices": [
-        "Workspace settings の Data Engineering/Science > Spark settings を構成する",
-        "必要に応じて既定環境・カスタムプールやリソース設定も管理する",
-        "PipelineのScheduleだけ変更する",
-        "Sensitivity labelだけで実際のアクセス権限を制御する"
+        "Custom Poolではノードサイズや自動スケールを要件に合わせて構成できる",
+        "Custom Poolを既定にするとセッション起動が長くなる場合がある",
+        "Starter Poolでも任意のノードサイズを必ず選べる",
+        "容量側でカスタムプールを無効にしていても必ずCustom Poolを作れる"
       ],
       "selectCount": 2,
       "answerIndices": [
@@ -63,12 +63,12 @@
         1
       ],
       "correctChoices": [
-        "Workspace settings の Data Engineering/Science > Spark settings を構成する",
-        "必要に応じて既定環境・カスタムプールやリソース設定も管理する"
+        "Custom Poolではノードサイズや自動スケールを要件に合わせて構成できる",
+        "Custom Poolを既定にするとセッション起動が長くなる場合がある"
       ],
-      "explanation": "正解は「Workspace settings の Data Engineering/Science > Spark settings を構成する」と「必要に応じて既定環境・カスタムプールやリソース設定も管理する」。要件に直接対応し、公式スキルの意図にも合う。",
+      "explanation": "Custom Poolは計算要件に合わせてノードや自動スケールを構成できます。一方、既定をStarter Poolから変えるとセッション起動が長くなる場合があります。容量側でカスタムプールが許可されていることも確認します。",
       "source": "https://learn.microsoft.com/en-us/fabric/data-engineering/workspace-admin-settings",
-      "contentReview": "2026-11-16 prior question-level review; current structural recheck; content hash locked",
+      "contentReview": "2026-11-27 independent core question and distractor review; see core-b-review-20261127.md; content hash locked",
       "specEvidence": "independent expected answer; Learn URL is a reference, not an official individual answer",
       "officialIndividualAnswer": false,
       "rightsReview": "No PDF or Practice Assessment origin metadata and no embedded third-party image; exact content is locked for future review",
@@ -142,18 +142,18 @@
     {
       "id": "O02-B",
       "bank": "DP700_QUESTIONS",
-      "contentSha256": "54d0d15aa399b50ed9885e98e30310bc598e49a320a320c56ca6b0415c61e44e",
+      "contentSha256": "2ea101feea0cb5a427aeeabfa36eda8a9890f3e6094be05aa5310222e97f0451",
       "included": true,
       "exclusionReason": null,
-      "question": "Domain workspace settingsについて、適切な実装・判断を2つ選べ。",
+      "question": "人事ワークスペースを人事ドメインに割り当てた。利用者の閲覧範囲について正しい説明を2つ選べ。",
       "caseText": null,
       "code": null,
       "type": "multi",
       "choices": [
-        "OneLake catalog の Govern > Domains でドメインを構成する",
-        "ドメイン所有者や対象ワークスペースを適切に割り当てる",
-        "全アイテムを1つの個人Workspaceへ移す",
-        "Notebookの変数名だけ統一する"
+        "ドメイン割り当てはコンテンツの分類や発見に役立つ",
+        "実際の閲覧可否はワークスペースロールやアイテム権限などで決まる",
+        "人事ドメイン外の利用者は自動で全アイテムを閲覧できなくなる",
+        "ドメインを設定すると各アイテムの権限が管理者だけにリセットされる"
       ],
       "selectCount": 2,
       "answerIndices": [
@@ -161,12 +161,12 @@
         1
       ],
       "correctChoices": [
-        "OneLake catalog の Govern > Domains でドメインを構成する",
-        "ドメイン所有者や対象ワークスペースを適切に割り当てる"
+        "ドメイン割り当てはコンテンツの分類や発見に役立つ",
+        "実際の閲覧可否はワークスペースロールやアイテム権限などで決まる"
       ],
-      "explanation": "正解は「OneLake catalog の Govern > Domains でドメインを構成する」と「ドメイン所有者や対象ワークスペースを適切に割り当てる」。要件に直接対応し、公式スキルの意図にも合う。",
+      "explanation": "ドメインはワークスペースとそのアイテムに分類情報を付け、カタログで探しやすくします。ドメインへの割り当て自体はアクセス権を変更せず、閲覧可否は別の権限設定で制御します。",
       "source": "https://learn.microsoft.com/en-us/fabric/governance/domains",
-      "contentReview": "2026-11-16 prior question-level review; current structural recheck; content hash locked",
+      "contentReview": "2026-11-27 independent core question and distractor review; see core-b-review-20261127.md; content hash locked",
       "specEvidence": "independent expected answer; Learn URL is a reference, not an official individual answer",
       "officialIndividualAnswer": false,
       "rightsReview": "No PDF or Practice Assessment origin metadata and no embedded third-party image; exact content is locked for future review",
@@ -240,18 +240,18 @@
     {
       "id": "O03-B",
       "bank": "DP700_QUESTIONS",
-      "contentSha256": "bdef8e01ea30ddd7bab96117dacb3c9d35b61d3a6c60616683bd73e5fc639971",
+      "contentSha256": "3f370c413cddb6c40128f52f8f2ac3ce1b4f39d893de49297365a48aaa9879bd",
       "included": true,
       "exclusionReason": null,
-      "question": "OneLake workspace settingsについて、適切な実装・判断を2つ選べ。",
+      "question": "閲覧者にはLakehouse内の特定の行と列だけを見せたい。権限の役割について正しい説明を2つ選べ。",
       "caseText": null,
       "code": null,
       "type": "multi",
       "choices": [
-        "ワークスペース/OneLake関連設定とOneLakeセキュリティを確認して構成する",
-        "アクセスは必要最小限とし、アイテム/データ粒度の権限も合わせて設計する",
-        "データを毎回CSVへコピーして回避する",
-        "全ユーザーをWorkspace Adminにする"
+        "ワークスペースロールやアイテム権限はアイテム操作の制御に使う",
+        "OneLakeのデータ権限はテーブル・行・列などに範囲を絞れる",
+        "ワークスペースのViewerロールだけで行フィルターを定義できる",
+        "アイテムの共有設定だけで任意の列を自動的に隠せる"
       ],
       "selectCount": 2,
       "answerIndices": [
@@ -259,12 +259,12 @@
         1
       ],
       "correctChoices": [
-        "ワークスペース/OneLake関連設定とOneLakeセキュリティを確認して構成する",
-        "アクセスは必要最小限とし、アイテム/データ粒度の権限も合わせて設計する"
+        "ワークスペースロールやアイテム権限はアイテム操作の制御に使う",
+        "OneLakeのデータ権限はテーブル・行・列などに範囲を絞れる"
       ],
-      "explanation": "正解は「ワークスペース/OneLake関連設定とOneLakeセキュリティを確認して構成する」と「アクセスは必要最小限とし、アイテム/データ粒度の権限も合わせて設計する」。要件に直接対応し、公式スキルの意図にも合う。",
+      "explanation": "アイテムの管理や共有などはワークスペース・アイテム権限が扱います。データの閲覧範囲はOneLakeセキュリティでテーブル、行、列などへ絞ります。",
       "source": "https://learn.microsoft.com/en-us/fabric/onelake/security/get-started-security",
-      "contentReview": "2026-11-16 prior question-level review; current structural recheck; content hash locked",
+      "contentReview": "2026-11-27 independent core question and distractor review; see core-b-review-20261127.md; content hash locked",
       "specEvidence": "independent expected answer; Learn URL is a reference, not an official individual answer",
       "officialIndividualAnswer": false,
       "rightsReview": "No PDF or Practice Assessment origin metadata and no embedded third-party image; exact content is locked for future review",
@@ -338,18 +338,18 @@
     {
       "id": "O04-B",
       "bank": "DP700_QUESTIONS",
-      "contentSha256": "18124b51ba1936cc147c1a1924f1aa84ff48e83fa4cf040e93a7c69518ffd076",
+      "contentSha256": "5d8fa6536b1e237a8f5290f6150b1876469cf58fd606e73f087a04edaac5d62f",
       "included": true,
       "exclusionReason": null,
-      "question": "Apache Airflow workspace settingsについて、適切な実装・判断を2つ選べ。",
+      "question": "AirflowのDAGを週1回だけ試す環境と、常時稼働する本番環境を用意する。プール選択について正しい説明を2つ選べ。",
       "caseText": null,
       "code": null,
       "type": "multi",
       "choices": [
-        "Apache Airflow job（Data Workflow）の設定・ランタイム・接続を構成する",
-        "DAG、プール/ランタイム、認証接続、トリガー設定を要件に合わせる",
-        "Dataflow Gen2だけでDAGを実行する",
-        "WarehouseのRLSでスケジュールする"
+        "低頻度の開発・テストにはStarter Poolが適する場合がある",
+        "起動待ちを抑えたい常時運用にはCustom Poolが適する場合がある",
+        "Starter Poolはアイドル後も常に起動したままになる",
+        "Custom Poolは停止しなくてもアイドル時の基本コストが発生しない"
       ],
       "selectCount": 2,
       "answerIndices": [
@@ -357,12 +357,12 @@
         1
       ],
       "correctChoices": [
-        "Apache Airflow job（Data Workflow）の設定・ランタイム・接続を構成する",
-        "DAG、プール/ランタイム、認証接続、トリガー設定を要件に合わせる"
+        "低頻度の開発・テストにはStarter Poolが適する場合がある",
+        "起動待ちを抑えたい常時運用にはCustom Poolが適する場合がある"
       ],
-      "explanation": "正解は「Apache Airflow job（Data Workflow）の設定・ランタイム・接続を構成する」と「DAG、プール/ランタイム、認証接続、トリガー設定を要件に合わせる」。要件に直接対応し、公式スキルの意図にも合う。",
+      "explanation": "Starter Poolは低頻度の開発・テストに適し、アイドル後に停止します。Custom Poolは常時稼働する本番用途に向き、起動待ちを抑えますが、稼働中の基本コストがあります。",
       "source": "https://learn.microsoft.com/en-us/fabric/data-factory/apache-airflow-compute",
-      "contentReview": "2026-11-16 prior question-level review; current structural recheck; content hash locked",
+      "contentReview": "2026-11-27 independent core question and distractor review; see core-b-review-20261127.md; content hash locked",
       "specEvidence": "independent expected answer; Learn URL is a reference, not an official individual answer",
       "officialIndividualAnswer": false,
       "rightsReview": "No PDF or Practice Assessment origin metadata and no embedded third-party image; exact content is locked for future review",
@@ -436,18 +436,18 @@
     {
       "id": "O05-B",
       "bank": "DP700_QUESTIONS",
-      "contentSha256": "c434e420135ea9f14c64990558d6bf729ff5caa1e6f71f4ac8c287d33340426b",
+      "contentSha256": "44f8db87fe9a46baa1c35af616761c91d7f1e4d6899dce2b22367f2d4dc4c814",
       "included": true,
       "exclusionReason": null,
-      "question": "Version controlについて、適切な実装・判断を2つ選べ。",
+      "question": "複数人でFabricの対応アイテムを変更する。Git連携の性質として正しい説明を2つ選べ。",
       "caseText": null,
       "code": null,
       "type": "multi",
       "choices": [
-        "Fabric Git integrationでワークスペースとリポジトリを接続する",
-        "ブランチ、コミット、PRレビューを用いて変更を統制する",
-        "本番でのみ直接編集する",
-        "監査ログをソースコード代わりにする"
+        "Git連携はワークスペース単位でアイテムを版管理する",
+        "ブランチを使って変更を分け、必要なら以前の状態へ戻せる",
+        "Git連携を有効にすると全種類のFabricアイテムが必ず対応する",
+        "Git連携はワークスペースの表示名だけを履歴化し、アイテムは対象外"
       ],
       "selectCount": 2,
       "answerIndices": [
@@ -455,12 +455,12 @@
         1
       ],
       "correctChoices": [
-        "Fabric Git integrationでワークスペースとリポジトリを接続する",
-        "ブランチ、コミット、PRレビューを用いて変更を統制する"
+        "Git連携はワークスペース単位でアイテムを版管理する",
+        "ブランチを使って変更を分け、必要なら以前の状態へ戻せる"
       ],
-      "explanation": "正解は「Fabric Git integrationでワークスペースとリポジトリを接続する」と「ブランチ、コミット、PRレビューを用いて変更を統制する」。要件に直接対応し、公式スキルの意図にも合う。",
+      "explanation": "Git連携はワークスペースの対応アイテムを版管理し、ブランチによる共同作業や以前の状態への復元に使えます。すべてのアイテム種別が対応するわけではありません。",
       "source": "https://learn.microsoft.com/en-us/fabric/cicd/git-integration/intro-to-git-integration",
-      "contentReview": "2026-11-16 prior question-level review; current structural recheck; content hash locked",
+      "contentReview": "2026-11-27 independent core question and distractor review; see core-b-review-20261127.md; content hash locked",
       "specEvidence": "independent expected answer; Learn URL is a reference, not an official individual answer",
       "officialIndividualAnswer": false,
       "rightsReview": "No PDF or Practice Assessment origin metadata and no embedded third-party image; exact content is locked for future review",
@@ -534,18 +534,18 @@
     {
       "id": "O06-B",
       "bank": "DP700_QUESTIONS",
-      "contentSha256": "cc1c7765f44d49bb21b54c2c313c76d5c5ab55751efb05cb147090bea3be60c1",
+      "contentSha256": "9e4faa76b0f8289d58bed25583388136ec7f7bc9ddc235aacf25945fd6c668ba",
       "included": true,
       "exclusionReason": null,
-      "question": "Database projectsについて、適切な実装・判断を2つ選べ。",
+      "question": "Fabric Warehouse用のデータベースプロジェクトをVS Codeで新規作成する。正しい設定を2つ選べ。",
       "caseText": null,
       "code": null,
       "type": "multi",
       "choices": [
-        "SQL Database Projectを使ってスキーマを定義しビルド/公開する",
-        "Gitでプロジェクトを版管理し、デプロイ前にビルド検証する",
-        "Lakehouse shortcutだけでDDLを管理する",
-        "Dynamic Data Maskingだけでスキーマを配布する"
+        "ターゲットプラットフォームにSynapse Data Warehouse in Microsoft Fabricを選ぶ",
+        "Fabric WarehouseではSDK形式のSQLプロジェクトを使う",
+        "ターゲットにAzure SQL Databaseだけを選べばFabric Warehouseへ直接公開できる",
+        "Fabric Warehouseでは非SDK形式のプロジェクトだけがサポートされる"
       ],
       "selectCount": 2,
       "answerIndices": [
@@ -553,12 +553,12 @@
         1
       ],
       "correctChoices": [
-        "SQL Database Projectを使ってスキーマを定義しビルド/公開する",
-        "Gitでプロジェクトを版管理し、デプロイ前にビルド検証する"
+        "ターゲットプラットフォームにSynapse Data Warehouse in Microsoft Fabricを選ぶ",
+        "Fabric WarehouseではSDK形式のSQLプロジェクトを使う"
       ],
-      "explanation": "正解は「SQL Database Projectを使ってスキーマを定義しビルド/公開する」と「Gitでプロジェクトを版管理し、デプロイ前にビルド検証する」。要件に直接対応し、公式スキルの意図にも合う。",
+      "explanation": "Microsoft Learnの手順ではターゲットにSynapse Data Warehouse in Microsoft Fabricを選び、Fabric WarehouseでサポートされるSDK形式のプロジェクトを作ります。この機能は現時点でプレビューです。",
       "source": "https://learn.microsoft.com/en-us/fabric/data-warehouse/develop-warehouse-project",
-      "contentReview": "2026-11-16 prior question-level review; current structural recheck; content hash locked",
+      "contentReview": "2026-11-27 independent core question and distractor review; see core-b-review-20261127.md; content hash locked",
       "specEvidence": "independent expected answer; Learn URL is a reference, not an official individual answer",
       "officialIndividualAnswer": false,
       "rightsReview": "No PDF or Practice Assessment origin metadata and no embedded third-party image; exact content is locked for future review",
@@ -632,18 +632,18 @@
     {
       "id": "O07-B",
       "bank": "DP700_QUESTIONS",
-      "contentSha256": "4a6c6d77c8cf66dc9fb3ebb5fe5cb490f101e94ddbd15bc7b527c369ca40e18f",
+      "contentSha256": "b45ce0e5602a462d80d7d4c3d863052c8e9b97f4f062de0fe818b075aae1e8af",
       "included": true,
       "exclusionReason": null,
-      "question": "Deployment pipelinesについて、適切な実装・判断を2つ選べ。",
+      "question": "開発から本番への配布をGit連携とDeployment pipelineで管理する。両者の役割について正しい説明を2つ選べ。",
       "caseText": null,
       "code": null,
       "type": "multi",
       "choices": [
-        "Deployment pipelineを作成し各ステージへワークスペースを割り当てる",
-        "環境差分はデプロイルールや接続再バインドで管理する",
-        "1つのWorkspaceを全環境で共有する",
-        "本番だけGitを無効化する"
+        "Deployment pipelineはステージ間で対応アイテムを配布する",
+        "Git連携は対応アイテムの版管理に使う",
+        "Deployment pipelineを作ればGitの履歴やブランチが自動で作られる",
+        "Git連携だけでテスト・本番ステージ間の配布が自動的に完了する"
       ],
       "selectCount": 2,
       "answerIndices": [
@@ -651,12 +651,12 @@
         1
       ],
       "correctChoices": [
-        "Deployment pipelineを作成し各ステージへワークスペースを割り当てる",
-        "環境差分はデプロイルールや接続再バインドで管理する"
+        "Deployment pipelineはステージ間で対応アイテムを配布する",
+        "Git連携は対応アイテムの版管理に使う"
       ],
-      "explanation": "正解は「Deployment pipelineを作成し各ステージへワークスペースを割り当てる」と「環境差分はデプロイルールや接続再バインドで管理する」。要件に直接対応し、公式スキルの意図にも合う。",
+      "explanation": "Deployment pipelineは対応アイテムを開発・テスト・本番などのステージ間へ配布します。Git連携は変更の版管理を担い、両者の役割は異なります。",
       "source": "https://learn.microsoft.com/en-us/fabric/cicd/deployment-pipelines/intro-to-deployment-pipelines",
-      "contentReview": "2026-11-16 prior question-level review; current structural recheck; content hash locked",
+      "contentReview": "2026-11-27 independent core question and distractor review; see core-b-review-20261127.md; content hash locked",
       "specEvidence": "independent expected answer; Learn URL is a reference, not an official individual answer",
       "officialIndividualAnswer": false,
       "rightsReview": "No PDF or Practice Assessment origin metadata and no embedded third-party image; exact content is locked for future review",
@@ -730,18 +730,18 @@
     {
       "id": "O08-B",
       "bank": "DP700_QUESTIONS",
-      "contentSha256": "836a5174e500794babefb61b50fea7b0eda4475ebb52ec77ea4296fa9d076390",
+      "contentSha256": "2a145f61a2da88f1d56a734f2f4095831afb6e4e381ed325a21325e64101070d",
       "included": true,
       "exclusionReason": null,
-      "question": "Workspace-level access controlsについて、適切な実装・判断を2つ選べ。",
+      "question": "Fabricワークスペースのロールごとの権限について正しい説明を2つ選べ。",
       "caseText": null,
       "code": null,
       "type": "multi",
       "choices": [
-        "Admin/Member/Contributor/ViewerなどWorkspaceロールを要件に合わせて付与する",
-        "最小権限でロールを割り当て、広すぎるロールを避ける",
-        "Deployment pipelineだけでデータ変換ロジックそのものを実行する",
-        "RLSだけでWorkspace編集権限も制御する"
+        "ContributorはWarehouseアイテムを作成・変更できる",
+        "AdminはワークスペースをGitリポジトリへ接続できる",
+        "Viewerはワークスペースの管理者を追加できる",
+        "Contributorはワークスペースの管理者を削除できる"
       ],
       "selectCount": 2,
       "answerIndices": [
@@ -749,12 +749,12 @@
         1
       ],
       "correctChoices": [
-        "Admin/Member/Contributor/ViewerなどWorkspaceロールを要件に合わせて付与する",
-        "最小権限でロールを割り当て、広すぎるロールを避ける"
+        "ContributorはWarehouseアイテムを作成・変更できる",
+        "AdminはワークスペースをGitリポジトリへ接続できる"
       ],
-      "explanation": "正解は「Admin/Member/Contributor/ViewerなどWorkspaceロールを要件に合わせて付与する」と「最小権限でロールを割り当て、広すぎるロールを避ける」。要件に直接対応し、公式スキルの意図にも合う。",
+      "explanation": "Microsoft Learnのロール表では、Contributor以上がWarehouseを作成・変更でき、Git接続はAdminの権限です。ViewerやContributorに管理者の追加・削除権限はありません。",
       "source": "https://learn.microsoft.com/en-us/fabric/fundamentals/roles-workspaces",
-      "contentReview": "2026-11-16 prior question-level review; current structural recheck; content hash locked",
+      "contentReview": "2026-11-27 independent core question and distractor review; see core-b-review-20261127.md; content hash locked",
       "specEvidence": "independent expected answer; Learn URL is a reference, not an official individual answer",
       "officialIndividualAnswer": false,
       "rightsReview": "No PDF or Practice Assessment origin metadata and no embedded third-party image; exact content is locked for future review",
