@@ -130,14 +130,32 @@
   "C-PY-04": {
     "code": "from pyspark.sql import functions as F\nrecent = df.filter(F.col('OrderDate') >= '2026-11-01').select('OrderId','Amount')",
     "question": "OrderDateはdate型で有効な日付が入っています。性能面で期待する効果はどれか。",
+    "choices": [
+      "早い段階で不要行・列を減らす",
+      "OrderDateが出力列にないためfilterは適用されない",
+      "selectは指定列で行をグループ化する",
+      "filterは各行でなくDataFrame全体の集計を返す"
+    ],
     "source": "https://learn.microsoft.com/en-us/fabric/data-engineering/spark-monitoring-best-practices"
   },
   "C-PY-05": {
     "code": "from pyspark.sql import functions as F\nresult = df.withColumn('Net', F.col('Amount') - F.col('Discount'))",
+    "choices": [
+      "AmountからDiscountを引いたNet列を追加または置換する",
+      "Amount列をNetへ改名するだけで値は変えない",
+      "AmountがDiscountより大きい行だけ残す",
+      "Net列が既存の場合は同名の列をもう1つ作る"
+    ],
     "source": "https://learn.microsoft.com/en-us/training/modules/use-apache-spark-work-files-lakehouse/4-dataframe"
   },
   "C-PY-08": {
     "code": "from pyspark.sql import functions as F\nresult = fact.join(F.broadcast(dim), 'ProductId')",
+    "choices": [
+      "小さいdimを各workerへ配布して大きなshuffleを減らす",
+      "大きいfactを各workerへ配布する",
+      "dimをProductIdごとに必ず1行へ集計する",
+      "ProductIdに一致しないfact行も必ず残す"
+    ],
     "source": "https://learn.microsoft.com/en-us/fabric/data-engineering/spark-monitoring-best-practices"
   },
   "PA-20261114-16": {
@@ -204,10 +222,22 @@
     "source": "https://learn.microsoft.com/en-us/fabric/data-warehouse/ingest-data-tsql"
   },
   "C-KQL-10": {
+    "choices": [
+      "ShortcutのQuery acceleration状態や進捗を確認する",
+      "Query acceleration policyを新規作成する",
+      "ShortcutのDeltaデータを100行返す",
+      "キャッシュの保持日数を変更する"
+    ],
     "source": "https://learn.microsoft.com/en-us/kusto/management/show-external-table-operations-query-acceleration-statistics?view=microsoft-fabric",
     "answerEvidence": "spec-verified"
   },
   "C-KQL-07": {
+    "choices": [
+      "EventhouseからOneLake shortcutの外部Deltaテーブルを照会する",
+      "ShortcutデータをEventhouseのネイティブテーブルへ取り込む",
+      "新しい外部テーブルの定義を作成する",
+      "LakehouseのSQL analytics endpointでSQLを実行する"
+    ],
     "source": "https://learn.microsoft.com/en-us/fabric/real-time-intelligence/query-acceleration-overview"
   },
   "C-KQL-05": {
@@ -305,7 +335,13 @@
     "reconstructed": true
   },
   "C-SQL-08": {
-    "explanation": "T-SQLではCustomerId AmountはCustomerIdの別名をAmountとする有効な構文です。2列を取得するにはCustomerId, Amountとカンマで区切ります。構文エラーになるとは限りません。GROUP BY、VACUUM、Spark poolの設定は列リストの修正になりません。",
+    "choices": [
+      "CustomerIdとAmountの列区切りのカンマがない",
+      "CustomerIdを角括弧で囲まないと列として認識されない",
+      "Amountの前にASを入れれば2列として取得できる",
+      "FROM句でSalesに別名を付けていない"
+    ],
+    "explanation": "T-SQLではCustomerId AmountはCustomerIdをAmountという別名で返す有効な構文です。2列を取得するにはCustomerId, Amountとカンマで区切ります。ASを追加しても別名指定のままです。",
     "source": "https://learn.microsoft.com/en-us/sql/t-sql/queries/select-clause-transact-sql"
   },
   "PA50-46": {
@@ -743,10 +779,38 @@
     "source": "https://learn.microsoft.com/en-us/sql/t-sql/queries/select-group-by-transact-sql"
   },
   "C-SQL-02": {
+    "choices": [
+      "CityがNULLのときだけUnknownを返す",
+      "CityがNULLの行を結果から除外する",
+      "CityがNULL以外でもUnknownに置き換える",
+      "直前行のCityでNULLを埋める"
+    ],
     "source": "https://learn.microsoft.com/en-us/sql/t-sql/language-elements/coalesce-transact-sql"
   },
   "C-SQL-05": {
+    "choices": [
+      "Amountに応じてTier列の値を作る",
+      "Highに該当する行だけを返す",
+      "Amount列をHighという文字列に変える",
+      "HighとNormalの件数を集計する"
+    ],
     "source": "https://learn.microsoft.com/en-us/sql/t-sql/language-elements/case-transact-sql"
+  },
+  "C-SQL-06": {
+    "choices": [
+      "不要期間の読み取り削減が期待できる",
+      "OrderDateをSELECT列に含めないとWHEREは適用されない",
+      "2026-11-01より前の分割だけを読む",
+      "OrderDateが分割列でも必ず全期間を読む"
+    ]
+  },
+  "C-SQL-10": {
+    "choices": [
+      "必要な列・行に絞りI/Oを減らせる可能性がある",
+      "Status条件は行の絞り込みには使われない",
+      "SELECT *でもこの2列だけが自動で返る",
+      "選択列を減らすとWHERE条件は無視される"
+    ]
   },
   "C-SQL-07": {
     "source": "https://learn.microsoft.com/en-us/sql/t-sql/queries/select-group-by-transact-sql"
@@ -763,6 +827,12 @@
     "source": "https://learn.microsoft.com/en-us/kusto/query/where-operator"
   },
   "C-KQL-03": {
+    "choices": [
+      "Host別のCpu平均を計算する",
+      "Host別のCpu合計を計算する",
+      "全HostをまとめてCpu平均を1行で返す",
+      "Host別の最新Cpu値を返す"
+    ],
     "source": "https://learn.microsoft.com/en-us/kusto/query/avg-aggregation-function"
   },
   "C-KQL-06": {
@@ -770,12 +840,24 @@
     "source": "https://learn.microsoft.com/en-us/kusto/query/arg-max-aggregation-function"
   },
   "C-KQL-08": {
+    "choices": [
+      "早期に期間・列を絞りスキャンや後続処理を減らせる",
+      "whereがなくてもprojectだけで直近1日に絞られる",
+      "projectによりEventsの保存列が削除される",
+      "whereは行ではなく出力列だけを限定する"
+    ],
     "source": "https://learn.microsoft.com/en-us/kusto/query/best-practices"
   },
   "C-KQL-09": {
     "source": "https://learn.microsoft.com/en-us/kusto/query/join-inner"
   },
   "C-PY-02": {
+    "choices": [
+      "指定した列のNULLを既定値で補完する",
+      "CityかAmountがNULLの行を削除する",
+      "NULL以外のCityもUnknownに置き換える",
+      "元のdfを直接書き換え、戻り値は作らない"
+    ],
     "source": "https://learn.microsoft.com/en-us/training/modules/use-apache-spark-work-files-lakehouse/4-dataframe"
   },
   "C-PY-03": {
@@ -789,6 +871,12 @@
     "source": "https://learn.microsoft.com/en-us/fabric/data-engineering/lakehouse-and-delta-tables"
   },
   "C-PY-10": {
+    "choices": [
+      "遅延到着イベントと状態保持の管理",
+      "ストリームの処理間隔を必ず10分にする",
+      "入力元から10分より古い行を削除する",
+      "5分窓の集計を自動で作成する"
+    ],
     "source": "https://learn.microsoft.com/en-us/fabric/data-engineering/structured-streaming-stateful-processing"
   },
   "ORD-01": {
@@ -843,11 +931,11 @@
     "question": "既定LakehouseのIncomingは追記専用のDeltaテーブルで、Salesと互換性のあるスキーマです。次のストリームでcheckpointLocationを指定する主な目的を1つ選んでください。",
     "choices": [
       "停止後に同じチェックポイントから処理の進捗や状態を復元する",
-      "Salesのすべての重複行を自動で削除する",
-      "Incomingのスキーマ変更を無条件で受け入れる",
-      "入力テーブルの過去データを自動でVACUUMする"
+      "任意の非冪等な書き込みでも重複を必ず防ぐ",
+      "チェックポイント位置を変えても前回の進捗を復元できる",
+      "既存のSales行を削除して全件を再作成する"
     ],
-    "explanation": "checkpointLocationには処理済み入力の位置や状態などが保存され、同じクエリを再開するときの復元に使われます。重複排除や任意のスキーマ変更を単独で保証する設定ではありません。"
+    "explanation": "checkpointLocationには処理済み入力の位置や状態などが保存され、同じクエリを同じ場所のチェックポイントから再開するときの復元に使われます。場所を変えると前回の進捗は引き継がれず、任意の非冪等な書き込みの重複防止を単独で保証するものでもありません。"
   },
   "C-KQL-02": {
     "question": "Errorsという列には何が記録されるか。",
@@ -959,7 +1047,7 @@
     "holdReason": "Structured Streamingは通常マイクロバッチで動作するため、両選択肢を対立する方式として採点できない。"
   }
 };
-const currentRevisions=new Set(["C-SQL-03","C-SQL-04","C-PY-01","C-PY-04","C-PY-06","C-PY-07","C-PY-09","C-KQL-01","C-KQL-02","C-KQL-04","C-KQL-06"]);
+const currentRevisions=new Set(["C-SQL-02","C-SQL-03","C-SQL-04","C-SQL-05","C-SQL-06","C-SQL-08","C-SQL-10","C-PY-01","C-PY-02","C-PY-04","C-PY-05","C-PY-06","C-PY-07","C-PY-08","C-PY-09","C-PY-10","C-KQL-01","C-KQL-02","C-KQL-03","C-KQL-04","C-KQL-06","C-KQL-07","C-KQL-08","C-KQL-10"]);
 for(const name of ["DP700_QUESTIONS","DP700_BASICS","DP700_INTERMEDIATE","DP700_ADVANCED","DP700_BRIDGE","DP700_PA_LIVE_20261106","DP700_PA_20261114","DP700_PA_PDF_20261112"]){for(const q of window[name]||[]){if(patches[q.id])Object.assign(q,patches[q.id],{qualityRevision:currentRevisions.has(q.id)?"2026-11-26":"2026-11-16"});
 const urlFixes={"https://learn.microsoft.com/en-us/fabric/data-engineering/spark-streaming-overview":"https://learn.microsoft.com/en-us/fabric/data-engineering/structured-streaming-overview","https://learn.microsoft.com/en-us/fabric/data-factory/cdc-overview":"https://learn.microsoft.com/en-us/fabric/data-factory/cdc-copy-job","https://learn.microsoft.com/en-us/fabric/data-warehouse/load-data":"https://learn.microsoft.com/en-us/fabric/data-warehouse/ingest-data-copy","https://learn.microsoft.com/en-us/fabric/fundamentals/monitoring-hub":"https://learn.microsoft.com/en-us/fabric/data-factory/monitor-data-factory"};
 if(urlFixes[q.source])q.source=urlFixes[q.source];}}
