@@ -44,4 +44,32 @@ final class DojoUITests: XCTestCase {
         XCTAssertTrue(app.staticTexts["表示中、49 / 49テーマ"].waitForExistence(timeout: 5))
         XCTAssertTrue(app.buttons["objective-O01"].exists)
     }
+
+    func testLongThemeQuestionCanAdvanceAfterFeedback() {
+        let app = XCUIApplication()
+        app.launch()
+        app.tabBars.buttons["進捗"].tap()
+        app.buttons["objectiveMapProgressLink"].tap()
+        let theme = app.buttons["objective-O04"]
+        XCTAssertTrue(theme.waitForExistence(timeout: 5))
+        theme.tap()
+
+        let required = app.staticTexts["O04-B"].exists ? 2 : 1
+        for index in 0..<required {
+            let choice = app.buttons["choice-\(index)"]
+            XCTAssertTrue(choice.waitForExistence(timeout: 5))
+            choice.tap()
+        }
+        let answer = app.buttons["answerButton"]
+        for _ in 0..<5 where !answer.isHittable { app.swipeUp() }
+        XCTAssertTrue(answer.isHittable)
+        answer.tap()
+
+        let next = app.buttons["nextButton"]
+        XCTAssertTrue(next.waitForExistence(timeout: 5))
+        for _ in 0..<8 where !next.isHittable { app.swipeUp() }
+        XCTAssertTrue(next.isHittable)
+        next.tap()
+        XCTAssertTrue(app.staticTexts["2 / 2"].waitForExistence(timeout: 5))
+    }
 }
