@@ -8,6 +8,7 @@ const names = ['DP700_QUESTIONS', 'DP700_BASICS', 'DP700_INTERMEDIATE', 'DP700_A
 const excluded = new Map(require('../commercial-exclusions.json').map(row => [row.id, row.reason]));
 const prior = new Map(require('../../dp700/audit/question-ledger.json').items.map(row => [row.id, row]));
 const sources = new Map(require('../../dp700/audit/source-checks.json').map(row => [row.url, row]));
+const coreARevisions = new Set(['O02-A', 'O03-A', 'O04-A', 'O05-A', 'O06-A', 'O07-A', 'O08-A', 'O09-A', 'O10-A', 'O11-A']);
 const all = names.flatMap(bank => banks[bank]
   .filter(q => bank !== 'DP700_QUESTIONS' || (!q.origin && q.scorable !== false && q.reviewStatus !== 'review'))
   .map(q => ({ bank, q })));
@@ -40,7 +41,9 @@ const rows = all.map(({ bank, q }) => {
     answerIndices: q.answers || null,
     correctChoices: q.type === 'order' ? q.orderItems : q.answers.map(i => q.choices[i]),
     explanation: q.explanation, source: q.source,
-    contentReview: !prior.has(q.id) ? 'missing' : q.qualityRevision === '2026-11-27'
+    contentReview: !prior.has(q.id) ? 'missing' : coreARevisions.has(q.id)
+      ? '2026-11-27 independent core A distractor review; see core-a-review-20261127.md; content hash locked'
+      : q.qualityRevision === '2026-11-27'
       ? '2026-11-27 independent core question and distractor review; see core-b-review-20261127.md; content hash locked'
       : q.qualityRevision === '2026-11-26'
         ? '2026-11-26 independent code semantics and distractor review; see code-order-review-20261126.md; content hash locked'

@@ -110,7 +110,7 @@
     {
       "id": "O02-A",
       "bank": "DP700_QUESTIONS",
-      "contentSha256": "168c6fb3e67d5936f980b230fd0543bc9b54bef649340f6e511898fb7c5f4112",
+      "contentSha256": "9bcb31d78ce133394b058b2d75348809ac5ded1c7170efdbf9ed80a79ef5371e",
       "included": true,
       "exclusionReason": null,
       "question": "部門別にFabricアイテムを整理し、データ所有責任を明確にしたい。 最も適切な対応はどれか。",
@@ -119,9 +119,9 @@
       "type": "single",
       "choices": [
         "OneLake catalog の Govern > Domains でドメインを構成する",
-        "全アイテムを1つの個人Workspaceへ移す",
-        "Notebookの変数名だけ統一する",
-        "各テーブルにDynamic Data Maskingを設定する"
+        "各部門のアイテムにCertifiedを付け、ドメインの代わりに所有部門を表す",
+        "ワークスペースのViewerロールを部門ごとに割り当てればドメインが自動作成される",
+        "部門名のSensitivity labelを付ければワークスペースが自動的に部門別に分類される"
       ],
       "selectCount": 1,
       "answerIndices": [
@@ -130,9 +130,9 @@
       "correctChoices": [
         "OneLake catalog の Govern > Domains でドメインを構成する"
       ],
-      "explanation": "OneLake catalog の Govern > Domains でドメインを構成する。ドメイン所有者や対象ワークスペースを適切に割り当てる。",
+      "explanation": "ドメインは部門などの業務領域でFabricコンテンツを論理的に整理し、発見と分散管理に使います。Certifiedは推奨・認定、Viewerはアクセス権、Sensitivity labelは機密分類であり、ドメインの代わりにはなりません。",
       "source": "https://learn.microsoft.com/en-us/fabric/governance/domains",
-      "contentReview": "2026-11-16 prior question-level review; current structural recheck; content hash locked",
+      "contentReview": "2026-11-27 independent core A distractor review; see core-a-review-20261127.md; content hash locked",
       "specEvidence": "independent expected answer; Learn URL is a reference, not an official individual answer",
       "officialIndividualAnswer": false,
       "rightsReview": "No PDF or Practice Assessment origin metadata and no embedded third-party image; exact content is locked for future review",
@@ -208,29 +208,29 @@
     {
       "id": "O03-A",
       "bank": "DP700_QUESTIONS",
-      "contentSha256": "9d07ac1c6ce8213c2edde5d92aca1593662b0ab010ee52c1a02efb72299d3379",
+      "contentSha256": "9aa85f6e4a77fc16e5f125b5bfab8c5071cb722d60f3bf8be9fa450bdc9ad4ec",
       "included": true,
       "exclusionReason": null,
-      "question": "ワークスペースのOneLake利用とアクセス境界を統制したい。 最も適切な対応はどれか。",
+      "question": "ワークスペース内のアイテム管理権限と、OneLake上のデータ閲覧範囲を両方制御したい。最も適切な設計はどれか。",
       "caseText": null,
       "code": null,
       "type": "single",
       "choices": [
-        "ワークスペース/OneLake関連設定とOneLakeセキュリティを確認して構成する",
-        "データを毎回CSVへコピーして回避する",
-        "全ユーザーをWorkspace Adminにする",
-        "Sparkのexecutor数だけ変更する"
+        "ワークスペース・アイテム権限とOneLakeセキュリティをそれぞれ要件に合わせて設定する",
+        "ワークスペースのViewerロールだけで行・列の閲覧範囲も細かく定義する",
+        "OneLakeセキュリティロールだけでアイテムの作成・共有権限も管理する",
+        "ドメインへの割り当てだけでアイテム操作とデータ閲覧の両方を制限する"
       ],
       "selectCount": 1,
       "answerIndices": [
         0
       ],
       "correctChoices": [
-        "ワークスペース/OneLake関連設定とOneLakeセキュリティを確認して構成する"
+        "ワークスペース・アイテム権限とOneLakeセキュリティをそれぞれ要件に合わせて設定する"
       ],
-      "explanation": "ワークスペース/OneLake関連設定とOneLakeセキュリティを確認して構成する。アクセスは必要最小限とし、アイテム/データ粒度の権限も合わせて設計する。",
+      "explanation": "アイテムの作成・設定・共有はワークスペースロールやアイテム権限で、テーブル・行・列などのデータ閲覧はOneLakeセキュリティで設計します。二つの権限面を分けて確認する必要があります。",
       "source": "https://learn.microsoft.com/en-us/fabric/onelake/security/get-started-security",
-      "contentReview": "2026-11-16 prior question-level review; current structural recheck; content hash locked",
+      "contentReview": "2026-11-27 independent core A distractor review; see core-a-review-20261127.md; content hash locked",
       "specEvidence": "independent expected answer; Learn URL is a reference, not an official individual answer",
       "officialIndividualAnswer": false,
       "rightsReview": "No PDF or Practice Assessment origin metadata and no embedded third-party image; exact content is locked for future review",
@@ -306,7 +306,7 @@
     {
       "id": "O04-A",
       "bank": "DP700_QUESTIONS",
-      "contentSha256": "aa0fa4384bbbf47d8ba0604f8cbd3f8a0255e3471aa3cc732c69c718a551765d",
+      "contentSha256": "b799fe4dc538e2277fe0c031e8ed53d24edebd3750837082a68aa9d84ab1a191",
       "included": true,
       "exclusionReason": null,
       "question": "Python DAGをFabric上でスケジュール・監視したい。 最も適切な対応はどれか。",
@@ -314,21 +314,21 @@
       "code": null,
       "type": "single",
       "choices": [
-        "Apache Airflow job（Data Workflow）の設定・ランタイム・接続を構成する",
-        "Dataflow Gen2だけでDAGを実行する",
-        "WarehouseのRLSでスケジュールする",
-        "Sensitivity labelでタスク依存を定義する"
+        "Apache Airflow jobのDAG・ランタイム・接続を構成する",
+        "Fabric Pipelineのスケジュールだけを設定すれば既存のAirflow DAGファイルをそのまま管理・実行できる",
+        "NotebookのスケジュールだけでAirflowのDAG依存関係と実行履歴を管理する",
+        "Deployment pipelineのステージをDAGタスクとして登録してスケジュールする"
       ],
       "selectCount": 1,
       "answerIndices": [
         0
       ],
       "correctChoices": [
-        "Apache Airflow job（Data Workflow）の設定・ランタイム・接続を構成する"
+        "Apache Airflow jobのDAG・ランタイム・接続を構成する"
       ],
-      "explanation": "Apache Airflow job（Data Workflow）の設定・ランタイム・接続を構成する。DAG、プール/ランタイム、認証接続、トリガー設定を要件に合わせる。",
-      "source": "https://learn.microsoft.com/en-us/fabric/data-factory/apache-airflow-compute",
-      "contentReview": "2026-11-16 prior question-level review; current structural recheck; content hash locked",
+      "explanation": "既存のPython DAGをFabric上で運用するならAirflow job（Data Workflow）でDAGと計算プール、接続、実行設定を構成します。Fabric PipelineやNotebookのスケジュールは、それだけではAirflow DAGの管理方式にはなりません。",
+      "source": "https://learn.microsoft.com/en-us/fabric/data-factory/create-apache-airflow-jobs",
+      "contentReview": "2026-11-27 independent core A distractor review; see core-a-review-20261127.md; content hash locked",
       "specEvidence": "independent expected answer; Learn URL is a reference, not an official individual answer",
       "officialIndividualAnswer": false,
       "rightsReview": "No PDF or Practice Assessment origin metadata and no embedded third-party image; exact content is locked for future review",
@@ -404,7 +404,7 @@
     {
       "id": "O05-A",
       "bank": "DP700_QUESTIONS",
-      "contentSha256": "d9572e9ec318f907e35f4e2fcead8b6a31591b041b8e35e562977a77501587ec",
+      "contentSha256": "63f4600b0369ae317e300af7448ce0fdef326182c059919d59676f26a7f121d7",
       "included": true,
       "exclusionReason": null,
       "question": "Notebookや対応Fabricアイテムの変更履歴をGitで管理したい。 最も適切な対応はどれか。",
@@ -413,9 +413,9 @@
       "type": "single",
       "choices": [
         "Fabric Git integrationでワークスペースとリポジトリを接続する",
-        "本番でのみ直接編集する",
-        "監査ログをソースコード代わりにする",
-        "Eventstreamに変更履歴を送る"
+        "Deployment pipelineだけを作ればFabricアイテムのGitコミット履歴も記録される",
+        "各アイテムを共有すれば変更が自動でGitブランチに保存される",
+        "ワークスペースの監視ログをGitリポジトリとして直接接続する"
       ],
       "selectCount": 1,
       "answerIndices": [
@@ -424,9 +424,9 @@
       "correctChoices": [
         "Fabric Git integrationでワークスペースとリポジトリを接続する"
       ],
-      "explanation": "Fabric Git integrationでワークスペースとリポジトリを接続する。ブランチ、コミット、PRレビューを用いて変更を統制する。",
+      "explanation": "Fabric Git integrationはワークスペースの対応アイテムをリポジトリで版管理し、ブランチとコミットを利用できます。Deployment pipelineはステージ間の配布を担い、単独ではGit履歴を作りません。",
       "source": "https://learn.microsoft.com/en-us/fabric/cicd/git-integration/intro-to-git-integration",
-      "contentReview": "2026-11-16 prior question-level review; current structural recheck; content hash locked",
+      "contentReview": "2026-11-27 independent core A distractor review; see core-a-review-20261127.md; content hash locked",
       "specEvidence": "independent expected answer; Learn URL is a reference, not an official individual answer",
       "officialIndividualAnswer": false,
       "rightsReview": "No PDF or Practice Assessment origin metadata and no embedded third-party image; exact content is locked for future review",
@@ -502,7 +502,7 @@
     {
       "id": "O06-A",
       "bank": "DP700_QUESTIONS",
-      "contentSha256": "03231e89778d908f21d6b2bc4d2a528cbe66d3cea5f0b0b431fb1474a533bbce",
+      "contentSha256": "9818a6dd0abaa7d423664a00c52e736f87c90c5d9ef5ac28b952d12b1c915646",
       "included": true,
       "exclusionReason": null,
       "question": "Fabric Warehouseのスキーマをコードとして管理・ビルド・公開したい。 最も適切な対応はどれか。",
@@ -511,9 +511,9 @@
       "type": "single",
       "choices": [
         "SQL Database Projectを使ってスキーマを定義しビルド/公開する",
-        "Lakehouse shortcutだけでDDLを管理する",
-        "Dynamic Data Maskingだけでスキーマを配布する",
-        "Power BI semantic modelをDatabase Projectとして扱う"
+        "Fabric Git integrationだけを有効にすればSQLスキーマのビルド検証と公開まで自動で行える",
+        "Deployment pipelineだけでSQLオブジェクトの定義をローカルでビルドできる",
+        "WarehouseのクエリエディターにDDLを保存すればデータベースプロジェクトとしてビルドされる"
       ],
       "selectCount": 1,
       "answerIndices": [
@@ -522,9 +522,9 @@
       "correctChoices": [
         "SQL Database Projectを使ってスキーマを定義しビルド/公開する"
       ],
-      "explanation": "SQL Database Projectを使ってスキーマを定義しビルド/公開する。Gitでプロジェクトを版管理し、デプロイ前にビルド検証する。",
+      "explanation": "Fabric Warehouseのデータベースプロジェクトではスキーマ定義をコード化し、ビルドで検証して公開できます。Git連携は版管理、Deployment pipelineは配布に役立ちますが、それだけでプロジェクトのビルドを代替しません。この機能は現時点でプレビューです。",
       "source": "https://learn.microsoft.com/en-us/fabric/data-warehouse/develop-warehouse-project",
-      "contentReview": "2026-11-16 prior question-level review; current structural recheck; content hash locked",
+      "contentReview": "2026-11-27 independent core A distractor review; see core-a-review-20261127.md; content hash locked",
       "specEvidence": "independent expected answer; Learn URL is a reference, not an official individual answer",
       "officialIndividualAnswer": false,
       "rightsReview": "No PDF or Practice Assessment origin metadata and no embedded third-party image; exact content is locked for future review",
@@ -600,7 +600,7 @@
     {
       "id": "O07-A",
       "bank": "DP700_QUESTIONS",
-      "contentSha256": "bf17762120ec51e879b1aef2af94e47ef843eda014327db501de35dae1d6ee26",
+      "contentSha256": "95a311c191d3b71d07108d70770c6951bfd614502df80232bbc33a59d4bca21b",
       "included": true,
       "exclusionReason": null,
       "question": "開発→テスト→本番へFabricアイテムを段階的に昇格したい。 最も適切な対応はどれか。",
@@ -609,9 +609,9 @@
       "type": "single",
       "choices": [
         "Deployment pipelineを作成し各ステージへワークスペースを割り当てる",
-        "1つのWorkspaceを全環境で共有する",
-        "本番だけGitを無効化する",
-        "毎回手作業でアイテムを作り直す"
+        "Git integrationで開発ブランチを作るだけでテスト・本番ワークスペースへ自動配布される",
+        "Copy activityで開発ワークスペースのFabricアイテム定義をテスト・本番へ複製する",
+        "ワークスペースのロールを環境ごとに変えるだけで対応アイテムが昇格する"
       ],
       "selectCount": 1,
       "answerIndices": [
@@ -620,9 +620,9 @@
       "correctChoices": [
         "Deployment pipelineを作成し各ステージへワークスペースを割り当てる"
       ],
-      "explanation": "Deployment pipelineを作成し各ステージへワークスペースを割り当てる。環境差分はデプロイルールや接続再バインドで管理する。",
+      "explanation": "Deployment pipelineは開発・テスト・本番のステージへワークスペースを割り当て、対応アイテムを段階的に配布します。Git連携は版管理であり、ブランチ作成だけではステージ間配布は完了しません。",
       "source": "https://learn.microsoft.com/en-us/fabric/cicd/deployment-pipelines/intro-to-deployment-pipelines",
-      "contentReview": "2026-11-16 prior question-level review; current structural recheck; content hash locked",
+      "contentReview": "2026-11-27 independent core A distractor review; see core-a-review-20261127.md; content hash locked",
       "specEvidence": "independent expected answer; Learn URL is a reference, not an official individual answer",
       "officialIndividualAnswer": false,
       "rightsReview": "No PDF or Practice Assessment origin metadata and no embedded third-party image; exact content is locked for future review",
@@ -698,7 +698,7 @@
     {
       "id": "O08-A",
       "bank": "DP700_QUESTIONS",
-      "contentSha256": "90a697ea6955fdac11f0eb1618415ec85738b1e65e54e66744445377f917bc9f",
+      "contentSha256": "bb85791dfc513f1e97e4ab345c93dac85a84570862c0c06c93d6841ee6c445f7",
       "included": true,
       "exclusionReason": null,
       "question": "ワークスペース全体の編集者と閲覧者を分離したい。 最も適切な対応はどれか。",
@@ -707,9 +707,9 @@
       "type": "single",
       "choices": [
         "Admin/Member/Contributor/ViewerなどWorkspaceロールを要件に合わせて付与する",
-        "Workspaceロールだけでデータ行・列レベルの制御まで完結させる",
-        "RLSだけでWorkspace編集権限も制御する",
-        "Sensitivity labelだけで編集権限を制御する"
+        "OneLakeのRLSだけでワークスペースのアイテム編集権限も分離する",
+        "各アイテムへのRead共有だけでワークスペース全体の編集者ロールを管理する",
+        "Sensitivity labelだけでワークスペースの編集権限と閲覧権限を分ける"
       ],
       "selectCount": 1,
       "answerIndices": [
@@ -718,9 +718,9 @@
       "correctChoices": [
         "Admin/Member/Contributor/ViewerなどWorkspaceロールを要件に合わせて付与する"
       ],
-      "explanation": "Admin/Member/Contributor/ViewerなどWorkspaceロールを要件に合わせて付与する。最小権限でロールを割り当て、広すぎるロールを避ける。",
+      "explanation": "ワークスペース全体で誰が編集・閲覧できるかはAdmin、Member、Contributor、Viewerのロールで分けます。RLSはデータ行の閲覧、アイテム共有は個別アイテムへの権限であり、ワークスペース全体のロールとは異なります。",
       "source": "https://learn.microsoft.com/en-us/fabric/fundamentals/roles-workspaces",
-      "contentReview": "2026-11-16 prior question-level review; current structural recheck; content hash locked",
+      "contentReview": "2026-11-27 independent core A distractor review; see core-a-review-20261127.md; content hash locked",
       "specEvidence": "independent expected answer; Learn URL is a reference, not an official individual answer",
       "officialIndividualAnswer": false,
       "rightsReview": "No PDF or Practice Assessment origin metadata and no embedded third-party image; exact content is locked for future review",
@@ -796,7 +796,7 @@
     {
       "id": "O09-A",
       "bank": "DP700_QUESTIONS",
-      "contentSha256": "87617a240479123f73eee4a72614e83af372ef2950ba90712dfba21bfb0dcde9",
+      "contentSha256": "9979df044820ec8360a8d9cf334fe7812a760d7d4dec87adc2f6af0050a9d170",
       "included": true,
       "exclusionReason": null,
       "question": "特定Lakehouseだけを一部ユーザーに共有したい。 最も適切な対応はどれか。",
@@ -805,9 +805,9 @@
       "type": "single",
       "choices": [
         "Workspace全体の権限を広げず、対象Item単位で共有/権限を付与する",
-        "Workspace Adminを付与する",
-        "Tenant Adminを付与する",
-        "すべてのItemを公開する"
+        "対象者をWorkspace Viewerに追加し、他のアイテムへのアクセスは共有設定で自動遮断する",
+        "対象Lakehouseをドメインへ割り当て、ドメイン所属者だけが閲覧できるようにする",
+        "対象者をWorkspace Contributorにして、Lakehouseの書き込みだけ個別に止める"
       ],
       "selectCount": 1,
       "answerIndices": [
@@ -816,9 +816,9 @@
       "correctChoices": [
         "Workspace全体の権限を広げず、対象Item単位で共有/権限を付与する"
       ],
-      "explanation": "Workspace全体の権限を広げず、対象Item単位で共有/権限を付与する。必要なItemと操作だけを許可する。",
+      "explanation": "Lakehouseはアイテム単位で共有でき、ワークスペース全体と他のアイテムへのアクセスを与えずに済みます。Workspaceロールを付与すると対象が広がり、ドメインへの分類は閲覧権限を自動制限しません。",
       "source": "https://learn.microsoft.com/en-us/fabric/data-engineering/lakehouse-sharing",
-      "contentReview": "2026-11-16 prior question-level review; current structural recheck; content hash locked",
+      "contentReview": "2026-11-27 independent core A distractor review; see core-a-review-20261127.md; content hash locked",
       "specEvidence": "independent expected answer; Learn URL is a reference, not an official individual answer",
       "officialIndividualAnswer": false,
       "rightsReview": "No PDF or Practice Assessment origin metadata and no embedded third-party image; exact content is locked for future review",
@@ -894,7 +894,7 @@
     {
       "id": "O10-A",
       "bank": "DP700_QUESTIONS",
-      "contentSha256": "9be4de7e27dd4f4f6bc476ec8328dfed2451fbdc0c5793bf2e939b57d26f108f",
+      "contentSha256": "869faf5579e25008cc89ba7b5d5c91564fb1abe037fdedaf67da52065f3884cd",
       "included": true,
       "exclusionReason": null,
       "question": "同じデータ資産でも行・列・テーブル・フォルダー単位で可視範囲を変えたい。 最も適切な対応はどれか。",
@@ -903,9 +903,9 @@
       "type": "single",
       "choices": [
         "要件に応じてRLS/CLS/OLSやOneLakeのテーブル・フォルダー権限を使い分ける",
-        "Workspace名を変更する",
-        "PipelineのRetry回数で可視範囲を制御する",
-        "Gitブランチ名でデータを隠す"
+        "RLSだけを設定し、列・テーブル・フォルダーの閲覧範囲も同じルールで制御する",
+        "Workspace Viewerだけを付与し、行・列・テーブルの範囲は自動で最小化する",
+        "Dynamic Data Maskingだけで特定行とフォルダーへのアクセスも拒否する"
       ],
       "selectCount": 1,
       "answerIndices": [
@@ -914,9 +914,9 @@
       "correctChoices": [
         "要件に応じてRLS/CLS/OLSやOneLakeのテーブル・フォルダー権限を使い分ける"
       ],
-      "explanation": "要件に応じてRLS/CLS/OLSやOneLakeのテーブル・フォルダー権限を使い分ける。複数の粒度を組み合わせる場合は権限モデルの相互作用も確認する。",
+      "explanation": "OneLakeのRLSは行、CLSは列、OLSはテーブルやフォルダーなどを対象にします。閲覧範囲の粒度に合わせて組み合わせ、別の権限経路も確認します。単一の行制御やマスク表示だけでは全粒度を扱えません。",
       "source": "https://learn.microsoft.com/en-us/fabric/onelake/security/table-column-row-security",
-      "contentReview": "2026-11-16 prior question-level review; current structural recheck; content hash locked",
+      "contentReview": "2026-11-27 independent core A distractor review; see core-a-review-20261127.md; content hash locked",
       "specEvidence": "independent expected answer; Learn URL is a reference, not an official individual answer",
       "officialIndividualAnswer": false,
       "rightsReview": "No PDF or Practice Assessment origin metadata and no embedded third-party image; exact content is locked for future review",
@@ -992,7 +992,7 @@
     {
       "id": "O11-A",
       "bank": "DP700_QUESTIONS",
-      "contentSha256": "e26a7e6e1ddf3b36b0b96f6ebdd8eeaecc75dcd9c0ae793514ede24ddce03454",
+      "contentSha256": "9072b94154de6901385bc6e0e8f01c7b392b285c1bd09d181922f171ee72e7d6",
       "included": true,
       "exclusionReason": null,
       "question": "SELECT権限は維持しつつ機密列を非特権ユーザーにはマスク表示したい。 最も適切な対応はどれか。",
@@ -1001,9 +1001,9 @@
       "type": "single",
       "choices": [
         "Dynamic Data Maskingを対象列へ設定する",
-        "元データ自体を書き換えて伏字にする",
-        "全員にUNMASKを付与する",
-        "Eventstreamで列を非表示にする"
+        "Column-level securityで対象列を見えなくし、SELECT結果にはマスク値として残す",
+        "Row-level securityで対象行を絞り、機密列の値だけをマスク表示する",
+        "Sensitivity labelを付ければSQLのSELECT結果で機密列が自動的にマスクされる"
       ],
       "selectCount": 1,
       "answerIndices": [
@@ -1012,9 +1012,9 @@
       "correctChoices": [
         "Dynamic Data Maskingを対象列へ設定する"
       ],
-      "explanation": "Dynamic Data Maskingを対象列へ設定する。DDMだけを完全な防御とせず、RLS/CLS/SQL権限などと組み合わせる。",
+      "explanation": "Dynamic Data Maskingは指定列のクエリ結果を非特権ユーザー向けにマスクし、保存データは変更しません。CLSは列へのアクセス制限、RLSは行へのアクセス制限で、マスク表示とは別です。",
       "source": "https://learn.microsoft.com/en-us/fabric/data-warehouse/dynamic-data-masking",
-      "contentReview": "2026-11-16 prior question-level review; current structural recheck; content hash locked",
+      "contentReview": "2026-11-27 independent core A distractor review; see core-a-review-20261127.md; content hash locked",
       "specEvidence": "independent expected answer; Learn URL is a reference, not an official individual answer",
       "officialIndividualAnswer": false,
       "rightsReview": "No PDF or Practice Assessment origin metadata and no embedded third-party image; exact content is locked for future review",

@@ -1494,10 +1494,106 @@
     "holdReason": "Structured Streamingは通常マイクロバッチで動作するため、両選択肢を対立する方式として採点できない。"
   }
 };
+// 2026-11-27: 基本単一選択の分野外の誤答肢を、同じ機能領域で比較する選択肢へ変更。
+const coreARevisions={
+  "O02-A": {
+    choices: [
+      "OneLake catalog の Govern > Domains でドメインを構成する",
+      "各部門のアイテムにCertifiedを付け、ドメインの代わりに所有部門を表す",
+      "ワークスペースのViewerロールを部門ごとに割り当てればドメインが自動作成される",
+      "部門名のSensitivity labelを付ければワークスペースが自動的に部門別に分類される"
+    ],
+    explanation: "ドメインは部門などの業務領域でFabricコンテンツを論理的に整理し、発見と分散管理に使います。Certifiedは推奨・認定、Viewerはアクセス権、Sensitivity labelは機密分類であり、ドメインの代わりにはなりません。"
+  },
+  "O03-A": {
+    question: "ワークスペース内のアイテム管理権限と、OneLake上のデータ閲覧範囲を両方制御したい。最も適切な設計はどれか。",
+    choices: [
+      "ワークスペース・アイテム権限とOneLakeセキュリティをそれぞれ要件に合わせて設定する",
+      "ワークスペースのViewerロールだけで行・列の閲覧範囲も細かく定義する",
+      "OneLakeセキュリティロールだけでアイテムの作成・共有権限も管理する",
+      "ドメインへの割り当てだけでアイテム操作とデータ閲覧の両方を制限する"
+    ],
+    explanation: "アイテムの作成・設定・共有はワークスペースロールやアイテム権限で、テーブル・行・列などのデータ閲覧はOneLakeセキュリティで設計します。二つの権限面を分けて確認する必要があります。"
+  },
+  "O04-A": {
+    source: "https://learn.microsoft.com/en-us/fabric/data-factory/create-apache-airflow-jobs",
+    choices: [
+      "Apache Airflow jobのDAG・ランタイム・接続を構成する",
+      "Fabric Pipelineのスケジュールだけを設定すれば既存のAirflow DAGファイルをそのまま管理・実行できる",
+      "NotebookのスケジュールだけでAirflowのDAG依存関係と実行履歴を管理する",
+      "Deployment pipelineのステージをDAGタスクとして登録してスケジュールする"
+    ],
+    explanation: "既存のPython DAGをFabric上で運用するならAirflow job（Data Workflow）でDAGと計算プール、接続、実行設定を構成します。Fabric PipelineやNotebookのスケジュールは、それだけではAirflow DAGの管理方式にはなりません。"
+  },
+  "O05-A": {
+    choices: [
+      "Fabric Git integrationでワークスペースとリポジトリを接続する",
+      "Deployment pipelineだけを作ればFabricアイテムのGitコミット履歴も記録される",
+      "各アイテムを共有すれば変更が自動でGitブランチに保存される",
+      "ワークスペースの監視ログをGitリポジトリとして直接接続する"
+    ],
+    explanation: "Fabric Git integrationはワークスペースの対応アイテムをリポジトリで版管理し、ブランチとコミットを利用できます。Deployment pipelineはステージ間の配布を担い、単独ではGit履歴を作りません。"
+  },
+  "O06-A": {
+    choices: [
+      "SQL Database Projectを使ってスキーマを定義しビルド/公開する",
+      "Fabric Git integrationだけを有効にすればSQLスキーマのビルド検証と公開まで自動で行える",
+      "Deployment pipelineだけでSQLオブジェクトの定義をローカルでビルドできる",
+      "WarehouseのクエリエディターにDDLを保存すればデータベースプロジェクトとしてビルドされる"
+    ],
+    explanation: "Fabric Warehouseのデータベースプロジェクトではスキーマ定義をコード化し、ビルドで検証して公開できます。Git連携は版管理、Deployment pipelineは配布に役立ちますが、それだけでプロジェクトのビルドを代替しません。この機能は現時点でプレビューです。"
+  },
+  "O07-A": {
+    choices: [
+      "Deployment pipelineを作成し各ステージへワークスペースを割り当てる",
+      "Git integrationで開発ブランチを作るだけでテスト・本番ワークスペースへ自動配布される",
+      "Copy activityで開発ワークスペースのFabricアイテム定義をテスト・本番へ複製する",
+      "ワークスペースのロールを環境ごとに変えるだけで対応アイテムが昇格する"
+    ],
+    explanation: "Deployment pipelineは開発・テスト・本番のステージへワークスペースを割り当て、対応アイテムを段階的に配布します。Git連携は版管理であり、ブランチ作成だけではステージ間配布は完了しません。"
+  },
+  "O08-A": {
+    choices: [
+      "Admin/Member/Contributor/ViewerなどWorkspaceロールを要件に合わせて付与する",
+      "OneLakeのRLSだけでワークスペースのアイテム編集権限も分離する",
+      "各アイテムへのRead共有だけでワークスペース全体の編集者ロールを管理する",
+      "Sensitivity labelだけでワークスペースの編集権限と閲覧権限を分ける"
+    ],
+    explanation: "ワークスペース全体で誰が編集・閲覧できるかはAdmin、Member、Contributor、Viewerのロールで分けます。RLSはデータ行の閲覧、アイテム共有は個別アイテムへの権限であり、ワークスペース全体のロールとは異なります。"
+  },
+  "O09-A": {
+    choices: [
+      "Workspace全体の権限を広げず、対象Item単位で共有/権限を付与する",
+      "対象者をWorkspace Viewerに追加し、他のアイテムへのアクセスは共有設定で自動遮断する",
+      "対象Lakehouseをドメインへ割り当て、ドメイン所属者だけが閲覧できるようにする",
+      "対象者をWorkspace Contributorにして、Lakehouseの書き込みだけ個別に止める"
+    ],
+    explanation: "Lakehouseはアイテム単位で共有でき、ワークスペース全体と他のアイテムへのアクセスを与えずに済みます。Workspaceロールを付与すると対象が広がり、ドメインへの分類は閲覧権限を自動制限しません。"
+  },
+  "O10-A": {
+    choices: [
+      "要件に応じてRLS/CLS/OLSやOneLakeのテーブル・フォルダー権限を使い分ける",
+      "RLSだけを設定し、列・テーブル・フォルダーの閲覧範囲も同じルールで制御する",
+      "Workspace Viewerだけを付与し、行・列・テーブルの範囲は自動で最小化する",
+      "Dynamic Data Maskingだけで特定行とフォルダーへのアクセスも拒否する"
+    ],
+    explanation: "OneLakeのRLSは行、CLSは列、OLSはテーブルやフォルダーなどを対象にします。閲覧範囲の粒度に合わせて組み合わせ、別の権限経路も確認します。単一の行制御やマスク表示だけでは全粒度を扱えません。"
+  },
+  "O11-A": {
+    choices: [
+      "Dynamic Data Maskingを対象列へ設定する",
+      "Column-level securityで対象列を見えなくし、SELECT結果にはマスク値として残す",
+      "Row-level securityで対象行を絞り、機密列の値だけをマスク表示する",
+      "Sensitivity labelを付ければSQLのSELECT結果で機密列が自動的にマスクされる"
+    ],
+    explanation: "Dynamic Data Maskingは指定列のクエリ結果を非特権ユーザー向けにマスクし、保存データは変更しません。CLSは列へのアクセス制限、RLSは行へのアクセス制限で、マスク表示とは別です。"
+  }
+};
 const currentRevisions=new Set(["C-SQL-02","C-SQL-03","C-SQL-04","C-SQL-05","C-SQL-06","C-SQL-08","C-SQL-10","C-PY-01","C-PY-02","C-PY-04","C-PY-05","C-PY-06","C-PY-07","C-PY-08","C-PY-09","C-PY-10","C-KQL-01","C-KQL-02","C-KQL-03","C-KQL-04","C-KQL-06","C-KQL-07","C-KQL-08","C-KQL-10"]);
 const coreRevisions=new Set(["O01-A","O01-B","O02-B","O03-B","O04-B","O05-B","O06-B","O07-B","O08-B"]);
 const remainingCoreRevisions=new Set(["O09-B","O10-B","O11-B","O12-B","O13-B","O17-B","O18-B","O19-B","O20-B","O21-B","O22-B","O24-B","O25-B","O26-B","O27-B","O28-B","O29-B","O30-B","O31-B","O34-B","O35-B","O36-B","O37-B","O38-B","O39-B","O40-B","O41-B","O42-B","O43-B","O44-B","O45-B","O46-B","O47-B","O49-B","O50-B","O51-B","O52-B","O53-B","O54-B"]);
 for(const name of ["DP700_QUESTIONS","DP700_BASICS","DP700_INTERMEDIATE","DP700_ADVANCED","DP700_BRIDGE","DP700_PA_LIVE_20261106","DP700_PA_20261114","DP700_PA_PDF_20261112"]){for(const q of window[name]||[]){if(patches[q.id])Object.assign(q,patches[q.id],{qualityRevision:coreRevisions.has(q.id)||remainingCoreRevisions.has(q.id)?"2026-11-27":currentRevisions.has(q.id)?"2026-11-26":"2026-11-16"});
+if(coreARevisions[q.id])Object.assign(q,coreARevisions[q.id],{qualityRevision:"2026-11-27"});
 const urlFixes={"https://learn.microsoft.com/en-us/fabric/data-engineering/spark-streaming-overview":"https://learn.microsoft.com/en-us/fabric/data-engineering/structured-streaming-overview","https://learn.microsoft.com/en-us/fabric/data-factory/cdc-overview":"https://learn.microsoft.com/en-us/fabric/data-factory/cdc-copy-job","https://learn.microsoft.com/en-us/fabric/data-warehouse/load-data":"https://learn.microsoft.com/en-us/fabric/data-warehouse/ingest-data-copy","https://learn.microsoft.com/en-us/fabric/fundamentals/monitoring-hub":"https://learn.microsoft.com/en-us/fabric/data-factory/monitor-data-factory"};
 if(urlFixes[q.source])q.source=urlFixes[q.source];}}
 })();

@@ -606,6 +606,17 @@
     "sha256": "6efb3e2004eb8095c83996e4f62c421a8ce5ae2e56fc7d662f210f454109fcde"
   },
   {
+    "url": "https://learn.microsoft.com/en-us/fabric/data-factory/create-apache-airflow-jobs",
+    "questionIds": [
+      "O04-A"
+    ],
+    "checkedAt": "2026-11-26T15:47:23.212Z",
+    "status": 200,
+    "finalUrl": "https://learn.microsoft.com/en-us/fabric/data-factory/create-apache-airflow-jobs",
+    "title": "Create an Apache Airflow Job project in Microsoft Fabric - Microsoft Fabric | Microsoft Learn",
+    "sha256": "8037f7b31fece611a643477febfaa66ad24dbdf98f553c21f4f2e5436c792e02"
+  },
+  {
     "url": "https://learn.microsoft.com/en-us/fabric/data-factory/data-factory-limitations",
     "questionIds": [
       "PA-20261114-11",
