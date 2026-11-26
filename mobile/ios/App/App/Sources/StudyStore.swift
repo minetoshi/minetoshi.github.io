@@ -330,7 +330,6 @@ struct QuizSummary {
         if timedOut {
             for question in session.questions.dropFirst(session.index + (session.answered ? 1 : 0)) {
                 session.results.append(QuestionResult(id: question.id, domain: question.domain, type: question.type, correct: false))
-                record(question, correct: false)
             }
         }
         let result = QuizSummary(mode: session.mode, title: session.title, results: session.results, timedOut: timedOut)

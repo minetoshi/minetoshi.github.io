@@ -70,6 +70,49 @@ final class DojoUITests: XCTestCase {
         for _ in 0..<8 where !next.isHittable { app.swipeUp() }
         XCTAssertTrue(next.isHittable)
         next.tap()
-        XCTAssertTrue(app.staticTexts["2 / 2"].waitForExistence(timeout: 5))
+        let nextProgress = app.staticTexts["2 / 2"]
+        XCTAssertTrue(nextProgress.waitForExistence(timeout: 5))
+        XCTAssertTrue(nextProgress.isHittable, "次の問題では先頭に戻る")
+    }
+
+    func testThemeQuizRequiresSelectionsAndShowsFinalScore() {
+        let app = XCUIApplication()
+        app.launch()
+        app.tabBars.buttons["進捗"].tap()
+        app.buttons["objectiveMapProgressLink"].tap()
+        app.buttons["objective-O04"].tap()
+
+        for _ in 0..<2 {
+            let isMulti = app.staticTexts["O04-B"].exists
+            let answer = app.buttons["answerButton"]
+            XCTAssertTrue(answer.waitForExistence(timeout: 5))
+            XCTAssertFalse(answer.isEnabled, "回答前は送信できない")
+            let first = app.buttons["choice-0"]
+            for _ in 0..<5 where !first.isHittable { app.swipeUp() }
+            XCTAssertTrue(first.isHittable)
+            first.tap()
+            if isMulti {
+                XCTAssertFalse(answer.isEnabled, "複数選択の途中では送信できない")
+                let second = app.buttons["choice-1"]
+                for _ in 0..<5 where !second.isHittable { app.swipeUp() }
+                second.tap()
+            }
+            for _ in 0..<5 where !answer.isHittable { app.swipeUp() }
+            XCTAssertTrue(answer.isEnabled)
+            answer.tap()
+            XCTAssertTrue(app.descendants(matching: .any)["answerFeedback"].waitForExistence(timeout: 5))
+            let next = app.buttons["nextButton"]
+            for _ in 0..<8 where !next.isHittable { app.swipeUp() }
+            XCTAssertTrue(next.isHittable)
+            next.tap()
+        }
+
+        XCTAssertTrue(app.staticTexts["演習結果"].waitForExistence(timeout: 5))
+        XCTAssertTrue(app.staticTexts.matching(NSPredicate(format: "label CONTAINS %@", "/ 2 問正解")).firstMatch.exists)
+        let home = app.buttons["ホームへ戻る"]
+        for _ in 0..<5 where !home.isHittable { app.swipeUp() }
+        XCTAssertTrue(home.isHittable)
+        home.tap()
+        XCTAssertTrue(app.tabBars.buttons["今日"].waitForExistence(timeout: 5))
     }
 }

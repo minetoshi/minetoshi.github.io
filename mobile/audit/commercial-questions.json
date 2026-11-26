@@ -8558,28 +8558,28 @@
     {
       "id": "ADV-23",
       "bank": "DP700_ADVANCED",
-      "contentSha256": "95f09f03960e534e968da7429c0939e4a784a902d204a2c0e3f5aa4b455bdf95",
+      "contentSha256": "a471c53f810f6a9d6806b0d30f5a33b0d8ff1d1f5e8652a1b325b3d5d97a3151",
       "included": true,
       "exclusionReason": null,
-      "question": "追記が続いて小さなファイルが増えた。行の内容を保ってファイル数を減らす操作は？",
+      "question": "新しいFabricワークスペースで、書き込み中心のDeltaテーブルと読み取り中心のDeltaテーブルを運用する。V-orderの適用をどう判断する？",
       "caseText": null,
       "code": null,
       "type": "single",
       "choices": [
-        "OPTIMIZE",
-        "VACUUMだけを実行",
-        "有効なファイルを手動削除"
+        "読み取り改善と書き込み時間を測り、読み取り中心のテーブルで有効化を検討する",
+        "両方のテーブルで必ず有効化し、書き込み時間も短くなるものとして扱う",
+        "読み取り中心のテーブルでも無効に固定し、ファイル配置の効果を検証しない"
       ],
       "selectCount": 1,
       "answerIndices": [
         0
       ],
       "correctChoices": [
-        "OPTIMIZE"
+        "読み取り改善と書き込み時間を測り、読み取り中心のテーブルで有効化を検討する"
       ],
-      "explanation": "OPTIMIZEで有効データのファイルをまとめます。VACUUMは未参照ファイルを保持条件に従って除去します。",
+      "explanation": "V-orderは読み取り効率を改善できますが、書き込みに追加の時間がかかる場合があります。新しいワークスペースでは既定で無効です。読み取り中心の表で実測し、必要な範囲へ適用します。",
       "source": "https://learn.microsoft.com/en-us/fabric/data-engineering/delta-optimization-and-v-order",
-      "contentReview": "2026-11-16 prior question-level review; current structural recheck; content hash locked",
+      "contentReview": "2026-11-27 independent staged-question review; see staged-review-20261127.md; content hash locked",
       "specEvidence": "independent expected answer; Learn URL is a reference, not an official individual answer",
       "officialIndividualAnswer": false,
       "rightsReview": "No PDF or Practice Assessment origin metadata and no embedded third-party image; exact content is locked for future review",
@@ -8620,28 +8620,28 @@
     {
       "id": "ADV-25",
       "bank": "DP700_ADVANCED",
-      "contentSha256": "5ea4617a992fa22ed71d9bb276950b91ce83276056bfbdfd5834be493c5d3231",
+      "contentSha256": "2583ebf536ced66b244cfe1abee3aacd598ea65441b3272dfb99d7550b9f3ef3",
       "included": true,
       "exclusionReason": null,
-      "question": "互換性のあるストリーミング処理を再起動する。以前の処理位置を引き継ぐのに必要なのは？",
+      "question": "同じソースから2つの独立したStructured Streamingクエリを起動する。チェックポイントの保存先はどうする？",
       "caseText": null,
       "code": null,
       "type": "single",
       "choices": [
-        "同じチェックポイントを利用",
-        "毎回別の空ディレクトリを使う",
-        "処理位置を出力テーブルの列名で管理"
+        "クエリごとに別のチェックポイントディレクトリを指定する",
+        "同じソースなのでチェックポイントディレクトリを共有する",
+        "宛先が異なるなら両方のチェックポイント指定を省略する"
       ],
       "selectCount": 1,
       "answerIndices": [
         0
       ],
       "correctChoices": [
-        "同じチェックポイントを利用"
+        "クエリごとに別のチェックポイントディレクトリを指定する"
       ],
-      "explanation": "チェックポイントに進捗や状態が記録されます。別の場所では以前の状態を引き継げません。",
+      "explanation": "独立した各クエリには専用のチェックポイントディレクトリが必要です。同じソースでも共有すると復旧メタデータが混ざり、重複処理や欠落、再開失敗につながります。",
       "source": "https://learn.microsoft.com/en-us/fabric/data-engineering/structured-streaming-overview",
-      "contentReview": "2026-11-16 prior question-level review; current structural recheck; content hash locked",
+      "contentReview": "2026-11-27 independent staged-question review; see staged-review-20261127.md; content hash locked",
       "specEvidence": "independent expected answer; Learn URL is a reference, not an official individual answer",
       "officialIndividualAnswer": false,
       "rightsReview": "No PDF or Practice Assessment origin metadata and no embedded third-party image; exact content is locked for future review",

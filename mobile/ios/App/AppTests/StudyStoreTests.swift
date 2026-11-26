@@ -81,6 +81,27 @@ import XCTest
         XCTAssertTrue(store.session?.questions.allSatisfy { $0.type == "code" } == true)
     }
 
+    func testTimedOutMockCountsUnansweredInScoreButNotAttemptHistory() throws {
+        let store = StudyStore()
+        store.reset()
+        store.start("mock45")
+        let first = try XCTUnwrap(store.session?.current)
+        XCTAssertEqual(store.session?.questions.count, 45)
+        if first.type == "order" {
+            store.answer()
+        } else {
+            for index in 0..<first.requiredSelection { store.toggleChoice(index) }
+            store.answer()
+        }
+        XCTAssertEqual(store.history.totalAttempts, 1)
+        store.finish(timedOut: true)
+        XCTAssertEqual(store.summary?.total, 45, "未回答は模試スコアの分母に含める")
+        XCTAssertEqual(store.history.totalAttempts, 1, "未回答を回答履歴として記録しない")
+        XCTAssertEqual(store.learned, 1)
+        XCTAssertEqual(store.history.sessions.first?.total, 45)
+        store.reset()
+    }
+
     func testSavedReviewPersistsAndSurvivesHistoryRestore() throws {
         let store = StudyStore()
         store.reset()
@@ -115,5 +136,51 @@ import XCTest
         XCTAssertEqual(Set(objectives.map(\.id)), Set(store.bank.objectiveLabels.keys))
         XCTAssertTrue(objectives.allSatisfy { $0.total > 0 && store.domains.contains($0.domain) })
         XCTAssertEqual(objectives.reduce(0) { $0 + $1.total }, 98)
+    }
+
+    func testMultiChoiceRequiresExactCountAndDoesNotDoubleRecord() throws {
+        let store = StudyStore()
+        store.reset()
+        let question = try XCTUnwrap(store.all.first { $0.type == "multi" && $0.requiredSelection == 2 })
+        store.start("test", explicitIDs: [question.id])
+        let options = Array(question.options.indices)
+        store.answer()
+        XCTAssertFalse(store.session?.answered == true)
+        XCTAssertEqual(store.history.totalAttempts, 0)
+
+        store.toggleChoice(options[0])
+        store.answer()
+        XCTAssertFalse(store.session?.answered == true)
+        store.toggleChoice(options[1])
+        store.toggleChoice(options[2])
+        XCTAssertEqual(store.session?.selected.count, 2, "選択数を超えて選べない")
+        store.toggleChoice(options[0])
+        XCTAssertEqual(store.session?.selected.count, 1, "選択を取り消せる")
+        store.toggleChoice(options[2])
+        store.answer()
+        XCTAssertTrue(store.session?.answered == true)
+        store.answer()
+        store.toggleChoice(options[3])
+        XCTAssertEqual(store.history.totalAttempts, 1)
+        store.next()
+        XCTAssertEqual(store.summary?.total, 1)
+        store.reset()
+    }
+
+    func testRestartChangesQuestionAndChoiceOrder() throws {
+        let store = StudyStore()
+        store.start("objective", filter: "O04")
+        let firstID = try XCTUnwrap(store.session?.current.id)
+        store.quit()
+        store.start("objective", filter: "O04")
+        XCTAssertNotEqual(store.session?.current.id, firstID)
+
+        let question = try XCTUnwrap(store.all.first { $0.id == "O04-A" })
+        store.quit()
+        store.start("test", explicitIDs: [question.id])
+        let firstOrder = try XCTUnwrap(store.session?.order)
+        store.quit()
+        store.start("test", explicitIDs: [question.id])
+        XCTAssertNotEqual(store.session?.order, firstOrder)
     }
 }
