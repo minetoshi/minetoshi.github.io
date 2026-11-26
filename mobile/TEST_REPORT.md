@@ -5,7 +5,7 @@
 - 販売用のコード40問と並べ替え15問について、コード実行結果・順序・正答・解説をID別に確認し、`audit/code-order-review-20261126.md` に記録。これは独立の意味監査であり、Microsoftによる個別解答確認や権利証明ではない。
 - 11問 `C-SQL-03`, `C-SQL-04`, `C-PY-01`, `C-PY-04`, `C-PY-06`, `C-PY-07`, `C-PY-09`, `C-KQL-01`, `C-KQL-02`, `C-KQL-04`, `C-KQL-06` の曖昧な前提、同時刻の扱い、重複排除・再分割・集計の誤解を招く選択肢や解説を修正。正答IDと販売用問数は維持（220問）。原稿ハッシュと販売用監査台帳を再生成し、非商用由来293問との高類似組は0。
 - 追加でコード15問の分野外の明らかな誤答を、同じ言語・機能内で比較する選択肢へ変更。対象IDは `audit/code-order-review-20261126.md` に記録。正答番号とコードは維持し、販売用は220問のまま。
-- 上記15問の改訂後、Xcode 26.4のiPhone 17 Pro Simulator（iOS 26.4）で `xcodebuild test` を実行し、8件通過・失敗0。結果は `/tmp/dp700-code-quality-dd/Logs/Test/Test-App-2026.11.26_08-52-19-+0900.xcresult`。その後の `C-PY-09` 解説文の明確化はCIで再検証する。
+- 上記15問の改訂と `C-PY-09` 解説文の明確化後、Xcode 26.4のiPhone 17 Pro Simulator（iOS 26.4）で `xcodebuild test` を再実行し、8件通過・失敗0。結果は `/tmp/dp700-code-quality-final-dd/Logs/Test/Test-App-2026.11.27_00-05-28-+0900.xcresult`。
 - Web版の構造検査は589問でエラー0。幅1280/390のブラウザ操作テストはそれぞれ全589問と各モードを通過。ネイティブ同梱検査は220問・49テーマ・WebView非搭載を確認。
 - Xcode 26.4、iPhone 17 Pro Simulator（iOS 26.4）の `xcodebuild test` は8件通過・失敗0。Computer Useでネイティブ版のホーム（220問）、演習一覧、コード問題の回答前と誤答後の赤・緑表示、解説を目視確認。
 - `devicectl` のiPhone 13とiPhone 17は今回も `unavailable`。実機操作・機内モード・実機スクリーンショットは未実施。
