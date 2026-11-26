@@ -66,19 +66,9 @@
       "score": 0.4144
     },
     {
-      "id": "O01-A",
-      "omittedId": "PA50-15",
-      "score": 0.4133
-    },
-    {
       "id": "O43-A",
       "omittedId": "PDF-M2-06",
       "score": 0.4
-    },
-    {
-      "id": "O07-B",
-      "omittedId": "PALIVE-20261106-42",
-      "score": 0.3908
     },
     {
       "id": "O35-B",
@@ -104,6 +94,16 @@
       "id": "C-PY-03",
       "omittedId": "PA50-26",
       "score": 0.361
+    },
+    {
+      "id": "MID-5",
+      "omittedId": "PA50-21",
+      "score": 0.3559
+    },
+    {
+      "id": "BASIC-10",
+      "omittedId": "PA-20261114-18",
+      "score": 0.3519
     }
   ]
 }

@@ -362,10 +362,40 @@
     "scorable": false,
     "holdReason": "アラート条件と通知先の構成順は一意ではなく、テスト前に両方が必要という条件のみである。"
   },
+  "O01-A": {
+    "question": "複数のNotebookで使う既定のSparkプールをワークスペース単位で設定したい。最も適切な操作はどれか。",
+    "choices": [
+      "Workspace settingsのData Engineering/Science > Spark Computeで既定プールを設定する",
+      "各Notebookで同じプールを個別選択すればワークスペースの既定も自動で変わる",
+      "容量側でCustom Poolの利用を許可するだけで既定プールが変わる",
+      "Starter Poolの最大executor数を変えればCustom Poolが既定になる"
+    ],
+    "explanation": "ワークスペース管理者はData Engineering/ScienceのSpark Computeで既定プールを選択できます。Notebook個別のプール指定、容量側の許可、Starter Poolの設定だけでは既定プールの選択は変わりません。",
+    "source": "https://learn.microsoft.com/en-us/fabric/data-engineering/workspace-admin-settings"
+  },
+  "O01-B": {
+    "question": "ワークスペースの既定SparkプールをStarter PoolからCustom Poolに変える前に、正しい留意点を2つ選べ。",
+    "choices": [
+      "Custom Poolではノードサイズや自動スケールを要件に合わせて構成できる",
+      "Custom Poolを既定にするとセッション起動が長くなる場合がある",
+      "Starter Poolでも任意のノードサイズを必ず選べる",
+      "容量側でカスタムプールを無効にしていても必ずCustom Poolを作れる"
+    ],
+    "explanation": "Custom Poolは計算要件に合わせてノードや自動スケールを構成できます。一方、既定をStarter Poolから変えるとセッション起動が長くなる場合があります。容量側でカスタムプールが許可されていることも確認します。",
+    "source": "https://learn.microsoft.com/en-us/fabric/data-engineering/workspace-admin-settings"
+  },
   "O02-A": {
     "source": "https://learn.microsoft.com/en-us/fabric/governance/domains"
   },
   "O02-B": {
+    "question": "人事ワークスペースを人事ドメインに割り当てた。利用者の閲覧範囲について正しい説明を2つ選べ。",
+    "choices": [
+      "ドメイン割り当てはコンテンツの分類や発見に役立つ",
+      "実際の閲覧可否はワークスペースロールやアイテム権限などで決まる",
+      "人事ドメイン外の利用者は自動で全アイテムを閲覧できなくなる",
+      "ドメインを設定すると各アイテムの権限が管理者だけにリセットされる"
+    ],
+    "explanation": "ドメインはワークスペースとそのアイテムに分類情報を付け、カタログで探しやすくします。ドメインへの割り当て自体はアクセス権を変更せず、閲覧可否は別の権限設定で制御します。",
     "source": "https://learn.microsoft.com/en-us/fabric/governance/domains"
   },
   "O02-C": {
@@ -375,6 +405,14 @@
     "source": "https://learn.microsoft.com/en-us/fabric/onelake/security/get-started-security"
   },
   "O03-B": {
+    "question": "閲覧者にはLakehouse内の特定の行と列だけを見せたい。権限の役割について正しい説明を2つ選べ。",
+    "choices": [
+      "ワークスペースロールやアイテム権限はアイテム操作の制御に使う",
+      "OneLakeのデータ権限はテーブル・行・列などに範囲を絞れる",
+      "ワークスペースのViewerロールだけで行フィルターを定義できる",
+      "アイテムの共有設定だけで任意の列を自動的に隠せる"
+    ],
+    "explanation": "アイテムの管理や共有などはワークスペース・アイテム権限が扱います。データの閲覧範囲はOneLakeセキュリティでテーブル、行、列などへ絞ります。",
     "source": "https://learn.microsoft.com/en-us/fabric/onelake/security/get-started-security"
   },
   "O03-C": {
@@ -384,6 +422,14 @@
     "source": "https://learn.microsoft.com/en-us/fabric/data-factory/apache-airflow-compute"
   },
   "O04-B": {
+    "question": "AirflowのDAGを週1回だけ試す環境と、常時稼働する本番環境を用意する。プール選択について正しい説明を2つ選べ。",
+    "choices": [
+      "低頻度の開発・テストにはStarter Poolが適する場合がある",
+      "起動待ちを抑えたい常時運用にはCustom Poolが適する場合がある",
+      "Starter Poolはアイドル後も常に起動したままになる",
+      "Custom Poolは停止しなくてもアイドル時の基本コストが発生しない"
+    ],
+    "explanation": "Starter Poolは低頻度の開発・テストに適し、アイドル後に停止します。Custom Poolは常時稼働する本番用途に向き、起動待ちを抑えますが、稼働中の基本コストがあります。",
     "source": "https://learn.microsoft.com/en-us/fabric/data-factory/apache-airflow-compute"
   },
   "O04-C": {
@@ -393,15 +439,42 @@
     "source": "https://learn.microsoft.com/en-us/fabric/cicd/git-integration/intro-to-git-integration"
   },
   "O05-B": {
+    "question": "複数人でFabricの対応アイテムを変更する。Git連携の性質として正しい説明を2つ選べ。",
+    "choices": [
+      "Git連携はワークスペース単位でアイテムを版管理する",
+      "ブランチを使って変更を分け、必要なら以前の状態へ戻せる",
+      "Git連携を有効にすると全種類のFabricアイテムが必ず対応する",
+      "Git連携はワークスペースの表示名だけを履歴化し、アイテムは対象外"
+    ],
+    "explanation": "Git連携はワークスペースの対応アイテムを版管理し、ブランチによる共同作業や以前の状態への復元に使えます。すべてのアイテム種別が対応するわけではありません。",
     "source": "https://learn.microsoft.com/en-us/fabric/cicd/git-integration/intro-to-git-integration"
   },
   "O05-C": {
     "source": "https://learn.microsoft.com/en-us/fabric/cicd/git-integration/intro-to-git-integration"
   },
+  "O06-B": {
+    "question": "Fabric Warehouse用のデータベースプロジェクトをVS Codeで新規作成する。正しい設定を2つ選べ。",
+    "choices": [
+      "ターゲットプラットフォームにSynapse Data Warehouse in Microsoft Fabricを選ぶ",
+      "Fabric WarehouseではSDK形式のSQLプロジェクトを使う",
+      "ターゲットにAzure SQL Databaseだけを選べばFabric Warehouseへ直接公開できる",
+      "Fabric Warehouseでは非SDK形式のプロジェクトだけがサポートされる"
+    ],
+    "explanation": "Microsoft Learnの手順ではターゲットにSynapse Data Warehouse in Microsoft Fabricを選び、Fabric WarehouseでサポートされるSDK形式のプロジェクトを作ります。この機能は現時点でプレビューです。",
+    "source": "https://learn.microsoft.com/en-us/fabric/data-warehouse/develop-warehouse-project"
+  },
   "O07-A": {
     "source": "https://learn.microsoft.com/en-us/fabric/cicd/deployment-pipelines/intro-to-deployment-pipelines"
   },
   "O07-B": {
+    "question": "開発から本番への配布をGit連携とDeployment pipelineで管理する。両者の役割について正しい説明を2つ選べ。",
+    "choices": [
+      "Deployment pipelineはステージ間で対応アイテムを配布する",
+      "Git連携は対応アイテムの版管理に使う",
+      "Deployment pipelineを作ればGitの履歴やブランチが自動で作られる",
+      "Git連携だけでテスト・本番ステージ間の配布が自動的に完了する"
+    ],
+    "explanation": "Deployment pipelineは対応アイテムを開発・テスト・本番などのステージ間へ配布します。Git連携は変更の版管理を担い、両者の役割は異なります。",
     "source": "https://learn.microsoft.com/en-us/fabric/cicd/deployment-pipelines/intro-to-deployment-pipelines"
   },
   "O07-C": {
@@ -411,6 +484,14 @@
     "source": "https://learn.microsoft.com/en-us/fabric/fundamentals/roles-workspaces"
   },
   "O08-B": {
+    "question": "Fabricワークスペースのロールごとの権限について正しい説明を2つ選べ。",
+    "choices": [
+      "ContributorはWarehouseアイテムを作成・変更できる",
+      "AdminはワークスペースをGitリポジトリへ接続できる",
+      "Viewerはワークスペースの管理者を追加できる",
+      "Contributorはワークスペースの管理者を削除できる"
+    ],
+    "explanation": "Microsoft Learnのロール表では、Contributor以上がWarehouseを作成・変更でき、Git接続はAdminの権限です。ViewerやContributorに管理者の追加・削除権限はありません。",
     "source": "https://learn.microsoft.com/en-us/fabric/fundamentals/roles-workspaces"
   },
   "O08-C": {
@@ -1048,7 +1129,8 @@
   }
 };
 const currentRevisions=new Set(["C-SQL-02","C-SQL-03","C-SQL-04","C-SQL-05","C-SQL-06","C-SQL-08","C-SQL-10","C-PY-01","C-PY-02","C-PY-04","C-PY-05","C-PY-06","C-PY-07","C-PY-08","C-PY-09","C-PY-10","C-KQL-01","C-KQL-02","C-KQL-03","C-KQL-04","C-KQL-06","C-KQL-07","C-KQL-08","C-KQL-10"]);
-for(const name of ["DP700_QUESTIONS","DP700_BASICS","DP700_INTERMEDIATE","DP700_ADVANCED","DP700_BRIDGE","DP700_PA_LIVE_20261106","DP700_PA_20261114","DP700_PA_PDF_20261112"]){for(const q of window[name]||[]){if(patches[q.id])Object.assign(q,patches[q.id],{qualityRevision:currentRevisions.has(q.id)?"2026-11-26":"2026-11-16"});
+const coreRevisions=new Set(["O01-A","O01-B","O02-B","O03-B","O04-B","O05-B","O06-B","O07-B","O08-B"]);
+for(const name of ["DP700_QUESTIONS","DP700_BASICS","DP700_INTERMEDIATE","DP700_ADVANCED","DP700_BRIDGE","DP700_PA_LIVE_20261106","DP700_PA_20261114","DP700_PA_PDF_20261112"]){for(const q of window[name]||[]){if(patches[q.id])Object.assign(q,patches[q.id],{qualityRevision:coreRevisions.has(q.id)?"2026-11-27":currentRevisions.has(q.id)?"2026-11-26":"2026-11-16"});
 const urlFixes={"https://learn.microsoft.com/en-us/fabric/data-engineering/spark-streaming-overview":"https://learn.microsoft.com/en-us/fabric/data-engineering/structured-streaming-overview","https://learn.microsoft.com/en-us/fabric/data-factory/cdc-overview":"https://learn.microsoft.com/en-us/fabric/data-factory/cdc-copy-job","https://learn.microsoft.com/en-us/fabric/data-warehouse/load-data":"https://learn.microsoft.com/en-us/fabric/data-warehouse/ingest-data-copy","https://learn.microsoft.com/en-us/fabric/fundamentals/monitoring-hub":"https://learn.microsoft.com/en-us/fabric/data-factory/monitor-data-factory"};
 if(urlFixes[q.source])q.source=urlFixes[q.source];}}
 })();
