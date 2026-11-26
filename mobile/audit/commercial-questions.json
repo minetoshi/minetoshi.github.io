@@ -1090,7 +1090,7 @@
     {
       "id": "O12-A",
       "bank": "DP700_QUESTIONS",
-      "contentSha256": "d770a465136175b36f4044e09016c9cfce212050b49b63c2157fbd968b7db5e4",
+      "contentSha256": "694d7c1e75ee9f0f38bd6b2239b14b04f26837cbef62fcbf2636ba9e54587e05",
       "included": true,
       "exclusionReason": null,
       "question": "機密度を分類し、派生コンテンツにも情報保護方針を反映したい。 最も適切な対応はどれか。",
@@ -1099,9 +1099,9 @@
       "type": "single",
       "choices": [
         "Sensitivity labelを適切なFabricアイテムへ適用する",
-        "Lakehouseを削除する",
-        "Spark poolを変更する",
-        "Pipelineの並列度だけ下げる"
+        "PromotedやCertifiedを付ければ機密度の分類と派生先へのラベル伝播が行われる",
+        "Workspaceロールを設定すれば派生した全コンテンツに同じ機密ラベルが自動付与される",
+        "ドメインに割り当てれば情報保護ポリシーが派生アイテムへ自動適用される"
       ],
       "selectCount": 1,
       "answerIndices": [
@@ -1110,9 +1110,9 @@
       "correctChoices": [
         "Sensitivity labelを適切なFabricアイテムへ適用する"
       ],
-      "explanation": "Sensitivity labelを適切なFabricアイテムへ適用する。ラベル伝播や組織の情報保護ポリシーを確認する。",
+      "explanation": "機密度の分類にはSensitivity labelと組織の情報保護ポリシーを使い、対応する派生コンテンツへのラベル伝播条件も確認します。Endorsementは信頼度、Workspaceロールは操作権限、ドメインは分類と発見を主に扱います。",
       "source": "https://learn.microsoft.com/en-us/fabric/governance/information-protection",
-      "contentReview": "2026-11-16 prior question-level review; current structural recheck; content hash locked",
+      "contentReview": "2026-11-27 independent core A distractor review; see core-a-review-20261127.md; content hash locked",
       "specEvidence": "independent expected answer; Learn URL is a reference, not an official individual answer",
       "officialIndividualAnswer": false,
       "rightsReview": "No PDF or Practice Assessment origin metadata and no embedded third-party image; exact content is locked for future review",
@@ -1482,7 +1482,7 @@
     {
       "id": "O18-A",
       "bank": "DP700_QUESTIONS",
-      "contentSha256": "0e9b2aa9fd7f2498655355e8703fc11367ef42f49c63299a187d3fb2e0d92923",
+      "contentSha256": "7d4c92c18843b0eac9bd85f2b9dc1b58c0a4e52196ebc3f3bfa5a978c58055c1",
       "included": true,
       "exclusionReason": null,
       "question": "同じPipelineを複数テーブル・環境で再利用したい。 最も適切な対応はどれか。",
@@ -1490,21 +1490,21 @@
       "code": null,
       "type": "single",
       "choices": [
-        "Pipeline/NotebookのパラメーターとDynamic expressionsを使ってハードコードを減らす",
-        "テーブルごとにPipelineを完全複製する",
-        "本番値をコードへ直書きする",
-        "毎回手作業でJSONを書き換える"
+        "Pipelineのパラメーターと動的式でテーブル名・接続先を実行時に渡す",
+        "Pipelineの変数にテーブル名を固定し、環境が変わるたびに定義を手動修正する",
+        "環境ごとにPipelineを複製し、テーブル追加時には全コピーを手動で変更する",
+        "Pipelineの表示名だけを実行時に変え、接続先と対象テーブルを切り替える"
       ],
       "selectCount": 1,
       "answerIndices": [
         0
       ],
       "correctChoices": [
-        "Pipeline/NotebookのパラメーターとDynamic expressionsを使ってハードコードを減らす"
+        "Pipelineのパラメーターと動的式でテーブル名・接続先を実行時に渡す"
       ],
-      "explanation": "Pipeline/NotebookのパラメーターとDynamic expressionsを使ってハードコードを減らす。依存関係、実行時値、接続やパスの差分を安全に渡す。",
+      "explanation": "Pipelineのパラメーターは実行ごとに値を渡せ、動的式でテーブル名や接続先の差分を扱えます。固定値の手動編集や環境別コピーは保守負担が大きく、表示名の変更だけでは処理対象は切り替わりません。",
       "source": "https://learn.microsoft.com/en-us/fabric/data-factory/parameters",
-      "contentReview": "2026-11-16 prior question-level review; current structural recheck; content hash locked",
+      "contentReview": "2026-11-27 independent core A distractor review; see core-a-review-20261127.md; content hash locked",
       "specEvidence": "independent expected answer; Learn URL is a reference, not an official individual answer",
       "officialIndividualAnswer": false,
       "rightsReview": "No PDF or Practice Assessment origin metadata and no embedded third-party image; exact content is locked for future review",
@@ -1580,7 +1580,7 @@
     {
       "id": "O19-A",
       "bank": "DP700_QUESTIONS",
-      "contentSha256": "cafc70826af43ab122137c69ddf2515fe8f4d52aa372a51f63d14caf22c01b32",
+      "contentSha256": "b4103bc58d9aa345506e8a004865d1371dcacc73bead8f9a8a84c8f48df264df",
       "included": true,
       "exclusionReason": null,
       "question": "初回は全件、以降は変更分だけ効率よく読み込みたい。 最も適切な対応はどれか。",
@@ -1589,9 +1589,9 @@
       "type": "single",
       "choices": [
         "初回Full load後、watermark/変更検知を使ったIncremental loadを設計する",
-        "毎回必ず全件削除して再ロードする",
-        "変更判定を持たずランダムに抽出する",
-        "RLSで変更行を推定する"
+        "毎回全件をコピーして宛先で重複だけ削除し、ソースからの読取量は減らさない",
+        "watermarkを実行開始時に次回値へ進め、コピーが失敗してもその値を維持する",
+        "前回のwatermarkを保存せず、毎回の最大時刻だけを次回範囲の下限に使う"
       ],
       "selectCount": 1,
       "answerIndices": [
@@ -1600,9 +1600,9 @@
       "correctChoices": [
         "初回Full load後、watermark/変更検知を使ったIncremental loadを設計する"
       ],
-      "explanation": "初回Full load後、watermark/変更検知を使ったIncremental loadを設計する。再実行時の冪等性とwatermark更新タイミングを設計する。",
+      "explanation": "初回全件取得の後は、保存した前回値と今回値の間だけを読み込みます。コピー成功後にwatermarkを進め、再実行時の重複や取りこぼしも設計します。全件コピーは読取量を減らせず、先に進捗を確定すると失敗時に欠落し得ます。",
       "source": "https://learn.microsoft.com/en-us/fabric/data-factory/tutorial-incremental-copy-data-warehouse-lakehouse",
-      "contentReview": "2026-11-16 prior question-level review; current structural recheck; content hash locked",
+      "contentReview": "2026-11-27 independent core A distractor review; see core-a-review-20261127.md; content hash locked",
       "specEvidence": "independent expected answer; Learn URL is a reference, not an official individual answer",
       "officialIndividualAnswer": false,
       "rightsReview": "No PDF or Practice Assessment origin metadata and no embedded third-party image; exact content is locked for future review",
@@ -1678,7 +1678,7 @@
     {
       "id": "O20-A",
       "bank": "DP700_QUESTIONS",
-      "contentSha256": "fb5e722ced5399f6321b57366e75ab90cca14604379af62c4e29f3ba3258b7ab",
+      "contentSha256": "f23d426c9a9bc33dfe136248a837ccf0bc6de2304439da90b830cf62b3404174",
       "included": true,
       "exclusionReason": null,
       "question": "分析用のFact/Dimensionモデルへロードする前処理を行いたい。 最も適切な対応はどれか。",
@@ -1687,9 +1687,9 @@
       "type": "single",
       "choices": [
         "粒度を定義し、ディメンションキー・重複・履歴・データ型を整える",
-        "すべてを1列のJSONにする",
-        "主キーを削除して関係をなくす",
-        "集計粒度を毎回変える"
+        "Factの行数だけを合わせ、Dimensionキーの不一致や履歴はロード時に無視する",
+        "FactとDimensionの列名だけをそろえ、各Fact行の粒度はロード後に決める",
+        "数値メジャーをDimensionへ移し、Factには説明属性だけを残して結合する"
       ],
       "selectCount": 1,
       "answerIndices": [
@@ -1698,9 +1698,9 @@
       "correctChoices": [
         "粒度を定義し、ディメンションキー・重複・履歴・データ型を整える"
       ],
-      "explanation": "粒度を定義し、ディメンションキー・重複・履歴・データ型を整える。FactとDimensionの関係、サロゲートキーや遅延到着ディメンションを考慮する。",
+      "explanation": "Factの観測粒度とDimensionとのキー関係を先に決め、重複・履歴・型を整えます。Factは測定値とDimensionキー、Dimensionは説明属性を持つ構成が基本です。行数や列名だけを合わせても粒度と参照整合性は保証されません。",
       "source": "https://learn.microsoft.com/en-us/fabric/data-warehouse/dimensional-modeling-overview",
-      "contentReview": "2026-11-16 prior question-level review; current structural recheck; content hash locked",
+      "contentReview": "2026-11-27 independent core A distractor review; see core-a-review-20261127.md; content hash locked",
       "specEvidence": "independent expected answer; Learn URL is a reference, not an official individual answer",
       "officialIndividualAnswer": false,
       "rightsReview": "No PDF or Practice Assessment origin metadata and no embedded third-party image; exact content is locked for future review",
@@ -1874,7 +1874,7 @@
     {
       "id": "O22-A",
       "bank": "DP700_QUESTIONS",
-      "contentSha256": "2a6470cd0e6049f67cca21f8db2555a649ad7f998d7e2d04fe913b1c628fb27b",
+      "contentSha256": "49f7174dd27b803c779835d6643040a7c53df005b69245ad4495f13c57c28c0d",
       "included": true,
       "exclusionReason": null,
       "question": "Spark/Delta、SQL分析、リアルタイムイベントなど用途に合う保存先を選びたい。 最も適切な対応はどれか。",
@@ -1883,9 +1883,9 @@
       "type": "single",
       "choices": [
         "Lakehouse/Warehouse/Eventhouse/Mirrored database等をワークロード特性で選ぶ",
-        "常にWarehouseだけを選ぶ",
-        "常にLakehouseだけを選ぶ",
-        "保存先を選ばずCSVだけにする"
+        "Lakehouseに統一し、Warehouse向けのSQL分析もリアルタイムイベントも全てNotebookで処理する",
+        "Warehouseに統一し、非構造化ファイルも高頻度イベントも全てSQLテーブルへ格納する",
+        "Eventhouseに統一し、SparkのDeltaテーブルと業務DBの継続レプリカをKQLテーブルで代替する"
       ],
       "selectCount": 1,
       "answerIndices": [
@@ -1894,9 +1894,9 @@
       "correctChoices": [
         "Lakehouse/Warehouse/Eventhouse/Mirrored database等をワークロード特性で選ぶ"
       ],
-      "explanation": "Lakehouse/Warehouse/Eventhouse/Mirrored database等をワークロード特性で選ぶ。SQL中心かSpark中心か、リアルタイム性、レプリケーション要否を比較する。",
+      "explanation": "LakehouseはファイルとDelta、Warehouseは構造化データのSQL分析、Eventhouseは高頻度イベントに向きます。業務DBの継続同期が必要なら対応ソースのMirroringも検討し、ワークロードに合わせて選びます。",
       "source": "https://learn.microsoft.com/en-us/fabric/fundamentals/store-data",
-      "contentReview": "2026-11-16 prior question-level review; current structural recheck; content hash locked",
+      "contentReview": "2026-11-27 independent core A distractor review; see core-a-review-20261127.md; content hash locked",
       "specEvidence": "independent expected answer; Learn URL is a reference, not an official individual answer",
       "officialIndividualAnswer": false,
       "rightsReview": "No PDF or Practice Assessment origin metadata and no embedded third-party image; exact content is locked for future review",
@@ -2658,7 +2658,7 @@
     {
       "id": "O30-A",
       "bank": "DP700_QUESTIONS",
-      "contentSha256": "8ee41ecb486db7d0f1c70b879a27698b65662427d8d85e124f879298511db574",
+      "contentSha256": "7daec017f4eec8e1e241ced3457179762d498df587a5a702eb82c7caba716409",
       "included": true,
       "exclusionReason": null,
       "question": "重複・欠損・遅延到着があるデータを品質維持しながら処理したい。 最も適切な対応はどれか。",
@@ -2667,9 +2667,9 @@
       "type": "single",
       "choices": [
         "重複排除、NULL処理、watermark/遅延許容などを要件に応じて実装する",
-        "エラー行をすべて黙って削除する",
-        "全列を文字列にするだけ",
-        "Git履歴でNULLを補完する"
+        "重複排除だけを適用し、遅れて到着したイベントは到着時刻に関係なく破棄する",
+        "watermarkだけを設定し、欠損値と重複キーは入力元が必ず処理すると仮定する",
+        "欠損値を一律の固定値に置き換え、キー・時刻の違いを確認せず集計する"
       ],
       "selectCount": 1,
       "answerIndices": [
@@ -2678,9 +2678,9 @@
       "correctChoices": [
         "重複排除、NULL処理、watermark/遅延許容などを要件に応じて実装する"
       ],
-      "explanation": "重複排除、NULL処理、watermark/遅延許容などを要件に応じて実装する。再送・冪等性・遅延到着ディメンションの扱いを設計する。",
+      "explanation": "重複、欠損、遅延到着は別の問題として扱います。ストリームではキーに基づく重複排除、妥当なNULL処理、watermarkと遅延許容を要件に合わせます。checkpointは進捗と状態を保持しますが、品質ルールそのものの代わりにはなりません。",
       "source": "https://learn.microsoft.com/en-us/fabric/data-engineering/structured-streaming-stateful-processing",
-      "contentReview": "2026-11-16 prior question-level review; current structural recheck; content hash locked",
+      "contentReview": "2026-11-27 independent core A distractor review; see core-a-review-20261127.md; content hash locked",
       "specEvidence": "independent expected answer; Learn URL is a reference, not an official individual answer",
       "officialIndividualAnswer": false,
       "rightsReview": "No PDF or Practice Assessment origin metadata and no embedded third-party image; exact content is locked for future review",
@@ -3442,7 +3442,7 @@
     {
       "id": "O40-A",
       "bank": "DP700_QUESTIONS",
-      "contentSha256": "613045854d2b3c2f5fd5014a5050713b3a349d822f60eb8816abe46270a6abab",
+      "contentSha256": "e3c13cd40b9bf4b49dd1e640eda21d6614ddeb3ffb9956c314e58e7886159e71",
       "included": true,
       "exclusionReason": null,
       "question": "Semantic modelの更新失敗や長時間化を検知したい。 最も適切な対応はどれか。",
@@ -3451,9 +3451,9 @@
       "type": "single",
       "choices": [
         "更新履歴/Monitoring hub等でrefresh状態・時間・失敗を監視する",
-        "RLSを解除して監視する",
-        "Gitでrefreshを代替する",
-        "Shortcutを削除する"
+        "Capacity Metrics appの使用率だけで各モデルの更新失敗原因と所要時間を判定する",
+        "レポートの応答時間だけを監視し、Importモデルの更新履歴は参照しない",
+        "Gitコミット日時を更新完了時刻として扱い、失敗したrefreshを検出する"
       ],
       "selectCount": 1,
       "answerIndices": [
@@ -3462,9 +3462,9 @@
       "correctChoices": [
         "更新履歴/Monitoring hub等でrefresh状態・時間・失敗を監視する"
       ],
-      "explanation": "更新履歴/Monitoring hub等でrefresh状態・時間・失敗を監視する。失敗通知や傾向監視を運用へ組み込む。",
+      "explanation": "Semantic modelの更新履歴から実行結果と所要時間、失敗の詳細を確認します。容量の使用率やレポートの応答時間だけでは個別の更新失敗を特定できません。Importモデルはソースデータの更新が必要です。",
       "source": "https://learn.microsoft.com/en-us/power-bi/connect-data/refresh-data",
-      "contentReview": "2026-11-16 prior question-level review; current structural recheck; content hash locked",
+      "contentReview": "2026-11-27 independent core A distractor review; see core-a-review-20261127.md; content hash locked",
       "specEvidence": "independent expected answer; Learn URL is a reference, not an official individual answer",
       "officialIndividualAnswer": false,
       "rightsReview": "No PDF or Practice Assessment origin metadata and no embedded third-party image; exact content is locked for future review",
@@ -3638,7 +3638,7 @@
     {
       "id": "O42-A",
       "bank": "DP700_QUESTIONS",
-      "contentSha256": "63ae08cf18a9f7908f82b726f64ed5f999b487d5b6eab5cfedfe32b50e22a8b9",
+      "contentSha256": "639240bc2db9a3f67f59917d41abf315510c99a9b5be065b628bab6c34c0e7ac",
       "included": true,
       "exclusionReason": null,
       "question": "Pipelineが失敗した原因を特定して再実行したい。 最も適切な対応はどれか。",
@@ -3647,9 +3647,9 @@
       "type": "single",
       "choices": [
         "Monitoring hubで失敗Activity、入力/出力、エラー詳細を確認して修正する",
-        "計測せずに最初からcapacityだけ増強する",
-        "すぐ全データを消去する",
-        "エラーを見ずに無限Retryする"
+        "パイプライン全体の実行時間だけで失敗Activityとエラーコードを推測する",
+        "Capacity Metricsで容量だけ調べ、Activityの入力出力やエラーは確認しない",
+        "Retry回数を増やし、同じ入力の再実行だけから恒久的な原因を推測する"
       ],
       "selectCount": 1,
       "answerIndices": [
@@ -3658,9 +3658,9 @@
       "correctChoices": [
         "Monitoring hubで失敗Activity、入力/出力、エラー詳細を確認して修正する"
       ],
-      "explanation": "Monitoring hubで失敗Activity、入力/出力、エラー詳細を確認して修正する。Retry可能な一時障害か、設定/データ不備かを切り分ける。",
+      "explanation": "失敗したActivityの入力・出力・エラー詳細を確認し、接続、設定、データ、権限などの原因を切り分けてから再実行します。全体時間や容量だけでは個別の失敗原因は分かりません。",
       "source": "https://learn.microsoft.com/en-us/fabric/data-factory/pipeline-troubleshoot-guide",
-      "contentReview": "2026-11-16 prior question-level review; current structural recheck; content hash locked",
+      "contentReview": "2026-11-27 independent core A distractor review; see core-a-review-20261127.md; content hash locked",
       "specEvidence": "independent expected answer; Learn URL is a reference, not an official individual answer",
       "officialIndividualAnswer": false,
       "rightsReview": "No PDF or Practice Assessment origin metadata and no embedded third-party image; exact content is locked for future review",
@@ -4324,7 +4324,7 @@
     {
       "id": "O50-A",
       "bank": "DP700_QUESTIONS",
-      "contentSha256": "6f9038c121291b11a5c23cec4725d592c2441907020e7bf3216b71f618ecf78f",
+      "contentSha256": "11d43b9cb4c7ba921e037373eb6e4524df979b738ecdf0105ee5e81d14a14c63",
       "included": true,
       "exclusionReason": null,
       "question": "Pipeline全体の所要時間が長い。 最も適切な対応はどれか。",
@@ -4333,9 +4333,9 @@
       "type": "single",
       "choices": [
         "Activityごとの時間を計測し、ボトルネック・並列化・Copy設定を最適化する",
-        "計測せずcapacityだけ最大化する",
-        "全Activityを1つにまとめる",
-        "ログを無効化する"
+        "パイプライン全体の時間だけを測り、各Activityの時間内訳は調べない",
+        "容量サイズを先に最大化し、Copyのソースと並列度の設定は確認しない",
+        "Copy activityをすべて直列化し、待ち時間の短いActivityから調整する"
       ],
       "selectCount": 1,
       "answerIndices": [
@@ -4344,9 +4344,9 @@
       "correctChoices": [
         "Activityごとの時間を計測し、ボトルネック・並列化・Copy設定を最適化する"
       ],
-      "explanation": "Activityごとの時間を計測し、ボトルネック・並列化・Copy設定を最適化する。不要な直列依存を減らし、Retry/データ量/ソース制約を確認する。",
+      "explanation": "Activityごとの時間とデータ量を確認し、遅い処理や不要な直列依存、Copyの設定を絞って改善します。全体時間だけではボトルネックを特定できず、容量増加だけでソース側の制約は解決しません。",
       "source": "https://learn.microsoft.com/en-us/fabric/data-factory/monitor-data-factory",
-      "contentReview": "2026-11-16 prior question-level review; current structural recheck; content hash locked",
+      "contentReview": "2026-11-27 independent core A distractor review; see core-a-review-20261127.md; content hash locked",
       "specEvidence": "independent expected answer; Learn URL is a reference, not an official individual answer",
       "officialIndividualAnswer": false,
       "rightsReview": "No PDF or Practice Assessment origin metadata and no embedded third-party image; exact content is locked for future review",
@@ -4422,7 +4422,7 @@
     {
       "id": "O51-A",
       "bank": "DP700_QUESTIONS",
-      "contentSha256": "cde9371a82ed41c6537d242a896c47172d9442b14277ed8bb29a0c7e6bd9407f",
+      "contentSha256": "8fc0e5a63a53a4b36e69e653c5acd1b9d06601019eef451a7b948d9420b63b5b",
       "included": true,
       "exclusionReason": null,
       "question": "Warehouseクエリが遅い。 最も適切な対応はどれか。",
@@ -4431,9 +4431,9 @@
       "type": "single",
       "choices": [
         "クエリパターン、フィルター、結合、データ量、実行特性を確認して最適化する",
-        "最初にRLSをすべて削除する",
-        "Gitを無効化する",
-        "毎回SELECT *を推奨する"
+        "容量サイズだけを上げ、フィルター・結合・統計の状態は調べずに比較する",
+        "最初の1回の実行時間だけで判断し、キャッシュや統計更新の影響は分けない",
+        "常に全列をSELECTして実行計画を単純化し、不要列の読取量も増やす"
       ],
       "selectCount": 1,
       "answerIndices": [
@@ -4442,9 +4442,9 @@
       "correctChoices": [
         "クエリパターン、フィルター、結合、データ量、実行特性を確認して最適化する"
       ],
-      "explanation": "クエリパターン、フィルター、結合、データ量、実行特性を確認して最適化する。不要列/不要行のスキャンを減らし、データモデルも見直す。",
+      "explanation": "Warehouseではフィルター、結合、統計、データ型と実行特性を調べます。初回はコールドスタートで遅くなる場合があるため、後続実行やremote scan量とも比較し、不要行・列の読取量を減らします。",
       "source": "https://learn.microsoft.com/en-us/fabric/data-warehouse/guidelines-warehouse-performance",
-      "contentReview": "2026-11-16 prior question-level review; current structural recheck; content hash locked",
+      "contentReview": "2026-11-27 independent core A distractor review; see core-a-review-20261127.md; content hash locked",
       "specEvidence": "independent expected answer; Learn URL is a reference, not an official individual answer",
       "officialIndividualAnswer": false,
       "rightsReview": "No PDF or Practice Assessment origin metadata and no embedded third-party image; exact content is locked for future review",
@@ -4520,7 +4520,7 @@
     {
       "id": "O52-A",
       "bank": "DP700_QUESTIONS",
-      "contentSha256": "e0a47ebb6bbaa0da441c1b23593a7b59574f6f137c9a655ea273305f69062915",
+      "contentSha256": "d96e8caf35eaa58750c3ca5222ca71244de9b026ae91f885e179683d80c6347a",
       "included": true,
       "exclusionReason": null,
       "question": "リアルタイム処理の遅延とEventhouseクエリ時間を下げたい。 最も適切な対応はどれか。",
@@ -4528,21 +4528,21 @@
       "code": null,
       "type": "single",
       "choices": [
-        "取り込み率・バックログ・Eventhouse状態を測り、早期filterや適切な保存/アクセラレーションを使う",
-        "常に全期間全列を読む",
-        "Git commit数を増やす",
-        "Sensitivity labelを外す"
+        "EventhouseのSystem overviewで取り込みと容量を確認し、KQL対象期間やPremium cacheを見直す",
+        "Eventhouseの容量だけ増やし、取り込み率やPremium cacheの状態は確認しない",
+        "KQLの期間指定を外して全期間のデータを読み、遅延箇所を推測する",
+        "Eventstreamのソース件数だけを見て、宛先とEventhouseの状態は調べない"
       ],
       "selectCount": 1,
       "answerIndices": [
         0
       ],
       "correctChoices": [
-        "取り込み率・バックログ・Eventhouse状態を測り、早期filterや適切な保存/アクセラレーションを使う"
+        "EventhouseのSystem overviewで取り込みと容量を確認し、KQL対象期間やPremium cacheを見直す"
       ],
-      "explanation": "取り込み率・バックログ・Eventhouse状態を測り、早期filterや適切な保存/アクセラレーションを使う。KQLの対象期間/列を絞り、RTIの容量とストレージ設計も確認する。",
+      "explanation": "EventhouseのSystem overviewは取り込み率、状態、ストレージや計算の使用状況を示します。取り込みとクエリのどちらが遅いかを分け、対象期間とPremium cacheの利用状況を確認します。",
       "source": "https://learn.microsoft.com/en-us/fabric/real-time-intelligence/manage-monitor-eventhouse",
-      "contentReview": "2026-11-16 prior question-level review; current structural recheck; content hash locked",
+      "contentReview": "2026-11-27 independent core A distractor review; see core-a-review-20261127.md; content hash locked",
       "specEvidence": "independent expected answer; Learn URL is a reference, not an official individual answer",
       "officialIndividualAnswer": false,
       "rightsReview": "No PDF or Practice Assessment origin metadata and no embedded third-party image; exact content is locked for future review",

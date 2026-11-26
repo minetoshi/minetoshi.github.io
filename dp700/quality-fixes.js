@@ -1589,11 +1589,114 @@ const coreARevisions={
     explanation: "Dynamic Data Maskingは指定列のクエリ結果を非特権ユーザー向けにマスクし、保存データは変更しません。CLSは列へのアクセス制限、RLSは行へのアクセス制限で、マスク表示とは別です。"
   }
 };
+// 正答だけが極端に長くならないよう、同じ論点内の誤解を比較する。
+const coreABalanceRevisions={
+  "O12-A": {
+    choices: [
+      "Sensitivity labelを適切なFabricアイテムへ適用する",
+      "PromotedやCertifiedを付ければ機密度の分類と派生先へのラベル伝播が行われる",
+      "Workspaceロールを設定すれば派生した全コンテンツに同じ機密ラベルが自動付与される",
+      "ドメインに割り当てれば情報保護ポリシーが派生アイテムへ自動適用される"
+    ],
+    explanation: "機密度の分類にはSensitivity labelと組織の情報保護ポリシーを使い、対応する派生コンテンツへのラベル伝播条件も確認します。Endorsementは信頼度、Workspaceロールは操作権限、ドメインは分類と発見を主に扱います。"
+  },
+  "O18-A": {
+    choices: [
+      "Pipelineのパラメーターと動的式でテーブル名・接続先を実行時に渡す",
+      "Pipelineの変数にテーブル名を固定し、環境が変わるたびに定義を手動修正する",
+      "環境ごとにPipelineを複製し、テーブル追加時には全コピーを手動で変更する",
+      "Pipelineの表示名だけを実行時に変え、接続先と対象テーブルを切り替える"
+    ],
+    explanation: "Pipelineのパラメーターは実行ごとに値を渡せ、動的式でテーブル名や接続先の差分を扱えます。固定値の手動編集や環境別コピーは保守負担が大きく、表示名の変更だけでは処理対象は切り替わりません。"
+  },
+  "O19-A": {
+    choices: [
+      "初回Full load後、watermark/変更検知を使ったIncremental loadを設計する",
+      "毎回全件をコピーして宛先で重複だけ削除し、ソースからの読取量は減らさない",
+      "watermarkを実行開始時に次回値へ進め、コピーが失敗してもその値を維持する",
+      "前回のwatermarkを保存せず、毎回の最大時刻だけを次回範囲の下限に使う"
+    ],
+    explanation: "初回全件取得の後は、保存した前回値と今回値の間だけを読み込みます。コピー成功後にwatermarkを進め、再実行時の重複や取りこぼしも設計します。全件コピーは読取量を減らせず、先に進捗を確定すると失敗時に欠落し得ます。"
+  },
+  "O20-A": {
+    choices: [
+      "粒度を定義し、ディメンションキー・重複・履歴・データ型を整える",
+      "Factの行数だけを合わせ、Dimensionキーの不一致や履歴はロード時に無視する",
+      "FactとDimensionの列名だけをそろえ、各Fact行の粒度はロード後に決める",
+      "数値メジャーをDimensionへ移し、Factには説明属性だけを残して結合する"
+    ],
+    explanation: "Factの観測粒度とDimensionとのキー関係を先に決め、重複・履歴・型を整えます。Factは測定値とDimensionキー、Dimensionは説明属性を持つ構成が基本です。行数や列名だけを合わせても粒度と参照整合性は保証されません。"
+  },
+  "O22-A": {
+    choices: [
+      "Lakehouse/Warehouse/Eventhouse/Mirrored database等をワークロード特性で選ぶ",
+      "Lakehouseに統一し、Warehouse向けのSQL分析もリアルタイムイベントも全てNotebookで処理する",
+      "Warehouseに統一し、非構造化ファイルも高頻度イベントも全てSQLテーブルへ格納する",
+      "Eventhouseに統一し、SparkのDeltaテーブルと業務DBの継続レプリカをKQLテーブルで代替する"
+    ],
+    explanation: "LakehouseはファイルとDelta、Warehouseは構造化データのSQL分析、Eventhouseは高頻度イベントに向きます。業務DBの継続同期が必要なら対応ソースのMirroringも検討し、ワークロードに合わせて選びます。"
+  },
+  "O30-A": {
+    choices: [
+      "重複排除、NULL処理、watermark/遅延許容などを要件に応じて実装する",
+      "重複排除だけを適用し、遅れて到着したイベントは到着時刻に関係なく破棄する",
+      "watermarkだけを設定し、欠損値と重複キーは入力元が必ず処理すると仮定する",
+      "欠損値を一律の固定値に置き換え、キー・時刻の違いを確認せず集計する"
+    ],
+    explanation: "重複、欠損、遅延到着は別の問題として扱います。ストリームではキーに基づく重複排除、妥当なNULL処理、watermarkと遅延許容を要件に合わせます。checkpointは進捗と状態を保持しますが、品質ルールそのものの代わりにはなりません。"
+  },
+  "O40-A": {
+    choices: [
+      "更新履歴/Monitoring hub等でrefresh状態・時間・失敗を監視する",
+      "Capacity Metrics appの使用率だけで各モデルの更新失敗原因と所要時間を判定する",
+      "レポートの応答時間だけを監視し、Importモデルの更新履歴は参照しない",
+      "Gitコミット日時を更新完了時刻として扱い、失敗したrefreshを検出する"
+    ],
+    explanation: "Semantic modelの更新履歴から実行結果と所要時間、失敗の詳細を確認します。容量の使用率やレポートの応答時間だけでは個別の更新失敗を特定できません。Importモデルはソースデータの更新が必要です。"
+  },
+  "O42-A": {
+    choices: [
+      "Monitoring hubで失敗Activity、入力/出力、エラー詳細を確認して修正する",
+      "パイプライン全体の実行時間だけで失敗Activityとエラーコードを推測する",
+      "Capacity Metricsで容量だけ調べ、Activityの入力出力やエラーは確認しない",
+      "Retry回数を増やし、同じ入力の再実行だけから恒久的な原因を推測する"
+    ],
+    explanation: "失敗したActivityの入力・出力・エラー詳細を確認し、接続、設定、データ、権限などの原因を切り分けてから再実行します。全体時間や容量だけでは個別の失敗原因は分かりません。"
+  },
+  "O50-A": {
+    choices: [
+      "Activityごとの時間を計測し、ボトルネック・並列化・Copy設定を最適化する",
+      "パイプライン全体の時間だけを測り、各Activityの時間内訳は調べない",
+      "容量サイズを先に最大化し、Copyのソースと並列度の設定は確認しない",
+      "Copy activityをすべて直列化し、待ち時間の短いActivityから調整する"
+    ],
+    explanation: "Activityごとの時間とデータ量を確認し、遅い処理や不要な直列依存、Copyの設定を絞って改善します。全体時間だけではボトルネックを特定できず、容量増加だけでソース側の制約は解決しません。"
+  },
+  "O51-A": {
+    choices: [
+      "クエリパターン、フィルター、結合、データ量、実行特性を確認して最適化する",
+      "容量サイズだけを上げ、フィルター・結合・統計の状態は調べずに比較する",
+      "最初の1回の実行時間だけで判断し、キャッシュや統計更新の影響は分けない",
+      "常に全列をSELECTして実行計画を単純化し、不要列の読取量も増やす"
+    ],
+    explanation: "Warehouseではフィルター、結合、統計、データ型と実行特性を調べます。初回はコールドスタートで遅くなる場合があるため、後続実行やremote scan量とも比較し、不要行・列の読取量を減らします。"
+  },
+  "O52-A": {
+    choices: [
+      "EventhouseのSystem overviewで取り込みと容量を確認し、KQL対象期間やPremium cacheを見直す",
+      "Eventhouseの容量だけ増やし、取り込み率やPremium cacheの状態は確認しない",
+      "KQLの期間指定を外して全期間のデータを読み、遅延箇所を推測する",
+      "Eventstreamのソース件数だけを見て、宛先とEventhouseの状態は調べない"
+    ],
+    explanation: "EventhouseのSystem overviewは取り込み率、状態、ストレージや計算の使用状況を示します。取り込みとクエリのどちらが遅いかを分け、対象期間とPremium cacheの利用状況を確認します。"
+  }
+};
 const currentRevisions=new Set(["C-SQL-02","C-SQL-03","C-SQL-04","C-SQL-05","C-SQL-06","C-SQL-08","C-SQL-10","C-PY-01","C-PY-02","C-PY-04","C-PY-05","C-PY-06","C-PY-07","C-PY-08","C-PY-09","C-PY-10","C-KQL-01","C-KQL-02","C-KQL-03","C-KQL-04","C-KQL-06","C-KQL-07","C-KQL-08","C-KQL-10"]);
 const coreRevisions=new Set(["O01-A","O01-B","O02-B","O03-B","O04-B","O05-B","O06-B","O07-B","O08-B"]);
 const remainingCoreRevisions=new Set(["O09-B","O10-B","O11-B","O12-B","O13-B","O17-B","O18-B","O19-B","O20-B","O21-B","O22-B","O24-B","O25-B","O26-B","O27-B","O28-B","O29-B","O30-B","O31-B","O34-B","O35-B","O36-B","O37-B","O38-B","O39-B","O40-B","O41-B","O42-B","O43-B","O44-B","O45-B","O46-B","O47-B","O49-B","O50-B","O51-B","O52-B","O53-B","O54-B"]);
 for(const name of ["DP700_QUESTIONS","DP700_BASICS","DP700_INTERMEDIATE","DP700_ADVANCED","DP700_BRIDGE","DP700_PA_LIVE_20261106","DP700_PA_20261114","DP700_PA_PDF_20261112"]){for(const q of window[name]||[]){if(patches[q.id])Object.assign(q,patches[q.id],{qualityRevision:coreRevisions.has(q.id)||remainingCoreRevisions.has(q.id)?"2026-11-27":currentRevisions.has(q.id)?"2026-11-26":"2026-11-16"});
 if(coreARevisions[q.id])Object.assign(q,coreARevisions[q.id],{qualityRevision:"2026-11-27"});
+if(coreABalanceRevisions[q.id])Object.assign(q,coreABalanceRevisions[q.id],{qualityRevision:"2026-11-27"});
 const urlFixes={"https://learn.microsoft.com/en-us/fabric/data-engineering/spark-streaming-overview":"https://learn.microsoft.com/en-us/fabric/data-engineering/structured-streaming-overview","https://learn.microsoft.com/en-us/fabric/data-factory/cdc-overview":"https://learn.microsoft.com/en-us/fabric/data-factory/cdc-copy-job","https://learn.microsoft.com/en-us/fabric/data-warehouse/load-data":"https://learn.microsoft.com/en-us/fabric/data-warehouse/ingest-data-copy","https://learn.microsoft.com/en-us/fabric/fundamentals/monitoring-hub":"https://learn.microsoft.com/en-us/fabric/data-factory/monitor-data-factory"};
 if(urlFixes[q.source])q.source=urlFixes[q.source];}}
 })();
