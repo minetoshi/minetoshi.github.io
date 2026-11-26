@@ -326,20 +326,21 @@ window.DP700_ADVANCED=[
     "id": "ADV-23",
     "origin": "adv15",
     "domain": "分析ソリューションの監視と最適化",
-    "skill": "ステップ8 · Deltaの読み取り",
+    "skill": "ステップ8 · V-orderの適用判断",
     "difficulty": "Hard",
     "type": "single",
-    "question": "追記が続いて小さなファイルが増えた。行の内容を保ってファイル数を減らす操作は？",
+    "question": "新しいFabricワークスペースで、書き込み中心のDeltaテーブルと読み取り中心のDeltaテーブルを運用する。V-orderの適用をどう判断する？",
     "choices": [
-      "OPTIMIZE",
-      "VACUUMだけを実行",
-      "有効なファイルを手動削除"
+      "読み取り改善と書き込み時間を測り、読み取り中心のテーブルで有効化を検討する",
+      "両方のテーブルで必ず有効化し、書き込み時間も短くなるものとして扱う",
+      "読み取り中心のテーブルでも無効に固定し、ファイル配置の効果を検証しない"
     ],
     "answers": [
       0
     ],
-    "explanation": "OPTIMIZEで有効データのファイルをまとめます。VACUUMは未参照ファイルを保持条件に従って除去します。",
-    "source": "https://learn.microsoft.com/en-us/fabric/data-engineering/delta-optimization-and-v-order"
+    "explanation": "V-orderは読み取り効率を改善できますが、書き込みに追加の時間がかかる場合があります。新しいワークスペースでは既定で無効です。読み取り中心の表で実測し、必要な範囲へ適用します。",
+    "source": "https://learn.microsoft.com/en-us/fabric/data-engineering/delta-optimization-and-v-order",
+    "qualityRevision": "2026-11-27-staged"
   },
   {
     "id": "ADV-24",
@@ -364,20 +365,21 @@ window.DP700_ADVANCED=[
     "id": "ADV-25",
     "origin": "adv15",
     "domain": "分析ソリューションの監視と最適化",
-    "skill": "ステップ8 · 再開時の状態",
+    "skill": "ステップ8 · 複数ストリームの状態",
     "difficulty": "Hard",
     "type": "single",
-    "question": "互換性のあるストリーミング処理を再起動する。以前の処理位置を引き継ぐのに必要なのは？",
+    "question": "同じソースから2つの独立したStructured Streamingクエリを起動する。チェックポイントの保存先はどうする？",
     "choices": [
-      "同じチェックポイントを利用",
-      "毎回別の空ディレクトリを使う",
-      "処理位置を出力テーブルの列名で管理"
+      "クエリごとに別のチェックポイントディレクトリを指定する",
+      "同じソースなのでチェックポイントディレクトリを共有する",
+      "宛先が異なるなら両方のチェックポイント指定を省略する"
     ],
     "answers": [
       0
     ],
-    "explanation": "チェックポイントに進捗や状態が記録されます。別の場所では以前の状態を引き継げません。",
-    "source": "https://learn.microsoft.com/en-us/fabric/data-engineering/structured-streaming-overview"
+    "explanation": "独立した各クエリには専用のチェックポイントディレクトリが必要です。同じソースでも共有すると復旧メタデータが混ざり、重複処理や欠落、再開失敗につながります。",
+    "source": "https://learn.microsoft.com/en-us/fabric/data-engineering/structured-streaming-overview",
+    "qualityRevision": "2026-11-27-staged"
   },
   {
     "id": "ADV-11",
